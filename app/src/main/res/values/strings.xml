@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello_world">Hello world!</string>
+
+    <!--String Values-->
+    <string name="app_name">Smart Golf Manager</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_menu">menu</string>
+    <string name="title_login">Login</string>
+    <string name="title_new_registration">New Registration</string>
+    <string name="title_to_login">To Login</string>
+    <string name="title_to_new_registration">To New Registration</string>
+    <string name="title_email_address">E-mail Address</string>
+    <string name="title_first_name">First Name</string>
+    <string name="title_last_name">Last Name</string>
+    <string name="title_password">Password</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_score_registration">Score Registration</string>
+    <string name="title_counting">Counting</string>
+    <string name="title_history">History</string>
+    <string name="title_course_registration">Course Registration</string>
+
+</resources>

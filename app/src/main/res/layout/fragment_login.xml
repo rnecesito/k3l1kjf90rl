@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="90dp"
+        android:background="@drawable/container_background">
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:text="@string/title_login"
+            android:id="@+id/register"
+            android:enabled="true"
+            android:textAllCaps="false"
+            android:background="@drawable/container_background_2"
+            android:textColor="#ffffffff"
+            android:textSize="20sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="17dp"
+            android:clickable="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/title_email_address"
+            android:id="@+id/textView"
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
+            android:textSize="25sp"
+            android:autoText="false"
+            android:textColor="#ffffffff"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="9dp"
+            android:layout_below="@+id/register" />
+
+        <EditText
+            android:layout_width="240dp"
+            android:layout_height="35dp"
+            android:id="@+id/new_registration_email"
+            android:background="@drawable/container_background_3"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/textView"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/title_password"
+            android:id="@+id/textView2"
+            android:textSize="25dp"
+            android:autoText="false"
+            android:textColor="#ffffffff"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/new_registration_email"
+            android:layout_alignStart="@+id/new_registration_email" />
+
+        <EditText
+            android:layout_width="240dp"
+            android:layout_height="35dp"
+            android:id="@+id/new_registration_name"
+            android:background="@drawable/container_background_3"
+            android:layout_below="@+id/textView2"
+            android:layout_alignLeft="@+id/textView2"
+            android:layout_alignStart="@+id/textView2"
+            android:layout_marginTop="9dp" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:text="Save"
+            android:id="@+id/button"
+            android:enabled="true"
+            android:textAllCaps="false"
+            android:textColor="#ffffffff"
+            android:textSize="20sp"
+            android:clickable="false"
+            android:background="@drawable/container_background_2"
+            android:layout_above="@+id/textView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp" />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="@string/title_menu"
+        android:textAllCaps="false"
+        android:id="@+id/menu_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#ff313131"
+        android:layout_marginTop="20dp"
+        android:elegantTextHeight="false"
+        android:enabled="true"
+        android:textStyle="normal"
+        android:singleLine="true"
+        android:textSize="27sp" />
+
+</RelativeLayout>
