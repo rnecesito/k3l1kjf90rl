@@ -3,7 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
 
-    <!--String Values-->
+    <!-- String Values -->
     <string name="app_name">Smart Golf Manager</string>
     <string name="action_settings">Settings</string>
     <string name="title_menu">menu</string>
@@ -20,6 +20,12 @@
     <string name="title_counting">Counting</string>
     <string name="title_history">History</string>
     <string name="title_course_registration">Course Registration</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_member_change">Member Change</string>
+    <string name="text_party_registration">Party Registration</string>
+    <string name="text_competition_registration">Competition Registration</string>
+    <string name="text_bet_registration"> Bet Registration </string>
+    <string name="text_course_name">Course Name</string>
 
 
     <!--String Values-->

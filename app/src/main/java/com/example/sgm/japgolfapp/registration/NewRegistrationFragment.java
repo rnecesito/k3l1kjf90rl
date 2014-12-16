@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.widget.RelativeLayout;
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 
@@ -154,7 +155,6 @@ public class NewRegistrationFragment extends BaseFragment{
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_new_registration, container, false);
     }
-
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

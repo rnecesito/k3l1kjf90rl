@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">Smart Golf Manager</string>
     <string name="action_settings"></string>
+    <string name="text_member_change">Member Change</string>
+    <string name="text_party_registration">Party Registration</string>
+    <string name="text_competition_registration">Competition Registration</string>
+    <string name="text_bet_registration"> Bet Registration</string>
+    <string name="text_course_name">Course Name</string>
 </resources>

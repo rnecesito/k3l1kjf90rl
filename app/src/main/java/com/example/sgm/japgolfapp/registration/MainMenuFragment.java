@@ -4,15 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
+import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 
 
 public class MainMenuFragment extends BaseFragment{
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,5 +27,15 @@ public class MainMenuFragment extends BaseFragment{
         RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.new_registration_main);
         final View item = inflater.inflate(R.layout.side_menu, rl, false);
         rl.addView(item);
+
+        Button settingButton = (Button)view.findViewById(R.id.settingButton);
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new MenuSettingsFragment());
+            }
+        });
+
     }
+
 }
