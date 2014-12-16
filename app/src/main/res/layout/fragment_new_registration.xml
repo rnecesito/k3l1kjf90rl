@@ -56,7 +56,10 @@
             android:layout_alignLeft="@+id/textView"
             android:layout_alignRight="@+id/new_registration_password"
             android:layout_alignParentEnd="false"
-            android:layout_alignParentStart="false" />
+            android:layout_alignParentStart="false"
+            android:inputType="textEmailAddress"
+            android:textColor="#ff000000"
+            android:paddingLeft="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -78,7 +81,9 @@
             android:background="@drawable/container_background_3"
             android:layout_below="@+id/textView2"
             android:layout_alignLeft="@+id/new_registration_email"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:textColor="#ff000000"
+            android:paddingLeft="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,7 +109,9 @@
             android:layout_alignLeft="@+id/textView"
             android:layout_alignStart="@+id/textView"
             android:password="false"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="#ff000000"
+            android:paddingLeft="5dp" />
 
     </RelativeLayout>
 

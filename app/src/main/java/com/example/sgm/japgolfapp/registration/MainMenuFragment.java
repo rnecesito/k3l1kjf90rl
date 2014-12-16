@@ -12,6 +12,8 @@ import com.example.sgm.japgolfapp.R;
 
 public class MainMenuFragment extends BaseFragment{
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
