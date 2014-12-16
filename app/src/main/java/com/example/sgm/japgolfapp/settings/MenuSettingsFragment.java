@@ -39,7 +39,7 @@ public class MenuSettingsFragment extends BaseFragment {
         memberCButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragment(new MemberChangeFragment());
+                showFragmentAndAddToBackStack(new MemberChangeFragment());
             }
         });
 
@@ -47,7 +47,7 @@ public class MenuSettingsFragment extends BaseFragment {
         partyRButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragment(new PartyRegistrationFragment());
+                showFragmentAndAddToBackStack(new PartyRegistrationFragment());
             }
         });
 
@@ -55,7 +55,7 @@ public class MenuSettingsFragment extends BaseFragment {
         competitionRButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragment(new CompetitionRegistrationFragment());
+                showFragmentAndAddToBackStack(new CompetitionRegistrationFragment());
             }
         });
 
