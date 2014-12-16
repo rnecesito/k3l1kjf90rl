@@ -1,7 +1,6 @@
 package com.example.sgm.japgolfapp.settings;
 
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,6 @@ import android.widget.RelativeLayout;
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MenuSettingsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MenuSettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MenuSettingsFragment extends BaseFragment {
 
 
@@ -58,6 +49,15 @@ public class MenuSettingsFragment extends BaseFragment {
                 showFragmentAndAddToBackStack(new CompetitionRegistrationFragment());
             }
         });
+
+        Button betRButton = (Button)view.findViewById(R.id.betRButton);
+        betRButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new BetSettingFragment());
+            }
+        });
+
 
     }
 

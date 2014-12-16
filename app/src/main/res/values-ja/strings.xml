@@ -7,4 +7,5 @@
     <string name="text_competition_registration">Competition Registration</string>
     <string name="text_bet_registration"> Bet Registration</string>
     <string name="text_course_name">Course Name</string>
+    <string name="text_hole">Hole</string>
 </resources>
