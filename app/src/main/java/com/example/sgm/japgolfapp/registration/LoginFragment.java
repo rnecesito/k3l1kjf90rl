@@ -152,8 +152,6 @@ public class LoginFragment extends BaseFragment{
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                showFragment(new MainMenuFragment());
-
                 if (android.os.Build.VERSION.SDK_INT > 9) {
                     StrictMode.ThreadPolicy policy =
                             new StrictMode.ThreadPolicy.Builder().permitAll().build();
