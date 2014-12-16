@@ -101,7 +101,9 @@
             android:layout_marginTop="11dp"
             android:layout_below="@+id/textView3"
             android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView" />
+            android:layout_alignStart="@+id/textView"
+            android:password="false"
+            android:inputType="textPassword" />
 
     </RelativeLayout>
 
