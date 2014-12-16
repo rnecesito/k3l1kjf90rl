@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:gravity="center_vertical">
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/container_background"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:text="@string/title_setting"
+                android:id="@+id/button2"
+                android:textAllCaps="false"
+                android:background="@drawable/container_background_4" />
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageButton"
+                android:background="@drawable/arrow"
+                android:contentDescription="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:text="@string/title_score_registration"
+                android:id="@+id/button3"
+                android:textAllCaps="false"
+                android:background="@drawable/container_background_4" />
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageButton2"
+                android:background="@drawable/arrow"
+                android:contentDescription="" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:text="@string/title_counting"
+                android:id="@+id/button4"
+                android:textAllCaps="false"
+                android:background="@drawable/container_background_4" />
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageButton3"
+                android:background="@drawable/arrow"
+                android:contentDescription="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp">
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:text="@string/title_history"
+                android:id="@+id/button5"
+                android:textAllCaps="false"
+                android:background="@drawable/container_background_4" />
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageButton4"
+                android:background="@drawable/arrow"
+                android:contentDescription="" />
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>
