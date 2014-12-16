@@ -105,7 +105,7 @@
             android:textSize="25dp"
             android:autoText="false"
             android:textColor="#ffffffff"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="15dp"
             android:layout_below="@+id/new_registration_name"
             android:layout_alignLeft="@+id/new_registration_name"
             android:layout_alignStart="@+id/new_registration_name" />

@@ -1,6 +1,6 @@
 package com.example.sgm.japgolfapp;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import com.example.sgm.japgolfapp.registration.PrimaryScreenFragment;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-//                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                     .add(R.id.container, new PrimaryScreenFragment())
                     .commit();
         }

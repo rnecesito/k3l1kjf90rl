@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
 
 			FragmentManager fragmentManager = getFragmentManager();
 			fragmentManager.beginTransaction()
-//                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                     .replace(R.id.container, fragment)
 					.commit();
 		}
@@ -49,8 +49,8 @@ public abstract class BaseFragment extends Fragment {
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
                 .remove(this)
-//                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                .add(R.id.container, fragment)
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                .replace(R.id.container, fragment)
                 .addToBackStack(fragment.getClass().getSimpleName())
                 .commit();
 	}
