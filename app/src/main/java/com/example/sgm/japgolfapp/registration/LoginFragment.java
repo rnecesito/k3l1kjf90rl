@@ -8,8 +8,15 @@ import android.view.ViewGroup;
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 
+import butterknife.OnClick;
+
 
 public class LoginFragment extends BaseFragment{
+
+    @OnClick(R.id.login)
+    public void login() {
+        showFragmentAndAddToBackStack(new MainMenuFragment());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
