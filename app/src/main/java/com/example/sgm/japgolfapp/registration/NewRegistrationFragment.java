@@ -145,7 +145,7 @@ public class NewRegistrationFragment extends BaseFragment{
                 Toast.makeText(getContext(), "Please enter password", Toast.LENGTH_SHORT).show();
                 return;
             } else {
-                new RegisterCall().execute(fname_val, "", "", "", email_val, pass_val);
+                new RegisterCall().execute(fname_val, "-", "Male", "1", email_val, pass_val);
                 System.out.println(retVal);
             }
     }
