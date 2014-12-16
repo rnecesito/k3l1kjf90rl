@@ -151,8 +151,6 @@ public class LoginFragment extends BaseFragment{
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-//                showFragment(new MainMenuFragment());
-
                 String email_val = un.getText().toString();
                 String pass_val = pw.getText().toString();
                 if(email_val.matches("")) {
@@ -167,6 +165,7 @@ public class LoginFragment extends BaseFragment{
                     System.out.println(retVal);
 
                 }
+
             }
         });
     }
