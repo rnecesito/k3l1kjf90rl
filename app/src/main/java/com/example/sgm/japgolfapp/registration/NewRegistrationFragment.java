@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.RelativeLayout;
+
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 
@@ -123,11 +123,11 @@ public class NewRegistrationFragment extends BaseFragment{
         }
     }
 
-    @OnClick(R.id.new_registration)
+    @OnClick(R.id.saveB)
     public void register() {
-        final EditText fname = (EditText) view_container.findViewById(R.id.new_registration_name);
-        final EditText email = (EditText) view_container.findViewById(R.id.new_registration_email);
-        final EditText pass = (EditText) view_container.findViewById(R.id.new_registration_password);
+        final EditText fname = (EditText) view_container.findViewById(R.id.editTextName);
+        final EditText email = (EditText) view_container.findViewById(R.id.editTextEmail);
+        final EditText pass = (EditText) view_container.findViewById(R.id.editTextPassword);
             String fname_val = fname.getText().toString();
             String email_val = email.getText().toString();
             String pass_val = pass.getText().toString();

@@ -152,25 +152,27 @@ public class LoginFragment extends BaseFragment{
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if (android.os.Build.VERSION.SDK_INT > 9) {
-                    StrictMode.ThreadPolicy policy =
-                            new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                    StrictMode.setThreadPolicy(policy);
-                }
-                String email_val = un.getText().toString();
-                String pass_val = pw.getText().toString();
-                if(email_val.matches("")) {
-//                    Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (pass_val.matches("")) {
-                    Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    new LoginCall().execute(email_val, pass_val);
-                    System.out.println(retVal);
+                showFragment(new MainMenuFragment());
 
-                }
+//                if (android.os.Build.VERSION.SDK_INT > 9) {
+//                    StrictMode.ThreadPolicy policy =
+//                            new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//                    StrictMode.setThreadPolicy(policy);
+//                }
+//                String email_val = un.getText().toString();
+//                String pass_val = pw.getText().toString();
+//                if(email_val.matches("")) {
+////                    Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
+//                    return;
+//                } else if (pass_val.matches("")) {
+//                    Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
+//                    return;
+//                } else {
+//                    new LoginCall().execute(email_val, pass_val);
+//                    System.out.println(retVal);
+//
+//                }
             }
         });
     }
