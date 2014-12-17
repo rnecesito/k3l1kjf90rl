@@ -64,30 +64,30 @@
         <ImageButton
             android:layout_width="55dp"
             android:layout_height="45dp"
-            android:id="@+id/imageButton8"
+            android:id="@+id/hole_next"
             android:background="@drawable/arrow"
             android:layout_marginLeft="7dp"
             android:layout_marginStart="7dp"
-            android:layout_alignTop="@+id/imageButton9"
-            android:layout_toRightOf="@+id/textView16"
-            android:layout_toEndOf="@+id/textView16" />
+            android:layout_alignTop="@+id/hole_prev"
+            android:layout_toRightOf="@+id/current_hole"
+            android:layout_toEndOf="@+id/current_hole" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="1"
-            android:id="@+id/textView16"
+            android:id="@+id/current_hole"
             android:layout_marginLeft="11dp"
             android:layout_marginStart="11dp"
             android:layout_alignBottom="@+id/textView15"
-            android:layout_toRightOf="@+id/imageButton9"
-            android:layout_toEndOf="@+id/imageButton9" />
+            android:layout_toRightOf="@+id/hole_prev"
+            android:layout_toEndOf="@+id/hole_prev" />
 
         <ImageButton
             android:layout_width="55dp"
             android:layout_height="45dp"
-            android:id="@+id/imageButton9"
+            android:id="@+id/hole_prev"
             android:background="@drawable/arrow_back"
             android:layout_marginLeft="17dp"
             android:layout_marginStart="17dp"
@@ -105,9 +105,9 @@
             android:gravity="center"
             android:background="@drawable/square_title"
             android:layout_height="30dp"
-            android:layout_below="@+id/imageButton9"
-            android:layout_alignRight="@+id/imageButton9"
-            android:layout_alignEnd="@+id/imageButton9" />
+            android:layout_below="@+id/hole_prev"
+            android:layout_alignRight="@+id/hole_prev"
+            android:layout_alignEnd="@+id/hole_prev" />
 
         <TextView
             android:layout_width="100dp"
@@ -118,51 +118,213 @@
             android:gravity="center"
             android:background="@drawable/square_title"
             android:layout_height="30dp"
-            android:layout_below="@+id/imageButton8"
-            android:layout_alignLeft="@+id/textView16"
-            android:layout_alignStart="@+id/textView16" />
+            android:layout_below="@+id/hole_next"
+            android:layout_alignLeft="@+id/current_hole"
+            android:layout_alignStart="@+id/current_hole" />
 
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/text_fellow_competitors_name"
-            android:id="@+id/textView19"
-            android:layout_below="@+id/textView17"
-            android:layout_alignLeft="@+id/textView17"
-            android:layout_alignStart="@+id/textView17"
-            android:layout_marginTop="13dp" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView18"
+            android:id="@+id/bet_setting_table">
 
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:id="@+id/imageButton10"
-            android:background="@drawable/arrow2"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
 
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:id="@+id/imageButton11"
-            android:background="@drawable/arrow2_back"
-            android:layout_alignTop="@+id/imageButton10"
-            android:layout_toLeftOf="@+id/new_registration"
-            android:layout_toStartOf="@+id/new_registration" />
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_fellow_competitors_name"
+                    android:layout_below="@+id/textView17"
+                    android:layout_alignLeft="@+id/textView17"
+                    android:layout_alignStart="@+id/textView17"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp" />
 
-        <TextView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="11"
-            android:id="@+id/textView20"
-            android:background="@drawable/container_background_4"
-            android:textSize="25sp"
-            android:paddingLeft="6dp"
-            android:paddingTop="5dp"
-            android:layout_alignTop="@+id/textView19"
-            android:layout_alignRight="@+id/imageButton8"
-            android:layout_alignEnd="@+id/imageButton8" />
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/arrow2_back"
+                    android:layout_alignTop="@+id/imageButton10"
+                    android:layout_toLeftOf="@+id/new_registration"
+                    android:layout_toStartOf="@+id/new_registration" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="11"
+                    android:background="@drawable/container_background_4"
+                    android:textSize="25sp"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="5dp"
+                    android:layout_alignTop="@+id/textView19"
+                    android:layout_alignRight="@+id/hole_next"
+                    android:layout_alignEnd="@+id/hole_next"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/arrow2"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_fellow_competitors_name"
+                    android:layout_below="@+id/textView17"
+                    android:layout_alignLeft="@+id/textView17"
+                    android:layout_alignStart="@+id/textView17"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/arrow2_back"
+                    android:layout_alignTop="@+id/imageButton10"
+                    android:layout_toLeftOf="@+id/new_registration"
+                    android:layout_toStartOf="@+id/new_registration" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="11"
+                    android:background="@drawable/container_background_4"
+                    android:textSize="25sp"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="5dp"
+                    android:layout_alignTop="@+id/textView19"
+                    android:layout_alignRight="@+id/hole_next"
+                    android:layout_alignEnd="@+id/hole_next"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/arrow2"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_fellow_competitors_name"
+                    android:layout_below="@+id/textView17"
+                    android:layout_alignLeft="@+id/textView17"
+                    android:layout_alignStart="@+id/textView17"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/arrow2_back"
+                    android:layout_alignTop="@+id/imageButton10"
+                    android:layout_toLeftOf="@+id/new_registration"
+                    android:layout_toStartOf="@+id/new_registration" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="11"
+                    android:background="@drawable/container_background_4"
+                    android:textSize="25sp"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="5dp"
+                    android:layout_alignTop="@+id/textView19"
+                    android:layout_alignRight="@+id/hole_next"
+                    android:layout_alignEnd="@+id/hole_next"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/arrow2"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_fellow_competitors_name"
+                    android:id="@+id/textView19"
+                    android:layout_below="@+id/textView17"
+                    android:layout_alignLeft="@+id/textView17"
+                    android:layout_alignStart="@+id/textView17"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/imageButton11"
+                    android:background="@drawable/arrow2_back"
+                    android:layout_alignTop="@+id/imageButton10"
+                    android:layout_toLeftOf="@+id/new_registration"
+                    android:layout_toStartOf="@+id/new_registration" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="11"
+                    android:id="@+id/textView20"
+                    android:background="@drawable/container_background_4"
+                    android:textSize="25sp"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="5dp"
+                    android:layout_alignTop="@+id/textView19"
+                    android:layout_alignRight="@+id/hole_next"
+                    android:layout_alignEnd="@+id/hole_next"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/imageButton10"
+                    android:background="@drawable/arrow2"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </TableRow>
+
+        </TableLayout>
 
     </RelativeLayout>
 

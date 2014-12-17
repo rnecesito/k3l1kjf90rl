@@ -67,7 +67,7 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:text="@string/title_counting"
-                android:id="@+id/button4"
+                android:id="@+id/countingButton"
                 android:textAllCaps="false"
                 android:background="@drawable/container_background_4"
                 android:layout_marginLeft="0dp" />

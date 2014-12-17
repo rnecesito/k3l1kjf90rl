@@ -1,6 +1,5 @@
-package com.example.sgm.japgolfapp.settings;
+package com.example.sgm.japgolfapp.counting;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,19 +11,19 @@ import android.widget.RelativeLayout;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
+import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 
 import butterknife.OnClick;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link android.app.Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CompetitionRegistrationFragment.OnFragmentInteractionListener} interface
+ * {@link com.example.sgm.japgolfapp.counting.ScoreCountingFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CompetitionRegistrationFragment#newInstance} factory method to
+ * Use the {@link com.example.sgm.japgolfapp.counting.ScoreCountingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CompetitionRegistrationFragment extends BaseFragment {
+public class ScoreCountingFragment extends BaseFragment {
     View view_container;
 
     boolean shown = false;
@@ -65,13 +64,6 @@ public class CompetitionRegistrationFragment extends BaseFragment {
                 if(tagged == null) {
                     rl.addView(item);
                 }
-                Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
-                scoreCountingButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showFragmentAndAddToBackStack(new ScoreCountingFragment());
-                    }
-                });
 //                showFragmentAndAddToBackStack(new MenuSettingsFragment());
             }
         });
@@ -142,7 +134,7 @@ public class CompetitionRegistrationFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_competition_registration, container, false);
+        return inflater.inflate(R.layout.fragment_score_counting, container, false);
     }
 
     @Override
