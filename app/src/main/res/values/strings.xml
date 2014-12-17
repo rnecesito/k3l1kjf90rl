@@ -27,13 +27,17 @@
     <string name="text_bet_registration"> Bet Registration </string>
     <string name="text_course_name">Course Name</string>
     <string name="text_bet_setting">Bet Setting</string>
+
     <string name="text_hole">Hole</string>
     <string name="text_fellow_competitors_name">Fellow Competitors Name</string>
     <string name="text_register">Register</string>
+
     <string name="text_play_history">Play History</string>
     <string name="text_play_history_score">Score</string>
     <string name="text_play_history_score_gross">Gross</string>
     <string name="text_play_history_score_net">Net</string>
+    <string name="text_save">Save</string>
+
     <string name="dummy_text_history_date">MM/DD/2017</string>
     <string name="dummy_text_history_course_name">Golf course name</string>
     <string name="dummy_text_name">1st Name</string>
@@ -68,13 +72,5 @@
     <!--<string name="text_hole">ホール</string>-->
     <!--<string name="text_fellow_competitors_name">同伴者氏名</string>-->
     <!--<string name="text_register">登録</string>-->
-    <!--<string name="text_play_history">Play History</string>-->
-    <!--<string name="text_play_history_score">Score</string>-->
-    <!--<string name="text_play_history_score_gross">Gross</string>-->
-    <!--<string name="text_play_history_score_net">Net</string>-->
-    <!--<string name="dummy_text_history_date">MM/DD/2017</string>-->
-    <!--<string name="dummy_text_history_course_name">Golf course name</string>-->
-    <!--<string name="dummy_text_name">1st Name</string>-->
-    <!--<string name="dummy_text_xx">XX</string>-->
-    <!--<string name="dummy_text_yy">YY</string>-->
+
 </resources>

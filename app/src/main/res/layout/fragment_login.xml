@@ -26,8 +26,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="17dp"
-            android:clickable="false" />
+            android:layout_marginTop="17dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,6 +54,8 @@
             android:layout_alignLeft="@+id/textView"
             android:layout_alignStart="@+id/textView"
             android:textColor="#ff000000"
+            android:textCursorDrawable = "@null"
+            android:paddingLeft="5dp" />
             android:paddingLeft="5dp"
             android:inputType="textEmailAddress" />
 
@@ -82,6 +83,7 @@
             android:layout_marginTop="9dp"
             android:inputType="textPassword"
             android:textColor="#ff000000"
+            android:textCursorDrawable = "@null"
             android:paddingLeft="5dp" />
 
         <Button

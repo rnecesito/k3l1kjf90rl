@@ -43,7 +43,7 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:text="@string/title_score_registration"
-                android:id="@+id/button3"
+                android:id="@+id/scoreRegistrationButton"
                 android:textAllCaps="false"
                 android:background="@drawable/container_background_4"
                 android:layout_marginLeft="0dp" />
@@ -51,7 +51,7 @@
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="55dp"
-                android:id="@+id/imageButton2"
+                android:id="@+id/imageScoreRegistrationButton"
                 android:background="@drawable/arrow"
                 android:contentDescription=""
                 android:layout_marginTop="22dp" />
@@ -96,7 +96,7 @@
                 android:background="@drawable/container_background_4"
                 android:layout_marginLeft="0dp" />
 
-            <ImageButton
+            <ImageView
                 android:layout_width="70dp"
                 android:layout_height="55dp"
                 android:id="@+id/imageHistoryButton"

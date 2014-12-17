@@ -6,13 +6,13 @@ public class PlayHistory{
 
     private String mDate;
     private String mGolfCourseName;
-    private ArrayList<PlayHistoryScore> mPlayHistoryScores;
+    private ArrayList<Competitor> mCompetitors;
 
 	public PlayHistory(){}
-    public PlayHistory(String date, String golfCourse, ArrayList<PlayHistoryScore> playHistoryScore){
+    public PlayHistory(String date, String golfCourse, ArrayList<Competitor> competitor){
         this.mDate = date;
         this.mGolfCourseName = golfCourse;
-        this.mPlayHistoryScores = playHistoryScore;
+        this.mCompetitors = competitor;
     }
 	public String getDate() {
         return mDate;
@@ -28,10 +28,10 @@ public class PlayHistory{
         this.mGolfCourseName = golfCourseName;
     }
 
-    public ArrayList<PlayHistoryScore> getPlayHistoryScores() {
-        return mPlayHistoryScores;
+    public ArrayList<Competitor> getPlayHistoryScores() {
+        return mCompetitors;
     }
-    public void setPlayHistoryScores(ArrayList<PlayHistoryScore> playHistoryScores) {
-        this.mPlayHistoryScores = playHistoryScores;
+    public void setPlayHistoryScores(ArrayList<Competitor> competitors) {
+        this.mCompetitors = competitors;
     }
 }
