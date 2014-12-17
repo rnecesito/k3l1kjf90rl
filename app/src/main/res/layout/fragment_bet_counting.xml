@@ -106,7 +106,6 @@
                     android:text="2nd Name"
                     android:textSize="27sp"
                     android:textColor="@android:color/white"
-                    android:id="@+id/"
                     android:gravity="left" />
 
                 <TextView
@@ -116,8 +115,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="27sp"
                     android:layout_marginLeft="35dp"
-                    android:layout_marginRight="20dp"
-                    android:id="@+id/" />
+                    android:layout_marginRight="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -125,7 +123,6 @@
                     android:text="Z"
                     android:textColor="@android:color/white"
                     android:textSize="27sp"
-                    android:id="@+id/"
                     android:gravity="center" />
             </TableRow>
 
@@ -143,7 +140,6 @@
                     android:text="3rd Name"
                     android:textSize="27sp"
                     android:textColor="@android:color/white"
-                    android:id="@+id/"
                     android:gravity="left" />
 
                 <TextView
@@ -152,8 +148,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="27sp"
                     android:layout_marginLeft="35dp"
-                    android:layout_marginRight="20dp"
-                    android:id="@+id/" />
+                    android:layout_marginRight="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -161,7 +156,6 @@
                     android:text="0"
                     android:textColor="@android:color/white"
                     android:textSize="27sp"
-                    android:id="@+id/"
                     android:gravity="center" />
             </TableRow>
 
@@ -179,7 +173,6 @@
                     android:text="4th Name"
                     android:textSize="27sp"
                     android:textColor="@android:color/white"
-                    android:id="@+id/"
                     android:gravity="left" />
 
                 <TextView
@@ -189,8 +182,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="27sp"
                     android:layout_marginLeft="35dp"
-                    android:layout_marginRight="20dp"
-                    android:id="@+id/" />
+                    android:layout_marginRight="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -198,7 +190,6 @@
                     android:text="VVV"
                     android:textColor="@android:color/white"
                     android:textSize="27sp"
-                    android:id="@+id/"
                     android:gravity="center" />
             </TableRow>
 
