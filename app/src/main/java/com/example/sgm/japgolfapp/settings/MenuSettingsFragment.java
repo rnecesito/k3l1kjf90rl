@@ -26,7 +26,7 @@ public class MenuSettingsFragment extends BaseFragment {
         final View item = inflater.inflate(R.layout.fragment_menu__settings, rl, false);
         rl.addView(item);
 
-        Button memberCButton = (Button)view.findViewById(R.id.memberChangeButton);
+        Button memberCButton = (Button)view.findViewById(R.id.createCompetitionB);
         memberCButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,7 +34,7 @@ public class MenuSettingsFragment extends BaseFragment {
             }
         });
 
-        Button partyRButton = (Button)view.findViewById(R.id.partyRButton);
+        Button partyRButton = (Button)view.findViewById(R.id.ViewCompetitionB);
         partyRButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

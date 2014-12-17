@@ -125,7 +125,7 @@ public class NewRegistrationFragment extends BaseFragment{
 
     @OnClick(R.id.saveB)
     public void register() {
-        final EditText fname = (EditText) view_container.findViewById(R.id.editTextName);
+        final EditText fname = (EditText) view_container.findViewById(R.id.editTextCName1);
         final EditText email = (EditText) view_container.findViewById(R.id.editTextEmail);
         final EditText pass = (EditText) view_container.findViewById(R.id.editTextPassword);
             String fname_val = fname.getText().toString();

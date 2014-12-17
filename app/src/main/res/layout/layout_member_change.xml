@@ -86,13 +86,13 @@
             android:autoText="false"
             android:textColor="#ffffffff"
             android:layout_centerVertical="true"
-            android:layout_alignLeft="@+id/editTextName"
-            android:layout_alignStart="@+id/editTextName" />
+            android:layout_alignLeft="@+id/editTextCName1"
+            android:layout_alignStart="@+id/editTextCName1" />
 
         <EditText
             android:layout_width="240dp"
             android:layout_height="35dp"
-            android:id="@+id/editTextName"
+            android:id="@+id/editTextCName1"
             android:background="@drawable/container_background_3"
             android:layout_below="@+id/textView2"
             android:layout_alignLeft="@+id/editTextEmail"
@@ -110,9 +110,9 @@
             android:autoText="false"
             android:textColor="#ffffffff"
             android:layout_marginTop="26dp"
-            android:layout_below="@+id/editTextName"
-            android:layout_alignLeft="@+id/editTextName"
-            android:layout_alignStart="@+id/editTextName" />
+            android:layout_below="@+id/editTextCName1"
+            android:layout_alignLeft="@+id/editTextCName1"
+            android:layout_alignStart="@+id/editTextCName1" />
 
         <EditText
             android:layout_width="240dp"
@@ -135,7 +135,7 @@
             android:text="Invalid Email Address"
             android:visibility="invisible"
             android:textColor="@android:color/holo_red_dark"
-            android:layout_above="@+id/textView2"
+            android:layout_below="@id/editTextEmail"
             android:layout_alignParentLeft="true"
             android:layout_marginStart="10dp"
             android:layout_alignParentStart="true" />
@@ -149,7 +149,7 @@
             android:visibility="invisible"
             android:textColor="@android:color/holo_red_dark"
             android:id="@+id/nameValidateText"
-            android:layout_below="@+id/editTextName"
+            android:layout_below="@+id/editTextCName1"
             android:layout_alignParentLeft="true"
             android:layout_alignLeft="@+id/textView3"
             android:layout_alignStart="@+id/textView3" />
@@ -167,6 +167,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignLeft="@+id/editTextPassword"
             android:layout_alignStart="@+id/editTextPassword" />
+
+
 
     </RelativeLayout>
 
@@ -186,5 +188,20 @@
         android:textStyle="normal"
         android:singleLine="true"
         android:textSize="27sp" />
-
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:text="@string/title_login"
+        android:textAllCaps="false"
+        android:id="@+id/button2"
+        android:background="#ff313131"
+        android:elegantTextHeight="false"
+        android:enabled="true"
+        android:textStyle="normal"
+        android:singleLine="true"
+        android:textSize="22sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="49dp"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>
