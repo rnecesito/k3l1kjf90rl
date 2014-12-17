@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
+import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
@@ -26,6 +27,7 @@ public class MainMenuFragment extends BaseFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final View view_container = view;
         LayoutInflater inflater = LayoutInflater.from(getContext());
         RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.new_registration_main);
         final View item = inflater.inflate(R.layout.side_menu, rl, false);
@@ -47,15 +49,6 @@ public class MainMenuFragment extends BaseFragment{
             }
         });
 
-        ImageView historyButton2 = (ImageView)view.findViewById(R.id.imageHistoryButton);
-        historyButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFragmentAndAddToBackStack(new PlayHistoryFragment());
-            }
-        });
-
-
         Button scoreRegistrationButton = (Button)view.findViewById(R.id.scoreRegistrationButton);
         scoreRegistrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,11 +57,26 @@ public class MainMenuFragment extends BaseFragment{
             }
         });
 
-        ImageView scoreRegistrationButton2 = (ImageView)view.findViewById(R.id.imageScoreRegistrationButton);
-        scoreRegistrationButton2.setOnClickListener(new View.OnClickListener() {
+        Button countingButton= (Button)view.findViewById(R.id.countingButton);
+        countingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
+                final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
+                item.setTag("counting_sub_menu");
+                View tagged = view_container.findViewWithTag("counting_sub_menu");
+                if(tagged == null) {
+                    rl.addView(item);
+                }
+                Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
+                scoreCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new ScoreCountingFragment());
+                    }
+                });
+//                showFragmentAndAddToBackStack(new MenuSettingsFragment());
             }
         });
 

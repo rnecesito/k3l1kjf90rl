@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
+import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -49,6 +50,29 @@ public class MemberChangeFragment extends BaseFragment{
             rl.removeView(item);
             shown = false;
         }
+
+        Button countingButton= (Button)view_container.findViewById(R.id.countingButton);
+        countingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
+                final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
+                item.setTag("counting_sub_menu");
+                View tagged = view_container.findViewWithTag("counting_sub_menu");
+                if(tagged == null) {
+                    rl.addView(item);
+                }
+                Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
+                scoreCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new ScoreCountingFragment());
+                    }
+                });
+//                showFragmentAndAddToBackStack(new MenuSettingsFragment());
+            }
+        });
     }
 
     public void SlideToRight(View view) {

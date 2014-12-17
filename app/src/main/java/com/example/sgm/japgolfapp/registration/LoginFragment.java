@@ -2,12 +2,14 @@ package com.example.sgm.japgolfapp.registration;
 
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
 
 
 public class LoginFragment extends BaseFragment{
@@ -146,30 +149,46 @@ public class LoginFragment extends BaseFragment{
         }
     }
 
-    @OnClick(R.id.login)
-    public void login() {
-        Button login = (Button) view_container.findViewById(R.id.login);
-
-        login.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                String email_val = un.getText().toString();
-                String pass_val = pw.getText().toString();
-                if(email_val.matches("")) {
-//                    Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (pass_val.matches("")) {
-                    Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    new LoginCall().execute(email_val, pass_val);
-                    System.out.println(retVal);
-
-                }
-
+    @OnEditorAction(R.id.login_password)
+    public boolean enter(EditText view, KeyEvent event) {
+        if (event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+            InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            in.hideSoftInputFromInputMethod(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            final EditText un = (EditText) view_container.findViewById(R.id.login_email);
+            final EditText pw = (EditText) view_container.findViewById(R.id.login_password);
+            String email_val = un.getText().toString();
+            String pass_val = pw.getText().toString();
+            if(email_val.matches("")) {
+//            Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
+                return false;
+            } else if (pass_val.matches("")) {
+                Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
+                return false;
+            } else {
+                new LoginCall().execute(email_val, pass_val);
             }
-        });
+        }
+        return false;
+    }
+
+    @OnClick(R.id.login)
+    public void login2() {
+        final EditText un = (EditText) view_container.findViewById(R.id.login_email);
+        final EditText pw = (EditText) view_container.findViewById(R.id.login_password);
+        String email_val = un.getText().toString();
+        String pass_val = pw.getText().toString();
+        if(email_val.matches("")) {
+//            Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (pass_val.matches("")) {
+            Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            new LoginCall().execute(email_val, pass_val);
+            System.out.println(retVal);
+        }
     }
 
     @Override
