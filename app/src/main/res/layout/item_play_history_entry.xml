@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/new_registration_main"
+    android:padding="5dp">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/itemPlayHistoryDate"
+        android:textSize="24sp"
+        android:text="@string/dummy_text_history_date"
+        android:layout_toLeftOf="@+id/imgDisplayHistory"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/itemPlayHistoryCourseName"
+        android:layout_below="@+id/itemPlayHistoryDate"
+        android:text="@string/dummy_text_history_course_name"
+        android:textSize="20sp"
+        android:layout_toLeftOf="@+id/imgDisplayHistory"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="55dp"
+        android:id="@+id/imgDisplayHistory"
+        android:background="@drawable/arrow"
+        android:contentDescription=""
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
+</RelativeLayout>
