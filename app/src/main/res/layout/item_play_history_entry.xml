@@ -3,6 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/new_registration_main"
+    android:clickable="false"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
     android:padding="5dp">
 
     <TextView
@@ -13,6 +17,7 @@
         android:text="@string/dummy_text_history_date"
         android:layout_toLeftOf="@+id/imgDisplayHistory"
         android:layout_alignParentLeft="true"
+        android:textColor="@android:color/white"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -25,9 +30,10 @@
         android:layout_toLeftOf="@+id/imgDisplayHistory"
         android:layout_marginLeft="20dp"
         android:layout_alignParentLeft="true"
+        android:textColor="@android:color/white"
         android:layout_alignParentStart="true" />
 
-    <ImageButton
+    <ImageView
         android:layout_width="70dp"
         android:layout_height="55dp"
         android:id="@+id/imgDisplayHistory"

@@ -9,17 +9,17 @@ import android.widget.ArrayAdapter;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.history.adapters.holders.PlayHistoryScoreViewBinder;
-import com.example.sgm.japgolfapp.models.PlayHistoryScore;
+import com.example.sgm.japgolfapp.models.Competitor;
 
 import java.util.ArrayList;
 
-public class PlayHistoryScoreAdapter extends ArrayAdapter<PlayHistoryScore> {
+public class PlayHistoryScoreAdapter extends ArrayAdapter<Competitor> {
 
 
-	private ArrayList<PlayHistoryScore> items;
+	private ArrayList<Competitor> items;
     private Activity activity;
 
-	public PlayHistoryScoreAdapter(Activity activity, int resource, ArrayList<PlayHistoryScore> items) {
+	public PlayHistoryScoreAdapter(Activity activity, int resource, ArrayList<Competitor> items) {
 		super(activity, resource, items);
 		this.activity = activity;
 		this.items = items;
@@ -31,7 +31,7 @@ public class PlayHistoryScoreAdapter extends ArrayAdapter<PlayHistoryScore> {
 	}
 
 	@Override
-	public PlayHistoryScore getItem(int position) {
+	public Competitor getItem(int position) {
 		if (getCount() > 0 && position > -1 && position < getCount()) {
 			return items.get(position);
 		}
@@ -42,7 +42,7 @@ public class PlayHistoryScoreAdapter extends ArrayAdapter<PlayHistoryScore> {
 	public View getView(int position, View view, ViewGroup parent) {
         PlayHistoryScoreViewBinder.PlayHistoryScoreHolder holder = new PlayHistoryScoreViewBinder.PlayHistoryScoreHolder();
 
-		PlayHistoryScore history = (PlayHistoryScore) getItem(position);
+		Competitor history = (Competitor) getItem(position);
 
 		if (view == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext()

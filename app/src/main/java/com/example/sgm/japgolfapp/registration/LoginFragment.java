@@ -43,6 +43,9 @@ public class LoginFragment extends BaseFragment{
     private boolean success = false;
     View view_container;
 
+    private EditText un;
+    private EditText pw;
+
     private class LoginCall extends AsyncTask<String, String, String> {
 
         public LoginCall() {
@@ -146,8 +149,7 @@ public class LoginFragment extends BaseFragment{
     @OnClick(R.id.login)
     public void login() {
         Button login = (Button) view_container.findViewById(R.id.login);
-        final EditText un = (EditText) view_container.findViewById(R.id.login_email);
-        final EditText pw = (EditText) view_container.findViewById(R.id.login_password);
+
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -180,5 +182,11 @@ public class LoginFragment extends BaseFragment{
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view_container = view;
+        un = (EditText) view_container.findViewById(R.id.login_email);
+        pw = (EditText) view_container.findViewById(R.id.login_password);
+
+        //DIRECT LOGIN
+        un.setText("q@q.com");
+        pw.setText("q");
     }
 }

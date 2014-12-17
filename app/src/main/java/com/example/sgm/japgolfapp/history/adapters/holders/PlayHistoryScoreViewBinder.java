@@ -4,8 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.models.PlayHistory;
-import com.example.sgm.japgolfapp.models.PlayHistoryScore;
+import com.example.sgm.japgolfapp.models.Competitor;
 
 
 public class PlayHistoryScoreViewBinder {
@@ -26,7 +25,7 @@ public class PlayHistoryScoreViewBinder {
 	}
 	//
 	public static void bindPlayHistoryScoreInfo(final PlayHistoryScoreHolder holder,
-			PlayHistoryScore historyScore) {
+			Competitor historyScore) {
 
 			if (historyScore != null) {
 				if (holder.tvName != null) {

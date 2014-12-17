@@ -1,0 +1,69 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/new_registration_main"
+    android:clickable="false"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:padding="5dp">
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_fellow_competitors_name"
+        android:id="@+id/tvCompetitorName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/ivDecrease"
+        android:layout_toStartOf="@+id/ivDecrease" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/tvHandicap"
+        android:layout_below="@+id/tvCompetitorName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/tvCompetitorName"
+        android:layout_alignEnd="@+id/tvCompetitorName" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:id="@+id/ivDecrease"
+        android:background="@drawable/arrow2_back"
+        android:layout_alignTop="@+id/tvScore"
+        android:layout_toLeftOf="@+id/tvScore"
+        android:layout_toStartOf="@+id/tvScore" />
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="11"
+        android:id="@+id/tvScore"
+        android:background="@drawable/container_background_4"
+        android:textSize="25sp"
+        android:paddingLeft="6dp"
+        android:paddingTop="5dp"
+        android:layout_alignTop="@+id/ivIncrease"
+        android:layout_toLeftOf="@+id/ivIncrease"
+        android:layout_toStartOf="@+id/ivIncrease" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:id="@+id/ivIncrease"
+        android:background="@drawable/arrow2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+
+</RelativeLayout>
