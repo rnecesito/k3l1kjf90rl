@@ -8,4 +8,13 @@
     <string name="text_bet_registration"> Bet Registration</string>
     <string name="text_course_name">Course Name</string>
     <string name="text_hole">Hole</string>
+    <string name="not_entered">Not Entered</string>
+    <string name="fellow_competitor_name">Fellow Competitor\'s Name</string>
+    <string name="save">Save</string>
+    <string name="confirming">Confirming</string>
+    <string name="create_competition">Create Competition</string>
+    <string name="view_competition">View Competition</string>
+    <string name="join_competition">Join Competition</string>
+    <string name="create_group">Create Group</string>
+    <string name="view_group">View Groups</string>
 </resources>

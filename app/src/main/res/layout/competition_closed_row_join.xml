@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow  xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/tableRow2"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="#CCC" >
+
+    <TextView
+        android:id="@+id/name_closed_competition"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="5dp"
+        android:textColor="#000"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="match_parent" >
+
+        <View style="@style/Divider" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/date_closed_competition"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="#000"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="match_parent" >
+
+        <View style="@style/Divider" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="60dp"
+        android:layout_gravity="center_horizontal|center_vertical">
+        <ImageView
+            android:id="@+id/edit_closed_competition"
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@android:drawable/ic_menu_edit" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="match_parent" >
+
+        <View style="@style/Divider" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="60dp"
+        android:layout_gravity="center_horizontal|center_vertical">
+        <ImageView
+            android:id="@+id/join_closed_competition"
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@android:drawable/ic_input_add" />
+    </LinearLayout>
+
+</TableRow>

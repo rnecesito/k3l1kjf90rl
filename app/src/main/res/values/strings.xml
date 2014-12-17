@@ -44,7 +44,6 @@
     <string name="dummy_text_xx">XX</string>
     <string name="dummy_text_yy">YY</string>
 
-
     <!--String Values-->
     <!--<string name="app_name">スマート　ゴルフ　マネージャー</string>-->
     <!--<string name="action_settings">Settings</string>-->
@@ -72,5 +71,17 @@
     <!--<string name="text_hole">ホール</string>-->
     <!--<string name="text_fellow_competitors_name">同伴者氏名</string>-->
     <!--<string name="text_register">登録</string>-->
+
+
+    <string name="not_entered">Not Entered</string>
+    <string name="fellow_competitor_name">Fellow Competitor\'s Name</string>
+    <string name="save">Save</string>
+    <string name="confirming">Confirming</string>
+    <string name="create_competition">Create Competition</string>
+    <string name="view_competition">View Competition</string>
+    <string name="join_competition">Join Competition</string>
+    <string name="create_group">Create Group</string>
+    <string name="view_groups">View Groups</string>
+    <string name="view_group">View Groups</string>
 
 </resources>

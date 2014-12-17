@@ -82,13 +82,13 @@
             android:autoText="false"
             android:textColor="#ffffffff"
             android:layout_centerVertical="true"
-            android:layout_alignLeft="@+id/editTextName"
-            android:layout_alignStart="@+id/editTextName" />
+            android:layout_alignLeft="@+id/editTextCName1"
+            android:layout_alignStart="@+id/editTextCName1" />
 
         <EditText
             android:layout_width="240dp"
             android:layout_height="35dp"
-            android:id="@+id/editTextName"
+            android:id="@+id/editTextCName1"
             android:background="@drawable/container_background_3"
             android:layout_below="@+id/textView2"
             android:layout_alignLeft="@+id/editTextEmail"
@@ -107,9 +107,9 @@
             android:textColor="#ffffffff"
 
             android:layout_marginTop="26dp"
-            android:layout_below="@+id/editTextName"
-            android:layout_alignLeft="@+id/editTextName"
-            android:layout_alignStart="@+id/editTextName" />
+            android:layout_below="@+id/editTextCName1"
+            android:layout_alignLeft="@+id/editTextCName1"
+            android:layout_alignStart="@+id/editTextCName1" />
 
 
         <EditText
