@@ -30,9 +30,19 @@
     <string name="text_hole">Hole</string>
     <string name="text_fellow_competitors_name">Fellow Competitors Name</string>
     <string name="text_register">Register</string>
+    <string name="text_play_history">Play History</string>
+    <string name="text_play_history_score">Score</string>
+    <string name="text_play_history_score_gross">Gross</string>
+    <string name="text_play_history_score_net">Net</string>
+    <string name="dummy_text_history_date">MM/DD/2017</string>
+    <string name="dummy_text_history_course_name">Golf course name</string>
+    <string name="dummy_text_name">1st Name</string>
+    <string name="dummy_text_xx">XX</string>
+    <string name="dummy_text_yy">YY</string>
 
 
-    String Values
+
+    <!--String Values-->
     <!--<string name="app_name">スマート　ゴルフ　マネージャー</string>-->
     <!--<string name="action_settings">Settings</string>-->
     <!--<string name="title_menu">メニュー</string>-->
@@ -57,6 +67,11 @@
     <!--<string name="text_course_name">ゴルフ場名</string>-->
     <!--<string name="text_bet_setting">Bet Setting</string>-->
     <!--<string name="text_hole">ホール</string>-->
+<<<<<<< HEAD
     <!--<string name="text_fellow_competitors_name">同伴者氏名</string>-->
     <!--<string name="text_register">登録</string>-->
+=======
+    <string name="text_fellow_competitors_name">同伴者氏名</string>
+    <string name="text_register">登録</string>
+>>>>>>> Play History
 </resources>

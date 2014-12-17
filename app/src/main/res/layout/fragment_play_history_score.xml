@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/new_registration_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="90dp"
+        android:background="@drawable/container_background">
+
+        <TextView
+            android:layout_width="110dp"
+            android:id="@+id/partyRText"
+            android:layout_alignParentTop="true"
+            android:text="@string/text_play_history_score"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="17dp"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:background="@drawable/square_title"
+            android:layout_height="60dp" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvPartyHistoryScore"
+            android:layout_below="@+id/partyRText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="@string/title_menu"
+        android:textAllCaps="false"
+        android:id="@+id/menu_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#ff313131"
+        android:layout_marginTop="20dp"
+        android:elegantTextHeight="false"
+        android:enabled="true"
+        android:textStyle="normal"
+        android:singleLine="true"
+        android:textSize="27sp" />
+
+</RelativeLayout>

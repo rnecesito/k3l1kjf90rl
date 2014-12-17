@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
+import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 
 
@@ -33,6 +34,14 @@ public class MainMenuFragment extends BaseFragment{
             @Override
             public void onClick(View v) {
                 showFragmentAndAddToBackStack(new MenuSettingsFragment());
+            }
+        });
+
+        Button historyButton = (Button)view.findViewById(R.id.historyButton);
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new PlayHistoryFragment());
             }
         });
 
