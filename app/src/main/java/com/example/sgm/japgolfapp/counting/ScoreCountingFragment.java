@@ -64,6 +64,29 @@ public class ScoreCountingFragment extends BaseFragment {
                 if(tagged == null) {
                     rl.addView(item);
                 }
+                Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
+                scoreCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new ScoreCountingFragment());
+                    }
+                });
+
+                Button betCountingButton = (Button)item.findViewById(R.id.betCounting);
+                betCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new BetCountingFragment());
+                    }
+                });
+
+                Button competitionCountingButton = (Button)item.findViewById(R.id.competitionCounting);
+                competitionCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new CompetitionCountingFragment());
+                    }
+                });
 //                showFragmentAndAddToBackStack(new MenuSettingsFragment());
             }
         });

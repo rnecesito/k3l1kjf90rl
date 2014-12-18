@@ -1,4 +1,4 @@
-package com.example.sgm.japgolfapp.settings;
+package com.example.sgm.japgolfapp.counting;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,26 +8,29 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.counting.BetCountingFragment;
-import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
-import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
+import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 
 import butterknife.OnClick;
 
-public class BetSettingFragment extends BaseFragment{
-
+/**
+ * A simple {@link android.app.Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link com.example.sgm.japgolfapp.counting.CompetitionCountingFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link com.example.sgm.japgolfapp.counting.CompetitionCountingFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class CompetitionCountingFragment extends BaseFragment {
     View view_container;
+
     boolean shown = false;
 
     @OnClick(R.id.menu_button)
     public void showMenu() {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
         RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
         View item = inflater.inflate(R.layout.side_menu, rl, false);
         if (!shown) {
@@ -49,7 +52,7 @@ public class BetSettingFragment extends BaseFragment{
             shown = false;
         }
 
-        Button countingButton= (Button)view_container.findViewById(R.id.countingButton);
+        Button countingButton= (Button)item.findViewById(R.id.countingButton);
         countingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,38 +90,6 @@ public class BetSettingFragment extends BaseFragment{
 //                showFragmentAndAddToBackStack(new MenuSettingsFragment());
             }
         });
-    }
-
-    @OnClick(R.id.hole_next)
-    public void nextHole() {
-        TextView hole = (TextView) view_container.findViewById(R.id.current_hole);
-        int hole_int = Integer.parseInt(hole.getText().toString());
-        hole.setText((hole_int + 1) + "");
-    }
-
-    @OnClick(R.id.hole_prev)
-    public void prevHole() {
-        TextView hole = (TextView) view_container.findViewById(R.id.current_hole);
-        int hole_int = Integer.parseInt(hole.getText().toString());
-        hole.setText((hole_int - 1) + "");
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_bet_registration, container, false);
-    }
-
-    @Override
-    public void onViewCreated(final View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        view_container = view;
-        TableLayout comp_list = (TableLayout) view.findViewById(R.id.bet_setting_table);
-        for (int index = 0; index < comp_list.getChildCount(); index++) {
-            TableRow current_row = (TableRow) comp_list.getChildAt(index);
-            current_row.getChildAt(1).setOnClickListener(sub);
-            current_row.getChildAt(3).setOnClickListener(add);
-        }
     }
 
     public void SlideToRight(View view) {
@@ -183,25 +154,16 @@ public class BetSettingFragment extends BaseFragment{
 
     }
 
-    private View.OnClickListener add = new View.OnClickListener() {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_competition_counting, container, false);
+    }
 
-        @Override
-        public void onClick(View v) {
-            TableRow row = (TableRow) v.getParent();
-            TextView score = (TextView) row.getChildAt(2);
-            int score_val = Integer.parseInt(score.getText().toString());
-            score.setText((score_val + 1) + "");
-        }
-    };
+    @Override
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        view_container = view;
+    }
 
-    private View.OnClickListener sub = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            TableRow row = (TableRow) v.getParent();
-            TextView score = (TextView) row.getChildAt(2);
-            int score_val = Integer.parseInt(score.getText().toString());
-            score.setText((score_val - 1) + "");
-        }
-    };
 }

@@ -5,11 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
+import com.example.sgm.japgolfapp.counting.BetCountingFragment;
+import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
@@ -74,6 +75,22 @@ public class MainMenuFragment extends BaseFragment{
                     @Override
                     public void onClick(View v) {
                         showFragmentAndAddToBackStack(new ScoreCountingFragment());
+                    }
+                });
+
+                Button betCountingButton = (Button)item.findViewById(R.id.betCounting);
+                betCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new BetCountingFragment());
+                    }
+                });
+
+                Button competitionCountingButton = (Button)item.findViewById(R.id.competitionCounting);
+                competitionCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new CompetitionCountingFragment());
                     }
                 });
 //                showFragmentAndAddToBackStack(new MenuSettingsFragment());

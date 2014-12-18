@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
+import com.example.sgm.japgolfapp.counting.BetCountingFragment;
+import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 
 import org.apache.http.HttpResponse;
@@ -362,6 +364,22 @@ public class PartyRegistrationFragment extends BaseFragment{
                     @Override
                     public void onClick(View v) {
                         showFragmentAndAddToBackStack(new ScoreCountingFragment());
+                    }
+                });
+
+                Button betCountingButton = (Button)item.findViewById(R.id.betCounting);
+                betCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new BetCountingFragment());
+                    }
+                });
+
+                Button competitionCountingButton = (Button)item.findViewById(R.id.competitionCounting);
+                competitionCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new CompetitionCountingFragment());
                     }
                 });
 //                showFragmentAndAddToBackStack(new MenuSettingsFragment());
