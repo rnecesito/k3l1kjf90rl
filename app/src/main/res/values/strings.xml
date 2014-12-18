@@ -83,5 +83,139 @@
     <string name="create_group">Create Group</string>
     <string name="view_groups">View Groups</string>
     <string name="view_group">View Groups</string>
+    <string name="course_registration">Course Registration</string>
+    <string name="create_courses">Create Courses</string>
+    <string name="view_courses">View Courses</string>
+    <string name="course_name">Course Name</string>
+    <string name="holes">Holes</string>
+    <string name="par">Par</string>
+    <string name="handicap">Handicap</string>
+    <string name="course_created">Course Created</string>
+    <string name="something_went_wrong">Something went Wrong</string>
+    <string name="create_course_name">Create Course Name</string>
+    <string name="up_to_18_holes">Up to 18 holes</string>
+    <string name="Edit">Edit</string>
+    <string name="loading_courses">Loading Courses</string>
+    <string name="courses_loaded">Courses Loaded</string>
+    <string name="loading_course_info">Loading Course Info</string>
+    <string name="deleting_course">Deleting Course</string>
+    <string name="course_deleted">Course Deleted</string>
+    <string name="information_loaded">Information Loaded</string>
+    <string name="enter_course_name">Enter Course Name</string>
+    <string name="sure">Sure</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="competition_registration">Competition Registration</string>
+
+    <string-array name="course_list">
+        <item>Course 1</item>
+        <item>Course 2</item>
+        <item>Course 3</item>
+        <item>Course 4</item>
+    </string-array>
+    <string-array name="holes_list">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+    </string-array>
+    <string-array name="handicap_list">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+        <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
+    </string-array>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="active">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="party">
+        <item>Timmy</item>
+        <item>Eddie</item>
+        <item>Chloe</item>
+    </string-array>
+    <string-array name="group">
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Green</item>
+    </string-array>
 
 </resources>

@@ -17,4 +17,26 @@
     <string name="join_competition">Join Competition</string>
     <string name="create_group">Create Group</string>
     <string name="view_group">View Groups</string>
+    <string name="course_registration">Course Registration</string>
+    <string name="create_courses">Create Courses</string>
+    <string name="view_courses">View Courses</string>
+    <string name="course_name">Course Name</string>
+    <string name="holes">Holes</string>
+    <string name="par">Par</string>
+    <string name="handicap">Handicap</string>
+    <string name="course_created">Course Created</string>
+    <string name="something_went_wrong">Something went Wrong</string>
+    <string name="create_course_name">Create Course Name</string>
+    <string name="up_to_18_holes">Up to 18 holes</string>
+    <string name="Edit">Edit</string>
+    <string name="loading_courses">Loading Courses</string>
+    <string name="courses_loaded">Courses Loaded</string>
+    <string name="loading_course_info">Loading Course Info</string>
+    <string name="deleting_course">Deleting Course</string>
+    <string name="course_deleted">Course Deleted</string>
+    <string name="information_loaded">Information Loaded</string>
+    <string name="enter_course_name">Enter Course Name</string>
+    <string name="sure">Sure</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 </resources>

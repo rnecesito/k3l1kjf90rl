@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/relativeLayout1"
@@ -14,61 +14,12 @@
         android:background="@drawable/container_background"
         android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/party_container"
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Search Group" />
-
-            <EditText
-                android:id="@+id/competition_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:focusable="false"
-                android:textColor="@android:color/black"
-                android:focusableInTouchMode="false"
-                android:text="Competitor 1"
-                android:background="@drawable/container_background_3"
-                android:textSize="14sp"
-                android:padding="5dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/competitor_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:clickable="true"
-            android:gravity="center_vertical|center_horizontal" >
-
-            <CheckBox
-                android:id="@+id/show_own_groups"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Show My Group Only" />
-        </LinearLayout>
-
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/horizontal_line"
             android:padding="1dp"
             android:stretchColumns="*">
@@ -81,11 +32,10 @@
                 android:background="#999" >
 
                 <TextView
-                    android:layout_width="120dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Group" />
+                    android:text="@string/course_name" />
 
                 <LinearLayout
                     android:layout_width="1dp"
@@ -95,11 +45,11 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:layout_gravity="center_horizontal"
-                    android:text="Members" />
+                    android:text="@string/holes" />
 
                 <LinearLayout
                     android:layout_width="1dp"
@@ -109,29 +59,30 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Action" />
+                    android:text="@string/Edit" />
             </TableRow>
 
-        </TableLayout>
 
+        </TableLayout>
+        
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="390dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:isScrollContainer="false">
-
+            
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/horizontal_line"
                 android:padding="1dp"
-                android:id="@+id/closed_groups_table">
+                android:id="@+id/courses_table">
 
-            </TableLayout>
+           </TableLayout>
 
         </ScrollView>
 
@@ -144,12 +95,11 @@
         android:layout_alignTop="@+id/relativeLayout1"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="-10dp"
-        android:background="@android:color/white"
+        android:background="#fff"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:text="@string/view_courses"
         android:textColor="@android:color/black"
-        android:text="@string/view_groups"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-         />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

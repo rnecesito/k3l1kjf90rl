@@ -58,6 +58,14 @@ public class MenuSettingsFragment extends BaseFragment {
             }
         });
 
+        Button courseAButton = (Button)view.findViewById(R.id.courseAdministrationB);
+        courseAButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new CourseRegistrationSettingsFragment());
+            }
+        });
+
 
     }
 
