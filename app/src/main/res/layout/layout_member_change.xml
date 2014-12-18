@@ -64,7 +64,7 @@
         <EditText
             android:layout_width="240dp"
             android:layout_height="35dp"
-            android:id="@+id/courseSpinner"
+            android:id="@+id/user_email"
             android:background="@drawable/container_background_3"
             android:layout_marginTop="8dp"
             android:layout_below="@+id/textView"
@@ -86,16 +86,16 @@
             android:autoText="false"
             android:textColor="#ffffffff"
             android:layout_centerVertical="true"
-            android:layout_alignLeft="@+id/cName1"
-            android:layout_alignStart="@+id/cName1" />
+            android:layout_alignLeft="@+id/user_name"
+            android:layout_alignStart="@+id/user_name" />
 
         <EditText
             android:layout_width="240dp"
             android:layout_height="35dp"
-            android:id="@+id/cName1"
+            android:id="@+id/user_name"
             android:background="@drawable/container_background_3"
             android:layout_below="@+id/textView2"
-            android:layout_alignLeft="@+id/courseSpinner"
+            android:layout_alignLeft="@+id/user_email"
             android:layout_marginTop="8dp"
             android:textColor="#ff000000"
             android:paddingLeft="5dp" />
@@ -110,14 +110,14 @@
             android:autoText="false"
             android:textColor="#ffffffff"
             android:layout_marginTop="26dp"
-            android:layout_below="@+id/cName1"
-            android:layout_alignLeft="@+id/cName1"
-            android:layout_alignStart="@+id/cName1" />
+            android:layout_below="@+id/user_name"
+            android:layout_alignLeft="@+id/user_name"
+            android:layout_alignStart="@+id/user_name" />
 
         <EditText
             android:layout_width="240dp"
             android:layout_height="55dp"
-            android:id="@+id/editTextPassword"
+            android:id="@+id/user_password"
             android:background="@drawable/container_background_3"
             android:layout_marginTop="11dp"
             android:layout_below="@+id/textView3"
@@ -135,7 +135,7 @@
             android:text="Invalid Email Address"
             android:visibility="invisible"
             android:textColor="@android:color/holo_red_dark"
-            android:layout_below="@id/courseSpinner"
+            android:layout_below="@id/user_email"
             android:layout_alignParentLeft="true"
             android:layout_marginStart="10dp"
             android:layout_alignParentStart="true" />
@@ -149,7 +149,7 @@
             android:visibility="invisible"
             android:textColor="@android:color/holo_red_dark"
             android:id="@+id/nameValidateText"
-            android:layout_below="@+id/cName1"
+            android:layout_below="@+id/user_name"
             android:layout_alignParentLeft="true"
             android:layout_alignLeft="@+id/textView3"
             android:layout_alignStart="@+id/textView3" />
@@ -161,7 +161,7 @@
             android:text="Not entered"
             android:textColor="@android:color/holo_red_dark"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editTextPassword"
+            android:layout_below="@+id/user_password"
             android:visibility="invisible"
             android:layout_marginStart="10dp"
             android:layout_alignParentStart="true"
