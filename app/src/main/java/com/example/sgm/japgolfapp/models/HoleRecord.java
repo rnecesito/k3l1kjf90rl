@@ -6,12 +6,14 @@ public class HoleRecord {
 
     private String mName;
     private ArrayList<Competitor> mCompetitors;
+    private ArrayList<BetSetting> mBetSettings;
 
     public HoleRecord(){}
 
-    public HoleRecord(String name, ArrayList<Competitor> competitors){
+    public HoleRecord(String name, ArrayList<Competitor> competitors, ArrayList<BetSetting> betSettings){
         mName = name;
         mCompetitors = competitors;
+        mBetSettings = betSettings;
     }
 	
 	public String getName() {
@@ -30,4 +32,10 @@ public class HoleRecord {
     public void setCompetitors(ArrayList<Competitor> scores){
         this.mCompetitors = scores;
     }
+
+
+    public ArrayList<BetSetting> getBetSettings(){ return mBetSettings; }
+
+    public void setBetSettings(ArrayList<BetSetting> betSettings){ this.mBetSettings = betSettings; }
+
 }

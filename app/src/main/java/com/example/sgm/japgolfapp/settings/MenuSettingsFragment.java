@@ -54,7 +54,7 @@ public class MenuSettingsFragment extends BaseFragment {
         betRButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new BetSettingFragment());
+                showFragmentAndAddToBackStack(new NewBetSettingFragment());
             }
         });
 

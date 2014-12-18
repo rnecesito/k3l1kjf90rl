@@ -9,12 +9,21 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="android:windowBackground">@drawable/bg</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerItem.DropDownItem</item>
+
     </style>
 
     <style name="Divider">
         <item name="android:layout_width">1dip</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">#000</item>
+    </style>
+
+
+
+    <style name="SpinnerItem.DropDownItem" parent="@android:style/Widget.DropDownItem.Spinner">
+        <item name="android:textColor">#ff000000</item>
     </style>
 
 </resources>
