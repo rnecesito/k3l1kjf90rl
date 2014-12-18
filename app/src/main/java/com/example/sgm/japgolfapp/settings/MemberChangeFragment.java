@@ -137,9 +137,9 @@ public class MemberChangeFragment extends BaseFragment{
 
     }
 
-    @InjectView(R.id.editTextEmail)
+    @InjectView(R.id.courseSpinner)
     EditText email;
-    @InjectView(R.id.editTextCName1)
+    @InjectView(R.id.cName1)
     EditText name;
     @InjectView(R.id.editTextPassword)
     EditText password;

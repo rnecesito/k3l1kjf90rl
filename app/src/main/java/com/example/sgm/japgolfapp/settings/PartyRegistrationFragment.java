@@ -1,18 +1,46 @@
 package com.example.sgm.japgolfapp.settings;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import butterknife.OnClick;
 
@@ -26,9 +54,272 @@ import butterknife.OnClick;
  */
 public class PartyRegistrationFragment extends BaseFragment{
 
-    View view_container;
-
     boolean shown = false;
+    View view_container;
+    private boolean success = false;
+    private ProgressDialog pdialog;
+    String response2;
+    String response2_2;
+    String user_info_json_string;
+    TextView date_view;
+    TableLayout competitor_list;
+    ArrayList<Players> player_list;
+    String retVal;
+
+    private class Courses {
+        int id = 0;
+        String course = "";
+
+        public Courses(int _id, String _course) {
+            id = _id;
+            course = _course;
+        }
+
+        public String toString() {
+            return course;
+        }
+    }
+
+    private class Players {
+        int id = 0;
+        String name = "";
+
+        public Players(int _id, String _name) {
+            id = _id;
+            name = _name;
+        }
+
+        public String toString() {
+            return name;
+        }
+    }
+
+    private class InitLists extends AsyncTask<String, String, String> {
+        public InitLists() {
+            pdialog = new ProgressDialog(getActivity());
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            pdialog.setMessage(getResources().getString(R.string.jap_loading_courses_players));
+            pdialog.setMessage("Loading courses and players...");
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String result2 = "";
+
+            byte[] result_2 = null;
+            String result2_2 = "";
+
+            byte[] user_info_result = null;
+            String user_info_result_string = "";
+
+            /** Getting Cache Directory */
+            File cDir = getActivity().getCacheDir();
+
+            /** Getting a reference to temporary file, if created earlier */
+            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
+
+            String strLine="";
+            StringBuilder text = new StringBuilder();
+
+            /** Reading contents of the temporary file, if already exists */
+            try {
+                FileReader fReader = new FileReader(tempFile);
+                BufferedReader bReader = new BufferedReader(fReader);
+
+                /** Reading the contents of the file , line by line */
+                while( (strLine=bReader.readLine()) != null  ){
+                    text.append(strLine);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/course?access_token="+text.toString());
+
+            try {
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    result2 = new String(result, "UTF-8");
+                    System.out.println("Success!");
+                    response2 = result2;
+                    success = true;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    result2 = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            HttpClient httpclient_2 = new DefaultHttpClient();
+            HttpGet httppost_2 = new HttpGet("http://zoogtech.com/golfapp/public/user/all?access_token="+text.toString());
+
+            try {
+                HttpResponse response = httpclient_2.execute(httppost_2);
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result_2 = EntityUtils.toByteArray(response.getEntity());
+                    result2_2 = new String(result_2, "UTF-8");
+                    System.out.println(result2_2);
+                    System.out.println("Success!");
+                    response2_2 = result2_2;
+                    success = true;
+                }else {
+                    result_2 = EntityUtils.toByteArray(response.getEntity());
+                    result2_2 = new String(result_2, "UTF-8");
+                    System.out.println(result2_2);
+                    System.out.println("Failed!");
+                    success = false;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            HttpClient httpclient_3 = new DefaultHttpClient();
+            HttpGet httppost_3 = new HttpGet("http://zoogtech.com/golfapp/public/user/profile?access_token="+text.toString());
+
+            try {
+                HttpResponse response = httpclient_3.execute(httppost_3);
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    user_info_result = EntityUtils.toByteArray(response.getEntity());
+                    user_info_result_string = new String(user_info_result, "UTF-8");
+                    System.out.println(user_info_result_string);
+                    System.out.println("Success!");
+                    user_info_json_string = user_info_result_string;
+                    success = true;
+                }else {
+                    user_info_result = EntityUtils.toByteArray(response.getEntity());
+                    user_info_result_string = new String(user_info_result, "UTF-8");
+                    System.out.println(user_info_result_string);
+                    System.out.println("Failed!");
+                    success = false;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result2;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+            if(success) {
+                JSONArray array = null;
+                try {
+                    array = new JSONArray(response2);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Spinner spinner = (Spinner) view_container.findViewById(R.id.courseSpinner);
+                ArrayList<Courses> course_list = new ArrayList<Courses>();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject row = null;
+                    try {
+                        row = array.getJSONObject(i);
+                        course_list.add(new Courses(Integer.parseInt(row.getString("id")), row.getString("name")));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                JSONArray array2 = null;
+                try {
+                    array2 = new JSONArray(response2_2);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<Players> player_list_container = new ArrayList<Players>();
+                for (int i = 0; i < array2.length(); i++) {
+                    JSONObject row = null;
+                    try {
+                        row = array2.getJSONObject(i);
+                        player_list_container.add(new Players(Integer.parseInt(row.getString("id")), row.getString("firstname")+" "+row.getString("lastname")));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                player_list = player_list_container;
+//                ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, course_list);
+                ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getActivity(), R.layout.spinner_background, course_list);
+                spinner.setAdapter(spinnerArrayAdapter);
+
+                Spinner spinner2 = (Spinner) view_container.findViewById(R.id.cName1);
+                ArrayAdapter spinnerArrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list_container);
+                spinner2.setAdapter(spinnerArrayAdapter2);
+                Spinner spinner3 = (Spinner) view_container.findViewById(R.id.cName2);
+                ArrayAdapter spinnerArrayAdapter3 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list_container);
+                spinner3.setAdapter(spinnerArrayAdapter3);
+                Spinner spinner4 = (Spinner) view_container.findViewById(R.id.cName3);
+                ArrayAdapter spinnerArrayAdapter4 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list_container);
+                spinner4.setAdapter(spinnerArrayAdapter4);
+                Spinner spinner5 = (Spinner) view_container.findViewById(R.id.cName4);
+                ArrayAdapter spinnerArrayAdapter5 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list_container);
+                spinner5.setAdapter(spinnerArrayAdapter5);
+
+
+//                int index = 0;
+//                JSONObject user_info_jo;
+//                try {
+//                    LayoutInflater inflater = LayoutInflater.from(getContext());
+//                    View item = inflater.inflate(R.layout.row_player_handicap, competitor_list, false);
+//                    ImageView del_btn = (ImageView) item.findViewById(R.id.delete_competitor);
+//                    del_btn.setOnClickListener(btnListener);
+//                    del_btn.setVisibility(View.INVISIBLE);
+//                    Spinner clist = (Spinner) item.findViewById(R.id.comp_names);
+//                    ArrayAdapter spinnerArrayAdapter2 = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, player_list);
+//                    user_info_jo = new JSONObject(user_info_json_string);
+//                    clist.setAdapter(spinnerArrayAdapter2);
+//                    competitor_list.addView(item);
+//                    for (Players p : player_list) {
+//                        if (p.id == Integer.parseInt(user_info_jo.getString("id"))) {
+//                            int pos = spinnerArrayAdapter2.getPosition(p);
+//                            clist.setSelection(pos);
+//                            clist.setClickable(false);
+//                        }
+//                        index = index + 1;
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+
+//                Toast.makeText(getContext(), getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Loading complete.", Toast.LENGTH_SHORT).show();
+            } else {
+//                Toast.makeText(getContext(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     @OnClick(R.id.menu_button)
     public void showMenu() {
@@ -150,6 +441,7 @@ public class PartyRegistrationFragment extends BaseFragment{
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view_container = view;
+        new InitLists().execute();
     }
 
 }
