@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:gravity="center_vertical">
-
+    android:gravity="center_vertical"
+    android:layout_marginTop="60dp">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,8 +103,7 @@
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginRight="10dp">
 
             <Button
                 android:layout_width="100dp"
@@ -121,5 +123,31 @@
                 android:layout_marginTop="22dp" />
         </TableRow>
 
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="90dp"
+                android:text="Course Registration"
+                android:id="@+id/courseAdministrationB"
+                android:textAllCaps="false"
+                android:background="@drawable/container_background_4"
+                android:layout_marginLeft="0dp" />
+
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="55dp"
+                android:id="@+id/imageButton5"
+                android:background="@drawable/arrow"
+                android:contentDescription=""
+                android:layout_marginTop="22dp" />
+        </TableRow>
+
     </TableLayout>
+</ScrollView>
 </RelativeLayout>

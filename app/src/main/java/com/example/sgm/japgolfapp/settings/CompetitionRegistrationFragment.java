@@ -14,6 +14,7 @@ import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.Competition.CreateClosedCompetitionFragment;
 import com.example.sgm.japgolfapp.Competition.CreateClosedCompetitionGroupFragment;
 import com.example.sgm.japgolfapp.Competition.JoinClosedCompetitionFragment;
+import com.example.sgm.japgolfapp.Competition.ViewClosedCompetitionGroupsFragment;
 import com.example.sgm.japgolfapp.Competition.ViewClosedCompetitionsFragment;
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
@@ -69,7 +70,7 @@ public class CompetitionRegistrationFragment extends BaseFragment {
         createGroupB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new CreateClosedCompetitionFragment());
+                showFragmentAndAddToBackStack(new CreateClosedCompetitionGroupFragment());
             }
         });
 
@@ -77,7 +78,7 @@ public class CompetitionRegistrationFragment extends BaseFragment {
         viewGroupsB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new CreateClosedCompetitionGroupFragment());
+                showFragmentAndAddToBackStack(new ViewClosedCompetitionGroupsFragment());
             }
         });
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/relativeLayout1"
@@ -15,114 +15,101 @@
         android:orientation="vertical" >
 
         <LinearLayout
-            android:id="@+id/party_container"
-            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp" >
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="Group Name" />
+                android:gravity="right"
+                android:text="@string/course_name"
+                android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/competition_name"
+                android:id="@+id/course_name_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:textColor="@android:color/black"
                 android:background="@drawable/container_background_3"
-                android:textSize="14sp"
-                android:padding="5dp" />
+                android:inputType="textPersonName"
+                android:textColor="@android:color/black"
+                android:padding="5dp"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="5dp"
-            android:id="@+id/course_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_below="@id/party_container" >
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="Competition" />
+                android:gravity="right"
+                android:text="@string/holes"
+                android:textSize="14sp" />
 
             <Spinner
-                android:id="@+id/competition_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:entries="@array/holes_list"
+                android:id="@+id/hole_count_info" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/competitor_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:clickable="true"
-            android:gravity="center_vertical|center_horizontal" >
-
-            <ImageView
-                android:id="@+id/add_player"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_input_add" />
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Add Member" />
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/handicap"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:entries="@array/active"
+                android:id="@+id/handicap_info" />
         </LinearLayout>
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/horizontal_line"
             android:padding="1dp"
-            android:stretchColumns="*">
+            android:stretchColumns="*" >
 
             <TableRow
-                android:id="@+id/tableRow1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="1dp"
+                android:id="@+id/create_course_header"
                 android:background="#999" >
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Name" />
+                    android:text="@string/holes" />
 
                 <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent" >
-
-                    <View style="@style/Divider" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:layout_gravity="left"
-                    android:text="Email" />
-
-                <LinearLayout
+                    android:id="@+id/divider"
                     android:layout_width="1dp"
                     android:layout_height="match_parent" >
 
@@ -133,37 +120,56 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Action" />
+                    android:text="@string/par" />
             </TableRow>
-
 
         </TableLayout>
 
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:id="@+id/table_scroll_info"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:isScrollContainer="false">
 
             <TableLayout
+                android:id="@+id/holes_table_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/horizontal_line"
                 android:padding="1dp"
-                android:id="@+id/courses_table">
+                android:stretchColumns="*">
 
             </TableLayout>
 
         </ScrollView>
 
-        <Button
-            android:id="@+id/group_create"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Create" />
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/create_course_info"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="40dp"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/delete_course"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="40dp"
+                android:text="Delete" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -177,8 +183,8 @@
         android:background="#fff"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:text="Course Info"
         android:textColor="@android:color/black"
-        android:text="@string/create_group"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
