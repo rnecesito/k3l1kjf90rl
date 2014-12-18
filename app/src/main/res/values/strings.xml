@@ -37,12 +37,14 @@
     <string name="text_play_history_score_gross">Gross</string>
     <string name="text_play_history_score_net">Net</string>
     <string name="text_save">Save</string>
+    <string name="text_help">Help</string>
 
     <string name="dummy_text_history_date">MM/DD/2017</string>
     <string name="dummy_text_history_course_name">Golf course name</string>
     <string name="dummy_text_name">1st Name</string>
     <string name="dummy_text_xx">XX</string>
     <string name="dummy_text_yy">YY</string>
+    <string name="dummy_text_ooo">OOO</string>
 
     <!--String Values-->
     <!--<string name="app_name">スマート　ゴルフ　マネージャー</string>-->

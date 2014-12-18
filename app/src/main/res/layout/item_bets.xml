@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/new_registration_main"
+    android:clickable="false"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:padding="5dp">
+
+    <TextView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/tvBetName"
+        android:textSize="24sp"
+        android:text="@string/dummy_text_history_date"
+        android:layout_alignParentLeft="true"
+        android:textColor="@android:color/white"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/tvHelp"
+        android:layout_alignTop="@+id/tvHelp"
+        android:layout_toLeftOf="@+id/cbBetCheck"
+        android:layout_toStartOf="@+id/cbBetCheck"
+        android:gravity="center_vertical" />
+
+    <!--<ImageView-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:id="@+id/imgDisplayHistory"-->
+        <!--android:background="@drawable/arrow"-->
+        <!--android:contentDescription=""-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentTop="true" />-->
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="55dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/text_help"
+        android:background="@drawable/arrow"
+        android:id="@+id/tvHelp"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
+<CheckBox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/cbBetCheck"
+    android:layout_toLeftOf="@+id/tvHelp"
+    android:layout_toStartOf="@+id/tvHelp"
+    android:checked="false"
+    android:clickable="false"
+    android:layout_alignBottom="@+id/tvBetName"
+    android:layout_alignTop="@+id/tvBetName" />
+
+</RelativeLayout>

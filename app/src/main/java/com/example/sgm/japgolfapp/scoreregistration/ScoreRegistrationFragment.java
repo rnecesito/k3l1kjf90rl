@@ -69,7 +69,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
             public void onClick(View view) {
                 mHoleNumber++;
                 if(mHoleNumber >= mItems.size())
-                    mItems.add(new HoleRecord("" + mHoleNumber, dummy_one));
+                    mItems.add(new HoleRecord("" + mHoleNumber, dummy_one, null));
                 mTvHoleNumber.setText("" + (mHoleNumber + 1));
                 mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
                 lvCompetitors.setAdapter(mAdapter);
@@ -84,7 +84,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         dummy_one.add(new Competitor("Mr. Chow", "0", "0", new ArrayList<Integer>()));
         dummy_one.add(new Competitor("Mr. Mikado", "0", "0", new ArrayList<Integer>() ));
 
-        mItems.add(new HoleRecord("1", dummy_one));
+        mItems.add(new HoleRecord("1", dummy_one, null));
         // -----------
         mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
         lvCompetitors.setAdapter(mAdapter);
