@@ -41,244 +41,309 @@
             android:gravity="center"
             android:background="@drawable/square_title"
             android:layout_height="60dp" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_below="@id/partyRText"
             android:layout_height="match_parent">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_below="@+id/partyRText"
 
-    android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/text_course_name"
-            android:id="@+id/textView"
-            android:layout_marginLeft="29dp"
-            android:layout_marginStart="29dp"
-            android:textSize="25sp"
-            android:autoText="false"
-            android:textColor="#ffffffff"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="9dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/partyRText"
+                android:layout_height="match_parent">
 
-        <EditText
-            android:layout_width="240dp"
-            android:layout_height="35dp"
-            android:id="@+id/editTextEmail"
-            android:background="@drawable/container_background_3"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/textView"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignRight="@+id/editTextPassword"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentStart="false"
-            android:inputType="textEmailAddress"
-            android:textColor="#ff000000"
-            android:paddingLeft="5dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/text_course_name"
+                    android:id="@+id/textView"
+                    android:layout_marginLeft="29dp"
+                    android:layout_marginStart="29dp"
+                    android:textSize="25sp"
+                    android:autoText="false"
+                    android:textColor="#ffffffff"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="9dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/fellow_competitor_name"
-            android:id="@+id/textView2"
-            android:textSize="25dp"
-            android:autoText="false"
-            android:textColor="#ffffffff"
-            android:layout_below="@+id/editTextEmail"
-            android:layout_alignLeft="@+id/editTextCName1"
-            android:layout_alignStart="@+id/editTextCName1" />
+                <Spinner
+                    android:layout_width="240dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/courseSpinner"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/textView"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignRight="@+id/editTextPassword"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false"
+                    android:paddingLeft="5dp"
+                    android:spinnerMode="dropdown" />
 
-        <EditText
-            android:layout_width="240dp"
-            android:layout_height="35dp"
-            android:id="@+id/editTextCName1"
-            android:background="@drawable/container_background_3"
-            android:layout_below="@+id/textView2"
-            android:layout_alignLeft="@+id/editTextEmail"
-            android:layout_marginTop="8dp"
-            android:textColor="#ff000000"
-            android:paddingLeft="5dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/not_entered"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:textColor="@android:color/holo_red_dark"
-            android:layout_below="@+id/editTextCName1"
-            android:id="@+id/textViewV1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Handicap"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginLeft="30dp"
-            android:layout_below="@+id/textViewV1"
-            android:id="@+id/textView25" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/fellow_competitor_name"
+                    android:id="@+id/textView2"
+                    android:textSize="25dp"
+                    android:autoText="false"
+                    android:textColor="#ffffffff"
+                    android:layout_below="@+id/courseSpinner"
+                    android:layout_alignLeft="@+id/cName1"
+                    android:layout_alignStart="@+id/cName1" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imgMinusB"
-            android:src="@drawable/ic_triangle_minus"
-            android:layout_below="@+id/textViewV1"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/textView25"
-        />
+                <Spinner
+                    android:layout_width="240dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/cName1"
+                    android:layout_below="@+id/textView2"
+                    android:layout_alignLeft="@+id/courseSpinner"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#ff000000"
+                    android:paddingLeft="5dp"
+                    android:spinnerMode="dropdown" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/not_entered"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_below="@+id/cName1"
+                    android:id="@+id/textViewV1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Handicap"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="30dp"
+                    android:layout_below="@+id/textViewV1"
+                    android:id="@+id/textView25" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_toRightOf="@+id/imgMinusB"
-            android:layout_below="@+id/textViewV1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:padding="10dp"
-            android:background="@drawable/container_background_4"
-            android:id="@+id/textViewC1Count" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgMinusB"
+                    android:src="@drawable/ic_triangle_minus"
+                    android:layout_below="@+id/textViewV1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/textView25"
+                />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imgAddB"
-            android:src="@drawable/ic_triangle_add"
-            android:layout_below="@+id/textViewV1"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/textViewC1Count"
-            />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_toRightOf="@+id/imgMinusB"
+                    android:layout_below="@+id/textViewV1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:padding="10dp"
+                    android:background="@drawable/container_background_4"
+                    android:id="@+id/textViewC1Count" />
 
-        <EditText
-            android:layout_width="240dp"
-            android:layout_height="35dp"
-            android:id="@+id/editTextCName2"
-            android:background="@drawable/container_background_3"
-            android:textColor="#ff000000"
-            android:paddingLeft="5dp"
-            android:layout_below="@+id/imgMinusB"
-            android:layout_marginTop="10dp"
-            android:layout_alignLeft="@+id/textView25"
-            android:layout_alignStart="@+id/textView25" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgAddB"
+                    android:src="@drawable/ic_triangle_add"
+                    android:layout_below="@+id/textViewV1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/textViewC1Count"
+                    />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/not_entered"
-            android:textColor="@android:color/holo_red_dark"
-            android:id="@+id/textViewV2"
-            android:layout_below="@+id/editTextCName2"
-            android:layout_alignLeft="@+id/textViewV1"
-            android:layout_alignStart="@+id/textViewV1" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Handicap"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginLeft="30dp"
-        android:layout_below="@+id/textViewV2"
-        android:id="@+id/textView27" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imgMinusB2"
-        android:src="@drawable/ic_triangle_minus"
-        android:layout_below="@+id/textViewV2"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/textView27"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_toRightOf="@+id/imgMinusB2"
-        android:layout_below="@+id/textViewV2"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="20dp"
-        android:padding="10dp"
-        android:background="@drawable/container_background_4"
-        android:id="@+id/textViewC2Count" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imgAddB2"
-        android:src="@drawable/ic_triangle_add"
-        android:layout_below="@+id/textViewV2"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/textViewC2Count"
-        />
-    <EditText
-        android:layout_width="240dp"
-        android:layout_height="35dp"
-        android:id="@+id/editTextCName3"
-        android:background="@drawable/container_background_3"
-        android:textColor="#ff000000"
-        android:paddingLeft="5dp"
-        android:layout_below="@+id/imgMinusB2"
-        android:layout_marginTop="10dp"
-        android:layout_alignLeft="@+id/textView25"
-        android:layout_alignStart="@+id/textView25" />
+                <Spinner
+                    android:layout_width="240dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/cName2"
+                    android:textColor="#ff000000"
+                    android:paddingLeft="5dp"
+                    android:layout_below="@+id/imgMinusB"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignLeft="@+id/textView25"
+                    android:layout_alignStart="@+id/textView25"
+                    android:spinnerMode="dropdown" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/not_entered"
-        android:textColor="@android:color/holo_red_dark"
-        android:id="@+id/textViewV3"
-        android:layout_below="@+id/editTextCName3"
-        android:layout_alignLeft="@+id/textViewV1"
-        android:layout_alignStart="@+id/textViewV1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/not_entered"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:id="@+id/textViewV2"
+                    android:layout_below="@+id/cName2"
+                    android:layout_alignLeft="@+id/textViewV1"
+                    android:layout_alignStart="@+id/textViewV1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Handicap"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="30dp"
+                    android:layout_below="@+id/textViewV2"
+                    android:id="@+id/textView27" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgMinusB2"
+                    android:src="@drawable/ic_triangle_minus"
+                    android:layout_below="@+id/textViewV2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/textView27"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_toRightOf="@+id/imgMinusB2"
+                    android:layout_below="@+id/textViewV2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:padding="10dp"
+                    android:background="@drawable/container_background_4"
+                    android:id="@+id/textViewC2Count" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgAddB2"
+                    android:src="@drawable/ic_triangle_add"
+                    android:layout_below="@+id/textViewV2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/textViewC2Count"
+                    />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Handicap"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginLeft="30dp"
-        android:layout_below="@+id/textViewV3"
-        android:id="@+id/textView30" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imgMinusB3"
-        android:src="@drawable/ic_triangle_minus"
-        android:layout_below="@+id/textViewV3"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/textView30"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_toRightOf="@+id/imgMinusB3"
-        android:layout_below="@+id/textViewV3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="20dp"
-        android:padding="10dp"
-        android:background="@drawable/container_background_4"
-        android:id="@+id/textViewC3Count" />
+                <Spinner
+                    android:layout_width="240dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/cName3"
+                    android:textColor="#ff000000"
+                    android:paddingLeft="5dp"
+                    android:layout_below="@+id/imgMinusB2"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignLeft="@+id/textView25"
+                    android:layout_alignStart="@+id/textView25"
+                    android:spinnerMode="dropdown" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imgAddB3"
-        android:src="@drawable/ic_triangle_add"
-        android:layout_below="@+id/textViewV3"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/textViewC3Count"
-        android:layout_marginBottom="20dp"
-        />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/not_entered"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:id="@+id/textViewV3"
+                    android:layout_below="@+id/cName3"
+                    android:layout_alignLeft="@+id/textViewV1"
+                    android:layout_alignStart="@+id/textViewV1" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Handicap"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="30dp"
+                    android:layout_below="@+id/textViewV3"
+                    android:id="@+id/textView30" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgMinusB3"
+                    android:src="@drawable/ic_triangle_minus"
+                    android:layout_below="@+id/textViewV3"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/textView30"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_toRightOf="@+id/imgMinusB3"
+                    android:layout_below="@+id/textViewV3"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:padding="10dp"
+                    android:background="@drawable/container_background_4"
+                    android:id="@+id/textViewC3Count" />
 
-</RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgAddB3"
+                    android:src="@drawable/ic_triangle_add"
+                    android:layout_below="@+id/textViewV3"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/textViewC3Count"
+                    android:layout_marginBottom="20dp"
+                    />
+
+                <Spinner
+                    android:layout_width="240dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/cName4"
+                    android:textColor="#ff000000"
+                    android:paddingLeft="5dp"
+                    android:layout_below="@+id/imgMinusB2"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignLeft="@+id/textView27"
+                    android:layout_alignStart="@+id/textView27"
+                    android:spinnerMode="dropdown" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/not_entered"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:id="@+id/textViewV4"
+                    android:layout_below="@+id/cName3"
+                    android:layout_alignLeft="@+id/textViewV3"
+                    android:layout_alignStart="@+id/textViewV3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Handicap"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="30dp"
+                    android:layout_below="@+id/textViewV4"
+                    android:id="@+id/textView31" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgMinusB4"
+                    android:src="@drawable/ic_triangle_minus"
+                    android:layout_below="@+id/textViewV4"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/textView31"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_toRightOf="@+id/imgMinusB4"
+                    android:layout_below="@+id/textViewV4"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:padding="10dp"
+                    android:background="@drawable/container_background_4"
+                    android:id="@+id/textViewC4Count" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgAddB4"
+                    android:src="@drawable/ic_triangle_add"
+                    android:layout_below="@+id/textViewV4"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/textViewC4Count"
+                    android:layout_marginBottom="20dp"
+                    />
+
+            </RelativeLayout>
+
         </ScrollView>
+
     </RelativeLayout>
 
     <Button
