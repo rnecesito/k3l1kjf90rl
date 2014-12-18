@@ -1,4 +1,4 @@
-package com.example.sgm.japgolfapp.settings;
+package com.example.sgm.japgolfapp.counting;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,22 +7,23 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
+import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
- * Created by archie on 12/16/2014.
+ * A simple {@link android.app.Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link com.example.sgm.japgolfapp.counting.BetCountingFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link com.example.sgm.japgolfapp.counting.BetCountingFragment#newInstance} factory method to
+ * create an instance of this fragment.
  */
-public class MemberChangeFragment extends BaseFragment{
-
+public class BetCountingFragment extends BaseFragment {
     View view_container;
 
     boolean shown = false;
@@ -51,7 +52,7 @@ public class MemberChangeFragment extends BaseFragment{
             shown = false;
         }
 
-        Button countingButton= (Button)view_container.findViewById(R.id.countingButton);
+        Button countingButton= (Button)item.findViewById(R.id.countingButton);
         countingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,13 +64,6 @@ public class MemberChangeFragment extends BaseFragment{
                 if(tagged == null) {
                     rl.addView(item);
                 }
-                Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
-                scoreCountingButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showFragmentAndAddToBackStack(new ScoreCountingFragment());
-                    }
-                });
 //                showFragmentAndAddToBackStack(new MenuSettingsFragment());
             }
         });
@@ -137,24 +131,10 @@ public class MemberChangeFragment extends BaseFragment{
 
     }
 
-    @InjectView(R.id.courseSpinner)
-    EditText email;
-    @InjectView(R.id.cName1)
-    EditText name;
-    @InjectView(R.id.editTextPassword)
-    EditText password;
-
-    @InjectView(R.id.emailValidateText)
-    TextView invalidEmail;
-    @InjectView(R.id.nameValidateText)
-    TextView invalidName;
-    @InjectView(R.id.passwordValidateText)
-    TextView invalidPassword;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.layout_member_change, container, false);
+        return inflater.inflate(R.layout.fragment_bet_counting, container, false);
     }
 
     @Override
@@ -163,30 +143,4 @@ public class MemberChangeFragment extends BaseFragment{
         view_container = view;
     }
 
-    @OnClick(R.id.saveB)
-    public void saveButton(){
-        validate();
-    }
-
-    public void validate(){
-        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
-            invalidEmail.setVisibility(View.VISIBLE);
-        }
-        if(name.getText().toString().isEmpty() ){
-            invalidName.setVisibility(View.VISIBLE);
-        }
-        if(password.getText().toString().isEmpty()){
-            invalidPassword.setVisibility(View.VISIBLE);
-        }
-
-        if(android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
-            invalidEmail.setVisibility(View.INVISIBLE);
-        }
-        if(!name.getText().toString().isEmpty()){
-            invalidName.setVisibility(View.INVISIBLE);
-        }
-        if(!password.getText().toString().isEmpty()){
-            invalidPassword.setVisibility(View.INVISIBLE);
-        }
-    }
 }

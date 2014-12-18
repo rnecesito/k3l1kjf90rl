@@ -70,7 +70,7 @@
             android:textColor="#ffffffff"
             android:layout_centerVertical="true"
             android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/editTextEmail" />
+            android:layout_alignStart="@+id/courseSpinner" />
 
         <EditText
             android:layout_width="240dp"
