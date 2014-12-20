@@ -22,7 +22,7 @@
                 android:text="@string/title_setting"
                 android:id="@+id/settingButton"
                 android:textAllCaps="false"
-                android:background="@drawable/container_background_4"
+                android:background="@drawable/button_new_golf_app"
                 android:layout_marginLeft="0dp" />
 
             <ImageButton
@@ -45,7 +45,7 @@
                 android:text="@string/title_score_registration"
                 android:id="@+id/scoreRegistrationButton"
                 android:textAllCaps="false"
-                android:background="@drawable/container_background_4"
+                android:background="@drawable/button_new_golf_app"
                 android:layout_marginLeft="0dp" />
 
             <ImageButton
@@ -69,7 +69,7 @@
                 android:text="@string/title_counting"
                 android:id="@+id/countingButton"
                 android:textAllCaps="false"
-                android:background="@drawable/container_background_4"
+                android:background="@drawable/button_new_golf_app"
                 android:layout_marginLeft="0dp" />
 
             <ImageButton
@@ -93,7 +93,7 @@
                 android:text="@string/title_history"
                 android:id="@+id/historyButton"
                 android:textAllCaps="false"
-                android:background="@drawable/container_background_4"
+                android:background="@drawable/button_new_golf_app"
                 android:layout_marginLeft="0dp" />
 
             <ImageView

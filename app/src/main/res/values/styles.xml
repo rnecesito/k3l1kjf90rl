@@ -11,6 +11,8 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
 
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerItem.DropDownItem</item>
+        <item name="android:button">@style/Widget.Button</item>
+       
 
     </style>
 
@@ -26,4 +28,8 @@
         <item name="android:textColor">#ff000000</item>
     </style>
 
+    <style name="Widget.Button" parent="android:Widget">
+        <item name="android:background">@drawable/button_new_golf_app</item>
+    </style>
+   
 </resources>
