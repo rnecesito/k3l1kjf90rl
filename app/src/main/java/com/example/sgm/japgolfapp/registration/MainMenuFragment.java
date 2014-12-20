@@ -1,10 +1,13 @@
 package com.example.sgm.japgolfapp.registration;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.sgm.japgolfapp.BaseFragment;
@@ -41,9 +44,24 @@ public class MainMenuFragment extends BaseFragment{
                 showFragmentAndAddToBackStack(new MenuSettingsFragment());
             }
         });
+        ImageButton iSettingButton = (ImageButton)view.findViewById(R.id.imageSettingButton);
+        iSettingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new MenuSettingsFragment());
+            }
+        });
 
         Button historyButton = (Button)view.findViewById(R.id.historyButton);
         historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new PlayHistoryFragment());
+            }
+        });
+
+        ImageView iHButton = (ImageView)view.findViewById(R.id.imageHistoryButton);
+        iHButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showFragmentAndAddToBackStack(new PlayHistoryFragment());
@@ -57,46 +75,68 @@ public class MainMenuFragment extends BaseFragment{
                 showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
             }
         });
+        ImageButton iSButton = (ImageButton)view.findViewById(R.id.imageScoreRegistrationButton);
+        iSButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
+            }
+        });
 
         Button countingButton= (Button)view.findViewById(R.id.countingButton);
         countingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LayoutInflater inflater = LayoutInflater.from(getContext());
-                RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
-                final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
-                item.setTag("counting_sub_menu");
-                View tagged = view_container.findViewWithTag("counting_sub_menu");
-                if(tagged == null) {
-                    rl.addView(item);
-                }
-                Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
-                scoreCountingButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showFragmentAndAddToBackStack(new ScoreCountingFragment());
-                    }
-                });
-
-                Button betCountingButton = (Button)item.findViewById(R.id.betCounting);
-                betCountingButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showFragmentAndAddToBackStack(new BetCountingFragment());
-                    }
-                });
-
-                Button competitionCountingButton = (Button)item.findViewById(R.id.competitionCounting);
-                competitionCountingButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showFragmentAndAddToBackStack(new CompetitionCountingFragment());
-                    }
-                });
+                countingButton(view_container);
 //                showFragmentAndAddToBackStack(new MenuSettingsFragment());
             }
         });
 
+
+        ImageButton iCButton = (ImageButton)view.findViewById(R.id.imageButton3);
+        iCButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countingButton(view_container);
+            }
+        });
+
+
+
+    }
+
+    private void countingButton(View view_container) {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
+        final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
+        item.setTag("counting_sub_menu");
+        View tagged = view_container.findViewWithTag("counting_sub_menu");
+        if(tagged == null) {
+            rl.addView(item);
+        }
+        Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
+        scoreCountingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new ScoreCountingFragment());
+            }
+        });
+
+        Button betCountingButton = (Button)item.findViewById(R.id.betCounting);
+        betCountingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new BetCountingFragment());
+            }
+        });
+
+        Button competitionCountingButton = (Button)item.findViewById(R.id.competitionCounting);
+        competitionCountingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new CompetitionCountingFragment());
+            }
+        });
     }
 
 }

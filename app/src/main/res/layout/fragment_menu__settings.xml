@@ -5,6 +5,7 @@
     android:layout_marginTop="60dp">
 <ScrollView
     android:layout_width="match_parent"
+    android:descendantFocusability="beforeDescendants"
     android:layout_height="match_parent">
     <TableLayout
         android:layout_width="wrap_content"
@@ -47,7 +48,7 @@
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="55dp"
-                android:id="@+id/imageSettingButton"
+                android:id="@+id/iCreateCompetitionB"
                 android:background="@drawable/arrow"
                 android:contentDescription=""
                 android:layout_marginTop="22dp" />
@@ -70,7 +71,7 @@
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="55dp"
-                android:id="@+id/imageButton2"
+                android:id="@+id/iViewCompetitionB"
                 android:background="@drawable/arrow"
                 android:contentDescription=""
                 android:layout_marginTop="22dp" />
@@ -94,7 +95,7 @@
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="55dp"
-                android:id="@+id/imageButton3"
+                android:id="@+id/iCompetitionRButton"
                 android:background="@drawable/arrow"
                 android:contentDescription=""
                 android:layout_marginTop="22dp" />
@@ -117,7 +118,7 @@
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="55dp"
-                android:id="@+id/imageButton4"
+                android:id="@+id/ibetRButton"
                 android:background="@drawable/arrow"
                 android:contentDescription=""
                 android:layout_marginTop="22dp" />
@@ -142,7 +143,7 @@
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="55dp"
-                android:id="@+id/imageButton5"
+                android:id="@+id/iCourseAdministrationB"
                 android:background="@drawable/arrow"
                 android:contentDescription=""
                 android:layout_marginTop="22dp" />
