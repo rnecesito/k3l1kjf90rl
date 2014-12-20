@@ -26,7 +26,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Competition Name" />
+                android:text="@string/jap_competition_name" />
 
             <EditText
                 android:id="@+id/competition_name"
@@ -52,7 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Course" />
+                android:text="@string/jap_course" />
 
             <Spinner
                 android:id="@+id/courses_spinner"
@@ -72,7 +72,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Competition Date" />
+                android:text="@string/date" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -109,7 +109,8 @@
             android:layout_marginTop="20dp"
             android:layout_centerInParent="true"
             android:layout_below="@id/date_container"
-            android:text="Update" />
+            android:textAllCaps="false"
+            android:text="@string/update" />
 
     </RelativeLayout>
 
@@ -124,7 +125,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="@android:color/black"
-        android:text="Edit Closed Competition"
+        android:text="@string/jap_edit_closed_competition"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

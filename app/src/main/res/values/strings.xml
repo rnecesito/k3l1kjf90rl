@@ -63,6 +63,36 @@
     <!--<string name="text_next">Next</string>-->
     <!--<string name="text_set">Set</string>-->
     <!--<string name="text_help">Help</string>-->
+    <!--<string name="course_name">Course Name</string>-->
+    <!--<string name="holes">Holes</string>-->
+    <!--<string name="handicap">Handicap</string>-->
+    <!--<string name="par">Par</string>-->
+    <!--<string name="delete">Delete</string>-->
+    <!--<string name="course_info">Course Info</string>-->
+    <!--<string name="view_courses">View Courses</string>-->
+    <!--<string name="Edit">Edit</string>-->
+    <!--<string name="view_closed_competition">ビュークローズコンクール</string>-->
+    <!--<string name="name">Name</string>-->
+    <!--<string name="date">Date</string>-->
+    <!--<string name="view">View</string>-->
+    <!--<string name="jap_closed_competition">Closed Competition</string>-->
+    <!--<string name="jap_competition_name">Competition Name</string>-->
+    <!--<string name="jap_course">Course</string>-->
+    <!--<string name="view_groups">View Groups</string>-->
+    <!--<string name="bet_setting_reference">Bet Setting/Reference</string>-->
+    <!--<string name="score_counting">Score Counting</string>-->
+    <!--<string name="return_text">Return</string>-->
+    <!--<string name="text_play_history">Play History</string>-->
+    <!--<string name="create_courses">Create Courses</string>-->
+    <!--<string name="view_closed_competitions">View Closed Competitions</string>-->
+    <!--<string name="join">Join</string>-->
+    <!--<string name="jap_edit_closed_competition">Edit Closed Competition</string>-->
+    <!--<string name="update">Update</string>-->
+    <!--<string name="create_competition">Create Competition</string>-->
+    <!--<string name="create">Create</string>-->
+    <!--<string name="competition_counting">Competition Counting</string>-->
+    <!--<string name="bet_counting">Bet Counting</string>-->
+
 
 
     <!--String Values-->
@@ -88,7 +118,7 @@
     <string name="text_competition_registration">コンペ 登録</string>
     <string name="text_bet_registration"> 握り 登録 </string>
     <string name="text_course_name">ゴルフ場名</string>
-    <string name="text_bet_setting">Bet Setting</string>
+    <string name="text_bet_setting">賭けの設定</string>
     <string name="text_hole">ホール</string>
     <string name="text_fellow_competitors_name">同伴者氏名</string>
     <string name="text_register">登録</string>
@@ -125,28 +155,48 @@
     <string name="text_next">次</string>
     <string name="text_set">据える</string>
     <string name="text_help">手伝</string>
+    <string name="course_name">ゴルフ場名</string>
+    <string name="holes">穴</string>
+    <string name="handicap">ハンディー</string>
+    <string name="par">パー</string>
+    <string name="delete">デリート</string>
+    <string name="course_info">コース情報</string>
+    <string name="view_courses">見るコース</string>
+    <string name="Edit">編集</string>
+    <string name="view_closed_competition">ビュークローズコンクール</string>
+    <string name="name">名前</string>
+    <string name="date">日付</string>
+    <string name="view">観る</string>
+    <string name="jap_closed_competition">クローズコンペ</string>
+    <string name="jap_competition_name">大会名</string>
+    <string name="jap_course">ゴルフ場名</string>
+    <string name="view_groups">ビュー·グループ</string>
+    <string name="bet_setting_reference">賭けの設定/参照</string>
+    <string name="score_counting">スコアカウント</string>
+    <string name="return_text">戻す</string>
+    <string name="text_play_history">歴史を演じる</string>
+    <string name="create_courses">コースを作成する</string>
+    <string name="view_closed_competitions">コンペスコア観る</string>
+    <string name="join">加わる</string>
+    <string name="jap_edit_closed_competition">クローズコンペを編集</string>
+    <string name="update">アップデイト</string>
+    <string name="create_competition">コンペ作成</string>
+    <string name="create">作る</string>
+    <string name="competition_counting">競争カウンティング</string>
+    <string name="bet_counting">賭け計数</string>
 
 
     <string name="not_entered">Not Entered</string>
     <string name="confirming">Confirming</string>
-    <string name="create_competition">Create Competition</string>
     <string name="view_competition">View Competition</string>
     <string name="join_competition">Join Competition</string>
     <string name="create_group">Create Group</string>
-    <string name="view_groups">View Groups</string>
     <string name="view_group">View Groups</string>
     <string name="course_registration">Course Registration</string>
-    <string name="create_courses">Create Courses</string>
-    <string name="view_courses">View Courses</string>
-    <string name="course_name">Course Name</string>
-    <string name="holes">Holes</string>
-    <string name="par">Par</string>
-    <string name="handicap">Handicap</string>
     <string name="course_created">Course Created</string>
     <string name="something_went_wrong">Something went Wrong</string>
     <string name="create_course_name">Create Course Name</string>
     <string name="up_to_18_holes">Up to 18 holes</string>
-    <string name="Edit">Edit</string>
     <string name="loading_courses">Loading Courses</string>
     <string name="courses_loaded">Courses Loaded</string>
     <string name="loading_course_info">Loading Course Info</string>
@@ -157,7 +207,6 @@
     <string name="sure">Sure</string>
 
 
-    <string name="text_play_history">Play History</string>
 
     <string name="dummy_text_history_date">MM/DD/2017</string>
     <string name="dummy_text_history_course_name">Golf course name</string>

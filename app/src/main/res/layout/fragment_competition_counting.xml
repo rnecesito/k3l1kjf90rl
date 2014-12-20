@@ -22,7 +22,7 @@
         <Button
             android:layout_width="90dp"
             android:layout_height="60dp"
-            android:text="Return"
+            android:text="@string/return_text"
             android:id="@+id/new_registration"
             android:enabled="true"
             android:textAllCaps="false"
@@ -38,7 +38,7 @@
             android:layout_width="120dp"
             android:id="@+id/partyRText"
             android:layout_alignParentTop="true"
-            android:text="Competition Counting"
+            android:text="@string/competition_counting"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="17dp"
             android:textSize="15dp"
