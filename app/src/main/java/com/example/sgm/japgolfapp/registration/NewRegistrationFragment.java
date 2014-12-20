@@ -46,8 +46,8 @@ public class NewRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            pdialog.setMessage(getResources().getString(R.string.jap_registering));
-            pdialog.setMessage("Registering");
+            pdialog.setMessage(getResources().getString(R.string.jap_registering));
+//            pdialog.setMessage("Registering");
             pdialog.show();
         }
 
@@ -113,12 +113,12 @@ public class NewRegistrationFragment extends BaseFragment{
                 pdialog.dismiss();
             }
             if(success) {
-//                Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_success), Toast.LENGTH_LONG).show();
-                Toast.makeText(getContext(), "Registration successful.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_success), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), "Registration successful.", Toast.LENGTH_LONG).show();
                 showFragment(new MainMenuFragment());
             } else {
-//                Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_failed), Toast.LENGTH_LONG).show();
-                Toast.makeText(getContext(), "Registration failed.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_failed), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), "Registration failed.", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -133,16 +133,16 @@ public class NewRegistrationFragment extends BaseFragment{
             String pass_val = pass.getText().toString();
 
             if(email_val.matches("")) {
-    //                Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(), "Please enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Please enter email", Toast.LENGTH_SHORT).show();
                 return;
             } else if(fname_val.matches("")) {
-//                Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_firstname), Toast.LENGTH_SHORT).show();
-            Toast.makeText(getContext(), "Please enter name", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_firstname), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "Please enter name", Toast.LENGTH_SHORT).show();
             return;
             } else if(pass_val.matches("")) {
-//                Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_pass), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(), "Please enter password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_pass), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Please enter password", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 new RegisterCall().execute(fname_val, "-", "Male", "1", email_val, pass_val);

@@ -22,8 +22,6 @@ import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.R.id;
-import com.example.sgm.japgolfapp.R.layout;
-
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -247,7 +245,7 @@ public class ClosedCompetitionEditFragment extends Fragment {
 
                 Toast.makeText(getActivity(), "Loading Complete.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -261,7 +259,7 @@ public class ClosedCompetitionEditFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Updating competition...");
+            pdialog.setMessage(getResources().getString(R.string.jap_updating_competition));
             pdialog.show();
             /** Getting Cache Directory */
             File cDir = getActivity().getCacheDir();
@@ -341,9 +339,9 @@ public class ClosedCompetitionEditFragment extends Fragment {
                 pdialog.dismiss();
             }
             if(success) {
-                Toast.makeText(getActivity(), "Competition updated.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_competition_updated), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -388,10 +386,10 @@ public class ClosedCompetitionEditFragment extends Fragment {
                 int course_id = c.id;
                 String p_date = date_view.getText().toString();
                 if(pn_val.matches("")) {
-                    Toast.makeText(getActivity(), "Enter a competition name.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_competition_name), Toast.LENGTH_SHORT).show();
                     return;
                 } else if (p_date.matches("") || p_date.matches("0000-00-00") || p_date.matches("MM/dd/yy")) {
-                    Toast.makeText(getActivity(), "Please enter a valid date.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_valid_date), Toast.LENGTH_SHORT).show();
                 } else {
                     new CompetitionUpdate().execute(pn_val, p_date, course_id+"");
                 }

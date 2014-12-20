@@ -158,9 +158,9 @@ public class CreateClosedCompetitionGroupFragment extends Fragment {
                 ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, course_list);
                 spinner.setAdapter(spinnerArrayAdapter);
 
-                Toast.makeText(getActivity(), "Loading Complete", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(),"Something went Wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -248,7 +248,7 @@ public class CreateClosedCompetitionGroupFragment extends Fragment {
             if(success) {
                 Toast.makeText(getActivity(), "Group created.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), "Something went Wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }

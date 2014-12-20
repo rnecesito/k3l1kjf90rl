@@ -104,8 +104,8 @@ public class PartyRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            pdialog.setMessage(getResources().getString(R.string.jap_loading_courses_players));
-            pdialog.setMessage("Loading courses and players...");
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_courses_players));
+//            pdialog.setMessage("Loading courses and players...");
             pdialog.show();
         }
 
@@ -314,11 +314,11 @@ public class PartyRegistrationFragment extends BaseFragment{
 //                    e.printStackTrace();
 //                }
 
-//                Toast.makeText(getContext(), getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(), "Loading complete.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Loading complete.", Toast.LENGTH_SHORT).show();
             } else {
-//                Toast.makeText(getContext(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -18,7 +18,7 @@
         <Button
             android:layout_width="90dp"
             android:layout_height="60dp"
-            android:text="Save"
+            android:text="@string/save"
             android:id="@+id/saveB"
             android:enabled="true"
             android:textAllCaps="false"
@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Name"
+            android:text="@string/title_first_name"
             android:id="@+id/textView2"
             android:textSize="25dp"
             android:autoText="false"

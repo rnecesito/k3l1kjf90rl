@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
@@ -21,11 +22,15 @@ import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +42,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -157,6 +165,87 @@ public class MemberChangeFragment extends BaseFragment{
 //                Toast.makeText(getContext(), "Data ", Toast.LENGTH_LONG).show();
             } else {
 //                Toast.makeText(getContext(), "Update failed. Please try again.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private class UpdateCall extends AsyncTask<String, String, String> {
+
+        public UpdateCall() {
+            pdialog = new ProgressDialog(getActivity());
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage(getResources().getString(R.string.jap_updating_profile));
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String fname = strings[0];
+            String lname = strings[1];
+            String gender = strings[2];
+            String handicap = strings[3];
+            String email = strings[4];
+            String pass = strings[5];
+            byte[] result = null;
+            String str = "";
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/user/profile");
+            try {
+                List<NameValuePair> json1 = new ArrayList<NameValuePair>(6);
+                json1.add(new BasicNameValuePair("firstname", fname));
+                json1.add(new BasicNameValuePair("lastname", lname));
+                json1.add(new BasicNameValuePair("email", email));
+                json1.add(new BasicNameValuePair("gender", gender));
+                json1.add(new BasicNameValuePair("handicap", handicap));
+                if(!pass.matches("")) {
+                    json1.add(new BasicNameValuePair("password", pass));
+                }
+
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+                httppost.setHeader("Authorization", readtoken());
+                httppost.setEntity(new UrlEncodedFormEntity(json1));
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    System.out.println(json1.toString());
+                    retVal = str;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return "Yeah";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+            if(success) {
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_profile_updated), Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_profile_update_failed), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -322,12 +411,15 @@ public class MemberChangeFragment extends BaseFragment{
     public void validate(){
         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
             invalidEmail.setVisibility(View.VISIBLE);
+            return;
         }
-        if(name.getText().toString().isEmpty() ){
+        else if(name.getText().toString().isEmpty() ){
             invalidName.setVisibility(View.VISIBLE);
+            return;
         }
-        if(password.getText().toString().isEmpty()){
+        else if(password.getText().toString().isEmpty()){
             invalidPassword.setVisibility(View.VISIBLE);
+            return;
         }
 
         if(android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
@@ -339,6 +431,7 @@ public class MemberChangeFragment extends BaseFragment{
         if(!password.getText().toString().isEmpty()){
             invalidPassword.setVisibility(View.INVISIBLE);
         }
+        new UpdateCall().execute(name.getText().toString(), "-", "Male", "1", email.getText().toString(), password.getText().toString() );
     }
 
     private String readtoken() {

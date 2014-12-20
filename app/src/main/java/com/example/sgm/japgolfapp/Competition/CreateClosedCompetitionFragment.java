@@ -79,7 +79,7 @@ public class CreateClosedCompetitionFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Loading");
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_courses_players));
             pdialog.show();
         }
 
@@ -160,9 +160,9 @@ public class CreateClosedCompetitionFragment extends Fragment {
                 ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, course_list);
                 spinner.setAdapter(spinnerArrayAdapter);
 
-                Toast.makeText(getActivity(),"Loading Complete", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), "Something went Wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -176,7 +176,7 @@ public class CreateClosedCompetitionFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Creating");
+            pdialog.setMessage(getResources().getString(R.string.jap_creating_competition));
             pdialog.show();
 
             File cDir = getActivity().getCacheDir();
@@ -251,9 +251,9 @@ public class CreateClosedCompetitionFragment extends Fragment {
                 pdialog.dismiss();
             }
             if(success) {
-                Toast.makeText(getActivity(),"Successfully Created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),getResources().getString(R.string.jap_competition_created), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), "Something went Wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -297,10 +297,10 @@ public class CreateClosedCompetitionFragment extends Fragment {
                 int course_id = c.id;
                 String p_date = date_view.getText().toString();
                 if(pn_val.matches("")) {
-                    Toast.makeText(getActivity(), "Must not be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_competition_name), Toast.LENGTH_SHORT).show();
                     return;
                 } else if (p_date.matches("") || p_date.matches("0000-00-00") || p_date.matches("MM/dd/yy")) {
-                    Toast.makeText(getActivity(), "Invalid Date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),getResources().getString(R.string.jap_enter_valid_date), Toast.LENGTH_SHORT).show();
                 } else {
                     new CompetitionCreate().execute(pn_val, p_date, course_id+"");
                 }

@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -58,8 +59,7 @@ public class LoginFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            pdialog.setMessage(getResources().getString(R.string.jap_logging_in));
-            pdialog.setMessage("Logging in...");
+            pdialog.setMessage(getResources().getString(R.string.jap_logging_in));
             pdialog.show();
         }
 
@@ -117,8 +117,7 @@ public class LoginFragment extends BaseFragment{
             }
             if(success) {
                 try {
-//                    Toast.makeText(getActivity(), getResources().getString(R.string.jap_login_success), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "Login successful.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.jap_login_success), Toast.LENGTH_SHORT).show();
 
                     File cDir = getActivity().getCacheDir();
                     tempFile = new File(cDir.getPath() + "/" + TEMP_FILE_NAME);
@@ -143,15 +142,14 @@ public class LoginFragment extends BaseFragment{
                     e.printStackTrace();
                 }
             } else {
-//                Toast.makeText(getActivity(), getResources().getString(R.string.jap_invalid_login), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity(), "Invalid username/password.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_invalid_login), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     @OnEditorAction(R.id.login_password)
-    public boolean enter(EditText view, KeyEvent event) {
-        if (event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+    public boolean enter(EditText view, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
             InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             in.hideSoftInputFromInputMethod(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             final EditText un = (EditText) view_container.findViewById(R.id.login_email);
@@ -159,11 +157,10 @@ public class LoginFragment extends BaseFragment{
             String email_val = un.getText().toString();
             String pass_val = pw.getText().toString();
             if(email_val.matches("")) {
-//            Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
                 return false;
             } else if (pass_val.matches("")) {
-                Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_pass), Toast.LENGTH_SHORT).show();
                 return false;
             } else {
                 new LoginCall().execute(email_val, pass_val);
@@ -180,11 +177,13 @@ public class LoginFragment extends BaseFragment{
         String pass_val = pw.getText().toString();
 
         if(email_val.matches("")) {
-//            Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
-            Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
             return;
         } else if (pass_val.matches("")) {
-            Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_pass), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
             return;
         } else {
             new LoginCall().execute(email_val, pass_val);
@@ -204,9 +203,13 @@ public class LoginFragment extends BaseFragment{
         view_container = view;
         un = (EditText) view_container.findViewById(R.id.login_email);
         pw = (EditText) view_container.findViewById(R.id.login_password);
+        EditText passEditText = (EditText) view_container.findViewById(R.id.login_password);
+        passEditText.setImeActionLabel(getResources().getString(R.string.text_next), EditorInfo.IME_ACTION_DONE);
 
         //DIRECT LOGIN
         un.setText("q@q.com");
         pw.setText("q");
+
+
     }
 }

@@ -236,9 +236,9 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
                     e.printStackTrace();
                 }
 
-                Toast.makeText(getActivity(), "Loading Complete.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -252,7 +252,7 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Updating competition...");
+            pdialog.setMessage(getResources().getString(R.string.jap_updating_competition));
             pdialog.show();
             /** Getting Cache Directory */
             File cDir = getActivity().getCacheDir();
@@ -355,9 +355,9 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
                 pdialog.dismiss();
             }
             if(success) {
-                Toast.makeText(getActivity(), "Competition updated.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_competition_updated), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }
