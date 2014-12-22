@@ -207,8 +207,8 @@ public class LoginFragment extends BaseFragment{
         passEditText.setImeActionLabel(getResources().getString(R.string.text_next), EditorInfo.IME_ACTION_DONE);
 
         //DIRECT LOGIN
-        un.setText("q@q.com");
-        pw.setText("q");
+//        un.setText("q@q.com");
+//        pw.setText("q");
 
 
     }
