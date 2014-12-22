@@ -23,7 +23,7 @@
             android:layout_width="90dp"
             android:layout_height="60dp"
             android:text="@string/return_text"
-            android:id="@+id/new_registration"
+            android:id="@+id/saveTv"
             android:enabled="true"
             android:textAllCaps="false"
             android:background="@drawable/square_title"
@@ -36,7 +36,7 @@
 
         <TextView
             android:layout_width="120dp"
-            android:id="@+id/partyRText"
+            android:id="@+id/registerTv"
             android:layout_alignParentTop="true"
             android:text="@string/bet_counting"
             android:layout_alignParentLeft="true"
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/score_counting_table"
-            android:layout_below="@+id/partyRText"
+            android:layout_below="@+id/registerTv"
             android:layout_marginTop="5dp">
 
             <TableRow
