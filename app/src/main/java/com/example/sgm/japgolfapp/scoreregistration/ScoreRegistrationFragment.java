@@ -66,7 +66,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         mBtnForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mHoleNumber > 18) {
+                if(mHoleNumber < 17) {
                     mHoleNumber++;
                     if(mHoleNumber >= mItems.size())
                         mItems.add(new HoleRecord("" + mHoleNumber, dummy_one, null));

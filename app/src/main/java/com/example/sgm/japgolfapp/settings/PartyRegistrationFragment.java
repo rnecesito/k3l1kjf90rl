@@ -392,56 +392,64 @@ public class PartyRegistrationFragment extends BaseFragment{
     public void minus1() {
         TextView score_tv = (TextView) view_container.findViewById(R.id.textViewC1Count);
         int score = Integer.parseInt(score_tv.getText().toString());
-        score_tv.setText((score - 1) + "");
+        if (score != 0)
+            score_tv.setText((score - 1) + "");
     }
 
     @OnClick(R.id.imgAddB)
     public void add1() {
         TextView score_tv = (TextView) view_container.findViewById(R.id.textViewC1Count);
         int score = Integer.parseInt(score_tv.getText().toString());
-        score_tv.setText((score + 1) + "");
+        if (score < 64)
+            score_tv.setText((score + 1) + "");
     }
 
     @OnClick(R.id.imgMinusB2)
     public void minus2() {
         TextView score_tv = (TextView) view_container.findViewById(R.id.textViewC2Count);
         int score = Integer.parseInt(score_tv.getText().toString());
-        score_tv.setText((score - 1) + "");
+        if (score != 0)
+            score_tv.setText((score - 1) + "");
     }
 
     @OnClick(R.id.imgAddB2)
     public void add2() {
         TextView score_tv = (TextView) view_container.findViewById(R.id.textViewC2Count);
         int score = Integer.parseInt(score_tv.getText().toString());
-        score_tv.setText((score + 1) + "");
+        if (score < 64)
+            score_tv.setText((score + 1) + "");
     }
 
     @OnClick(R.id.imgMinusB3)
     public void minus3() {
         TextView score_tv = (TextView) view_container.findViewById(R.id.textViewC3Count);
         int score = Integer.parseInt(score_tv.getText().toString());
-        score_tv.setText((score - 1) + "");
+        if (score != 0)
+            score_tv.setText((score - 1) + "");
     }
 
     @OnClick(R.id.imgAddB3)
     public void add3() {
         TextView score_tv = (TextView) view_container.findViewById(R.id.textViewC3Count);
         int score = Integer.parseInt(score_tv.getText().toString());
-        score_tv.setText((score + 1) + "");
+        if (score < 64)
+            score_tv.setText((score + 1) + "");
     }
 
     @OnClick(R.id.imgMinusB4)
     public void minus4() {
         TextView score_tv = (TextView) view_container.findViewById(R.id.textViewC4Count);
         int score = Integer.parseInt(score_tv.getText().toString());
-        score_tv.setText((score - 1) + "");
+        if (score != 0)
+            score_tv.setText((score - 1) + "");
     }
 
     @OnClick(R.id.imgAddB4)
     public void add4() {
         TextView score_tv = (TextView) view_container.findViewById(R.id.textViewC4Count);
         int score = Integer.parseInt(score_tv.getText().toString());
-        score_tv.setText((score + 1) + "");
+        if (score < 64)
+            score_tv.setText((score + 1) + "");
     }
 
     public void SlideToRight(View view) {
