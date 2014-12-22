@@ -3,6 +3,7 @@ package com.example.sgm.japgolfapp.registration;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -132,8 +133,14 @@ public class LoginFragment extends BaseFragment{
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    SharedPreferences prefs = getActivity().getSharedPreferences(
+                            "com.example.app", Context.MODE_PRIVATE);
+
+                    String hasLoggedIn = "com.example.app.hasloggedin";
+                    prefs.edit().putBoolean(hasLoggedIn, true).apply();
 
                     FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.popBackStack();
                     fragmentManager.beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                             .replace(R.id.container, new MainMenuFragment())
