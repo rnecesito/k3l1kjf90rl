@@ -13,19 +13,14 @@ import butterknife.OnClick;
 
 public class IntroScreenFragment extends BaseFragment{
 
-    @OnClick(R.id.to_login)
-    public void viewLogin() {
-        showFragmentAndAddToBackStack(new LoginFragment());
-    }
-
     @OnClick(R.id.to_new_registration)
     public void viewNewRegistration() {
-        showFragmentAndAddToBackStack(new NewRegistrationFragment());
+        showFragmentAndAddToBackStack(new PrimaryScreenFragment());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_primary_screen, container, false);
+        return inflater.inflate(R.layout.fragment_intro_screen, container, false);
     }
 }

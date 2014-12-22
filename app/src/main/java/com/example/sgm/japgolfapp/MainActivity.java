@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.sgm.japgolfapp.registration.PrimaryScreenFragment;
+import com.example.sgm.japgolfapp.registration.IntroScreenFragment;
 
 
 public class MainActivity extends Activity {
@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                    .add(R.id.container, new PrimaryScreenFragment())
+                    .add(R.id.container, new IntroScreenFragment())
                     .commit();
         }
     }

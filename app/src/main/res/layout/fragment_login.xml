@@ -55,7 +55,6 @@
             android:layout_alignStart="@+id/textView"
             android:textColor="#ff000000"
             android:textCursorDrawable = "@null"
-            android:paddingLeft="5dp" />
             android:paddingLeft="5dp"
             android:inputType="textEmailAddress" />
 
