@@ -1,10 +1,14 @@
 package com.example.sgm.japgolfapp.settings;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -81,22 +85,31 @@ public class BetSettingChooserFragment extends BaseFragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (lvBetSettings.getChildAt(position) != null) {
-                        CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
-                        if (cb.isChecked()) {
-                            mItems.get(position).setIsChosen(false);
+                    CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
+                    /*TextView helpTv = ((TextView)lvBetSettings.getChildAt(position).findViewById(R.id.tvHelp));*/
+                    if (cb.isChecked()) {
+                        mItems.get(position).setIsChosen(false);
+                        adapter.notifyDataSetChanged();
+                        settingsCount--;
+                    }
+                    else { //do something else}
+                        if(settingsCount < MAXSETTINGS) {
+                            NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
+                            mItems.get(position).setIsChosen(true);
                             adapter.notifyDataSetChanged();
-                            settingsCount--;
-                        } else { //do something else}
-                            if(settingsCount < MAXSETTINGS) {
-                                NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
-                                mItems.get(position).setIsChosen(true);
-                                adapter.notifyDataSetChanged();
-                                settingsCount++;
-                            }else{
-                                Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
-                            }
+                            settingsCount++;
+                        }else{
+                            Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
                         }
                     }
+                        /*helpTv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                              new CustomDialogClass(getActivity());
+                            }
+                        });*/
+                }
+
 
             }
         });

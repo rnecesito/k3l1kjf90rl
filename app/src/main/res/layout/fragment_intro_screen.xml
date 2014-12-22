@@ -23,22 +23,7 @@
             android:background="@drawable/container_background_2"
             android:textColor="#ffffffff"
             android:textSize="22sp"
-            android:layout_marginBottom="82dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:layout_width="230dp"
-            android:layout_height="60dp"
-            android:text="@string/title_to_login"
-            android:id="@+id/to_login"
-            android:enabled="true"
-            android:textAllCaps="false"
-            android:background="@drawable/container_background_2"
-            android:textColor="#ffffffff"
-            android:textSize="22sp"
-            android:layout_marginTop="77dp"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>

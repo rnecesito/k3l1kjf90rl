@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/new_registration_main"
     android:clickable="false"
-    android:descendantFocusability="blocksDescendants"
+    android:descendantFocusability="beforeDescendants"
     android:focusable="false"
     android:focusableInTouchMode="false"
     android:padding="5dp">
@@ -50,8 +50,6 @@
     android:id="@+id/cbBetCheck"
     android:layout_toLeftOf="@+id/tvHelp"
     android:layout_toStartOf="@+id/tvHelp"
-    android:checked="false"
-    android:clickable="false"
     android:layout_alignBottom="@+id/tvBetName"
     android:layout_alignTop="@+id/tvBetName" />
 

@@ -14,6 +14,7 @@ public class BetChooserViewBinder {
 	public static class BetChooserHolder {
 		TextView tvName;
         CheckBox cbBetCheck;
+        public TextView tvHelp;
 	}
 
 	public static void bindBetChooserdHolder(BetChooserHolder holder, View view) {
@@ -21,6 +22,7 @@ public class BetChooserViewBinder {
 				.findViewById(R.id.tvBetName);
         holder.cbBetCheck = (CheckBox) view
                 .findViewById(R.id.cbBetCheck);
+        holder.tvHelp = (TextView)view.findViewById(R.id.tvHelp);
 	}
 
 	public static void bindBetChooserInfo(final BetChooserHolder holder,

@@ -33,11 +33,15 @@
         android:layout_alignRight="@+id/tvCompetitorName"
         android:layout_alignEnd="@+id/tvCompetitorName" />
 
-    <ImageView
+    <TextView
         android:layout_width="40dp"
         android:layout_height="35dp"
         android:id="@+id/ivDecrease"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="-"
         android:background="@drawable/arrow2_back"
+        android:gravity="center"
+        android:textSize="22dp"
         android:layout_alignTop="@+id/tvScore"
         android:layout_toLeftOf="@+id/tvScore"
         android:layout_toStartOf="@+id/tvScore" />
@@ -55,11 +59,15 @@
         android:layout_toLeftOf="@+id/ivIncrease"
         android:layout_toStartOf="@+id/ivIncrease" />
 
-    <ImageView
+    <TextView
         android:layout_width="40dp"
         android:layout_height="35dp"
         android:id="@+id/ivIncrease"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="+"
         android:background="@drawable/arrow2"
+        android:gravity="center"
+        android:textSize="22dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

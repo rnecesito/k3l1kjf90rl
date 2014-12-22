@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,8 +24,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
     private Integer mHoleNumber;
     private Integer mCeilSize;
 
-    private ImageView mBtnBack;
-    private ImageView mBtnForward;
+    private TextView mBtnBack;
+    private TextView mBtnForward;
 
     private TextView mTvHoleNumber;
 
@@ -49,7 +48,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         mTvHoleNumber = (TextView) view.findViewById(R.id.tvHoleNumber);
         mTvHoleNumber.setText("" + (mHoleNumber + 1));
 
-        mBtnBack = (ImageView) view_container.findViewById(R.id.ivBack);
+        mBtnBack = (TextView) view_container.findViewById(R.id.ivBack);
         mBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,17 +62,19 @@ public class ScoreRegistrationFragment extends BaseFragment{
             }
         });
 
-        mBtnForward = (ImageView) view_container.findViewById(R.id.ivForward);
+        mBtnForward = (TextView) view_container.findViewById(R.id.ivForward);
         mBtnForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mHoleNumber++;
-                if(mHoleNumber >= mItems.size())
-                    mItems.add(new HoleRecord("" + mHoleNumber, dummy_one, null));
-                mTvHoleNumber.setText("" + (mHoleNumber + 1));
-                mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
-                lvCompetitors.setAdapter(mAdapter);
-                lvCompetitors.setFocusable(true);
+                if(mHoleNumber > 18) {
+                    mHoleNumber++;
+                    if(mHoleNumber >= mItems.size())
+                        mItems.add(new HoleRecord("" + mHoleNumber, dummy_one, null));
+                    mTvHoleNumber.setText("" + (mHoleNumber + 1));
+                    mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
+                    lvCompetitors.setAdapter(mAdapter);
+                    lvCompetitors.setFocusable(true);
+                }
             }
         });
 
