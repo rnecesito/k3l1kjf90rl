@@ -1,5 +1,7 @@
 package com.example.sgm.japgolfapp.registration;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,21 @@ public class PrimaryScreenFragment extends BaseFragment{
 
     @OnClick(R.id.to_login)
     public void viewLogin() {
-        showFragmentAndAddToBackStack(new LoginFragment());
+
+
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(
+                "com.example.app", Context.MODE_PRIVATE);
+
+        String hasLoggedIn = "com.example.app.hasloggedin";
+
+        Boolean b = prefs.getBoolean(hasLoggedIn, false);
+
+        if(b) {
+            showFragmentAndAddToBackStack(new MainMenuFragment());
+        }else{
+            showFragmentAndAddToBackStack(new LoginFragment());
+        }
     }
 
     @OnClick(R.id.to_new_registration)
