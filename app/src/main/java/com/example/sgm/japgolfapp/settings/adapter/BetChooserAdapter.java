@@ -9,16 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.BetSetting;
 import com.example.sgm.japgolfapp.settings.adapter.holders.BetChooserViewBinder;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -65,7 +64,8 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
             holder.tvHelp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new CustomDialogClass(a).show();
+                    Dialog d = new CustomDialogClass(a);
+                    d.show();
                 }
             });
 
@@ -99,7 +99,6 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-
             setContentView(R.layout.dialog_help);
 
             returnB = (Button)findViewById(R.id.returnB);
@@ -115,6 +114,7 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.returnB:
+                    SlideToLeft(v.getRootView());
                     dismiss();
                     break;
                 default:
@@ -124,5 +124,65 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
         }
     }
 
+    public void SlideToRight(View view) {
+        Animation slide = null;
+        slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, -5.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
+                0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
 
+        slide.setDuration(400);
+        slide.setFillAfter(true);
+        slide.setFillEnabled(true);
+        view.startAnimation(slide);
+
+        slide.setAnimationListener(new Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+        });
+
+    }
+
+    public void SlideToLeft(View view) {
+        Animation slide = null;
+        slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, -5.0f, Animation.RELATIVE_TO_SELF,
+                0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
+
+        slide.setDuration(400);
+        slide.setFillAfter(true);
+        slide.setFillEnabled(true);
+        view.startAnimation(slide);
+
+        slide.setAnimationListener(new Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+        });
+
+    }
 }

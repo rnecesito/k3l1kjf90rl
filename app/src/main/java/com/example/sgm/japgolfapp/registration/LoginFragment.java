@@ -178,7 +178,7 @@ public class LoginFragment extends BaseFragment{
         return false;
     }
 
-    @OnClick(R.id.login)
+    @OnClick(R.id.button_login)
     public void login2() {
         final EditText un = (EditText) view_container.findViewById(R.id.login_email);
         final EditText pw = (EditText) view_container.findViewById(R.id.login_password);

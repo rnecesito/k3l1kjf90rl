@@ -244,6 +244,7 @@ public class MemberChangeFragment extends BaseFragment{
             }
             if(success) {
                 Toast.makeText(getContext(), getResources().getString(R.string.jap_profile_updated), Toast.LENGTH_LONG).show();
+                popBackStack();
             } else {
                 Toast.makeText(getContext(), getResources().getString(R.string.jap_profile_update_failed), Toast.LENGTH_LONG).show();
             }
@@ -274,7 +275,7 @@ public class MemberChangeFragment extends BaseFragment{
             shown = false;
         }
 
-        Button countingButton= (Button)view_container.findViewById(R.id.countingButton);
+        Button countingButton= (Button)item.findViewById(R.id.countingButton);
         countingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sgm.japgolfapp.BaseFragment;
-import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.R.id;
 import com.example.sgm.japgolfapp.R.layout;
 import com.example.sgm.japgolfapp.course.CreateCourseFragment;
@@ -21,11 +20,20 @@ public class CourseRegistrationSettingsFragment extends BaseFragment {
 		showFragmentAndAddToBackStack(new CreateCourseFragment());
 	}
 
+    @OnClick(id.imageSettingButton)
+    public void createCourse2() {
+        showFragmentAndAddToBackStack(new CreateCourseFragment());
+    }
+
 	@OnClick(id.viewCoursesB)
 	public void viewCourse() {
-
         showFragmentAndAddToBackStack(new ViewCourseFragment());
 	}
+
+    @OnClick(id.imageButton2)
+    public void viewCourse2() {
+        showFragmentAndAddToBackStack(new ViewCourseFragment());
+    }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

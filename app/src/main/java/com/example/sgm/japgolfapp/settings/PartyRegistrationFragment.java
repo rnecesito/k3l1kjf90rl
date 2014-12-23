@@ -347,7 +347,7 @@ public class PartyRegistrationFragment extends BaseFragment{
             shown = false;
         }
 
-        Button countingButton= (Button)view_container.findViewById(R.id.countingButton);
+        Button countingButton= (Button)item.findViewById(R.id.countingButton);
         countingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

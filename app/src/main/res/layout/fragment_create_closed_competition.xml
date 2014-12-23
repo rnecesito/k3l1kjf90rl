@@ -36,7 +36,8 @@
                 android:textSize="14sp"
                 android:layout_weight="1"
                 android:background="@drawable/container_background_3"
-                android:padding="5dp" />
+                android:padding="5dp"
+                android:textColor="#ff000000" />
         </LinearLayout>
 
         <LinearLayout

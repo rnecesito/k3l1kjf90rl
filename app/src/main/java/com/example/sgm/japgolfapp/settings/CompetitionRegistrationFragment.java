@@ -50,8 +50,24 @@ public class CompetitionRegistrationFragment extends BaseFragment {
             }
         });
 
+        Button createCompetitionB2 = (Button)view.findViewById(R.id.imageSettingButton);
+        createCompetitionB2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new CreateClosedCompetitionFragment());
+            }
+        });
+
         Button viewCompetitionB = (Button)view.findViewById(R.id.viewCompetitionB);
         viewCompetitionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new ViewClosedCompetitionsFragment());
+            }
+        });
+
+        Button viewCompetitionB2 = (Button)view.findViewById(R.id.imageButton2);
+        viewCompetitionB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showFragmentAndAddToBackStack(new ViewClosedCompetitionsFragment());
@@ -66,6 +82,14 @@ public class CompetitionRegistrationFragment extends BaseFragment {
             }
         });
 
+        Button joinCompetitionB2 = (Button)view.findViewById(R.id.imageButton3);
+        joinCompetitionB2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new JoinClosedCompetitionFragment());
+            }
+        });
+
         Button createGroupB = (Button)view.findViewById(R.id.createGroupB);
         createGroupB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,8 +98,24 @@ public class CompetitionRegistrationFragment extends BaseFragment {
             }
         });
 
+        Button createGroupB2 = (Button)view.findViewById(R.id.imageButton4);
+        createGroupB2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new CreateClosedCompetitionGroupFragment());
+            }
+        });
+
         Button viewGroupsB = (Button)view.findViewById(R.id.viewGroupsB);
         viewGroupsB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new ViewClosedCompetitionGroupsFragment());
+            }
+        });
+
+        Button viewGroupsB2 = (Button)view.findViewById(R.id.imageButtson4);
+        viewGroupsB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showFragmentAndAddToBackStack(new ViewClosedCompetitionGroupsFragment());

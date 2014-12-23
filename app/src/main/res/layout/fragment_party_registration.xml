@@ -103,6 +103,7 @@
                     android:textColor="#ff000000"
                     android:paddingLeft="5dp"
                     android:spinnerMode="dropdown" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,7 +112,9 @@
                     android:layout_marginLeft="5dp"
                     android:textColor="@android:color/holo_red_dark"
                     android:layout_below="@+id/cName1"
+                    android:visibility="invisible"
                     android:id="@+id/textViewV1" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -173,8 +176,10 @@
                     android:textColor="@android:color/holo_red_dark"
                     android:id="@+id/textViewV2"
                     android:layout_below="@+id/cName2"
+                    android:visibility="invisible"
                     android:layout_alignLeft="@+id/textViewV1"
                     android:layout_alignStart="@+id/textViewV1" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,6 +188,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_below="@+id/textViewV2"
                     android:id="@+id/textView27" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -192,6 +198,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/textView27"
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -204,6 +211,7 @@
                     android:padding="10dp"
                     android:background="@drawable/container_background_4"
                     android:id="@+id/textViewC2Count" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -233,6 +241,7 @@
                     android:textColor="@android:color/holo_red_dark"
                     android:id="@+id/textViewV3"
                     android:layout_below="@+id/cName3"
+                    android:visibility="invisible"
                     android:layout_alignLeft="@+id/textViewV1"
                     android:layout_alignStart="@+id/textViewV1" />
 
@@ -244,6 +253,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_below="@+id/textViewV3"
                     android:id="@+id/textView30" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -253,6 +263,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/textView30"
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -296,6 +307,7 @@
                     android:textColor="@android:color/holo_red_dark"
                     android:id="@+id/textViewV4"
                     android:layout_below="@+id/cName3"
+                    android:visibility="invisible"
                     android:layout_alignLeft="@+id/textViewV3"
                     android:layout_alignStart="@+id/textViewV3" />
 
@@ -379,14 +391,4 @@
         android:layout_alignParentBottom="true"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/confirming"
-        android:textColor="@android:color/holo_red_dark"
-        android:id="@+id/textView24"
-        android:layout_alignTop="@+id/menu_button"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 </RelativeLayout>
