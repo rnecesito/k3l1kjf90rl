@@ -23,11 +23,7 @@
             android:layout_width="90dp"
             android:layout_height="60dp"
             android:text="@string/return_text"
-<<<<<<< HEAD
-            android:id="@+id/saveTv"
-=======
             android:id="@+id/return_btn"
->>>>>>> ccf81aa4ecaed41454e332f7e3cd42277fdcd03b
             android:enabled="true"
             android:textAllCaps="false"
             android:background="@drawable/square_title"

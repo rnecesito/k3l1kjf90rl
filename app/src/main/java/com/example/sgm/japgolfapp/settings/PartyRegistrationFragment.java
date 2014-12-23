@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,7 @@ public class PartyRegistrationFragment extends BaseFragment{
     boolean shown = false;
     View view_container;
     private boolean success = false;
-    private ProgressDialog pdialog;
+
     String response2;
     String response2_2;
     String user_info_json_string;
@@ -67,6 +68,9 @@ public class PartyRegistrationFragment extends BaseFragment{
     TableLayout competitor_list;
     ArrayList<Players> player_list;
     String retVal;
+
+    private ProgressDialog pdialog;
+    private ProgressDialog pdialog2;
 
     private class Courses {
         int id = 0;
@@ -450,6 +454,23 @@ public class PartyRegistrationFragment extends BaseFragment{
         int score = Integer.parseInt(score_tv.getText().toString());
         if (score < 64)
             score_tv.setText((score + 1) + "");
+    }
+
+    @OnClick(R.id.saveB)
+    public void saveB(){
+
+        pdialog2 = new ProgressDialog(getActivity());
+        pdialog2.setMessage("Saving...");
+        pdialog2.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+              pdialog2.dismiss();
+              popBackStack();
+            }
+        }, 2000);
+//
     }
 
     public void SlideToRight(View view) {
