@@ -161,8 +161,10 @@ public class LoginFragment extends BaseFragment{
             in.hideSoftInputFromInputMethod(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             final EditText un = (EditText) view_container.findViewById(R.id.login_email);
             final EditText pw = (EditText) view_container.findViewById(R.id.login_password);
+
             String email_val = un.getText().toString();
             String pass_val = pw.getText().toString();
+
             if(email_val.matches("")) {
                 Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
                 return false;
@@ -182,6 +184,7 @@ public class LoginFragment extends BaseFragment{
         final EditText pw = (EditText) view_container.findViewById(R.id.login_password);
         String email_val = un.getText().toString();
         String pass_val = pw.getText().toString();
+
 
         if(email_val.matches("")) {
             Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();

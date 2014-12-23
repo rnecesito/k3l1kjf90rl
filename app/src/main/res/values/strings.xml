@@ -284,6 +284,8 @@
         Gives point/s to the fellow competitor/s when shot onto cart way and the ball jumped.\n\n
         OctopusSquidCentipede \n
         Gives point/s to the fellow competitor/s when shot the ground hardly.\n\n</string>
+    <string name="type_bet">Type of Bet</string>
+    <string name="prev">Prev</string>
 
     <string-array name="course_list">
         <item>Course 1</item>

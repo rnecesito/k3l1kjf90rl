@@ -30,7 +30,7 @@
 
         <TextView
             android:layout_width="110dp"
-            android:id="@+id/partyRText"
+            android:id="@+id/registerTv"
             android:layout_alignParentTop="true"
             android:text="@string/text_competition_registration"
             android:layout_alignParentLeft="true"

@@ -1,0 +1,136 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bet_registration">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="90dp"
+        android:background="@drawable/container_background"
+        android:id="@+id/dd">
+
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:text="@string/text_save"
+            android:id="@+id/saveTv2"
+            android:enabled="true"
+            android:textAllCaps="false"
+            android:background="@drawable/square_title"
+            android:textColor="#ffffffff"
+            android:textSize="21dp"
+            android:layout_marginTop="17dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:clickable="false" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:id="@+id/registerTv2"
+            android:layout_alignParentTop="true"
+            android:text="@string/text_register"
+
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="17dp"
+            android:textSize="15dp"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:background="@drawable/square_title"
+            android:layout_height="60dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/type_bet"
+            android:id="@+id/textView15"
+            android:layout_marginTop="22dp"
+            android:textSize="25sp"
+            android:layout_below="@+id/registerTv2"
+            android:layout_marginLeft="21dp"
+            android:layout_marginStart="21dp" />
+
+        <TextView
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:id="@+id/ivForward2"
+            android:background="@drawable/arrow"
+            android:layout_marginLeft="7dp"
+            android:gravity="center"
+            android:text="@string/text_next"
+            android:layout_marginStart="7dp"
+            android:layout_alignTop="@+id/ivBack2"
+            android:layout_toRightOf="@+id/tvHoleNumber"
+            android:layout_toEndOf="@+id/tvHoleNumber" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="1"
+            android:id="@+id/tvHoleNumber"
+            android:layout_marginLeft="11dp"
+            android:visibility="gone"
+            android:layout_marginStart="11dp"
+            android:layout_alignBottom="@+id/textView15"
+            android:layout_toRightOf="@+id/ivBack2"
+            android:layout_toEndOf="@+id/ivBack2" />
+
+        <TextView
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:id="@+id/ivBack2"
+            android:background="@drawable/arrow_back"
+            android:layout_marginLeft="17dp"
+            android:gravity="center"
+            android:text="@string/prev"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="14dp"
+            android:layout_below="@+id/registerTv2"
+            android:layout_toRightOf="@+id/textView15"
+            android:layout_toEndOf="@+id/textView15" />
+
+        <TextView
+            android:layout_width="130dp"
+            android:id="@+id/textView17"
+            android:text="@string/bet_setting_reference"
+            android:textSize="11sp"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            android:gravity="center"
+            android:background="@drawable/square_title"
+            android:layout_height="30dp"
+            android:layout_below="@+id/ivBack2"
+            android:layout_alignRight="@+id/ivBack2"
+            android:layout_alignEnd="@+id/ivBack2" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:id="@+id/tvBetRegistration"
+            android:text="@string/text_bet_registration"
+            android:textSize="11sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:background="@drawable/square_title"
+            android:layout_height="30dp"
+            android:layout_below="@+id/ivForward2"
+            android:layout_alignLeft="@+id/tvHoleNumber"
+            android:visibility="gone"
+            android:layout_alignStart="@+id/tvHoleNumber" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvCompetitors2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView17" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
