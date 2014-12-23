@@ -16,6 +16,11 @@
 
     </style>
 
+    <style name="dialog_animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_right</item>
+    </style>
+
     <style name="Divider">
         <item name="android:layout_width">1dip</item>
         <item name="android:layout_height">match_parent</item>

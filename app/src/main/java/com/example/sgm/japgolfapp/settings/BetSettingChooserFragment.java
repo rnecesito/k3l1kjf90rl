@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,7 +16,9 @@ import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
+import com.example.sgm.japgolfapp.history.adapters.PlayHistoryScoreAdapter;
 import com.example.sgm.japgolfapp.models.BetSetting;
+import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.settings.adapter.BetChooserAdapter;
 
 import org.apache.http.HttpResponse;
@@ -222,6 +226,38 @@ public class BetSettingChooserFragment extends BaseFragment{
 //        mItems.add(new BetSetting("ggg", "ggg help",false));
 //        mItems.add(new BetSetting("hhh", "hhh help",false));
         // ---------------------------------
+
+
+        lvBetSettings = (ListView) view.findViewById(R.id.lvBets);
+        adapter = new BetChooserAdapter(getActivity(), 0, mItems);
+        lvBetSettings.setAdapter(adapter);
+        lvBetSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (lvBetSettings.getChildAt(position) != null) {
+                    CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
+                    /*TextView helpTv = ((TextView)lvBetSettings.getChildAt(position).findViewById(R.id.tvHelp));*/
+                    if (cb.isChecked()) {
+                        mItems.get(position).setIsChosen(false);
+                        adapter.notifyDataSetChanged();
+                        settingsCount--;
+                    }
+                    else { //do something else}
+                        if(settingsCount < MAXSETTINGS) {
+                            NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
+                            mItems.get(position).setIsChosen(true);
+                            adapter.notifyDataSetChanged();
+                            settingsCount++;
+                        }else{
+                            Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                }
+
+
+            }
+        });
     }
 
 }
