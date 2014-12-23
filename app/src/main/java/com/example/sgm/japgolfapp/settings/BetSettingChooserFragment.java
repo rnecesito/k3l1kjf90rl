@@ -102,12 +102,7 @@ public class BetSettingChooserFragment extends BaseFragment{
                             Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
                         }
                     }
-                        /*helpTv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                              new CustomDialogClass(getActivity());
-                            }
-                        });*/
+
                 }
 
 

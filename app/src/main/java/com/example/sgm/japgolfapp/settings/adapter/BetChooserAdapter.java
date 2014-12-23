@@ -65,7 +65,10 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
             holder.tvHelp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new CustomDialogClass(a).show();
+                    //new CustomDialogClass(a).show();
+                    CustomDialogClass dialog = new CustomDialogClass(a);
+                    dialog.getWindow().getAttributes().windowAnimations = R.anim.right_left_animation;
+                    dialog.show();
                 }
             });
 
