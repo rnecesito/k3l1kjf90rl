@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,9 +14,7 @@ import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.history.adapters.PlayHistoryScoreAdapter;
 import com.example.sgm.japgolfapp.models.BetSetting;
-import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.settings.adapter.BetChooserAdapter;
 
 import org.apache.http.HttpResponse;
