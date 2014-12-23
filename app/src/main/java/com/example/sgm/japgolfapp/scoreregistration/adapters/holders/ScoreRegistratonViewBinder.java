@@ -1,12 +1,10 @@
 package com.example.sgm.japgolfapp.scoreregistration.adapters.holders;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.Competitor;
-import com.example.sgm.japgolfapp.models.PlayHistory;
 
 
 public class ScoreRegistratonViewBinder {
@@ -14,8 +12,8 @@ public class ScoreRegistratonViewBinder {
 	public static class CompetitorScoreHolder {
 		TextView tvCompetitor;
         TextView tvHandicap;
-        ImageView ivIncrease;
-        ImageView ivDecrease;
+        TextView ivIncrease;
+        TextView ivDecrease;
         TextView tvScore;
 
         Integer mHoleNumber;
@@ -27,9 +25,9 @@ public class ScoreRegistratonViewBinder {
 				.findViewById(R.id.tvCompetitorName);
         holder.tvHandicap = (TextView) view
                 .findViewById(R.id.tvHandicap);
-        holder.ivIncrease = (ImageView) view
+        holder.ivIncrease = (TextView) view
                 .findViewById(R.id.ivIncrease);
-        holder.ivDecrease = (ImageView) view
+        holder.ivDecrease = (TextView) view
                 .findViewById(R.id.ivDecrease);
         holder.tvScore = (TextView) view
                 .findViewById(R.id.tvScore);
@@ -69,10 +67,8 @@ public class ScoreRegistratonViewBinder {
                     holder.ivDecrease.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if(competitor.getScores().get(holder.mHoleNumber) != 0) {
-                                competitor.getScores().set(holder.mHoleNumber.intValue(), new Integer(competitor.getScores().get(holder.mHoleNumber).intValue() - 1));
-                                holder.tvScore.setText("" + competitor.getScores().get(holder.mHoleNumber));
-                            }
+                            competitor.getScores().set(holder.mHoleNumber.intValue(), new Integer(competitor.getScores().get(holder.mHoleNumber).intValue() - 1));
+                            holder.tvScore.setText("" + competitor.getScores().get(holder.mHoleNumber));
                         }
                     });
                 }

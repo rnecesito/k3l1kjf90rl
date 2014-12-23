@@ -33,12 +33,12 @@
             android:id="@+id/registerTv"
             android:layout_width="120dp"
             android:layout_height="60dp"
+            android:text="@string/title_score_registration"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="17dp"
             android:background="@drawable/square_title"
             android:gravity="center"
-            android:text="@string/text_bet_registration"
             android:textColor="@android:color/white"
             android:textSize="15dp" />
 
@@ -54,16 +54,22 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="25sp" />
 
-        <ImageView
-            android:id="@+id/ivForward"
+        <TextView
             android:layout_width="55dp"
             android:layout_height="45dp"
-            android:layout_alignTop="@+id/ivBack"
+            android:id="@+id/ivForward"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="+"
+            android:background="@drawable/arrow"
+            android:gravity="center"
+            android:textSize="22dp"
+            android:layout_below="@id/saveTv"
             android:layout_marginLeft="7dp"
-            android:layout_marginStart="7dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/tvHoleNumber"
             android:layout_toRightOf="@+id/tvHoleNumber"
-            android:background="@drawable/arrow" />
+            />
 
         <TextView
             android:id="@+id/tvHoleNumber"
@@ -77,17 +83,22 @@
             android:text="1"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <ImageView
-            android:id="@+id/ivBack"
+        <TextView
             android:layout_width="55dp"
             android:layout_height="45dp"
+            android:id="@+id/ivBack"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="-"
+            android:background="@drawable/arrow_back"
+            android:gravity="center"
+            android:textSize="22dp"
             android:layout_below="@+id/registerTv"
             android:layout_marginLeft="17dp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/textView15"
             android:layout_toRightOf="@+id/textView15"
-            android:background="@drawable/arrow_back" />
+            />
 
         <TextView
             android:id="@+id/textView17"

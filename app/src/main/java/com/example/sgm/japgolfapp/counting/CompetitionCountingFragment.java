@@ -28,6 +28,11 @@ public class CompetitionCountingFragment extends BaseFragment {
 
     boolean shown = false;
 
+    @OnClick(R.id.return_btn)
+    public void goBack() {
+        popBackStack();
+    }
+
     @OnClick(R.id.menu_button)
     public void showMenu() {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
