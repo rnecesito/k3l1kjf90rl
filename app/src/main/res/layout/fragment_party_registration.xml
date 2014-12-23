@@ -50,7 +50,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_below="@+id/registerTv"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -93,6 +93,7 @@
                     android:layout_alignLeft="@+id/cName1"
                     android:layout_alignStart="@+id/cName1" />
 
+                <!--competitor 1-->
                 <Spinner
                     android:layout_width="240dp"
                     android:layout_height="35dp"
@@ -157,6 +158,7 @@
                     android:layout_toRightOf="@+id/textViewC1Count"
                     />
 
+                <!--competitor 2-->
                 <Spinner
                     android:layout_width="240dp"
                     android:layout_height="35dp"
@@ -222,6 +224,7 @@
                     android:layout_toRightOf="@+id/textViewC2Count"
                     />
 
+                <!--compeitor 3-->
                 <Spinner
                     android:layout_width="240dp"
                     android:layout_height="35dp"
@@ -288,13 +291,14 @@
                     android:layout_marginBottom="20dp"
                     />
 
+                <!--competitor 4-->
                 <Spinner
                     android:layout_width="240dp"
                     android:layout_height="35dp"
                     android:id="@+id/cName4"
                     android:textColor="#ff000000"
                     android:paddingLeft="5dp"
-                    android:layout_below="@+id/imgMinusB2"
+                    android:layout_below="@+id/imgMinusB3"
                     android:layout_marginTop="10dp"
                     android:layout_alignLeft="@+id/textView27"
                     android:layout_alignStart="@+id/textView27"
@@ -306,10 +310,10 @@
                     android:text="@string/not_entered"
                     android:textColor="@android:color/holo_red_dark"
                     android:id="@+id/textViewV4"
-                    android:layout_below="@+id/cName3"
+                    android:layout_below="@+id/cName4"
                     android:visibility="invisible"
-                    android:layout_alignLeft="@+id/textViewV3"
-                    android:layout_alignStart="@+id/textViewV3" />
+                    android:layout_alignLeft="@+id/textViewV4"
+                    android:layout_alignStart="@+id/textViewV4" />
 
                 <TextView
                     android:layout_width="wrap_content"

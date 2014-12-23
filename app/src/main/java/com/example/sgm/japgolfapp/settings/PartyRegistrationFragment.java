@@ -280,8 +280,8 @@ public class PartyRegistrationFragment extends BaseFragment{
                 spinner.setAdapter(spinnerArrayAdapter);
 
                 Spinner spinner2 = (Spinner) view_container.findViewById(R.id.cName1);
-                ArrayAdapter spinnerArrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list_container);
-                spinner2.setAdapter(spinnerArrayAdapter2);
+//                ArrayAdapter spinnerArrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list_container);
+//                spinner2.setAdapter(spinnerArrayAdapter2);
                 Spinner spinner3 = (Spinner) view_container.findViewById(R.id.cName2);
                 ArrayAdapter spinnerArrayAdapter3 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list_container);
                 spinner3.setAdapter(spinnerArrayAdapter3);
@@ -293,30 +293,23 @@ public class PartyRegistrationFragment extends BaseFragment{
                 spinner5.setAdapter(spinnerArrayAdapter5);
 
 
-//                int index = 0;
-//                JSONObject user_info_jo;
-//                try {
-//                    LayoutInflater inflater = LayoutInflater.from(getContext());
-//                    View item = inflater.inflate(R.layout.row_player_handicap, competitor_list, false);
-//                    ImageView del_btn = (ImageView) item.findViewById(R.id.delete_competitor);
-//                    del_btn.setOnClickListener(btnListener);
-//                    del_btn.setVisibility(View.INVISIBLE);
-//                    Spinner clist = (Spinner) item.findViewById(R.id.comp_names);
-//                    ArrayAdapter spinnerArrayAdapter2 = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, player_list);
-//                    user_info_jo = new JSONObject(user_info_json_string);
-//                    clist.setAdapter(spinnerArrayAdapter2);
-//                    competitor_list.addView(item);
-//                    for (Players p : player_list) {
-//                        if (p.id == Integer.parseInt(user_info_jo.getString("id"))) {
-//                            int pos = spinnerArrayAdapter2.getPosition(p);
-//                            clist.setSelection(pos);
-//                            clist.setClickable(false);
-//                        }
-//                        index = index + 1;
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
+                int index = 0;
+                JSONObject user_info_jo;
+                try {
+                    ArrayAdapter spinnerArrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list);
+                    user_info_jo = new JSONObject(user_info_json_string);
+                    spinner2.setAdapter(spinnerArrayAdapter2);
+                    for (Players p : player_list) {
+                        if (p.id == Integer.parseInt(user_info_jo.getString("id"))) {
+                            int pos = spinnerArrayAdapter2.getPosition(p);
+                            spinner2.setSelection(pos);
+                            spinner2.setClickable(false);
+                        }
+                        index = index + 1;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 Toast.makeText(getContext(), getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
 //                Toast.makeText(getContext(), "Loading complete.", Toast.LENGTH_SHORT).show();
