@@ -1,11 +1,14 @@
 package com.example.sgm.japgolfapp;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.sgm.japgolfapp.registration.IntroScreenFragment;
+import com.example.sgm.japgolfapp.registration.MainMenuFragment;
 
 
 public class MainActivity extends Activity {
@@ -16,10 +19,24 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                    .add(R.id.container, new IntroScreenFragment())
-                    .commit();
+            SharedPreferences prefs = this.getSharedPreferences(
+                    "com.example.app", Context.MODE_PRIVATE);
+
+            String hasLoggedIn = "com.example.app.hasloggedin";
+
+            Boolean b = prefs.getBoolean(hasLoggedIn, false);
+
+            if(b) {
+                getFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                        .add(R.id.container, new MainMenuFragment())
+                        .commit();
+            }else{
+                getFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                        .add(R.id.container, new IntroScreenFragment())
+                        .commit();
+            }
         }
     }
 
