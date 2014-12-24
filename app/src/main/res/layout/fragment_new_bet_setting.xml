@@ -67,4 +67,21 @@
         android:singleLine="true"
         android:textSize="27sp" />
 
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:text="@string/logout"
+        android:textAllCaps="false"
+        android:id="@+id/logout_button"
+        android:background="#ff313131"
+        android:elegantTextHeight="false"
+        android:enabled="true"
+        android:textStyle="normal"
+        android:singleLine="true"
+        android:textSize="22sp"
+        android:layout_marginBottom="49dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/dd"
+        android:layout_alignStart="@+id/dd" />
+
 </RelativeLayout>

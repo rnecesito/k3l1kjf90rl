@@ -2,153 +2,159 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:gravity="center_vertical"
-    android:layout_marginTop="60dp">
-<ScrollView
-    android:layout_width="match_parent"
-    android:descendantFocusability="beforeDescendants"
-    android:layout_height="match_parent">
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/container_background"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp">
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp">
+    android:layout_marginTop="60dp"
+    android:layout_marginBottom="30dp">
 
-        <TextView
-            android:layout_width="130dp"
-            android:layout_height="60dp"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:gravity="center"
-            android:text="@string/title_setting"
-            android:textAllCaps="false"
-            android:layout_marginLeft="0dp"
-            android:background="@drawable/square_title"/>
-        </TableRow>
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:layout_height="match_parent">
 
-            <Button
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:text="@string/text_member_change"
-                android:id="@+id/createCompetitionB"
-                android:textAllCaps="false"
-                android:background="@drawable/button_new_golf_app"
-                android:layout_marginLeft="0dp" />
-
-            <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="55dp"
-                android:id="@+id/iCreateCompetitionB"
-                android:background="@drawable/arrow"
-                android:contentDescription=""
-                android:layout_marginTop="22dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="10dp">
-
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                android:text="@string/text_party_registration"
-                android:id="@+id/ViewCompetitionB"
-                android:textAllCaps="false"
-                android:background="@drawable/button_new_golf_app"
-                android:layout_marginLeft="0dp" />
-
-            <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="55dp"
-                android:id="@+id/iViewCompetitionB"
-                android:background="@drawable/arrow"
-                android:contentDescription=""
-                android:layout_marginTop="22dp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="10dp">
-
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                android:text="@string/text_competition_registration"
-                android:id="@+id/competitionRButton"
-                android:textAllCaps="false"
-                android:background="@drawable/button_new_golf_app"
-                android:layout_marginLeft="0dp" />
-
-            <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="55dp"
-                android:id="@+id/iCompetitionRButton"
-                android:background="@drawable/arrow"
-                android:contentDescription=""
-                android:layout_marginTop="22dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="10dp">
-
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                android:text="@string/text_bet_registration"
-                android:id="@+id/betRButton"
-                android:textAllCaps="false"
-                android:background="@drawable/button_new_golf_app"
-                android:layout_marginLeft="0dp" />
-
-            <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="55dp"
-                android:id="@+id/ibetRButton"
-                android:background="@drawable/arrow"
-                android:contentDescription=""
-                android:layout_marginTop="22dp" />
-        </TableRow>
-
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="10dp"
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/container_background"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp">
 
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                android:text="Course Registration"
-                android:id="@+id/courseAdministrationB"
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="60dp"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:text="@string/title_setting"
                 android:textAllCaps="false"
-                android:background="@drawable/button_new_golf_app"
-                android:layout_marginLeft="0dp" />
+                android:layout_marginLeft="0dp"
+                android:background="@drawable/square_title"/>
+            </TableRow>
 
-            <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="55dp"
-                android:id="@+id/iCourseAdministrationB"
-                android:background="@drawable/arrow"
-                android:contentDescription=""
-                android:layout_marginTop="22dp" />
-        </TableRow>
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp">
 
-    </TableLayout>
-</ScrollView>
+                <Button
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:text="@string/text_member_change"
+                    android:id="@+id/createCompetitionB"
+                    android:textAllCaps="false"
+                    android:background="@drawable/button_new_golf_app"
+                    android:layout_marginLeft="0dp" />
+
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/iCreateCompetitionB"
+                    android:background="@drawable/arrow"
+                    android:contentDescription=""
+                    android:layout_marginTop="22dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="90dp"
+                    android:text="@string/text_party_registration"
+                    android:id="@+id/ViewCompetitionB"
+                    android:textAllCaps="false"
+                    android:background="@drawable/button_new_golf_app"
+                    android:layout_marginLeft="0dp" />
+
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/iViewCompetitionB"
+                    android:background="@drawable/arrow"
+                    android:contentDescription=""
+                    android:layout_marginTop="22dp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="90dp"
+                    android:text="@string/text_competition_registration"
+                    android:id="@+id/competitionRButton"
+                    android:textAllCaps="false"
+                    android:background="@drawable/button_new_golf_app"
+                    android:layout_marginLeft="0dp" />
+
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/iCompetitionRButton"
+                    android:background="@drawable/arrow"
+                    android:contentDescription=""
+                    android:layout_marginTop="22dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="90dp"
+                    android:text="@string/text_bet_registration"
+                    android:id="@+id/betRButton"
+                    android:textAllCaps="false"
+                    android:background="@drawable/button_new_golf_app"
+                    android:layout_marginLeft="0dp" />
+
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/ibetRButton"
+                    android:background="@drawable/arrow"
+                    android:contentDescription=""
+                    android:layout_marginTop="22dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="90dp"
+                    android:text="Course Registration"
+                    android:id="@+id/courseAdministrationB"
+                    android:textAllCaps="false"
+                    android:background="@drawable/button_new_golf_app"
+                    android:layout_marginLeft="0dp" />
+
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/iCourseAdministrationB"
+                    android:background="@drawable/arrow"
+                    android:contentDescription=""
+                    android:layout_marginTop="22dp" />
+            </TableRow>
+
+        </TableLayout>
+
+    </ScrollView>
+
 </RelativeLayout>

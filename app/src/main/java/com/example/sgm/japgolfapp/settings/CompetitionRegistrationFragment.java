@@ -5,9 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.example.sgm.japgolfapp.BaseFragment;
@@ -17,9 +16,6 @@ import com.example.sgm.japgolfapp.Competition.JoinClosedCompetitionFragment;
 import com.example.sgm.japgolfapp.Competition.ViewClosedCompetitionGroupsFragment;
 import com.example.sgm.japgolfapp.Competition.ViewClosedCompetitionsFragment;
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
-
-import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,7 +46,7 @@ public class CompetitionRegistrationFragment extends BaseFragment {
             }
         });
 
-        Button createCompetitionB2 = (Button)view.findViewById(R.id.imageSettingButton);
+        ImageButton createCompetitionB2 = (ImageButton)view.findViewById(R.id.imageSettingButton);
         createCompetitionB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +62,7 @@ public class CompetitionRegistrationFragment extends BaseFragment {
             }
         });
 
-        Button viewCompetitionB2 = (Button)view.findViewById(R.id.imageButton2);
+        ImageButton viewCompetitionB2 = (ImageButton)view.findViewById(R.id.imageButton2);
         viewCompetitionB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +78,7 @@ public class CompetitionRegistrationFragment extends BaseFragment {
             }
         });
 
-        Button joinCompetitionB2 = (Button)view.findViewById(R.id.imageButton3);
+        ImageButton joinCompetitionB2 = (ImageButton)view.findViewById(R.id.imageButton3);
         joinCompetitionB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +94,7 @@ public class CompetitionRegistrationFragment extends BaseFragment {
             }
         });
 
-        Button createGroupB2 = (Button)view.findViewById(R.id.imageButton4);
+        ImageButton createGroupB2 = (ImageButton)view.findViewById(R.id.imageButton4);
         createGroupB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +110,7 @@ public class CompetitionRegistrationFragment extends BaseFragment {
             }
         });
 
-        Button viewGroupsB2 = (Button)view.findViewById(R.id.imageButtson4);
+        ImageButton viewGroupsB2 = (ImageButton)view.findViewById(R.id.imageButtson4);
         viewGroupsB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

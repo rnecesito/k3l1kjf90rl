@@ -5,8 +5,11 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.sgm.japgolfapp.registration.IntroScreenFragment;
 
 import butterknife.ButterKnife;
 
@@ -41,6 +44,16 @@ public abstract class BaseFragment extends Fragment {
 		if (manager.getBackStackEntryCount() > 0)
 			manager.popBackStack();
 	}
+
+    protected void clearBackStack() {
+        Intent intent = new Intent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getFragmentManager().beginTransaction()
+                .remove(this)
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                .replace(R.id.container, new IntroScreenFragment())
+                .commit();
+    }
 
 	protected void showFragmentAndAddToBackStack(Fragment fragment) {
 		if (fragment == null)

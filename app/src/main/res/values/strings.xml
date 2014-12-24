@@ -96,6 +96,7 @@
     <string name="search_group">Search Group</string>
     <string name="show_my_group_only">Show My Group Only</string>
     <string name="group">Group</string>
+    <string name="logout">Logout</string>
 
 
 
@@ -192,6 +193,7 @@
     <!--<string name="search_group">グループ検索</string>-->
     <!--<string name="show_my_group_only">自分のグループのみ表示</string>-->
     <!--<string name="group">グループ</string>-->
+    <!--<string name="logout">ログアウト</string>-->
 
 
     <string name="not_entered">Not Entered</string>
