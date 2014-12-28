@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/relativeLayout1"
@@ -12,7 +12,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/container_background"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/party_container"
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp" >
+            android:layout_marginRight="20dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -50,12 +50,13 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:clickable="true"
-            android:gravity="center_vertical|center_horizontal" >
+            android:gravity="center_vertical|center_horizontal">
 
             <CheckBox
                 android:id="@+id/show_own_groups"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:checked="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,6 +65,7 @@
         </LinearLayout>
 
         <TableLayout
+            android:id="@+id/tl_competitionViewGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -71,69 +73,63 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/horizontal_line"
             android:padding="1dp"
-            android:stretchColumns="*">
+            android:stretchColumns="0,2,4">
 
             <TableRow
                 android:id="@+id/tableRow1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="1dp"
-                android:background="#999" >
+                android:background="#999">
 
                 <TextView
-                    android:layout_width="120dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:padding="5dp"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/group" />
 
                 <LinearLayout
                     android:layout_width="1dp"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
 
                     <View style="@style/Divider" />
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:padding="5dp"
                     android:layout_gravity="center_horizontal"
                     android:text="Members" />
 
                 <LinearLayout
                     android:layout_width="1dp"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
 
                     <View style="@style/Divider" />
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="50dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:padding="5dp"
                     android:text="Action" />
             </TableRow>
 
         </TableLayout>
 
-        <ScrollView
+        <ListView
+            android:id="@+id/lv_competition_view_group"
             android:layout_width="match_parent"
             android:layout_height="290dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:isScrollContainer="false">
+            android:isScrollContainer="false" />
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/horizontal_line"
-                android:padding="1dp"
-                android:id="@+id/closed_groups_table">
-
-            </TableLayout>
-
-        </ScrollView>
 
     </LinearLayout>
 
@@ -149,7 +145,6 @@
         android:paddingRight="10dp"
         android:textColor="@android:color/black"
         android:text="@string/view_groups"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-         />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

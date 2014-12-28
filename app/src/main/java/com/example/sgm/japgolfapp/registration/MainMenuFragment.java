@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
+import butterknife.OnClick;
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.counting.BetCountingFragment;
@@ -22,10 +22,8 @@ import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 
-import butterknife.OnClick;
 
-
-public class MainMenuFragment extends BaseFragment{
+public class MainMenuFragment extends BaseFragment {
     boolean shown = false;
     View view_container;
 
@@ -39,14 +37,14 @@ public class MainMenuFragment extends BaseFragment{
             rl.addView(item);
             SlideToRight(item);
 
-            Button settingButton = (Button)item.findViewById(R.id.settingButton);
+            Button settingButton = (Button) item.findViewById(R.id.settingButton);
             settingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showFragmentAndAddToBackStack(new MenuSettingsFragment());
                 }
             });
-            ImageButton iSettingButton = (ImageButton)item.findViewById(R.id.imageSettingButton);
+            ImageButton iSettingButton = (ImageButton) item.findViewById(R.id.imageSettingButton);
             iSettingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -54,7 +52,7 @@ public class MainMenuFragment extends BaseFragment{
                 }
             });
 
-            Button historyButton = (Button)item.findViewById(R.id.historyButton);
+            Button historyButton = (Button) item.findViewById(R.id.historyButton);
             historyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,7 +60,7 @@ public class MainMenuFragment extends BaseFragment{
                 }
             });
 
-            ImageView iHButton = (ImageView)item.findViewById(R.id.imageHistoryButton);
+            ImageView iHButton = (ImageView) item.findViewById(R.id.imageHistoryButton);
             iHButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -70,14 +68,14 @@ public class MainMenuFragment extends BaseFragment{
                 }
             });
 
-            Button scoreRegistrationButton = (Button)item.findViewById(R.id.scoreRegistrationButton);
+            Button scoreRegistrationButton = (Button) item.findViewById(R.id.scoreRegistrationButton);
             scoreRegistrationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
                 }
             });
-            ImageButton iSButton = (ImageButton)item.findViewById(R.id.imageScoreRegistrationButton);
+            ImageButton iSButton = (ImageButton) item.findViewById(R.id.imageScoreRegistrationButton);
             iSButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -85,7 +83,7 @@ public class MainMenuFragment extends BaseFragment{
                 }
             });
 
-            Button countingButton= (Button)item.findViewById(R.id.countingButton);
+            Button countingButton = (Button) item.findViewById(R.id.countingButton);
             countingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -95,7 +93,7 @@ public class MainMenuFragment extends BaseFragment{
             });
 
 
-            ImageButton iCButton = (ImageButton)item.findViewById(R.id.imageButton3);
+            ImageButton iCButton = (ImageButton) item.findViewById(R.id.imageButton3);
             iCButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -111,7 +109,7 @@ public class MainMenuFragment extends BaseFragment{
             shown = false;
         }
 
-        Button countingButton= (Button)item.findViewById(R.id.countingButton);
+        Button countingButton = (Button) item.findViewById(R.id.countingButton);
         countingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,10 +118,10 @@ public class MainMenuFragment extends BaseFragment{
                 final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
                 item.setTag("counting_sub_menu");
                 View tagged = view_container.findViewWithTag("counting_sub_menu");
-                if(tagged == null) {
+                if (tagged == null) {
                     rl.addView(item);
                 }
-                Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
+                Button scoreCountingButton = (Button) item.findViewById(R.id.scoreCounting);
                 scoreCountingButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -131,7 +129,7 @@ public class MainMenuFragment extends BaseFragment{
                     }
                 });
 
-                Button betCountingButton = (Button)item.findViewById(R.id.betCounting);
+                Button betCountingButton = (Button) item.findViewById(R.id.betCounting);
                 betCountingButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -139,7 +137,7 @@ public class MainMenuFragment extends BaseFragment{
                     }
                 });
 
-                Button competitionCountingButton = (Button)item.findViewById(R.id.competitionCounting);
+                Button competitionCountingButton = (Button) item.findViewById(R.id.competitionCounting);
                 competitionCountingButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -168,10 +166,10 @@ public class MainMenuFragment extends BaseFragment{
         final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
         item.setTag("counting_sub_menu");
         View tagged = view_container.findViewWithTag("counting_sub_menu");
-        if(tagged == null) {
+        if (tagged == null) {
             rl.addView(item);
         }
-        Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
+        Button scoreCountingButton = (Button) item.findViewById(R.id.scoreCounting);
         scoreCountingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,7 +177,7 @@ public class MainMenuFragment extends BaseFragment{
             }
         });
 
-        Button betCountingButton = (Button)item.findViewById(R.id.betCounting);
+        Button betCountingButton = (Button) item.findViewById(R.id.betCounting);
         betCountingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,7 +185,7 @@ public class MainMenuFragment extends BaseFragment{
             }
         });
 
-        Button competitionCountingButton = (Button)item.findViewById(R.id.competitionCounting);
+        Button competitionCountingButton = (Button) item.findViewById(R.id.competitionCounting);
         competitionCountingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -271,7 +269,6 @@ public class MainMenuFragment extends BaseFragment{
 //                countingButton(view_container);
 //            }
 //        });
-
 
 
     }

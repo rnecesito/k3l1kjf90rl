@@ -28,8 +28,8 @@
                 android:layout_weight="1"
                 android:text="@string/name" />
 
-            <EditText
-                android:id="@+id/competition_name"
+            <TextView
+                android:id="@+id/tv_competition_edit_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -47,24 +47,26 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
+            android:orientation="horizontal"
             android:layout_below="@id/party_container">
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Competition" />
 
-            <Spinner
-                android:id="@+id/competition_spinner"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/tv_competition_edit_group_close_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
+
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/competitor_container"
+            android:id="@+id/ll_competition_edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -143,7 +145,7 @@
         </TableLayout>
 
         <ListView
-            android:id="@+id/lv_competition_create_group_addmember"
+            android:id="@+id/lv_competition_edit_group_addmember"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginLeft="10dp"
@@ -151,12 +153,12 @@
             android:isScrollContainer="false" />
 
         <Button
-            android:id="@+id/group_create"
+            android:id="@+id/b_competition_edit_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
-            android:text="Create" />
+            android:text="Update" />
 
     </LinearLayout>
 
@@ -171,7 +173,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="@android:color/black"
-        android:text="@string/create_group"
+        android:text="Edit Group"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

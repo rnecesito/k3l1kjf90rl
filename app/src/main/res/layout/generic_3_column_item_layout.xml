@@ -8,7 +8,7 @@
     android:layout_marginTop="10dp"
     android:background="@drawable/horizontal_line"
     android:padding="1dp"
-    android:stretchColumns="*">
+    android:stretchColumns="0,2,4">
 
     <TableRow
         android:id="@+id/tr_generic_row"
@@ -18,13 +18,14 @@
 
         <TextView
             android:id="@+id/tv_generic_column_1"
-            android:layout_width="60dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:padding="5dp"
             android:layout_gravity="center_horizontal"
-            android:text="@string/name" />
+            android:text="@string/name"
+            android:gravity="center" />
 
         <LinearLayout
             android:layout_width="1dp"
@@ -35,10 +36,10 @@
 
         <TextView
             android:id="@+id/tv_generic_column_2"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:layout_gravity="left"
+            android:layout_gravity="center"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="@string/title_email_address" />
@@ -52,10 +53,11 @@
 
         <TextView
             android:id="@+id/tv_generic_column_3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:padding="5dp"
-            android:text="Action" />
+            android:text="Action"
+            android:gravity="center" />
     </TableRow>
 </TableLayout>
