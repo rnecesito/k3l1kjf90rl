@@ -134,10 +134,13 @@ public class LoginFragment extends BaseFragment{
                         e.printStackTrace();
                     }
                     SharedPreferences prefs = getActivity().getSharedPreferences(
-                            "com.example.app", Context.MODE_PRIVATE);
+                            "com.golf.app", Context.MODE_PRIVATE);
 
-                    String hasLoggedIn = "com.example.app.hasloggedin";
+                    String hasLoggedIn = "com.golf.app.hasloggedin";
                     prefs.edit().putBoolean(hasLoggedIn, true).apply();
+
+                    String userID = "com.golf.app.userID";
+                    prefs.edit().putBoolean(userID, true).apply();
 
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.popBackStack();

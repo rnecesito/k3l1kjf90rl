@@ -20,9 +20,9 @@ public class MainActivity extends Activity {
 
         if (savedInstanceState == null) {
             SharedPreferences prefs = this.getSharedPreferences(
-                    "com.example.app", Context.MODE_PRIVATE);
+                    "com.golf.app", Context.MODE_PRIVATE);
 
-            String hasLoggedIn = "com.example.app.hasloggedin";
+            String hasLoggedIn = "com.golf.app.hasloggedin";
 
             Boolean b = prefs.getBoolean(hasLoggedIn, false);
 

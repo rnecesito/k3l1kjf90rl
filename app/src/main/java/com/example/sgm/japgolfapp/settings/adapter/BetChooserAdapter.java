@@ -61,7 +61,7 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
 						false);
 
 
-            BetChooserViewBinder.bindBetChooserdHolder(holder, view);
+            BetChooserViewBinder.bindBetChooserdHolder(a.getApplicationContext(), holder, view);
             holder.tvHelp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -66,8 +66,8 @@ public class BetSettingChooserFragment extends BaseFragment{
     private ProgressDialog pdialog;
     private String bettype_json_string;
 
-    private final Integer MAXSETTINGS = 3;
-    private Integer settingsCount = 0;
+//    private final Integer MAXSETTINGS = 3;
+    public static Integer STATICsettingsCount;
     public BetSettingChooserFragment(){}
 
     boolean shown = false;
@@ -395,36 +395,36 @@ public class BetSettingChooserFragment extends BaseFragment{
                     lvBetSettings = (ListView) view_container.findViewById(R.id.lvBets);
                     adapter = new BetChooserAdapter(getActivity(), 0, mItems);
                     lvBetSettings.setAdapter(adapter);
-                    lvBetSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            if (lvBetSettings.getChildAt(position) != null) {
-                                CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
-                    /*TextView helpTv = ((TextView)lvBetSettings.getChildAt(position).findViewById(R.id.tvHelp));*/
-                                if (cb.isChecked()) {
-                                    mItems.get(position).setIsChosen(false);
-                                    adapter.notifyDataSetChanged();
-                                    settingsCount--;
-                                }
-                                else { //do something else}
-                                    if(settingsCount < MAXSETTINGS) {
-                                        NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
-                                        mItems.get(position).setIsChosen(true);
-                                        adapter.notifyDataSetChanged();
-                                        settingsCount++;
-                                    }else{
-                                        Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                        /*helpTv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                              new CustomDialogClass(getActivity());
-                            }
-                        });*/
-                            }
-                        }
-                    });
+//                    lvBetSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                            if (lvBetSettings.getChildAt(position) != null) {
+//                                CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
+//                    /*TextView helpTv = ((TextView)lvBetSettings.getChildAt(position).findViewById(R.id.tvHelp));*/
+//                                if (cb.isChecked()) {
+//                                    mItems.get(position).setIsChosen(false);
+//                                    adapter.notifyDataSetChanged();
+//                                    settingsCount--;
+//                                }
+//                                else { //do something else}
+//                                    if(settingsCount < MAXSETTINGS) {
+//                                        NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
+//                                        mItems.get(position).setIsChosen(true);
+//                                        adapter.notifyDataSetChanged();
+//                                        settingsCount++;
+//                                    }else{
+//                                        Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                        /*helpTv.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                              new CustomDialogClass(getActivity());
+//                            }
+//                        });*/
+//                            }
+//                        }
+//                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -447,7 +447,7 @@ public class BetSettingChooserFragment extends BaseFragment{
         super.onViewCreated(view, savedInstanceState);
         view_container = view;
         new InitLists().execute();
-
+        STATICsettingsCount = 0;
         tvReturn = (TextView) view_container.findViewById(R.id.tvSaveReturn);
         tvReturn.setText("Return");
         tvReturn.setOnClickListener(new View.OnClickListener() {
@@ -473,33 +473,62 @@ public class BetSettingChooserFragment extends BaseFragment{
         lvBetSettings = (ListView) view.findViewById(R.id.lvBets);
         adapter = new BetChooserAdapter(getActivity(), 0, mItems);
         lvBetSettings.setAdapter(adapter);
-        lvBetSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (lvBetSettings.getChildAt(position) != null) {
-                    CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
-                    /*TextView helpTv = ((TextView)lvBetSettings.getChildAt(position).findViewById(R.id.tvHelp));*/
-                    if (cb.isChecked()) {
-                        mItems.get(position).setIsChosen(false);
-                        adapter.notifyDataSetChanged();
-                        settingsCount--;
-                    }
-                    else { //do something else}
-                        if(settingsCount < MAXSETTINGS) {
-                            NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
-                            mItems.get(position).setIsChosen(true);
-                            adapter.notifyDataSetChanged();
-                            settingsCount++;
-                        }else{
-                            Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+//        lvBetSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    if (lvBetSettings.getChildAt(position) != null) {
+//                    CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
+//                    /*TextView helpTv = ((TextView)lvBetSettings.getChildAt(position).findViewById(R.id.tvHelp));*/
+//                    if (cb.isChecked()) {
+//                        mItems.get(position).setIsChosen(false);
+//                        adapter.notifyDataSetChanged();
+//                        settingsCount--;
+//                    }
+//                    else { //do something else}
+//                        if(settingsCount < MAXSETTINGS) {
+//                            NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
+//                            mItems.get(position).setIsChosen(true);
+//                            adapter.notifyDataSetChanged();
+//                            settingsCount++;
+//                        }else{
+//                            Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                }
+//
+//
+//            }
+//        });
 
-                }
+//        lvBetSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    if (lvBetSettings.getChildAt(position) != null) {
+//                    CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
+//                    /*TextView helpTv = ((TextView)lvBetSettings.getChildAt(position).findViewById(R.id.tvHelp));*/
+//                    if (cb.isChecked()) {
+//                        mItems.get(position).setIsChosen(false);
+//                        adapter.notifyDataSetChanged();
+//                        settingsCount--;
+//                    }
+//                    else { //do something else}
+//                        if(settingsCount < MAXSETTINGS) {
+//                            NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
+//                            mItems.get(position).setIsChosen(true);
+//                            adapter.notifyDataSetChanged();
+//                            settingsCount++;
+//                        }else{
+//                            Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                }
+//
+//
+//            }
+//        });
 
-
-            }
-        });
     }
 
 }
