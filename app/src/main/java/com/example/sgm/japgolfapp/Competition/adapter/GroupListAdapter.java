@@ -3,6 +3,7 @@ package com.example.sgm.japgolfapp.Competition.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,31 +12,28 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.models.UserModel;
+import com.example.sgm.japgolfapp.models.CompetitionGroupModel;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by CarlAnthony on 12/26/2014.
  */
-
-public class GroupMemberAdapter extends ArrayAdapter<UserModel> {
-
+public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> {
 
     private Context context;
-    private List<UserModel> listUser;
+    private List<CompetitionGroupModel> groupList;
     private View view;
 
-
-    public GroupMemberAdapter(Context context, int resource, List<UserModel> objects) {
+    public GroupListAdapter(Context context, int resource, List<CompetitionGroupModel> objects) {
         super(context, resource, objects);
         this.context = context;
-        this.listUser = objects;
+        this.groupList = objects;
     }
-
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -50,24 +48,24 @@ public class GroupMemberAdapter extends ArrayAdapter<UserModel> {
             holder = (ViewHolder) view.getTag();
         }
 
-        String name = listUser.get(position).getFirstName() + " " + listUser.get(position).getLastName();
+        holder.txtGName.setText(groupList.get(position).getName());
+        holder.txtGName.setTextColor(Color.BLACK);
+        holder.txtGMemberCount.setText(groupList.get(position).getCompetitors().size() + "");
+        holder.txtGMemberCount.setTextColor(Color.BLACK);
 
 
-        holder.txtName.setText(name);
-        holder.txtName.setTextColor(Color.BLACK);
-        holder.txtEmail.setText(listUser.get(position).getEmail());
-        holder.txtEmail.setTextColor(Color.BLACK);
-
+        //IF STATEMENT MUST BE HERE
         Drawable drawable = context.getResources().getDrawable(android.R.drawable.ic_delete);
         holder.txtAction.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
         holder.txtAction.setText(" ");
         holder.txtAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                remove(getItem(position));
-                notifyDataSetChanged();
+                EventBus.getDefault().post(groupList.get(position));
             }
         });
+
+        //IF STATEMENT ENDS HERE
 
         if (position % 2 == 0) {
             holder.tableRow.setBackgroundColor(Color.WHITE);
@@ -81,10 +79,10 @@ public class GroupMemberAdapter extends ArrayAdapter<UserModel> {
 
     class ViewHolder {
         @InjectView(R.id.tv_generic_column_1)
-        TextView txtName;
+        TextView txtGName;
 
         @InjectView(R.id.tv_generic_column_2)
-        TextView txtEmail;
+        TextView txtGMemberCount;
 
         @InjectView(R.id.tv_generic_column_3)
         TextView txtAction;

@@ -336,8 +336,8 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
         String urlString = Api.WEB_URL + "closed-competition/" + competition + "/create-group";
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pdialog.setMessage("Creating group...");
-        pdialog.show();
+        pDialog.setMessage("Creating group...");
+        pDialog.show();
 
         JSONObject requestObject = new JSONObject();
 
@@ -357,7 +357,7 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
 
             @Override
             public void onResponse(JSONObject response) {
-                pdialog.dismiss();
+                pDialog.dismiss();
                 Toast.makeText(getActivity(), "Group created.", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
@@ -365,7 +365,7 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(GolfApp.TAG, error.getMessage());
-                pdialog.dismiss();
+                pDialog.dismiss();
                 Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }) {

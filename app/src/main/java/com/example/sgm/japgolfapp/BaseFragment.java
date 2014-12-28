@@ -12,6 +12,7 @@ import android.view.View;
 import com.example.sgm.japgolfapp.registration.IntroScreenFragment;
 
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 public abstract class BaseFragment extends Fragment {
 
@@ -86,4 +87,51 @@ public abstract class BaseFragment extends Fragment {
 		ButterKnife.reset(this);
 	}
 
+
+    public void onEvent(Object object) {
+    }
+
+
+    @Override
+    public void onStart() {
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
+        super.onStart();
+
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().unregister(this);
+        super.onDestroy();
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+
+    protected boolean isStickyAvailabe() {
+        return false;
+    }
 }
