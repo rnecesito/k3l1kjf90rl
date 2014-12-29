@@ -288,6 +288,9 @@
         Gives point/s to the fellow competitor/s when shot the ground hardly.\n\n</string>
     <string name="type_bet">Type of Bet</string>
     <string name="prev">Prev</string>
+    <string name="tx_score_registration">Score Registration</string>
+    <string name="tx_party_play_scoring">Party Play Scoring</string>
+    <string name="tx_competition_scoring">Competition Scoring</string>
 
     <string-array name="course_list">
         <item>Course 1</item>
