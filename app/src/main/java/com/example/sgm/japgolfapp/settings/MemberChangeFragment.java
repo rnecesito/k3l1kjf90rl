@@ -534,13 +534,17 @@ public class MemberChangeFragment extends BaseFragment{
 
         if(android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
             invalidEmail.setVisibility(View.INVISIBLE);
+            return;
         }
         if(!name.getText().toString().isEmpty()){
             invalidName.setVisibility(View.INVISIBLE);
+            return;
         }
         if(!password.getText().toString().isEmpty()){
             invalidPassword.setVisibility(View.INVISIBLE);
+            return;
         }
+
         new UpdateCall().execute(name.getText().toString(), "-", "Male", "1", email.getText().toString(), password.getText().toString() );
     }
 
