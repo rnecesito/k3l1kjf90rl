@@ -67,8 +67,9 @@ public class ScoreRegistratonViewBinder {
                     holder.ivDecrease.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            competitor.getScores().set(holder.mHoleNumber.intValue(), new Integer(competitor.getScores().get(holder.mHoleNumber).intValue() - 1));
-                            holder.tvScore.setText("" + competitor.getScores().get(holder.mHoleNumber));
+                            if (competitor.getScores().get(holder.mHoleNumber).intValue() > 0)
+                                competitor.getScores().set(holder.mHoleNumber.intValue(), new Integer(competitor.getScores().get(holder.mHoleNumber).intValue() - 1));
+                                holder.tvScore.setText("" + competitor.getScores().get(holder.mHoleNumber));
                         }
                     });
                 }
