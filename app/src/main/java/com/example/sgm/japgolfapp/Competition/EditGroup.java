@@ -225,7 +225,8 @@ public class EditGroup extends BaseFragment {
 
 
                 pDialog.dismiss();
-                Toast.makeText(getActivity(), "Group created.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Group Upated.", Toast.LENGTH_SHORT).show();
+                getActivity().onBackPressed();
             }
         }, new Response.ErrorListener() {
 
