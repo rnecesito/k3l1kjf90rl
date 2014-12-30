@@ -44,7 +44,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Member"
+            android:text="@string/jap_add_member"
             android:textAllCaps="false"
             android:id="@+id/b_competition_create_group_add_member" />
 

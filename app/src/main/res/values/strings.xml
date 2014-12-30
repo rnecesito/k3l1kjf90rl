@@ -102,6 +102,10 @@
     <string name="jap_party_date">Party Date</string>
     <string name="jap_creating_party">Creating party…</string>
     <string name="jap_enter_party_name">Enter a party name.</string>
+    <string name="jap_add_member">Add Member</string>
+    <string name="jap_competition">Competition</string>
+    <string name="jap_edit_group">Edit Group</string>
+    <string name="jap_bet_type">Bet Type</string>
 
 
 
@@ -204,6 +208,10 @@
     <!--<string name="jap_party_date">プレイ日時</string>-->
     <!--<string name="jap_creating_party">パーティー登録中...</string>-->
     <!--<string name="jap_enter_party_name">パーティー名を入力してください。</string>-->
+    <!--<string name="jap_add_member">メンバーを追加</string>-->
+    <!--<string name="jap_competition">コンペ名</string>-->
+    <!--<string name="jap_edit_group">グループの編集</string>-->
+    <!--<string name="jap_bet_type">握り</string>-->
 
 
     <string name="not_entered">Not Entered</string>
