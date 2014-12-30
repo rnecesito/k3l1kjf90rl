@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,33 +51,24 @@ import butterknife.OnClick;
 
 public class EditGroup extends BaseFragment {
 
-    private View view;
-
-    @InjectView(R.id.b_competition_edit_name)
-    Button btnUpdate;
-
-    @InjectView(R.id.lv_competition_edit_group_addmember)
-    ListView listView;
-
-    @InjectView(R.id.tv_competition_edit_group_close_name)
-    TextView txtCloseCompetition;
-
-    @InjectView(R.id.tv_competition_edit_name)
-    TextView txtGroupName;
-
-    @InjectView(R.id.ll_competition_edit_name)
-    LinearLayout btnAddMember;
-
-
+    private final String CLOSE_COMPETITION_QUEUE = "closeCompetition";
+    private final String editGroupQueue = "EditGroup";
     public CompetitionGroupModel cModel;
     public CloseCompetitionModel closeCompetitionModel;
+    @InjectView(R.id.b_competition_edit_name)
+    Button btnUpdate;
+    @InjectView(R.id.lv_competition_edit_group_addmember)
+    ListView listView;
+    @InjectView(R.id.tv_competition_edit_group_close_name)
+    TextView txtCloseCompetition;
+    @InjectView(R.id.et_competition_edit_name)
+    EditText txtGroupName;
+    @InjectView(R.id.ll_competition_edit_name)
+    LinearLayout btnAddMember;
+    private View view;
     private List<CloseCompetitionModel> closeList;
     private GroupMemberAdapter adapter;
     private List<UserModel> userList;
-
-    private final String CLOSE_COMPETITION_QUEUE = "closeCompetition";
-
-    private final String editGroupQueue = "EditGroup";
 
     public static EditGroup newInstance(CompetitionGroupModel model) {
         EditGroup frag = new EditGroup();
@@ -173,7 +165,7 @@ public class EditGroup extends BaseFragment {
         }
         adapter.notifyDataSetChanged();
         for (int i = 0; i < closeList.size(); i++) {
-            if (cModel.getCloseCompetitionCompetitorId().contentEquals(closeList.get(i).getId())) {
+            if (cModel.getClosedCompetitionId().contentEquals(closeList.get(i).getId())) {
 
                 txtCloseCompetition.setText(closeList.get(i).getName());
                 break;
@@ -204,18 +196,20 @@ public class EditGroup extends BaseFragment {
 
     private void UpdateGroup() {
         //http://zoogtech.com/golfapp/public/closed-competition/1/create-group
-        String urlString = Api.WEB_URL + "closed-competition/group/" + cModel.getId();
+        String urlString = Api.WEB_URL + "closed-competition/" + cModel.getClosedCompetitionId() + "/group/" + cModel.getId();
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Updating group...");
         pDialog.show();
 
         JSONObject requestObject = new JSONObject();
-
+        JSONArray arr = new JSONArray(generateMemberArray());
         try {
-            
-            JSONArray arr = new JSONArray(generateMemberArray());
+
+
+            requestObject.put("name", txtGroupName.getText().toString());
             requestObject.put("members", arr);
+            requestObject.put("closed_competition_id", cModel.getClosedCompetitionId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -228,6 +222,8 @@ public class EditGroup extends BaseFragment {
 
             @Override
             public void onResponse(JSONObject response) {
+
+
                 pDialog.dismiss();
                 Toast.makeText(getActivity(), "Group created.", Toast.LENGTH_SHORT).show();
             }
