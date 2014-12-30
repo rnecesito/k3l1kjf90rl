@@ -1,12 +1,13 @@
 package com.example.sgm.japgolfapp.settings;
 
+import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -32,11 +35,15 @@ import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +55,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import butterknife.OnClick;
 
@@ -492,6 +503,123 @@ public class PartyRegistrationFragment extends BaseFragment{
         });
     }
 
+    private class PartyCreate extends AsyncTask<String, String, String> {
+        StringBuilder text = new StringBuilder();
+        public PartyCreate() {
+            pdialog = new ProgressDialog(getActivity());
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage(getResources().getString(R.string.jap_creating_party));
+            pdialog.show();
+            /** Getting Cache Directory */
+            File cDir = getActivity().getCacheDir();
+
+            /** Getting a reference to temporary file, if created earlier */
+            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
+
+            String strLine="";
+
+            /** Reading contents of the temporary file, if already exists */
+            try {
+                FileReader fReader = new FileReader(tempFile);
+                BufferedReader bReader = new BufferedReader(fReader);
+
+                /** Reading the contents of the file , line by line */
+                while( (strLine=bReader.readLine()) != null  ){
+                    text.append(strLine);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String pname = strings[0];
+            String date = strings[1];
+            String course= strings[2];
+            byte[] result = null;
+            String str = "";
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://zoogtech.com/golfapp/public/party-play");
+
+            try {
+                List<NameValuePair> json = new ArrayList<NameValuePair>();
+                json.add(new BasicNameValuePair("name", pname));
+                json.add(new BasicNameValuePair("date", date));
+                json.add(new BasicNameValuePair("course_id", course));
+
+                Spinner sp1 = (Spinner) view_container.findViewById(R.id.cName1);
+                Spinner sp2 = (Spinner) view_container.findViewById(R.id.cName2);
+                Spinner sp3 = (Spinner) view_container.findViewById(R.id.cName3);
+                Spinner sp4 = (Spinner) view_container.findViewById(R.id.cName4);
+
+                Players p1 = (Players) sp1.getSelectedItem();
+                Players p2 = (Players) sp2.getSelectedItem();
+                Players p3 = (Players) sp3.getSelectedItem();
+                Players p4 = (Players) sp4.getSelectedItem();
+
+                int p1_id = p1.id;
+                int p2_id = p2.id;
+                int p3_id = p3.id;
+                int p4_id = p4.id;
+
+                json.add(new BasicNameValuePair("members[0]", p1_id+""));
+                json.add(new BasicNameValuePair("members[1]", p2_id+""));
+                json.add(new BasicNameValuePair("members[2]", p3_id+""));
+                json.add(new BasicNameValuePair("members[3]", p4_id+""));
+
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+                httppost.setHeader("Authorization", text.toString());
+                httppost.setEntity(new UrlEncodedFormEntity(json));
+
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    System.out.println(new UrlEncodedFormEntity(json).toString());
+                    retVal = str;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return "Yeah";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+            if(success) {
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_party_created), Toast.LENGTH_SHORT).show();
+                popBackStack();
+            } else {
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
     @OnClick(R.id.imgMinusB)
     public void minus1() {
@@ -557,21 +685,65 @@ public class PartyRegistrationFragment extends BaseFragment{
             score_tv.setText((score + 1) + "");
     }
 
+    @OnClick(R.id.party_date_value)
+    public void setdate() {
+        Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                new mDateSetListener(), mYear, mMonth, mDay);
+        dialog.show();
+    }
+
+    class mDateSetListener implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            // getCalender();
+            int mYear = year;
+            int mMonth = monthOfYear;
+            int mDay = dayOfMonth;
+            date_view.setText(new StringBuilder()
+                    // Month is 0 based so add 1
+                    .append(new DecimalFormat("00").format(mYear)).append("-")
+                    .append(new DecimalFormat("00").format(mMonth + 1)).append("-")
+                    .append(new DecimalFormat("00").format(mDay)));
+            System.out.println(date_view.getText().toString());
+
+        }
+    }
+
     @OnClick(R.id.saveB)
     public void saveB(){
-
-        pdialog2 = new ProgressDialog(getActivity());
-        pdialog2.setMessage("Saving...");
-        pdialog2.show();
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-              pdialog2.dismiss();
-              popBackStack();
-            }
-        }, 2000);
+//        pdialog2 = new ProgressDialog(getActivity());
+//        pdialog2.setMessage("Saving...");
+//        pdialog2.show();
 //
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//              pdialog2.dismiss();
+//              popBackStack();
+//            }
+//        }, 2000);
+        EditText party_name = (EditText) view_container.findViewById(R.id.party_name_value);
+        Spinner course_name = (Spinner) view_container.findViewById(R.id.courseSpinner);
+        date_view = (TextView) view_container.findViewById(R.id.party_date_value);
+        String pn_val = party_name.getText().toString();
+        Courses c = (Courses) course_name.getSelectedItem();
+        int course_id = c.id;
+        String p_date = date_view.getText().toString();
+        if(pn_val.matches("")) {
+            Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_party_name), Toast.LENGTH_SHORT).show();
+            return;
+        } else if (p_date.matches("") || p_date.matches("0000-00-00") || p_date.matches("MM/dd/yy")) {
+            Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_valid_date), Toast.LENGTH_SHORT).show();
+        } else {
+            new PartyCreate().execute(pn_val, p_date, course_id+"");
+        }
     }
 
     public void SlideToRight(View view) {
@@ -646,6 +818,8 @@ public class PartyRegistrationFragment extends BaseFragment{
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view_container = view;
+        date_view = (TextView) view_container.findViewById(R.id.party_date_value);
+        date_view.setInputType(InputType.TYPE_NULL);
         new InitLists().execute();
     }
 

@@ -97,6 +97,11 @@
     <string name="show_my_group_only">Show My Group Only</string>
     <string name="group">Group</string>
     <string name="logout">Logout</string>
+    <string name="jap_party_name">Party Name</string>
+    <string name="jap_party_created">Party created.</string>
+    <string name="jap_party_date">Party Date</string>
+    <string name="jap_creating_party">Creating party…</string>
+    <string name="jap_enter_party_name">Enter a party name.</string>
 
 
 
@@ -194,6 +199,11 @@
     <!--<string name="show_my_group_only">自分のグループのみ表示</string>-->
     <!--<string name="group">グループ</string>-->
     <!--<string name="logout">ログアウト</string>-->
+    <!--<string name="jap_party_created">パーティー登録完了しました。</string>-->
+    <!--<string name="jap_party_name">パーティー名</string>-->
+    <!--<string name="jap_party_date">プレイ日時</string>-->
+    <!--<string name="jap_creating_party">パーティー登録中...</string>-->
+    <!--<string name="jap_enter_party_name">パーティー名を入力してください。</string>-->
 
 
     <string name="not_entered">Not Entered</string>
