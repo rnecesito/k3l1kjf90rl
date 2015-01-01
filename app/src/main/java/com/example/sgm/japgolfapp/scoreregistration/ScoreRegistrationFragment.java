@@ -55,7 +55,6 @@ import butterknife.OnClick;
 
 public class ScoreRegistrationFragment extends BaseFragment{
 
-    private View view_container;
     private ListView lvCompetitors;
     private ListView lvCompetitors2;
 
@@ -67,7 +66,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
 
     private Integer mHoleNumber;
     private Integer mHoleNumber2;
-    private Integer mCeilSize;
 
     private TextView mBtnBack;
     private TextView mBtnForward;
@@ -80,8 +78,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
     private TextView tvBetRegistration;
 
     private FrameLayout container;
-
-    boolean shown = false;
 
     private Party partyInformation;
 
@@ -320,8 +316,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
 
     //TEST DATA
     private ArrayList<Competitor> mGroupMembers;
-//    ArrayList<Competitor> dummy_one;
-//    ArrayList<Competitor> dummy_two;
+    ArrayList<Competitor> dummy_one;
+    ArrayList<Competitor> dummy_two;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
