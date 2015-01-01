@@ -16,6 +16,8 @@ public class Party {
     @SerializedName("handicap")
     private String course;
 
+    @SerializedName("holes")
+    private String holes;
 
     public Party() {}
 
@@ -57,4 +59,13 @@ public class Party {
     public void setDate(String date) {
         this.course = date;
     }
+
+    public void setHoles(String holes){
+        this.holes = holes;
+    }
+
+    public String getHoles(){
+        return holes;
+    }
+
 }

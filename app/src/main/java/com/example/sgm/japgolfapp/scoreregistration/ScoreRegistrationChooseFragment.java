@@ -44,6 +44,7 @@ public class ScoreRegistrationChooseFragment extends BaseFragment {
             }
         });
 
+
         //Competition Scoring
         Button btnCompetitionScoring = (Button)view.findViewById(R.id.btnCompetitionScoring);
         btnCompetitionScoring.setOnClickListener(new View.OnClickListener() {

@@ -1,13 +1,16 @@
 package com.example.sgm.japgolfapp.scoreregistration;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -24,9 +27,28 @@ import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.models.HoleRecord;
+import com.example.sgm.japgolfapp.models.Party;
+import com.example.sgm.japgolfapp.scoreregistration.adapters.PartyPlayScoringAdapter;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.ScoreRegistrationAdapter;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import butterknife.OnClick;
@@ -36,10 +58,13 @@ public class ScoreRegistrationFragment extends BaseFragment{
     private View view_container;
     private ListView lvCompetitors;
     private ListView lvCompetitors2;
+
     private ArrayList<HoleRecord> mItems;
     private ArrayList<HoleRecord> mItems2;
+
     private ScoreRegistrationAdapter mAdapter;
     private ScoreRegistrationAdapter mAdapter2;
+
     private Integer mHoleNumber;
     private Integer mHoleNumber2;
     private Integer mCeilSize;
@@ -57,6 +82,12 @@ public class ScoreRegistrationFragment extends BaseFragment{
     private FrameLayout container;
 
     boolean shown = false;
+
+    private Party partyInformation;
+
+    public ScoreRegistrationFragment(Party party){
+        partyInformation = party;
+    }
 
     @OnClick(R.id.menu_button)
     public void showMenu() {
@@ -103,14 +134,14 @@ public class ScoreRegistrationFragment extends BaseFragment{
             scoreRegistrationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
+                    showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
                 }
             });
             ImageButton iSButton = (ImageButton)item.findViewById(R.id.imageScoreRegistrationButton);
             iSButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
+                    showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
                 }
             });
 
@@ -288,9 +319,9 @@ public class ScoreRegistrationFragment extends BaseFragment{
     }
 
     //TEST DATA
-    ArrayList<Competitor> dummy_one;
-
-    ArrayList<Competitor> dummy_two;
+    private ArrayList<Competitor> mGroupMembers;
+//    ArrayList<Competitor> dummy_one;
+//    ArrayList<Competitor> dummy_two;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -301,6 +332,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         view_container = view;
         lvCompetitors = (ListView) view.findViewById(R.id.lvCompetitors);
         tvBetRegistration = (TextView)view.findViewById(R.id.tvBetRegistration);
@@ -336,6 +368,10 @@ public class ScoreRegistrationFragment extends BaseFragment{
                     mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
                     lvCompetitors.setAdapter(mAdapter);
                     lvCompetitors.setFocusable(true);
+                    if(mHoleNumber == 0){
+                        mBtnBack.setVisibility(View.INVISIBLE);
+                    }
+                    mBtnForward.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -344,7 +380,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
         mBtnForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mHoleNumber < 17) {
+                //CAN'T GO OVER HOW MANY HOLES
+                if(mHoleNumber < Integer.valueOf(partyInformation.getHoles())) {
                     mHoleNumber++;
                     if(mHoleNumber >= mItems.size())
                         mItems.add(new HoleRecord("" + mHoleNumber, dummy_one, null));
@@ -352,22 +389,16 @@ public class ScoreRegistrationFragment extends BaseFragment{
                     mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
                     lvCompetitors.setAdapter(mAdapter);
                     lvCompetitors.setFocusable(true);
+
+                    if(mHoleNumber == Integer.valueOf(partyInformation.getHoles())){
+                        mBtnForward.setVisibility(View.INVISIBLE);
+                    }
+                    mBtnBack.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-
-        //TEST DATAS
-        dummy_one = new ArrayList<Competitor>();
-        dummy_one.add(new Competitor("Mr. Showa", "0", "0", new ArrayList<Integer>()));
-        dummy_one.add(new Competitor("Mr. Chow", "0", "0", new ArrayList<Integer>()));
-        dummy_one.add(new Competitor("Mr. Mikado", "0", "0", new ArrayList<Integer>() ));
-
-        mItems.add(new HoleRecord("1", dummy_one, null));
-        // -----------
-        mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
-        lvCompetitors.setAdapter(mAdapter);
-        lvCompetitors.setFocusable(true);
+        // ---------------------------------------------------------------------------------------------------------------------------
 
 
         lvCompetitors2 = (ListView) view.findViewById(R.id.lvCompetitors2);
@@ -403,19 +434,134 @@ public class ScoreRegistrationFragment extends BaseFragment{
         });
 
 
-        //TEST DATAS
-        dummy_two = new ArrayList<Competitor>();
-        dummy_two.add(new Competitor("Mr. Showa", "0", "0", new ArrayList<Integer>()));
-        dummy_two.add(new Competitor("Mr. Chow", "0", "0", new ArrayList<Integer>()));
-        dummy_two.add(new Competitor("Mr. Mikado", "0", "0", new ArrayList<Integer>() ));
-
-        mItems2.add(new HoleRecord("1", dummy_two, null));
-        // -----------
-        mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0, mItems2.get(mHoleNumber2).getCompetitors(), mHoleNumber2);
-        lvCompetitors2.setAdapter(mAdapter2);
-        lvCompetitors2.setFocusable(true);
 
 
+    }
+
+    View view_container;
+    boolean shown = false;
+    private ProgressDialog pdialog;
+    private boolean success = false;
+    String retVal;
+
+    private String readtoken() {
+        /** Getting Cache Directory */
+        File cDir = getActivity().getCacheDir();
+
+        /** Getting a reference to temporary file, if created earlier */
+        File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
+
+        String strLine="";
+        StringBuilder text = new StringBuilder();
+
+        /** Reading contents of the temporary file, if already exists */
+        try {
+            FileReader fReader = new FileReader(tempFile);
+            BufferedReader bReader = new BufferedReader(fReader);
+
+            /** Reading the contents of the file , line by line */
+            while( (strLine=bReader.readLine()) != null  ){
+                text.append(strLine);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return text.toString();
+    }
+
+    private class getPartyPlayScoresList extends AsyncTask<String, String, String> {
+
+        public getPartyPlayScoresList() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage("Getting Groups");
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/score-registration/scores/"+partyInformation.getId()+"?access_token="+token.toString());
+            try {
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+            if(success) {
+                JSONArray info = null;
+                try {
+                    info = new JSONArray(retVal);
+
+
+                    //TEST DATAS
+                    dummy_one = new ArrayList<Competitor>();
+                    dummy_one.add(new Competitor("Oscar", "0", "0", new ArrayList<Integer>()));
+                    dummy_one.add(new Competitor("Mike", "0", "0", new ArrayList<Integer>()));
+
+                    mItems.add(new HoleRecord("1", dummy_one, null));
+                    // -----------
+                    mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
+                    lvCompetitors.setAdapter(mAdapter);
+                    lvCompetitors.setFocusable(true);
+
+                    //TEST DATAS
+                    dummy_two = new ArrayList<Competitor>();
+                    dummy_two.add(new Competitor("Oscar", "0", "0", new ArrayList<Integer>()));
+                    dummy_two.add(new Competitor("Mike", "0", "0", new ArrayList<Integer>()));
+
+                    mItems2.add(new HoleRecord("1", dummy_two, null));
+                    // -----------
+                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0, mItems2.get(mHoleNumber2).getCompetitors(), mHoleNumber2);
+                    lvCompetitors2.setAdapter(mAdapter2);
+                    lvCompetitors2.setFocusable(true);
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 
