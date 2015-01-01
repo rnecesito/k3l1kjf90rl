@@ -29,8 +29,7 @@
                 android:gravity="center"
                 android:text="@string/title_course_registration"
                 android:textAllCaps="false"
-                android:layout_marginLeft="0dp"
-                android:background="@drawable/square_title"/>
+                android:layout_marginLeft="0dp" />
             </TableRow>
 
             <TableRow

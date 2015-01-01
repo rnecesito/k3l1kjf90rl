@@ -18,6 +18,9 @@ public class CompetitionGroupModel {
     @SerializedName("name")
     private String name;
 
+    @SerializedName("closed_competition_id")
+    private String closedCompetitionId;
+
     @SerializedName("competitors")
     private List<CompetitorsModel> competitors;
 
@@ -51,6 +54,14 @@ public class CompetitionGroupModel {
 
     public void setCompetitors(List<CompetitorsModel> competitors) {
         this.competitors = competitors;
+    }
+
+    public String getClosedCompetitionId() {
+        return closedCompetitionId;
+    }
+
+    public void setClosedCompetitionId(String closedCompetitionId) {
+        this.closedCompetitionId = closedCompetitionId;
     }
 }
 

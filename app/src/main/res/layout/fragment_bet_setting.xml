@@ -44,7 +44,6 @@
             android:textSize="18dp"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:background="@drawable/square_title"
             android:layout_height="60dp" />
 
         <TextView

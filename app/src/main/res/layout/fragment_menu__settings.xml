@@ -138,7 +138,7 @@
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="90dp"
-                    android:text="Course Registration"
+                    android:text="@string/title_course_registration"
                     android:id="@+id/courseAdministrationB"
                     android:textAllCaps="false"
                     android:background="@drawable/button_new_golf_app"

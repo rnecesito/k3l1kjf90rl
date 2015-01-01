@@ -28,8 +28,8 @@
                 android:layout_weight="1"
                 android:text="@string/name" />
 
-            <TextView
-                android:id="@+id/tv_competition_edit_name"
+            <EditText
+                android:id="@+id/et_competition_edit_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Competition" />
+                android:text="@string/jap_competition" />
 
             <TextView
                 android:id="@+id/tv_competition_edit_group_close_name"
@@ -83,7 +83,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Member" />
+                android:text="@string/jap_add_member" />
         </LinearLayout>
 
         <TableLayout
@@ -158,7 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
-            android:text="Update" />
+            android:text="@string/update" />
 
     </LinearLayout>
 
@@ -173,7 +173,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="@android:color/black"
-        android:text="Edit Group"
+        android:text="@string/jap_edit_group"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

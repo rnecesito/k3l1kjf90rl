@@ -23,7 +23,7 @@
             <Button
                 android:layout_width="110dp"
                 android:layout_height="55dp"
-                android:text="Score Counting"
+                android:text="@string/score_counting"
                 android:id="@+id/scoreCounting"
                 android:textAllCaps="false"
                 android:background="@drawable/button_new_golf_app"
@@ -42,7 +42,7 @@
             <Button
                 android:layout_width="110dp"
                 android:layout_height="55dp"
-                android:text="Bet Counting"
+                android:text="@string/bet_counting"
                 android:id="@+id/betCounting"
                 android:textAllCaps="false"
                 android:background="@drawable/button_new_golf_app"
@@ -61,7 +61,7 @@
             <Button
                 android:layout_width="110dp"
                 android:layout_height="55dp"
-                android:text="Competition Counting"
+                android:text="@string/competition_counting"
                 android:id="@+id/competitionCounting"
                 android:textAllCaps="false"
                 android:background="@drawable/button_new_golf_app"

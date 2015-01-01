@@ -37,20 +37,17 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
+    private final String groupListQueue = "GroupListQueue";
+    String response2;
+    @InjectView(R.id.lv_competition_view_group)
+    ListView listView;
+    @InjectView(R.id.show_own_groups)
+    CheckBox checkBox;
     private String retVal = null;
     private ProgressDialog pdialog;
     private boolean success = false;
-    String response2;
-
-    @InjectView(R.id.lv_competition_view_group)
-    ListView listView;
-
-    @InjectView(R.id.show_own_groups)
-    CheckBox checkBox;
-
     private List<CompetitionGroupModel> groupList, myGroupList;
     private GroupListAdapter adapter, myAdapter;
-    private final String groupListQueue = "GroupListQueue";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,113 +60,6 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     }
 
 
-    //    private class CompetitionView extends AsyncTask<String, String, String> {
-//
-//        public CompetitionView() {
-//            pdialog = new ProgressDialog(getActivity());
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            pdialog.setMessage("Loading courses...");
-//            pdialog.show();
-//        }
-//
-//        @Override
-//        protected String doInBackground(String... strings) {
-//            byte[] result = null;
-//            String result2 = "";
-//            File cDir = getActivity().getCacheDir();
-//            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
-//            String strLine="";
-//            StringBuilder text = new StringBuilder();
-//            try {
-//                FileReader fReader = new FileReader(tempFile);
-//                BufferedReader bReader = new BufferedReader(fReader);
-//                while( (strLine=bReader.readLine()) != null  ){
-//                    text.append(strLine);
-//                }
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }catch(IOException e){
-//                e.printStackTrace();
-//            }
-//
-//            HttpClient httpclient = new DefaultHttpClient();
-//            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/closed-competition/group?access_token="+text.toString());
-//
-//            try {
-//                HttpResponse response = httpclient.execute(httppost);
-//                StatusLine statusLine = response.getStatusLine();
-//                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-//                    result = EntityUtils.toByteArray(response.getEntity());
-//                    result2 = new String(result, "UTF-8");
-//                    System.out.println(result2);
-//                    System.out.println("Success!");
-//                    response2 = result2;
-//                    success = true;
-//                }else {
-//                    result = EntityUtils.toByteArray(response.getEntity());
-//                    result2 = new String(result, "UTF-8");
-//                    System.out.println(result2);
-//                    System.out.println("Failed!");
-//                }
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            } catch (ClientProtocolException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            return result2;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result2) {
-////            super.onPostExecute(result2);
-//            if(pdialog != null && pdialog.isShowing()) {
-//                pdialog.dismiss();
-//            }
-//            if(success) {
-//                JSONArray array = null;
-//                try {
-//                    array = new JSONArray(result2);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                for (int i = 0; i < array.length(); i++) {
-//                    JSONObject row = null;
-//                    try {
-//                        row = array.getJSONObject(i);
-//                        LayoutInflater inflater = LayoutInflater.from(getContext());
-//                        final View item = inflater.inflate(R.layout.competition_closed_groups_row, main_table, false);
-//                        TextView tv_group_name = (TextView) item.findViewById(R.id.cgr_grp_name);
-//                        tv_group_name.setText(row.getString("name"));
-//                        TextView tv_member = (TextView) item.findViewById(R.id.cgr_member_cnt);
-//                        tv_member.setText(i+"");
-//                        ImageView iv_action = (ImageView) item.findViewById(R.id.approve_competition);
-//                        iv_action.setTag(row.getString("id"));
-//                        if(i % 2 == 0) {
-//                            item.setBackgroundColor(Color.WHITE);
-//                        } else {
-//                            item.setBackgroundColor(Color.LTGRAY);
-//                        }
-//                        main_table.addView(item);
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                Toast.makeText(getContext(), "Groups loaded.", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(getContext(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -179,9 +69,15 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
 //        new CompetitionView().execute();
         ButterKnife.inject(this, view);
         initLayout();
-        LoadAllGroups();
+
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LoadAllGroups();
     }
 
     private void initLayout() {
@@ -267,6 +163,13 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
 
     }
 
+    private void clearAdapter() {
+        groupList.clear();
+        myGroupList.clear();
+        adapter.notifyDataSetChanged();
+        myAdapter.notifyDataSetChanged();
+    }
+
 
     private void LoadAllGroups() {
         //http://zoogtech.com/golfapp/public/closed-competition/group
@@ -276,6 +179,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         pDialog.setMessage("Loading Groups...");
         pDialog.show();
         Log.d(GolfApp.TAG, urlString);
+        clearAdapter();
 
         StringRequest strReq = new StringRequest(Request.Method.GET, urlString,
                 new Response.Listener<String>() {
