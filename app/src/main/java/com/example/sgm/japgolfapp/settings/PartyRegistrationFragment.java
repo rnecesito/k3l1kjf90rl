@@ -31,6 +31,7 @@ import com.example.sgm.japgolfapp.counting.BetCountingFragment;
 import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
+import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 
 import org.apache.http.HttpResponse;
@@ -392,14 +393,14 @@ public class PartyRegistrationFragment extends BaseFragment{
             scoreRegistrationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
+                    showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
                 }
             });
             ImageButton iSButton = (ImageButton)item.findViewById(R.id.imageScoreRegistrationButton);
             iSButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
+                    showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
                 }
             });
 

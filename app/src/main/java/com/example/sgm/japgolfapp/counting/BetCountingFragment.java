@@ -16,19 +16,12 @@ import android.widget.RelativeLayout;
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
+import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 
 import butterknife.OnClick;
 
-/**
- * A simple {@link android.app.Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link com.example.sgm.japgolfapp.counting.BetCountingFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link com.example.sgm.japgolfapp.counting.BetCountingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class BetCountingFragment extends BaseFragment {
     View view_container;
     boolean shown = false;
@@ -78,14 +71,14 @@ public class BetCountingFragment extends BaseFragment {
             scoreRegistrationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
+                    showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
                 }
             });
             ImageButton iSButton = (ImageButton)item.findViewById(R.id.imageScoreRegistrationButton);
             iSButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
+                    showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
                 }
             });
 

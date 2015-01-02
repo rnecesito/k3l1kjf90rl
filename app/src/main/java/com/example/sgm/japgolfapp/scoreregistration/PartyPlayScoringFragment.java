@@ -178,12 +178,21 @@ public class PartyPlayScoringFragment extends BaseFragment{
                     info = new JSONArray(retVal);
                     mPartyPlayGroups = new ArrayList<Party>();
                     for(int i = 0; i < info.length(); i++){
+
+                        String courseName, holes;
+                        try{
+                            courseName = info.getJSONObject(i).getJSONObject("course").getString("name");
+                            holes = info.getJSONObject(i).getJSONObject("course").getString("holes");
+                        }catch (Exception e){
+                            courseName = "";
+                            holes = "0";
+                        }
                         Party newParty = new Party(
                                 info.getJSONObject(i).getString("id"),
                                 info.getJSONObject(i).getString("name"),
                                 info.getJSONObject(i).getString("date"),
-                                info.getJSONObject(i).getJSONObject("course").getString("name"));
-                        newParty.setHoles(info.getJSONObject(i).getJSONObject("course").getString("holes"));
+                                courseName);
+                        newParty.setHoles(holes);
                         mPartyPlayGroups.add(newParty);
                     }
 
@@ -329,6 +338,7 @@ public class PartyPlayScoringFragment extends BaseFragment{
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        view_container = view;
         lvPartyPlayGroups = (ListView) view.findViewById(R.id.lvPartyPlayGroups);
         //TEST DATAS
 

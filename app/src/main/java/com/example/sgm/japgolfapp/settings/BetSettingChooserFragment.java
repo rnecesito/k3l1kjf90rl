@@ -27,6 +27,7 @@ import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.models.BetSetting;
+import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 import com.example.sgm.japgolfapp.settings.adapter.BetChooserAdapter;
 
@@ -117,14 +118,14 @@ public class BetSettingChooserFragment extends BaseFragment{
             scoreRegistrationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
+                    showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
                 }
             });
             ImageButton iSButton = (ImageButton)item.findViewById(R.id.imageScoreRegistrationButton);
             iSButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
+                    showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
                 }
             });
 
