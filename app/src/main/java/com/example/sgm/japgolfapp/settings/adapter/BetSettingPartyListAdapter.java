@@ -1,4 +1,4 @@
-package com.example.sgm.japgolfapp.scoreregistration.adapters;
+package com.example.sgm.japgolfapp.settings.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,19 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TableRow;
 
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.models.Party;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.holders.PartyPlayScoringViewBinder;
-import com.example.sgm.japgolfapp.scoreregistration.adapters.holders.ScoreRegistratonViewBinder;
 
 import java.util.ArrayList;
 
-public class PartyPlayScoringAdapter extends ArrayAdapter<Party> {
+public class BetSettingPartyListAdapter extends ArrayAdapter<Party> {
 
 
 	private ArrayList<Party> mItems;
 
-	public PartyPlayScoringAdapter(Activity activity, int resource, ArrayList<Party> items) {
+	public BetSettingPartyListAdapter(Activity activity, int resource, ArrayList<Party> items) {
 		super(activity, resource, items);
 		this.mItems = items;
 	}
@@ -54,22 +52,21 @@ public class PartyPlayScoringAdapter extends ArrayAdapter<Party> {
 						R.layout.generic_3_column_item_layout, parent,
 						false);
 
-                TableRow tableRow = (TableRow) view
-                        .findViewById(R.id.tr_generic_row);
+            TableRow tableRow = (TableRow) view
+                    .findViewById(R.id.tr_generic_row);
 
-                if (position % 2 == 0) {
-                    tableRow.setBackgroundColor(Color.WHITE);
-                } else {
-                    tableRow.setBackgroundColor(Color.LTGRAY);
-                }
+            if (position % 2 == 0) {
+                tableRow.setBackgroundColor(Color.WHITE);
+            } else {
+                tableRow.setBackgroundColor(Color.LTGRAY);
+            }
+
 
             PartyPlayScoringViewBinder.bindPartyPlayHolder(holder, view);
 			view.setTag(holder);
 		} else {
 			holder = (PartyPlayScoringViewBinder.PartyPlayHolder) view.getTag();
 		}
-
-
 
 		if (party != null) {
             PartyPlayScoringViewBinder.bindPartyPlayInfo(holder, party);

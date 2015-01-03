@@ -3,6 +3,7 @@ package com.example.sgm.japgolfapp.scoreregistration;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -202,7 +204,8 @@ public class PartyPlayScoringFragment extends BaseFragment{
                     lvPartyPlayGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            ScoreRegistrationFragment targetFragment = new ScoreRegistrationFragment(mPartyPlayGroups.get(position));
+                            ScoreRegistrationFragment targetFragment = new ScoreRegistrationFragment();
+                            targetFragment.setScoreRegistrationFragmentParty(mPartyPlayGroups.get(position));
                             showFragmentAndAddToBackStack(targetFragment);
                         }
                     });
@@ -341,6 +344,20 @@ public class PartyPlayScoringFragment extends BaseFragment{
         view_container = view;
         lvPartyPlayGroups = (ListView) view.findViewById(R.id.lvPartyPlayGroups);
         //TEST DATAS
+
+        TableRow tableRow = (TableRow) view
+                .findViewById(R.id.tr_generic_row);
+        tableRow.setBackgroundColor(Color.LTGRAY);
+
+        TextView tvName = (TextView) view
+                .findViewById(R.id.tv_generic_column_1);
+        tvName.setText("Name");
+        TextView tvDate = (TextView) view
+                .findViewById(R.id.tv_generic_column_2);
+        tvDate.setText("Date");
+        TextView tvCourse = (TextView) view
+                .findViewById(R.id.tv_generic_column_3);
+        tvCourse.setText("Course");
 
         getPartyPlayGroupList init = new getPartyPlayGroupList();
         init.execute();

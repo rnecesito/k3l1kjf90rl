@@ -81,7 +81,9 @@ public class ScoreRegistrationFragment extends BaseFragment{
 
     private Party partyInformation;
 
-    public ScoreRegistrationFragment(Party party){
+    public ScoreRegistrationFragment(){}
+
+    public void setScoreRegistrationFragmentParty(Party party){
         partyInformation = party;
     }
 

@@ -20,38 +20,48 @@
         android:textColor="@android:color/white"
         android:layout_alignParentStart="true" />
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/itemBetStyleOne"
+        android:orientation="horizontal"
         android:layout_below="@+id/itemHoleName"
-        android:text="@string/dummy_text_ooo"
-        android:textSize="20sp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@android:color/white"
-        android:layout_alignParentStart="true" />
+        android:layout_alignRight="@+id/itemHoleName"
+        android:layout_alignEnd="@+id/itemHoleName">
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:id="@+id/itemBetStyleOne"
+            android:text="@string/dummy_text_ooo"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"/>
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/itemBetStyleTwo"
-        android:layout_below="@+id/itemHoleName"
-        android:text="@string/dummy_text_ooo"
-        android:textSize="20sp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@android:color/white"
-        android:layout_toRightOf="@+id/itemBetStyleOne" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:id="@+id/itemBetStyleTwo"
+            android:text="@string/dummy_text_ooo"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"/>
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/itemBetStyleThree"
-        android:layout_below="@+id/itemHoleName"
-        android:text="@string/dummy_text_ooo"
-        android:textSize="20sp"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/itemBetStyleTwo"
-        android:textColor="@android:color/white" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:id="@+id/itemBetStyleThree"
+            android:text="@string/dummy_text_ooo"
+            android:textSize="14sp"
+            android:textColor="@android:color/white" />
+
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="70dp"

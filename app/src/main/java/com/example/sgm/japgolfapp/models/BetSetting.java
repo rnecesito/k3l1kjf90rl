@@ -4,16 +4,42 @@ import java.util.ArrayList;
 
 public class BetSetting {
 
+    private String mId;
+    private String mAmmount;
     private String mName;
     private String mHelp;
     private Boolean mChosen;
 
     public BetSetting(){}
 
+    public BetSetting(String id, String ammount, String name, String help, Boolean choosen){
+        mId = id;
+        mAmmount = ammount;
+        mName = name;
+        mHelp = help;
+        mChosen = choosen;
+    }
+
     public BetSetting(String name, String help, Boolean choosen){
         mName = name;
         mHelp = help;
         mChosen = choosen;
+    }
+
+    public void setId(String id){
+        mId = id;
+    }
+
+    public String getId(){
+        return mId;
+    }
+
+    public void setAmmount(String ammount){
+        mAmmount = ammount;
+    }
+
+    public String getAmmount(){
+        return mAmmount;
     }
 	
 	public String getName() {

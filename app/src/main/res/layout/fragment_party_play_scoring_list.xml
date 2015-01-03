@@ -32,7 +32,7 @@
             android:id="@+id/tableHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/item_table_list_header"
+            layout="@layout/generic_3_column_item_layout"
             android:layout_below="@+id/registerTv"/>
 
         <ListView

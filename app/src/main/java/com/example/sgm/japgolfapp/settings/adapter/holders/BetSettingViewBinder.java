@@ -15,8 +15,6 @@ public class BetSettingViewBinder {
         TextView tvFirstBet;
         TextView tvSecondBet;
         TextView tvThirdBet;
-
-
 	}
 
 	public static void bindHoleRecordHolder(HoleRecordHolder holder, View view) {

@@ -320,7 +320,7 @@ public class MenuSettingsFragment extends BaseFragment {
         betRButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new NewBetSettingFragment());
+                showFragmentAndAddToBackStack(new BetSettingPartyListFragment());
             }
         });
 
@@ -328,7 +328,7 @@ public class MenuSettingsFragment extends BaseFragment {
         iBetRButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new NewBetSettingFragment());
+                showFragmentAndAddToBackStack(new BetSettingPartyListFragment());
             }
         });
 

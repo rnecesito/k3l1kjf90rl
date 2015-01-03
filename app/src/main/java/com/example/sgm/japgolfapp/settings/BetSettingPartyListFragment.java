@@ -3,6 +3,7 @@ package com.example.sgm.japgolfapp.settings;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.BaseFragment;
@@ -24,13 +26,10 @@ import com.example.sgm.japgolfapp.counting.BetCountingFragment;
 import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
-import com.example.sgm.japgolfapp.models.BetSetting;
-import com.example.sgm.japgolfapp.models.HoleRecord;
 import com.example.sgm.japgolfapp.models.Party;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.PartyPlayScoringAdapter;
-import com.example.sgm.japgolfapp.settings.adapter.BetSettingAdapter;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -42,8 +41,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -55,17 +52,12 @@ import java.util.ArrayList;
 
 import butterknife.OnClick;
 
-public class NewBetSettingFragment extends BaseFragment{
+public class BetSettingPartyListFragment extends BaseFragment{
 
-    private ListView lvHoldeRecords;
-    public static ArrayList<HoleRecord> mItems;
-    BetSettingAdapter mAdapter;
-    TextView tvSet;
-    String partyId = "";
-
-    public void setPartyId(String partyId){
-        this.partyId = partyId;
-    }
+    private PartyPlayScoringAdapter mAdapter;
+    private ListView lvPartyPlayGroups;
+    //SERIOUS DATA
+    private ArrayList<Party> mPartyPlayGroups;
 
     @OnClick(R.id.logout_button)
     public void logout() {
@@ -78,6 +70,143 @@ public class NewBetSettingFragment extends BaseFragment{
         clearBackStack();
     }
 
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_party_play_scoring_list, container, false);
+    }
+
+    View view_container;
+    boolean shown = false;
+    private ProgressDialog pdialog;
+    private boolean success = false;
+    String retVal;
+
+    private String readtoken() {
+        /** Getting Cache Directory */
+        File cDir = getActivity().getCacheDir();
+
+        /** Getting a reference to temporary file, if created earlier */
+        File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
+
+        String strLine="";
+        StringBuilder text = new StringBuilder();
+
+        /** Reading contents of the temporary file, if already exists */
+        try {
+            FileReader fReader = new FileReader(tempFile);
+            BufferedReader bReader = new BufferedReader(fReader);
+
+            /** Reading the contents of the file , line by line */
+            while( (strLine=bReader.readLine()) != null  ){
+                text.append(strLine);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return text.toString();
+    }
+
+    private class getPartyPlayGroupList extends AsyncTask<String, String, String> {
+
+        public getPartyPlayGroupList() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage("Getting Groups");
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/party-play?access_token="+token.toString());
+            try {
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+            if(success) {
+                JSONArray info = null;
+                try {
+                    info = new JSONArray(retVal);
+                    mPartyPlayGroups = new ArrayList<Party>();
+                    for(int i = 0; i < info.length(); i++){
+
+                        String courseName, holes;
+                        try{
+                            courseName = info.getJSONObject(i).getJSONObject("course").getString("name");
+                            holes = info.getJSONObject(i).getJSONObject("course").getString("holes");
+                        }catch (Exception e){
+                            courseName = "";
+                            holes = "0";
+                        }
+                        Party newParty = new Party(
+                                info.getJSONObject(i).getString("id"),
+                                info.getJSONObject(i).getString("name"),
+                                info.getJSONObject(i).getString("date"),
+                                courseName);
+                        newParty.setHoles(holes);
+                        mPartyPlayGroups.add(newParty);
+                    }
+
+                    mAdapter = new PartyPlayScoringAdapter(getActivity(),0,mPartyPlayGroups);
+                    lvPartyPlayGroups.setAdapter(mAdapter);
+                    lvPartyPlayGroups.setFocusable(true);
+                    lvPartyPlayGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            NewBetSettingFragment targetFragment = new NewBetSettingFragment();
+                            targetFragment.setPartyId(mPartyPlayGroups.get(position).getId());
+                            showFragmentAndAddToBackStack(targetFragment);
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     @OnClick(R.id.menu_button)
     public void showMenu() {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -200,6 +329,33 @@ public class NewBetSettingFragment extends BaseFragment{
         });
     }
 
+    @Override
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        view_container = view;
+        lvPartyPlayGroups = (ListView) view.findViewById(R.id.lvPartyPlayGroups);
+        TextView registerTv = (TextView) view.findViewById(R.id.registerTv);
+        registerTv.setText("Party List");
+        TableRow tableRow = (TableRow) view
+                .findViewById(R.id.tr_generic_row);
+        tableRow.setBackgroundColor(Color.LTGRAY);
+
+        TextView tvName = (TextView) view
+                .findViewById(R.id.tv_generic_column_1);
+        tvName.setText("Name");
+        TextView tvDate = (TextView) view
+                .findViewById(R.id.tv_generic_column_2);
+        tvDate.setText("Date");
+        TextView tvCourse = (TextView) view
+                .findViewById(R.id.tv_generic_column_3);
+        tvCourse.setText("Course");
+
+        getPartyPlayGroupList init = new getPartyPlayGroupList();
+        init.execute();
+
+    }
+
     public void SlideToRight(View view) {
         Animation slide = null;
         slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, -5.0f,
@@ -297,159 +453,4 @@ public class NewBetSettingFragment extends BaseFragment{
     }
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_new_bet_setting, container, false);
-    }
-
-    @Override
-    public void onViewCreated(final View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        view_container = view;
-
-        TextView txt = (TextView) view.findViewById(R.id.tvSaveReturn);
-        txt.setVisibility(TextView.INVISIBLE);
-        getPartyPlayGroupList init = new getPartyPlayGroupList();
-        init.execute();
-    }
-
-
-    View view_container;
-    boolean shown = false;
-    private ProgressDialog pdialog;
-    private boolean success = false;
-    String retVal;
-
-    private String readtoken() {
-        /** Getting Cache Directory */
-        File cDir = getActivity().getCacheDir();
-
-        /** Getting a reference to temporary file, if created earlier */
-        File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
-
-        String strLine="";
-        StringBuilder text = new StringBuilder();
-
-        /** Reading contents of the temporary file, if already exists */
-        try {
-            FileReader fReader = new FileReader(tempFile);
-            BufferedReader bReader = new BufferedReader(fReader);
-
-            /** Reading the contents of the file , line by line */
-            while( (strLine=bReader.readLine()) != null  ){
-                text.append(strLine);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        return text.toString();
-    }
-
-    private class getPartyPlayGroupList extends AsyncTask<String, String, String> {
-
-        public getPartyPlayGroupList() {
-            pdialog = new ProgressDialog(getActivity());
-            pdialog.setCancelable(false);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pdialog.setMessage("Getting Holes");
-            pdialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            byte[] result = null;
-            String str = "";
-            String token = readtoken();
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/bet-registration/bets/"+ partyId +"?access_token="+token.toString());
-            try {
-                HttpResponse response = httpclient.execute(httppost);
-                StatusLine statusLine = response.getStatusLine();
-                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                    result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
-                    success = true;
-                    retVal = str;
-                }else {
-                    result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
-                    retVal = str;
-                }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return str;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            if(pdialog != null && pdialog.isShowing()) {
-                pdialog.dismiss();
-            }
-            if(success) {
-                JSONObject info = null;
-                try {
-                    info = new JSONObject(retVal);
-
-                    JSONArray hole = info.getJSONObject("course").getJSONArray("hole_items");
-                    lvHoldeRecords = (ListView) view_container.findViewById(R.id.lvBets);
-
-                    tvSet = (TextView) view_container.findViewById(R.id.tvSaveReturn);
-                    tvSet.setText("Save");
-
-                    mItems = new ArrayList<HoleRecord>();
-
-                    for(int i = 0 ; i < hole.length() ; i++){
-                        ArrayList<BetSetting> holeBetSettings = new ArrayList<BetSetting>();
-                        JSONArray jsonHoleBetSettings = hole.getJSONObject(i).getJSONArray("bets");
-                        for(int a = 0 ; a < jsonHoleBetSettings.length() ; a++){
-                            JSONObject obj = jsonHoleBetSettings.getJSONObject(a);
-                            holeBetSettings.add(new BetSetting(obj.getString("id")
-                                    ,obj.getString("amount")
-                                    ,obj.getJSONObject("bet_type").getString("name")
-                                    ,obj.getJSONObject("bet_type").getString("description")
-                                    ,true ));
-                        }
-                        HoleRecord newHoleRecord = new HoleRecord(hole.getJSONObject(i).getString("hole_number"), null, holeBetSettings);
-                        mItems.add(newHoleRecord);
-                    }
-
-
-                    // -----------
-                    mAdapter = new BetSettingAdapter(getActivity(), 0, mItems);
-                    lvHoldeRecords.setAdapter(mAdapter);
-                    lvHoldeRecords.setFocusable(true);
-                    lvHoldeRecords.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            BetSettingChooserFragment targetFragment = new BetSettingChooserFragment();
-                            targetFragment.setItems(mItems.get(i).getBetSettings());
-                            targetFragment.setItemNumber(i);
-                            showFragmentAndAddToBackStack(targetFragment);
-                        }
-                    });
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 }

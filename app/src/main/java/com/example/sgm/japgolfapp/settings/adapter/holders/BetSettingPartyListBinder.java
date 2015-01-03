@@ -1,25 +1,23 @@
-package com.example.sgm.japgolfapp.scoreregistration.adapters.holders;
+package com.example.sgm.japgolfapp.settings.adapter.holders;
 
 import android.graphics.Color;
 import android.view.View;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.Party;
 
 
-public class PartyPlayScoringViewBinder {
+public class BetSettingPartyListBinder {
 
 	public static class PartyPlayHolder {
 		TextView tvName;
         TextView tvDate;
         TextView tvCourse;
+
 	}
 
-
 	public static void bindPartyPlayHolder(PartyPlayHolder holder, View view) {
-
 
 		holder.tvName = (TextView) view
 				.findViewById(R.id.tv_generic_column_1);
