@@ -59,8 +59,6 @@ public class GroupListAdapter extends ArrayAdapter<Party> {
 			holder = (PartyPlayHolder) view.getTag();
 		}
 
-
-
 		if (party != null) {
             bindPartyPlayInfo(holder, party);
             if (position % 2 == 0) {
