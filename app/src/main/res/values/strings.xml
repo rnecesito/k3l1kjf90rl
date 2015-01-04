@@ -106,6 +106,7 @@
     <string name="jap_competition">Competition</string>
     <string name="jap_edit_group">Edit Group</string>
     <string name="jap_bet_type">Bet Type</string>
+    <string name="jap_loading_parties">Loading parties…</string>
 
 
 
@@ -212,6 +213,7 @@
     <!--<string name="jap_competition">コンペ名</string>-->
     <!--<string name="jap_edit_group">グループの編集</string>-->
     <!--<string name="jap_bet_type">握り</string>-->
+    <!--<string name="jap_loading_parties">パーティー情報を取得中...</string>-->
 
 
     <string name="not_entered">Not Entered</string>
