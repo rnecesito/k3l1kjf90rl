@@ -169,7 +169,7 @@ public class ScoreCountingFragment extends BaseFragment {
                         e.printStackTrace();
                     }
                 }
-                ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, party_list);
+                ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getActivity(), R.layout.spinner_background, party_list);
                 spinner.setAdapter(spinnerArrayAdapter);
                 Toast.makeText(getActivity(), getResources().getString(R.string.information_loaded), Toast.LENGTH_SHORT).show();
             } else {
@@ -187,8 +187,8 @@ public class ScoreCountingFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            pdialog.setMessage(getResources().getString(R.string.jap_loading_parties));
-//            pdialog.show();
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_scores));
+            pdialog.show();
         }
 
         @Override

@@ -177,8 +177,8 @@ public class BetCountingFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            pdialog.setMessage(getResources().getString(R.string.jap_loading_parties));
-//            pdialog.show();
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_scores));
+            pdialog.show();
         }
 
         @Override
