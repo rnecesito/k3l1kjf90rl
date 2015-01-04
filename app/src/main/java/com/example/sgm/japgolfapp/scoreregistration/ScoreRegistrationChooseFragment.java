@@ -50,14 +50,14 @@ public class ScoreRegistrationChooseFragment extends BaseFragment {
         btnCompetitionScoring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new CompetitionScoringChooseFragment());
+                showFragmentAndAddToBackStack(new ClosedCompetitionsFragment());
             }
         });
         ImageButton btnCompetitionScoringArrow = (ImageButton)view.findViewById(R.id.btnCompetitionScoringArrow);
         btnCompetitionScoringArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new CompetitionScoringChooseFragment());
+                showFragmentAndAddToBackStack(new ClosedCompetitionsFragment());
             }
         });
 
