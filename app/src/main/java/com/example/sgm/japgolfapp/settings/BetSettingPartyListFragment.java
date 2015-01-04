@@ -28,8 +28,7 @@ import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.models.Party;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
-import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
-import com.example.sgm.japgolfapp.scoreregistration.adapters.PartyPlayScoringAdapter;
+import com.example.sgm.japgolfapp.scoreregistration.adapters.GroupListAdapter;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -54,7 +53,7 @@ import butterknife.OnClick;
 
 public class BetSettingPartyListFragment extends BaseFragment{
 
-    private PartyPlayScoringAdapter mAdapter;
+    private GroupListAdapter mAdapter;
     private ListView lvPartyPlayGroups;
     //SERIOUS DATA
     private ArrayList<Party> mPartyPlayGroups;
@@ -190,7 +189,7 @@ public class BetSettingPartyListFragment extends BaseFragment{
                         mPartyPlayGroups.add(newParty);
                     }
 
-                    mAdapter = new PartyPlayScoringAdapter(getActivity(),0,mPartyPlayGroups);
+                    mAdapter = new GroupListAdapter(getActivity(),0,mPartyPlayGroups);
                     lvPartyPlayGroups.setAdapter(mAdapter);
                     lvPartyPlayGroups.setFocusable(true);
                     lvPartyPlayGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {

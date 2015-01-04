@@ -26,10 +26,7 @@ import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.models.BetSetting;
 import com.example.sgm.japgolfapp.models.HoleRecord;
-import com.example.sgm.japgolfapp.models.Party;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
-import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
-import com.example.sgm.japgolfapp.scoreregistration.adapters.PartyPlayScoringAdapter;
 import com.example.sgm.japgolfapp.settings.adapter.BetSettingAdapter;
 
 import org.apache.http.HttpResponse;
@@ -43,7 +40,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.File;

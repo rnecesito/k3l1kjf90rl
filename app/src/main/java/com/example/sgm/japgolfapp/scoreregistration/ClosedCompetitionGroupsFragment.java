@@ -51,12 +51,19 @@ import java.util.ArrayList;
 
 import butterknife.OnClick;
 
-public class PartyPlayScoringFragment extends BaseFragment{
+public class ClosedCompetitionGroupsFragment extends BaseFragment{
 
     private GroupListAdapter mAdapter;
     private ListView lvPartyPlayGroups;
     //SERIOUS DATA
     private ArrayList<Party> mPartyPlayGroups;
+
+    private String mCompetitionId = "";
+
+
+    public void setCompetition(String competition){
+        mCompetitionId = competition;
+    }
 
     @OnClick(R.id.logout_button)
     public void logout() {
@@ -130,7 +137,7 @@ public class PartyPlayScoringFragment extends BaseFragment{
             String str = "";
             String token = readtoken();
             HttpClient httpclient = new DefaultHttpClient();
-            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/party-play?access_token="+token.toString());
+            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/closed-competition/"+mCompetitionId+"/group?access_token="+token.toString());
             try {
                 HttpResponse response = httpclient.execute(httppost);
                 StatusLine statusLine = response.getStatusLine();
@@ -171,19 +178,21 @@ public class PartyPlayScoringFragment extends BaseFragment{
                     info = new JSONArray(retVal);
                     mPartyPlayGroups = new ArrayList<Party>();
                     for(int i = 0; i < info.length(); i++){
-
-                        String courseName, holes;
+                        String courseName, holes, date;
                         try{
-                            courseName = info.getJSONObject(i).getJSONObject("course").getString("name");
-                            holes = info.getJSONObject(i).getJSONObject("course").getString("holes");
+                            courseName = info.getJSONObject(i).getJSONObject("closed_competition").getJSONObject("course").getString("name");
+                            JSONArray holesData = info.getJSONObject(i).getJSONObject("closed_competition").getJSONObject("course").getJSONArray("hole_items");
+                            holes = "" + holesData.length();
+                            date = info.getJSONObject(i).getJSONObject("closed_competition").getString("date");
                         }catch (Exception e){
                             courseName = "";
                             holes = "0";
+                            date = "";
                         }
                         Party newParty = new Party(
                                 info.getJSONObject(i).getString("id"),
                                 info.getJSONObject(i).getString("name"),
-                                info.getJSONObject(i).getString("date"),
+                                date,
                                 courseName);
                         newParty.setHoles(holes);
                         mPartyPlayGroups.add(newParty);
@@ -195,8 +204,8 @@ public class PartyPlayScoringFragment extends BaseFragment{
                     lvPartyPlayGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            ScoreRegistrationFragment targetFragment = new ScoreRegistrationFragment();
-                            targetFragment.setScoreRegistrationFragmentParty(mPartyPlayGroups.get(position));
+                            ScoreRegistrationCompetitionFragment targetFragment = new ScoreRegistrationCompetitionFragment();
+                            targetFragment.setScoreRegistrationFragmentParty(mCompetitionId, mPartyPlayGroups.get(position), position);
                             showFragmentAndAddToBackStack(targetFragment);
                         }
                     });

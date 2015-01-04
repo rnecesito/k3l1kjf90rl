@@ -1,4 +1,4 @@
-package com.example.sgm.japgolfapp.settings.adapter;
+package com.example.sgm.japgolfapp.scoreregistration.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,12 +16,12 @@ import com.example.sgm.japgolfapp.scoreregistration.adapters.holders.GroupListVi
 
 import java.util.ArrayList;
 
-public class BetSettingPartyListAdapter extends ArrayAdapter<Party> {
+public class GroupListAdapter extends ArrayAdapter<Party> {
 
 
 	private ArrayList<Party> mItems;
 
-	public BetSettingPartyListAdapter(Activity activity, int resource, ArrayList<Party> items) {
+	public GroupListAdapter(Activity activity, int resource, ArrayList<Party> items) {
 		super(activity, resource, items);
 		this.mItems = items;
 	}
@@ -52,40 +52,40 @@ public class BetSettingPartyListAdapter extends ArrayAdapter<Party> {
 				view = inflater.inflate(
 						R.layout.generic_3_column_item_layout, parent,
 						false);
-
             bindPartyPlayHolder(holder, view);
+
 			view.setTag(holder);
+		} else {
+			holder = (PartyPlayHolder) view.getTag();
+		}
+
+
+
+		if (party != null) {
+            bindPartyPlayInfo(holder, party);
             if (position % 2 == 0) {
                 holder.tableRow.setBackgroundColor(Color.WHITE);
             } else {
                 holder.tableRow.setBackgroundColor(Color.LTGRAY);
             }
-
-        } else {
-			holder = (PartyPlayHolder) view.getTag();
-		}
-
-		if (party != null) {
-            bindPartyPlayInfo(holder, party);
 		}
 
 		return view;
 	}
 
-
     public class PartyPlayHolder {
-		TextView tvName;
+        TextView tvName;
         TextView tvDate;
         TextView tvCourse;
         TableRow tableRow;
-	}
+    }
 
 
-	public void bindPartyPlayHolder(PartyPlayHolder holder, View view) {
+    public void bindPartyPlayHolder(PartyPlayHolder holder, View view) {
 
 
-		holder.tvName = (TextView) view
-				.findViewById(R.id.tv_generic_column_1);
+        holder.tvName = (TextView) view
+                .findViewById(R.id.tv_generic_column_1);
         holder.tvDate = (TextView) view
                 .findViewById(R.id.tv_generic_column_2);
         holder.tvCourse = (TextView) view
@@ -93,30 +93,30 @@ public class BetSettingPartyListAdapter extends ArrayAdapter<Party> {
         holder.tableRow = (TableRow) view
                 .findViewById(R.id.tr_generic_row);
 
-	}
+    }
 
-	//
-	public void bindPartyPlayInfo(final PartyPlayHolder holder,
-			final Party party) {
+    //
+    public void bindPartyPlayInfo(final PartyPlayHolder holder,
+                                  final Party party) {
 
-			if (party != null) {
+        if (party != null) {
 
-				if (holder.tvName != null) {
-					holder.tvName.setText(party.getName());
-                    holder.tvName.setTextColor(Color.BLACK);
-				}
+            if (holder.tvName != null) {
+                holder.tvName.setText(party.getName());
+                holder.tvName.setTextColor(Color.BLACK);
+            }
 
-                if (holder.tvDate != null) {
-                    holder.tvDate.setText(party.getDate());
-                    holder.tvDate.setTextColor(Color.BLACK);
-                }
+            if (holder.tvDate != null) {
+                holder.tvDate.setText(party.getDate());
+                holder.tvDate.setTextColor(Color.BLACK);
+            }
 
-                if (holder.tvCourse != null) {
-                    holder.tvCourse.setText(party.getCourse());
-                    holder.tvCourse.setTextColor(Color.BLACK);
-                }
+            if (holder.tvCourse != null) {
+                holder.tvCourse.setText(party.getCourse());
+                holder.tvCourse.setTextColor(Color.BLACK);
+            }
 
 
-			}
-		}
+        }
+    }
 }

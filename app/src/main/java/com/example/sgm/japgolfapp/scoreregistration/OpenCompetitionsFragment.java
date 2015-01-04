@@ -51,7 +51,7 @@ import java.util.ArrayList;
 
 import butterknife.OnClick;
 
-public class PartyPlayScoringFragment extends BaseFragment{
+public class OpenCompetitionsFragment extends BaseFragment{
 
     private GroupListAdapter mAdapter;
     private ListView lvPartyPlayGroups;
@@ -130,7 +130,7 @@ public class PartyPlayScoringFragment extends BaseFragment{
             String str = "";
             String token = readtoken();
             HttpClient httpclient = new DefaultHttpClient();
-            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/party-play?access_token="+token.toString());
+            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/open-competition?access_token="+token.toString());
             try {
                 HttpResponse response = httpclient.execute(httppost);
                 StatusLine statusLine = response.getStatusLine();
@@ -175,7 +175,8 @@ public class PartyPlayScoringFragment extends BaseFragment{
                         String courseName, holes;
                         try{
                             courseName = info.getJSONObject(i).getJSONObject("course").getString("name");
-                            holes = info.getJSONObject(i).getJSONObject("course").getString("holes");
+                            JSONArray holesData = info.getJSONObject(i).getJSONObject("course").getJSONArray("hole_items");
+                            holes = "" + holesData.length();
                         }catch (Exception e){
                             courseName = "";
                             holes = "0";

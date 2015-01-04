@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -28,9 +27,9 @@ import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.models.HoleRecord;
 import com.example.sgm.japgolfapp.models.Party;
-import com.example.sgm.japgolfapp.scoreregistration.adapters.PartyPlayScoringAdapter;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.ScoreRegistrationAdapter;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
+import com.example.sgm.japgolfapp.settings.NewBetSettingFragment;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -40,8 +39,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -318,8 +317,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
 
     //TEST DATA
     private ArrayList<Competitor> mGroupMembers;
-    ArrayList<Competitor> dummy_one;
-    ArrayList<Competitor> dummy_two;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -332,10 +329,11 @@ public class ScoreRegistrationFragment extends BaseFragment{
         super.onViewCreated(view, savedInstanceState);
 
         view_container = view;
-        lvCompetitors = (ListView) view.findViewById(R.id.lvCompetitors);
-        tvBetRegistration = (TextView)view.findViewById(R.id.tvBetRegistration);
-        container = (FrameLayout)view.findViewById(R.id.bet_registration_container);
-        saveTv2 = (TextView)view.findViewById(R.id.saveTv2);
+        lvCompetitors = (ListView) view_container.findViewById(R.id.lvCompetitors);
+        lvCompetitors2 = (ListView) view_container.findViewById(R.id.lvCompetitors2);
+        tvBetRegistration = (TextView)view_container.findViewById(R.id.tvBetRegistration);
+        container = (FrameLayout)view_container.findViewById(R.id.bet_registration_container);
+        saveTv2 = (TextView)view_container.findViewById(R.id.saveTv2);
 
         tvBetRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -350,8 +348,9 @@ public class ScoreRegistrationFragment extends BaseFragment{
             }
         });
 
-
         mItems = new ArrayList<HoleRecord>();
+        mItems2 = new ArrayList<HoleRecord>();
+
         mHoleNumber = 0;
         mTvHoleNumber = (TextView) view.findViewById(R.id.tvHoleNumber);
         mTvHoleNumber.setText("" + (mHoleNumber + 1));
@@ -360,7 +359,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         mBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mHoleNumber != 0) {
+                if(mHoleNumber <= 0) {
                     mHoleNumber--;
                     mTvHoleNumber.setText("" + (mHoleNumber + 1));
                     mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
@@ -379,16 +378,17 @@ public class ScoreRegistrationFragment extends BaseFragment{
             @Override
             public void onClick(View view) {
                 //CAN'T GO OVER HOW MANY HOLES
-                if(mHoleNumber < Integer.valueOf(partyInformation.getHoles())) {
+                if(mHoleNumber < Integer.valueOf(partyInformation.getHoles()) - 1) {
                     mHoleNumber++;
                     if(mHoleNumber >= mItems.size())
-                        mItems.add(new HoleRecord("" + mHoleNumber, dummy_one, null));
+                        //TODO
+                        mItems.add(new HoleRecord("" + mHoleNumber, mGroupMembers, null));
                     mTvHoleNumber.setText("" + (mHoleNumber + 1));
                     mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
                     lvCompetitors.setAdapter(mAdapter);
                     lvCompetitors.setFocusable(true);
 
-                    if(mHoleNumber == Integer.valueOf(partyInformation.getHoles())){
+                    if(mHoleNumber == Integer.valueOf(partyInformation.getHoles()) - 1){
                         mBtnForward.setVisibility(View.INVISIBLE);
                     }
                     mBtnBack.setVisibility(View.VISIBLE);
@@ -396,14 +396,11 @@ public class ScoreRegistrationFragment extends BaseFragment{
             }
         });
 
-        // ---------------------------------------------------------------------------------------------------------------------------
+        // -------------------------------------
 
-
-        lvCompetitors2 = (ListView) view.findViewById(R.id.lvCompetitors2);
-
-        mItems2 = new ArrayList<HoleRecord>();
         mHoleNumber2 = 0;
-
+//        mTvHoleNumber = (TextView) view.findViewById(R.id.tvHoleNumber);
+//        mTvHoleNumber.setText("" + (mHoleNumber + 1));
 
         tvPrev = (TextView) view_container.findViewById(R.id.ivBack2);
         tvPrev.setOnClickListener(new View.OnClickListener() {
@@ -411,9 +408,14 @@ public class ScoreRegistrationFragment extends BaseFragment{
             public void onClick(View view) {
                 if(mHoleNumber2 != 0) {
                     mHoleNumber2--;
+//                    mTvHoleNumber.setText("" + (mHoleNumber + 1));
                     mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0, mItems2.get(mHoleNumber2).getCompetitors(), mHoleNumber2);
                     lvCompetitors2.setAdapter(mAdapter2);
                     lvCompetitors2.setFocusable(true);
+                    if(mHoleNumber2 == 0){
+                        tvPrev.setVisibility(View.INVISIBLE);
+                    }
+                    tvNext.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -422,17 +424,28 @@ public class ScoreRegistrationFragment extends BaseFragment{
         tvNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mHoleNumber2++;
-                 mItems2.add(new HoleRecord("" + mHoleNumber2, dummy_two, null));
-             //   mTvHoleNumber.setText("" + (mHoleNumber + 1));
-                mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0, mItems2.get(mHoleNumber2).getCompetitors(), mHoleNumber2);
-                lvCompetitors2.setAdapter(mAdapter2);
-                lvCompetitors2.setFocusable(true);
+                //CHANGE TO HOW MANY BET SETTINGS THERE ARE
+                if(mHoleNumber2 < Integer.valueOf(partyInformation.getHoles()) - 1) {
+                    mHoleNumber2++;
+                    if(mHoleNumber2 >= mItems2.size())
+                        //TODO
+                        mItems2.add(new HoleRecord("" + mHoleNumber, mGroupMembers, null));
+//                    mTvHoleNumber.setText("" + (mHoleNumber + 1));
+                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0, mItems2.get(mHoleNumber2).getCompetitors(), mHoleNumber2);
+                    lvCompetitors2.setAdapter(mAdapter2);
+                    lvCompetitors2.setFocusable(true);
+
+                    if(mHoleNumber2 == Integer.valueOf(partyInformation.getHoles()) - 1){
+                        tvNext.setVisibility(View.INVISIBLE);
+                    }
+                    tvPrev.setVisibility(View.VISIBLE);
+                }
             }
         });
 
-
-
+        //---------------------------------------------------------
+        GetPartyPlayScoresList init = new GetPartyPlayScoresList();
+        init.execute();
 
     }
 
@@ -469,9 +482,9 @@ public class ScoreRegistrationFragment extends BaseFragment{
         return text.toString();
     }
 
-    private class getPartyPlayScoresList extends AsyncTask<String, String, String> {
+    private class GetPartyPlayScoresList extends AsyncTask<String, String, String> {
 
-        public getPartyPlayScoresList() {
+        public GetPartyPlayScoresList() {
             pdialog = new ProgressDialog(getActivity());
             pdialog.setCancelable(false);
         }
@@ -479,7 +492,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Groups");
+            pdialog.setMessage("Getting Members");
             pdialog.show();
         }
 
@@ -525,34 +538,53 @@ public class ScoreRegistrationFragment extends BaseFragment{
                 pdialog.dismiss();
             }
             if(success) {
-                JSONArray info = null;
                 try {
-                    info = new JSONArray(retVal);
-
+                    final JSONObject info = new JSONObject(retVal);
 
                     //TEST DATAS
-                    dummy_one = new ArrayList<Competitor>();
-                    dummy_one.add(new Competitor("Oscar", "0", "0", new ArrayList<Integer>()));
-                    dummy_one.add(new Competitor("Mike", "0", "0", new ArrayList<Integer>()));
+                    mGroupMembers = new ArrayList<Competitor>();
 
-                    mItems.add(new HoleRecord("1", dummy_one, null));
+                    for(int i = 0 ; i < info.getJSONArray("members").length(); i++) {
+                        JSONObject obj = info.getJSONArray("members").getJSONObject(i);
+                        mGroupMembers.add(new Competitor(obj.getJSONObject("member").getString("firstname") + " " + obj.getJSONObject("member").getString("lastname")
+                                , "0"
+                                , "0"
+                                , new ArrayList<Integer>()));
+                    }
+//                    dummy_one = new ArrayList<Competitor>();
+//                    dummy_one.add(new Competitor("Oscar", "0", "0", new ArrayList<Integer>()));
+//                    dummy_one.add(new Competitor("Mike", "0", "0", new ArrayList<Integer>()));
+
+                    mItems.add(new HoleRecord(info.getString("id"), mGroupMembers, null));
                     // -----------
                     mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
                     lvCompetitors.setAdapter(mAdapter);
                     lvCompetitors.setFocusable(true);
 
                     //TEST DATAS
-                    dummy_two = new ArrayList<Competitor>();
-                    dummy_two.add(new Competitor("Oscar", "0", "0", new ArrayList<Integer>()));
-                    dummy_two.add(new Competitor("Mike", "0", "0", new ArrayList<Integer>()));
+//                    dummy_two = new ArrayList<Competitor>();
+//                    dummy_two.add(new Competitor("Oscar", "0", "0", new ArrayList<Integer>()));
+//                    dummy_two.add(new Competitor("Mike", "0", "0", new ArrayList<Integer>()));
 
-                    mItems2.add(new HoleRecord("1", dummy_two, null));
+                    mItems2.add(new HoleRecord(info.getString("id"), mGroupMembers, null));
                     // -----------
                     mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0, mItems2.get(mHoleNumber2).getCompetitors(), mHoleNumber2);
                     lvCompetitors2.setAdapter(mAdapter2);
                     lvCompetitors2.setFocusable(true);
 
+                    TextView toBetSettings = (TextView) view_container.findViewById(R.id.textView17);
+                    toBetSettings.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            NewBetSettingFragment targetFragment = new NewBetSettingFragment();
+                            try {
+                                targetFragment.setPartyId(info.getString("id"));
+                            }catch (Exception e){
 
+                            }
+                            showFragmentAndAddToBackStack(targetFragment);
+                        }
+                    });
 
 
                 } catch (JSONException e) {
@@ -561,6 +593,10 @@ public class ScoreRegistrationFragment extends BaseFragment{
             }
         }
     }
+
+
+
+
 
 
 }

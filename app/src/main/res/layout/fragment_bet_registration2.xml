@@ -59,13 +59,11 @@
             android:layout_height="45dp"
             android:id="@+id/ivForward2"
             android:background="@drawable/arrow"
-            android:layout_marginLeft="7dp"
             android:gravity="center"
             android:text="@string/text_next"
-            android:layout_marginStart="7dp"
             android:layout_alignTop="@+id/ivBack2"
-            android:layout_toRightOf="@+id/tvHoleNumber"
-            android:layout_toEndOf="@+id/tvHoleNumber" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,14 +83,11 @@
             android:layout_height="45dp"
             android:id="@+id/ivBack2"
             android:background="@drawable/arrow_back"
-            android:layout_marginLeft="17dp"
             android:gravity="center"
             android:text="@string/prev"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="14dp"
-            android:layout_below="@+id/registerTv2"
-            android:layout_toRightOf="@+id/textView15"
-            android:layout_toEndOf="@+id/textView15" />
+            android:layout_below="@+id/textView15"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="130dp"
@@ -129,6 +124,19 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView17" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/tvBetType"
+            android:layout_alignBottom="@+id/ivBack2"
+            android:layout_toRightOf="@+id/ivBack2"
+            android:layout_toLeftOf="@+id/ivForward2"
+            android:layout_toStartOf="@+id/ivForward2"
+            android:gravity="center"
+            android:layout_alignTop="@+id/ivForward2" />
 
     </RelativeLayout>
 

@@ -10,10 +10,8 @@ import android.widget.RelativeLayout;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.settings.MemberChangeFragment;
-import com.example.sgm.japgolfapp.settings.PartyRegistrationFragment;
 
-public class ScoreRegistrationChooseFragment extends BaseFragment {
+public class CompetitionScoringChooseFragment extends BaseFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,10 +27,11 @@ public class ScoreRegistrationChooseFragment extends BaseFragment {
 
         //Party Scoring
         Button btnPartyScoring = (Button)view.findViewById(R.id.btnPartyScoring);
+        btnPartyScoring.setText("Open Competition Scoring");
         btnPartyScoring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new PartyPlayScoringFragment());
+                showFragmentAndAddToBackStack(new OpenCompetitionsFragment());
             }
         });
 
@@ -40,24 +39,25 @@ public class ScoreRegistrationChooseFragment extends BaseFragment {
         btnPartyScoringArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new PartyPlayScoringFragment());
+                showFragmentAndAddToBackStack(new OpenCompetitionsFragment());
             }
         });
 
 
         //Competition Scoring
         Button btnCompetitionScoring = (Button)view.findViewById(R.id.btnCompetitionScoring);
+        btnCompetitionScoring.setText("Closed Competition Scoring");
         btnCompetitionScoring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new CompetitionScoringChooseFragment());
+                showFragmentAndAddToBackStack(new ClosedCompetitionsFragment());
             }
         });
         ImageButton btnCompetitionScoringArrow = (ImageButton)view.findViewById(R.id.btnCompetitionScoringArrow);
         btnCompetitionScoringArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragmentAndAddToBackStack(new CompetitionScoringChooseFragment());
+                showFragmentAndAddToBackStack(new ClosedCompetitionsFragment());
             }
         });
 
