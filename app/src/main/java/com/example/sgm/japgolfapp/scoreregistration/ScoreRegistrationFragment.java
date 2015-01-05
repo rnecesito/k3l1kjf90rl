@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
@@ -24,6 +25,7 @@ import com.example.sgm.japgolfapp.counting.BetCountingFragment;
 import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
+import com.example.sgm.japgolfapp.models.BetSetting;
 import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.models.HoleRecord;
 import com.example.sgm.japgolfapp.models.Party;
@@ -39,6 +41,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,31 +57,30 @@ import butterknife.OnClick;
 
 public class ScoreRegistrationFragment extends BaseFragment{
 
+    //FOR SCORE REGISTRATION
     private ListView lvCompetitors;
-    private ListView lvCompetitors2;
-
     private ArrayList<HoleRecord> mItems;
-    private ArrayList<HoleRecord> mItems2;
-
     private ScoreRegistrationAdapter mAdapter;
-    private ScoreRegistrationAdapter mAdapter2;
-
     private Integer mHoleNumber;
-    private Integer mHoleNumber2;
-
     private TextView mBtnBack;
     private TextView mBtnForward;
+    private ArrayList<Competitor> mGroupMembers;
 
+    //FOR BET REGISTRATION
+    private ListView lvCompetitors2;
+    private ArrayList<HoleRecord> mItems2;
+    private ScoreRegistrationAdapter mAdapter2;
+    private Integer mBetNumber;
     private TextView tvPrev;
     private TextView tvNext;
     private TextView saveTv2;
+    private ArrayList<BetSetting> mBetSettings;
 
     private TextView mTvHoleNumber;
     private TextView tvBetRegistration;
-
     private FrameLayout container;
-
     private Party partyInformation;
+    private TextView tvBetType;
 
     public ScoreRegistrationFragment(){}
 
@@ -315,9 +317,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
         });
     }
 
-    //TEST DATA
-    private ArrayList<Competitor> mGroupMembers;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -329,6 +328,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
         super.onViewCreated(view, savedInstanceState);
 
         view_container = view;
+
+        tvBetType = (TextView) view_container.findViewById(R.id.tvBetType);
         lvCompetitors = (ListView) view_container.findViewById(R.id.lvCompetitors);
         lvCompetitors2 = (ListView) view_container.findViewById(R.id.lvCompetitors2);
         tvBetRegistration = (TextView)view_container.findViewById(R.id.tvBetRegistration);
@@ -338,112 +339,26 @@ public class ScoreRegistrationFragment extends BaseFragment{
         tvBetRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             container.setVisibility(View.VISIBLE);
+             GetBetsList getbets = new GetBetsList();
+             getbets.execute();
+
             }
         });
         saveTv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 container.setVisibility(View.GONE);
+                tvPrev.setVisibility(TextView.VISIBLE);
+                tvNext.setVisibility(TextView.VISIBLE);
             }
         });
 
-        mItems = new ArrayList<HoleRecord>();
-        mItems2 = new ArrayList<HoleRecord>();
+
 
         mHoleNumber = 0;
         mTvHoleNumber = (TextView) view.findViewById(R.id.tvHoleNumber);
         mTvHoleNumber.setText("" + (mHoleNumber + 1));
 
-        mBtnBack = (TextView) view_container.findViewById(R.id.ivBack);
-        mBtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mHoleNumber <= 0) {
-                    mHoleNumber--;
-                    mTvHoleNumber.setText("" + (mHoleNumber + 1));
-                    mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
-                    lvCompetitors.setAdapter(mAdapter);
-                    lvCompetitors.setFocusable(true);
-                    if(mHoleNumber == 0){
-                        mBtnBack.setVisibility(View.INVISIBLE);
-                    }
-                    mBtnForward.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        mBtnForward = (TextView) view_container.findViewById(R.id.ivForward);
-        mBtnForward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //CAN'T GO OVER HOW MANY HOLES
-                if(mHoleNumber < Integer.valueOf(partyInformation.getHoles()) - 1) {
-                    mHoleNumber++;
-                    if(mHoleNumber >= mItems.size())
-                        //TODO
-                        mItems.add(new HoleRecord("" + mHoleNumber, mGroupMembers, null));
-                    mTvHoleNumber.setText("" + (mHoleNumber + 1));
-                    mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
-                    lvCompetitors.setAdapter(mAdapter);
-                    lvCompetitors.setFocusable(true);
-
-                    if(mHoleNumber == Integer.valueOf(partyInformation.getHoles()) - 1){
-                        mBtnForward.setVisibility(View.INVISIBLE);
-                    }
-                    mBtnBack.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        // -------------------------------------
-
-        mHoleNumber2 = 0;
-//        mTvHoleNumber = (TextView) view.findViewById(R.id.tvHoleNumber);
-//        mTvHoleNumber.setText("" + (mHoleNumber + 1));
-
-        tvPrev = (TextView) view_container.findViewById(R.id.ivBack2);
-        tvPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mHoleNumber2 != 0) {
-                    mHoleNumber2--;
-//                    mTvHoleNumber.setText("" + (mHoleNumber + 1));
-                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0, mItems2.get(mHoleNumber2).getCompetitors(), mHoleNumber2);
-                    lvCompetitors2.setAdapter(mAdapter2);
-                    lvCompetitors2.setFocusable(true);
-                    if(mHoleNumber2 == 0){
-                        tvPrev.setVisibility(View.INVISIBLE);
-                    }
-                    tvNext.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        tvNext = (TextView) view_container.findViewById(R.id.ivForward2);
-        tvNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //CHANGE TO HOW MANY BET SETTINGS THERE ARE
-                if(mHoleNumber2 < Integer.valueOf(partyInformation.getHoles()) - 1) {
-                    mHoleNumber2++;
-                    if(mHoleNumber2 >= mItems2.size())
-                        //TODO
-                        mItems2.add(new HoleRecord("" + mHoleNumber, mGroupMembers, null));
-//                    mTvHoleNumber.setText("" + (mHoleNumber + 1));
-                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0, mItems2.get(mHoleNumber2).getCompetitors(), mHoleNumber2);
-                    lvCompetitors2.setAdapter(mAdapter2);
-                    lvCompetitors2.setFocusable(true);
-
-                    if(mHoleNumber2 == Integer.valueOf(partyInformation.getHoles()) - 1){
-                        tvNext.setVisibility(View.INVISIBLE);
-                    }
-                    tvPrev.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        //---------------------------------------------------------
         GetPartyPlayScoresList init = new GetPartyPlayScoresList();
         init.execute();
 
@@ -534,6 +449,9 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+
+            mItems = new ArrayList<HoleRecord>();
+
             if(pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
@@ -541,7 +459,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
                 try {
                     final JSONObject info = new JSONObject(retVal);
 
-                    //TEST DATAS
                     mGroupMembers = new ArrayList<Competitor>();
 
                     for(int i = 0 ; i < info.getJSONArray("members").length(); i++) {
@@ -551,24 +468,145 @@ public class ScoreRegistrationFragment extends BaseFragment{
                                 , "0"
                                 , new ArrayList<Integer>()));
                     }
-//                    dummy_one = new ArrayList<Competitor>();
-//                    dummy_one.add(new Competitor("Oscar", "0", "0", new ArrayList<Integer>()));
-//                    dummy_one.add(new Competitor("Mike", "0", "0", new ArrayList<Integer>()));
 
                     mItems.add(new HoleRecord(info.getString("id"), mGroupMembers, null));
-                    // -----------
                     mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
                     lvCompetitors.setAdapter(mAdapter);
                     lvCompetitors.setFocusable(true);
 
-                    //TEST DATAS
-//                    dummy_two = new ArrayList<Competitor>();
-//                    dummy_two.add(new Competitor("Oscar", "0", "0", new ArrayList<Integer>()));
-//                    dummy_two.add(new Competitor("Mike", "0", "0", new ArrayList<Integer>()));
+                    //ACTIVATE BUTTONS -------------------------------------------------------------
 
-                    mItems2.add(new HoleRecord(info.getString("id"), mGroupMembers, null));
-                    // -----------
-                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0, mItems2.get(mHoleNumber2).getCompetitors(), mHoleNumber2);
+                    mBtnBack = (TextView) view_container.findViewById(R.id.ivBack);
+                    mBtnBack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(mHoleNumber >= 0) {
+                                mHoleNumber--;
+                                mTvHoleNumber.setText("" + (mHoleNumber + 1));
+                                mAdapter = new ScoreRegistrationAdapter(getActivity(), 0,
+                                        mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
+                                lvCompetitors.setAdapter(mAdapter);
+                                lvCompetitors.setFocusable(true);
+                                if(mHoleNumber == 0){
+                                    mBtnBack.setVisibility(View.INVISIBLE);
+                                }
+                                mBtnForward.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
+
+                    mBtnForward = (TextView) view_container.findViewById(R.id.ivForward);
+                    mBtnForward.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //CAN'T GO OVER HOW MANY HOLES
+                            if(mHoleNumber < Integer.valueOf(partyInformation.getHoles()) - 1) {
+                                mHoleNumber++;
+                                if(mHoleNumber >= mItems.size())
+                                    //TODO
+                                    mItems.add(new HoleRecord("" + mHoleNumber, mGroupMembers, null));
+                                mTvHoleNumber.setText("" + (mHoleNumber + 1));
+                                mAdapter = new ScoreRegistrationAdapter(getActivity(), 0,
+                                        mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
+                                lvCompetitors.setAdapter(mAdapter);
+                                lvCompetitors.setFocusable(true);
+
+                                if(mHoleNumber == Integer.valueOf(partyInformation.getHoles()) - 1){
+                                    mBtnForward.setVisibility(View.INVISIBLE);
+                                }
+                                mBtnBack.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
+
+                    //------------------------------------------------------------------------------
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private class GetBetsList extends AsyncTask<String, String, String> {
+
+        public GetBetsList() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage("Getting Bets");
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/bet-registration/bets/"+partyInformation.getId()+"?access_token="+token.toString());
+            try {
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            mItems2 = new ArrayList<HoleRecord>();
+            mBetNumber = 0;
+
+            if(pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+            if(success) {
+                try {
+                    final JSONObject info = new JSONObject(retVal);
+
+                    mBetSettings = new ArrayList<BetSetting>();
+
+                    JSONArray bets = info.getJSONObject("course").getJSONArray("hole_items").getJSONObject(mHoleNumber).getJSONArray("bets");
+                    for(int i = 0 ; i < bets.length(); i++) {
+                        JSONObject obj = bets.getJSONObject(i);
+
+                        //TODO INSERT BET SETTING HERE
+                        mBetSettings.add(new BetSetting(obj.getString("id"),
+                                obj.getString("amount"),
+                                obj.getJSONObject("bet_type").getString("name"),
+                                obj.getJSONObject("bet_type").getString("description"), false));
+                    }
+
+                    mItems2.add(new HoleRecord(info.getString("id"), mGroupMembers, mBetSettings));
+                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0,
+                            mItems2.get(mBetNumber).getCompetitors(), mBetNumber);
                     lvCompetitors2.setAdapter(mAdapter2);
                     lvCompetitors2.setFocusable(true);
 
@@ -586,7 +624,61 @@ public class ScoreRegistrationFragment extends BaseFragment{
                         }
                     });
 
+                    if(mBetSettings.size() != 0) {
+                        tvBetType.setText(mBetSettings.get(0).getName());
 
+                        //ACTIVATE BUTTONS FOR NEXT AND PREV -------------------------------------------
+
+                        tvPrev = (TextView) view_container.findViewById(R.id.ivBack2);
+                        tvPrev.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (mBetNumber != 0) {
+                                    mBetNumber--;
+                                    tvBetType.setText(mBetSettings.get(mBetNumber).getName());
+                                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0,
+                                            mItems2.get(mBetNumber).getCompetitors(), mBetNumber);
+                                    lvCompetitors2.setAdapter(mAdapter2);
+                                    lvCompetitors2.setFocusable(true);
+                                    if (mBetNumber == 0) {
+                                        tvPrev.setVisibility(View.INVISIBLE);
+                                    }
+                                    tvNext.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
+                        tvPrev.setVisibility(TextView.INVISIBLE);
+
+                        tvNext = (TextView) view_container.findViewById(R.id.ivForward2);
+                        tvNext.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //CHANGE TO HOW MANY BET SETTINGS THERE ARE
+                                if (mBetNumber < mBetSettings.size() - 1) {
+                                    mBetNumber++;
+                                    tvBetType.setText(mBetSettings.get(mBetNumber).getName());
+                                    //TODO
+                                    if (mBetNumber >= mItems2.size())
+                                        mItems2.add(new HoleRecord("" + mHoleNumber, mGroupMembers, mBetSettings));
+
+                                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0,
+                                            mItems2.get(mBetNumber).getCompetitors(), mBetNumber);
+                                    lvCompetitors2.setAdapter(mAdapter2);
+                                    lvCompetitors2.setFocusable(true);
+
+                                    if (mBetNumber == mBetSettings.size() - 1) {
+                                        tvNext.setVisibility(View.INVISIBLE);
+                                    }
+                                    tvPrev.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
+
+                        container.setVisibility(View.VISIBLE);
+                        //------------------------------------------------------------------------------
+                    }else{
+                        Toast.makeText(getActivity(), "There are no bets set for this hole", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

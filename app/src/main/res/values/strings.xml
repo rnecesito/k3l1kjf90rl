@@ -111,8 +111,6 @@
     <string name="jap_loading_competition_groups">Loading competition groups…</string>
     <string name="jap_loading_scores">Loading scores…</string>
 
-
-
     <!--String Values-->
     <!--<string name="app_name">スマート　ゴルフ　マネージャー</string>-->
     <!--<string name="action_settings">Settings</string>-->
@@ -221,7 +219,6 @@
     <!--<string name="jap_loading_competition_groups">コンペグループを取得中...</string>-->
     <!--<string name="jap_loading_scores">スコアを取得中</string>-->
 
-
     <string name="not_entered">Not Entered</string>
     <string name="confirming">Confirming</string>
     <string name="view_competition">View Competition</string>
@@ -240,8 +237,6 @@
     <string name="information_loaded">Information Loaded</string>
     <string name="enter_course_name">Enter Course Name</string>
     <string name="sure">Sure</string>
-
-
 
     <string name="dummy_text_history_date">MM/DD/2017</string>
     <string name="dummy_text_history_course_name">Golf course name</string>
