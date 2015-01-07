@@ -206,6 +206,7 @@ public class PartyPlayScoringFragment extends BaseFragment{
             }
         }
     }
+
     @OnClick(R.id.menu_button)
     public void showMenu() {
         LayoutInflater inflater = LayoutInflater.from(getActivity());

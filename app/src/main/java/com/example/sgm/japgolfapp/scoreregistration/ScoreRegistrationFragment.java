@@ -29,17 +29,22 @@ import com.example.sgm.japgolfapp.models.BetSetting;
 import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.models.HoleRecord;
 import com.example.sgm.japgolfapp.models.Party;
+import com.example.sgm.japgolfapp.scoreregistration.adapters.BetRegistrationAdapter;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.ScoreRegistrationAdapter;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 import com.example.sgm.japgolfapp.settings.NewBetSettingFragment;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +57,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.OnClick;
 
@@ -69,7 +75,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
     //FOR BET REGISTRATION
     private ListView lvCompetitors2;
     private ArrayList<HoleRecord> mItems2;
-    private ScoreRegistrationAdapter mAdapter2;
+    private BetRegistrationAdapter mAdapter2;
     private Integer mBetNumber;
     private TextView tvPrev;
     private TextView tvNext;
@@ -353,8 +359,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
             }
         });
 
-
-
         mHoleNumber = 0;
         mTvHoleNumber = (TextView) view.findViewById(R.id.tvHoleNumber);
         mTvHoleNumber.setText("" + (mHoleNumber + 1));
@@ -475,6 +479,20 @@ public class ScoreRegistrationFragment extends BaseFragment{
                     lvCompetitors.setFocusable(true);
 
                     //ACTIVATE BUTTONS -------------------------------------------------------------
+
+                    TextView toBetSettings = (TextView) view_container.findViewById(R.id.textView17);
+                    toBetSettings.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            NewBetSettingFragment targetFragment = new NewBetSettingFragment();
+                            try {
+                                targetFragment.setPartyId(info.getString("id"));
+                            }catch (Exception e){
+
+                            }
+                            showFragmentAndAddToBackStack(targetFragment);
+                        }
+                    });
 
                     mBtnBack = (TextView) view_container.findViewById(R.id.ivBack);
                     mBtnBack.setOnClickListener(new View.OnClickListener() {
@@ -605,24 +623,10 @@ public class ScoreRegistrationFragment extends BaseFragment{
                     }
 
                     mItems2.add(new HoleRecord(info.getString("id"), mGroupMembers, mBetSettings));
-                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0,
+                    mAdapter2 = new BetRegistrationAdapter(getActivity(), 0,
                             mItems2.get(mBetNumber).getCompetitors(), mBetNumber);
                     lvCompetitors2.setAdapter(mAdapter2);
                     lvCompetitors2.setFocusable(true);
-
-                    TextView toBetSettings = (TextView) view_container.findViewById(R.id.textView17);
-                    toBetSettings.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            NewBetSettingFragment targetFragment = new NewBetSettingFragment();
-                            try {
-                                targetFragment.setPartyId(info.getString("id"));
-                            }catch (Exception e){
-
-                            }
-                            showFragmentAndAddToBackStack(targetFragment);
-                        }
-                    });
 
                     if(mBetSettings.size() != 0) {
                         tvBetType.setText(mBetSettings.get(0).getName());
@@ -636,7 +640,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
                                 if (mBetNumber != 0) {
                                     mBetNumber--;
                                     tvBetType.setText(mBetSettings.get(mBetNumber).getName());
-                                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0,
+                                    mAdapter2 = new BetRegistrationAdapter(getActivity(), 0,
                                             mItems2.get(mBetNumber).getCompetitors(), mBetNumber);
                                     lvCompetitors2.setAdapter(mAdapter2);
                                     lvCompetitors2.setFocusable(true);
@@ -661,7 +665,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
                                     if (mBetNumber >= mItems2.size())
                                         mItems2.add(new HoleRecord("" + mHoleNumber, mGroupMembers, mBetSettings));
 
-                                    mAdapter2 = new ScoreRegistrationAdapter(getActivity(), 0,
+                                    mAdapter2 = new BetRegistrationAdapter(getActivity(), 0,
                                             mItems2.get(mBetNumber).getCompetitors(), mBetNumber);
                                     lvCompetitors2.setAdapter(mAdapter2);
                                     lvCompetitors2.setFocusable(true);
@@ -686,9 +690,155 @@ public class ScoreRegistrationFragment extends BaseFragment{
         }
     }
 
+    //TODO
+    private class PlaceScores extends AsyncTask<String, String, String> {
 
+        public PlaceScores() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage("Saving Bets");
+            pdialog.show();
+        }
 
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/bet-registration/register/");// + mPartyId);
+            try {
 
+                List<NameValuePair> json = new ArrayList<NameValuePair>();
+                //TODO
+//                json.add(new BasicNameValuePair("hole_id", mHoleId));
+//                for(int i = 0; i < mChoosen.size(); i++) {
+//                    json.add(new BasicNameValuePair("bets["+ i +"][bet_type_id]", mChoosen.get(i).getId()));
+//                    json.add(new BasicNameValuePair("bets["+ i +"][amount]", mChoosen.get(i).getId()));
+//                }
+                json.add(new BasicNameValuePair("access_token", token));
 
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+//                httppost.setHeader("Authorization", text.toString());
+                httppost.setEntity(new UrlEncodedFormEntity(json));
+
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+            getActivity().onBackPressed();
+        }
+    }
+
+    //TODO
+    private class PlaceBetScores extends AsyncTask<String, String, String> {
+
+        public PlaceBetScores() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage("Saving Bets");
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/bet-registration/register/");// + mPartyId);
+            try {
+
+                List<NameValuePair> json = new ArrayList<NameValuePair>();
+                //TODO
+//                json.add(new BasicNameValuePair("hole_id", mHoleId));
+//                for(int i = 0; i < mChoosen.size(); i++) {
+//                    json.add(new BasicNameValuePair("bets["+ i +"][bet_type_id]", mChoosen.get(i).getId()));
+//                    json.add(new BasicNameValuePair("bets["+ i +"][amount]", mChoosen.get(i).getId()));
+//                }
+                json.add(new BasicNameValuePair("access_token", token));
+
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+//                httppost.setHeader("Authorization", text.toString());
+                httppost.setEntity(new UrlEncodedFormEntity(json));
+
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+            getActivity().onBackPressed();
+        }
+    }
 }

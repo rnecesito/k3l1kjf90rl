@@ -22,10 +22,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="17dp"
-            android:background="@drawable/square_title"
             android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="15dp" />
+            android:textSize="20dp" />
 
         <include
             android:layout_marginTop="10dp"

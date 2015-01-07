@@ -33,11 +33,15 @@ import com.example.sgm.japgolfapp.settings.adapter.BetChooserAdapter;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,29 +53,29 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.OnClick;
 
 
 public class BetSettingChooserFragment extends BaseFragment{
 
-    private View view_container;
     private ArrayList<BetSetting> mItems;
+    private ArrayList<BetSetting> mInitialItems;
     private BetChooserAdapter adapter;
     private ListView lvBetSettings;
     private TextView tvReturn;
-    private Integer mItemNumber;
 
-    private boolean success = false;
-    private ProgressDialog pdialog;
     private String bettype_json_string;
 
-//    private final Integer MAXSETTINGS = 3;
     public static Integer STATICsettingsCount;
+
+    ArrayList<BetSetting> mChoosen;
+
     public BetSettingChooserFragment(){}
 
-    boolean shown = false;
 
     @OnClick(R.id.menu_button)
     public void showMenu() {
@@ -304,11 +308,127 @@ public class BetSettingChooserFragment extends BaseFragment{
 
     public void setItems(ArrayList<BetSetting> competitor){
         mItems = competitor;
+        mInitialItems = competitor;
     }
 
-    public void setItemNumber(Integer i){
-        this.mItemNumber = i;
+    private String mPartyId;
+    public void setPartyId(String partyId){
+        mPartyId = partyId;
     }
+
+    private String mHoleId;
+    public void setHoleId(String id){
+        mHoleId = id;
+    }
+
+    View view_container;
+    boolean shown = false;
+    private ProgressDialog pdialog;
+    private boolean success = false;
+    String retVal;
+
+    private String readtoken() {
+        /** Getting Cache Directory */
+        File cDir = getActivity().getCacheDir();
+
+        /** Getting a reference to temporary file, if created earlier */
+        File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
+
+        String strLine="";
+        StringBuilder text = new StringBuilder();
+
+        /** Reading contents of the temporary file, if already exists */
+        try {
+            FileReader fReader = new FileReader(tempFile);
+            BufferedReader bReader = new BufferedReader(fReader);
+
+            /** Reading the contents of the file , line by line */
+            while( (strLine=bReader.readLine()) != null  ){
+                text.append(strLine);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return text.toString();
+    }
+
+    private class PlaceBetsList extends AsyncTask<String, String, String> {
+
+        public PlaceBetsList() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage("Saving Bets");
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/bet-registration/register/" + mPartyId);
+            try {
+
+                List<NameValuePair> json = new ArrayList<NameValuePair>();
+                //TODO
+                json.add(new BasicNameValuePair("hole_id", mHoleId));
+                for(int i = 0; i < mChoosen.size(); i++) {
+                    json.add(new BasicNameValuePair("bets["+ i +"][bet_type_id]", mChoosen.get(i).getId()));
+                    json.add(new BasicNameValuePair("bets["+ i +"][amount]", mChoosen.get(i).getId()));
+                }
+                json.add(new BasicNameValuePair("access_token", token));
+
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+//                httppost.setHeader("Authorization", text.toString());
+                httppost.setEntity(new UrlEncodedFormEntity(json));
+
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+            getActivity().onBackPressed();
+        }
+    }
+
 
     private class InitLists extends AsyncTask<String, String, String> {
         public InitLists() {
@@ -387,8 +507,17 @@ public class BetSettingChooserFragment extends BaseFragment{
                         JSONObject row = null;
                         try {
                             row = bets_array.getJSONObject(i);
-                            mItems.add(new BetSetting(row.getString("name"), row.getString("description"), false));
-//                            bets_list.add(new Bets(Integer.parseInt(row.getString("id")), row.getString("description"), row.getString("name")));
+                            BetSetting addThis = new BetSetting(row.getString("id"), "0" ,row.getString("name"), row.getString("description"), false);
+                            Boolean willAddThis = true;
+                            for(int a  = 0; a < mInitialItems.size(); a++){
+                                if(addThis.getName().equals(mInitialItems.get(a).getName())) {
+                                    willAddThis = false;
+                                }
+                            }
+                            if(willAddThis){
+                                mItems.add(addThis);
+                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -396,36 +525,7 @@ public class BetSettingChooserFragment extends BaseFragment{
                     lvBetSettings = (ListView) view_container.findViewById(R.id.lvBets);
                     adapter = new BetChooserAdapter(getActivity(), 0, mItems);
                     lvBetSettings.setAdapter(adapter);
-//                    lvBetSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            if (lvBetSettings.getChildAt(position) != null) {
-//                                CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
-//                    /*TextView helpTv = ((TextView)lvBetSettings.getChildAt(position).findViewById(R.id.tvHelp));*/
-//                                if (cb.isChecked()) {
-//                                    mItems.get(position).setIsChosen(false);
-//                                    adapter.notifyDataSetChanged();
-//                                    settingsCount--;
-//                                }
-//                                else { //do something else}
-//                                    if(settingsCount < MAXSETTINGS) {
-//                                        NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
-//                                        mItems.get(position).setIsChosen(true);
-//                                        adapter.notifyDataSetChanged();
-//                                        settingsCount++;
-//                                    }else{
-//                                        Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                        /*helpTv.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                              new CustomDialogClass(getActivity());
-//                            }
-//                        });*/
-//                            }
-//                        }
-//                    });
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -448,87 +548,30 @@ public class BetSettingChooserFragment extends BaseFragment{
         super.onViewCreated(view, savedInstanceState);
         view_container = view;
         new InitLists().execute();
-        STATICsettingsCount = 0;
+        STATICsettingsCount = mInitialItems.size();
         tvReturn = (TextView) view_container.findViewById(R.id.tvSaveReturn);
         tvReturn.setText("Return");
         tvReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //SAVE ALL CHOOSEN BET SETTINGS TO HOLE RECORD
-                getActivity().onBackPressed();
+                mChoosen = new ArrayList<BetSetting>();
+
+                for(int i = 0; i < mItems.size(); i++){
+                    if(mItems.get(i).isChosen()){
+                        mChoosen.add(mItems.get(i));
+                    }
+                }
+                PlaceBetsList send = new PlaceBetsList();
+                send.execute();
+//                Toast.makeText(getActivity(), "" + mChoosen.get(0).getId(), Toast.LENGTH_LONG).show();
+//                getActivity().onBackPressed();
             }
         });
-
-        //TEST DATAS -----------------------
-//        mItems.add(new BetSetting("aaa", "aaa help",false));
-//        mItems.add(new BetSetting("bbb", "bbb help",false));
-//        mItems.add(new BetSetting("ccc", "ccc help",false));
-//        mItems.add(new BetSetting("ddd", "ddd help",false));
-//        mItems.add(new BetSetting("eee", "eee help",false));
-//        mItems.add(new BetSetting("fff", "fff help",false));
-//        mItems.add(new BetSetting("ggg", "ggg help",false));
-//        mItems.add(new BetSetting("hhh", "hhh help",false));
-        // ---------------------------------
-
 
         lvBetSettings = (ListView) view.findViewById(R.id.lvBets);
         adapter = new BetChooserAdapter(getActivity(), 0, mItems);
         lvBetSettings.setAdapter(adapter);
-//        lvBetSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    if (lvBetSettings.getChildAt(position) != null) {
-//                    CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
-//                    /*TextView helpTv = ((TextView)lvBetSettings.getChildAt(position).findViewById(R.id.tvHelp));*/
-//                    if (cb.isChecked()) {
-//                        mItems.get(position).setIsChosen(false);
-//                        adapter.notifyDataSetChanged();
-//                        settingsCount--;
-//                    }
-//                    else { //do something else}
-//                        if(settingsCount < MAXSETTINGS) {
-//                            NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
-//                            mItems.get(position).setIsChosen(true);
-//                            adapter.notifyDataSetChanged();
-//                            settingsCount++;
-//                        }else{
-//                            Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                }
-//
-//
-//            }
-//        });
-
-//        lvBetSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    if (lvBetSettings.getChildAt(position) != null) {
-//                    CheckBox cb = ((CheckBox) lvBetSettings.getChildAt(position).findViewById(R.id.cbBetCheck));
-//                    /*TextView helpTv = ((TextView)lvBetSettings.getChildAt(position).findViewById(R.id.tvHelp));*/
-//                    if (cb.isChecked()) {
-//                        mItems.get(position).setIsChosen(false);
-//                        adapter.notifyDataSetChanged();
-//                        settingsCount--;
-//                    }
-//                    else { //do something else}
-//                        if(settingsCount < MAXSETTINGS) {
-//                            NewBetSettingFragment.mItems.get(mItemNumber).getBetSettings().add(mItems.get(position));
-//                            mItems.get(position).setIsChosen(true);
-//                            adapter.notifyDataSetChanged();
-//                            settingsCount++;
-//                        }else{
-//                            Toast.makeText(getActivity(), "Cannot Add More than 3 Settings", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                }
-//
-//
-//            }
-//        });
 
     }
 

@@ -417,13 +417,13 @@ public class NewBetSettingFragment extends BaseFragment{
                         JSONArray jsonHoleBetSettings = hole.getJSONObject(i).getJSONArray("bets");
                         for(int a = 0 ; a < jsonHoleBetSettings.length() ; a++){
                             JSONObject obj = jsonHoleBetSettings.getJSONObject(a);
-                            holeBetSettings.add(new BetSetting(obj.getString("id")
+                            holeBetSettings.add(new BetSetting(obj.getString("bet_type_id")
                                     ,obj.getString("amount")
                                     ,obj.getJSONObject("bet_type").getString("name")
                                     ,obj.getJSONObject("bet_type").getString("description")
                                     ,true ));
                         }
-                        HoleRecord newHoleRecord = new HoleRecord(hole.getJSONObject(i).getString("hole_number"), null, holeBetSettings);
+                        HoleRecord newHoleRecord = new HoleRecord(hole.getJSONObject(i).getString("id"), hole.getJSONObject(i).getString("hole_number"), null, holeBetSettings);
                         mItems.add(newHoleRecord);
                     }
 
@@ -437,7 +437,8 @@ public class NewBetSettingFragment extends BaseFragment{
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             BetSettingChooserFragment targetFragment = new BetSettingChooserFragment();
                             targetFragment.setItems(mItems.get(i).getBetSettings());
-                            targetFragment.setItemNumber(i);
+                            targetFragment.setPartyId(partyId);
+                            targetFragment.setHoleId(mItems.get(i).getId());
                             showFragmentAndAddToBackStack(targetFragment);
                         }
                     });

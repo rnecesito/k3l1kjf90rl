@@ -20,10 +20,9 @@
             android:text="@string/text_bet_setting"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="17dp"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:background="@drawable/square_title"
             android:layout_height="60dp" />
 
         <TextView

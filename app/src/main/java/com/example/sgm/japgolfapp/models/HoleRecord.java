@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class HoleRecord {
 
+    private String mId;
     private String mName;
     private ArrayList<Competitor> mCompetitors;
     private ArrayList<BetSetting> mBetSettings;
@@ -15,6 +16,18 @@ public class HoleRecord {
         mCompetitors = competitors;
         mBetSettings = betSettings;
     }
+
+    public HoleRecord( String id, String name, ArrayList<Competitor> competitors, ArrayList<BetSetting> betSettings){
+        mId = id;
+        mName = name;
+        mCompetitors = competitors;
+        mBetSettings = betSettings;
+    }
+
+
+    public String getId(){ return mId; }
+
+    public void setId(String id) { this.mId = id; }
 	
 	public String getName() {
         return mName;
