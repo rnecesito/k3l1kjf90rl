@@ -23,15 +23,25 @@ public class MainActivity extends Activity {
                     "com.golf.app", Context.MODE_PRIVATE);
 
             String hasLoggedIn = "com.golf.app.hasloggedin";
+            String firstTime = "com.golf.app.firstTimeCheck";
 
             Boolean b = prefs.getBoolean(hasLoggedIn, false);
+            Boolean b2 = prefs.getBoolean(firstTime, false);
 
-            if(b) {
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                        .add(R.id.container, new MainMenuFragment())
-                        .commit();
-            }else{
+            if (b2) {
+                if(b) {
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                            .add(R.id.container, new MainMenuFragment())
+                            .commit();
+                }else{
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                            .add(R.id.container, new IntroScreenFragment())
+                            .commit();
+                }
+            } else {
+                prefs.edit().putBoolean(firstTime, true).apply();
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                         .add(R.id.container, new IntroScreenFragment())

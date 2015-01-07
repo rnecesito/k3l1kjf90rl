@@ -88,7 +88,7 @@
         <Button
             android:layout_width="120dp"
             android:layout_height="60dp"
-            android:text="@string/text_save"
+            android:text="@string/title_login"
             android:id="@+id/button_login"
             android:enabled="true"
             android:textAllCaps="false"

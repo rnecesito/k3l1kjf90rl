@@ -141,10 +141,10 @@
     <!--<string name="jap_updating_profile">プロフィール更新中...</string>-->
     <!--<string name="jap_profile_updated">更新完了しました。</string>-->
     <!--<string name="jap_profile_update_failed">更新できませんでした。再試行してください。</string>-->
-    <!--<string name="jap_loading_courses_players">ゴルフ場とプレイヤー情報を取得中...</string>-->
+    <!--<string name="jap_loading_courses_players">確認中です。</string>-->
     <!--<string name="jap_loading_complete">取得完了しました。</string>-->
     <!--<string name="jap_something_wrong">予期せぬ状況が発生しました。再試行してください。</string>-->
-    <!--<string name="jap_reg_success">登録完了しました。</string>-->
+    <!--<string name="jap_reg_success">登録しました。</string>-->
     <!--<string name="jap_reg_failed">登録できませんでした。再試行してください。</string>-->
     <!--<string name="jap_registering">登録中...</string>-->
     <!--<string name="jap_enter_email">メールアドレスを入力してください。</string>-->
@@ -214,9 +214,9 @@
     <!--<string name="jap_competition">コンペ名</string>-->
     <!--<string name="jap_edit_group">グループの編集</string>-->
     <!--<string name="jap_bet_type">握り</string>-->
-    <!--<string name="jap_loading_parties">パーティー情報を取得中...</string>-->
-    <!--<string name="jap_loading_competition_info">コンペ情報を取得中...</string>-->
-    <!--<string name="jap_loading_competition_groups">コンペグループを取得中...</string>-->
+    <!--<string name="jap_loading_parties">確認中です。</string>-->
+    <!--<string name="jap_loading_competition_info">確認中です。</string>-->
+    <!--<string name="jap_loading_competition_groups">確認中です。</string>-->
     <!--<string name="jap_loading_scores">スコアを取得中</string>-->
 
     <string name="not_entered">Not Entered</string>
