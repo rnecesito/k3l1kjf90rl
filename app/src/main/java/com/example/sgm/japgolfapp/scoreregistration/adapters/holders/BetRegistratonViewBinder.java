@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.Competitor;
+import com.example.sgm.japgolfapp.models.CompetitorCompact;
 
 
 public class BetRegistratonViewBinder {
@@ -37,7 +38,7 @@ public class BetRegistratonViewBinder {
 
 	//
 	public static void bindCompetitorScoreInfo(final CompetitorScoreHolder holder,
-			final Competitor competitor) {
+			final CompetitorCompact competitor) {
 
 			if (competitor != null) {
 
@@ -45,20 +46,16 @@ public class BetRegistratonViewBinder {
 					holder.tvCompetitor.setText(competitor.getName());
 				}
                 if (holder.tvScore != null) {
-                    if(holder.mHoleNumber >= competitor.getScores().size()){
-                        competitor.getScores().add(0);
-                    }
-
-                    holder.tvScore.setText("" + competitor.getScores().get(holder.mHoleNumber));
-
+                    holder.tvScore.setText("" + competitor.getScore());
                 }
 
                 if (holder.ivIncrease != null){
                     holder.ivIncrease.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            competitor.getScores().set(holder.mHoleNumber.intValue(), new Integer(competitor.getScores().get(holder.mHoleNumber).intValue() + 1));
-                            holder.tvScore.setText("" + competitor.getScores().get(holder.mHoleNumber));
+                            Integer i = new Integer(competitor.getScore()).intValue() + 1;
+                            competitor.setScore(i.toString());
+                            holder.tvScore.setText("" + competitor.getScore());
                         }
                     });
                 }
@@ -67,8 +64,9 @@ public class BetRegistratonViewBinder {
                     holder.ivDecrease.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            competitor.getScores().set(holder.mHoleNumber.intValue(), new Integer(competitor.getScores().get(holder.mHoleNumber).intValue() - 1));
-                            holder.tvScore.setText("" + competitor.getScores().get(holder.mHoleNumber));
+                            Integer i = new Integer(competitor.getScore()).intValue() - 1;
+                            competitor.setScore(i.toString());
+                            holder.tvScore.setText("" + competitor.getScore());
                         }
                     });
                 }

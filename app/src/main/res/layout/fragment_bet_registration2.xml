@@ -11,6 +11,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="90dp"
         android:background="#ff9b9b9b"
+        android:clickable="true"
         android:id="@+id/dd">
 
         <Button
@@ -58,6 +59,7 @@
             android:id="@+id/ivForward2"
             android:background="@drawable/arrow"
             android:gravity="center"
+            android:visibility="invisible"
             android:text="@string/text_next"
             android:layout_alignTop="@+id/ivBack2"
             android:layout_alignParentRight="true"
@@ -83,6 +85,7 @@
             android:background="@drawable/arrow_back"
             android:gravity="center"
             android:text="@string/prev"
+            android:visibility="invisible"
             android:layout_below="@+id/textView15"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

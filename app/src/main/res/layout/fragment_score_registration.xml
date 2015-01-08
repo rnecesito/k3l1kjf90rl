@@ -66,6 +66,7 @@
             android:layout_marginLeft="7dp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="14dp"
+            android:visibility="invisible"
             android:layout_toEndOf="@+id/tvHoleNumber"
             android:layout_toRightOf="@+id/tvHoleNumber"
             />
@@ -104,9 +105,12 @@
             android:id="@+id/textView17"
             android:layout_width="130dp"
             android:layout_height="30dp"
-            android:layout_alignEnd="@+id/ivBack"
-            android:layout_alignRight="@+id/ivBack"
-            android:layout_below="@+id/ivBack"
+
+            android:layout_alignLeft="@+id/tvHoleNumber"
+            android:layout_alignStart="@+id/tvHoleNumber"
+            android:layout_below="@+id/ivForward"
+
+
             android:background="@drawable/square_title"
             android:gravity="center"
             android:text="@string/text_bet_registration"
@@ -117,14 +121,16 @@
             android:id="@+id/tvBetRegistration"
             android:layout_width="100dp"
             android:layout_height="30dp"
-            android:layout_alignLeft="@+id/tvHoleNumber"
-            android:layout_alignStart="@+id/tvHoleNumber"
-            android:layout_below="@+id/ivForward"
+            android:layout_alignEnd="@+id/ivBack"
+            android:layout_alignRight="@+id/ivBack"
+            android:layout_below="@+id/ivBack"
             android:background="@drawable/square_title"
             android:gravity="center"
             android:text="@string/bet_setting_reference"
             android:textColor="@android:color/white"
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            android:layout_alignLeft="@+id/textView15"
+            android:layout_alignStart="@+id/textView15" />
 
         <ListView
             android:id="@+id/lvCompetitors"

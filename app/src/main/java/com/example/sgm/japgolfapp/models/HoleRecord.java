@@ -6,18 +6,18 @@ public class HoleRecord {
 
     private String mId;
     private String mName;
-    private ArrayList<Competitor> mCompetitors;
+    private ArrayList<CompetitorCompact> mCompetitors;
     private ArrayList<BetSetting> mBetSettings;
 
     public HoleRecord(){}
 
-    public HoleRecord(String name, ArrayList<Competitor> competitors, ArrayList<BetSetting> betSettings){
+    public HoleRecord(String name, ArrayList<CompetitorCompact> competitors, ArrayList<BetSetting> betSettings){
         mName = name;
         mCompetitors = competitors;
         mBetSettings = betSettings;
     }
 
-    public HoleRecord( String id, String name, ArrayList<Competitor> competitors, ArrayList<BetSetting> betSettings){
+    public HoleRecord( String id, String name, ArrayList<CompetitorCompact> competitors, ArrayList<BetSetting> betSettings){
         mId = id;
         mName = name;
         mCompetitors = competitors;
@@ -38,11 +38,11 @@ public class HoleRecord {
     }
 
 
-    public ArrayList<Competitor> getCompetitors(){
+    public ArrayList<CompetitorCompact> getCompetitors(){
         return mCompetitors;
     }
 
-    public void setCompetitors(ArrayList<Competitor> scores){
+    public void setCompetitors(ArrayList<CompetitorCompact> scores){
         this.mCompetitors = scores;
     }
 
