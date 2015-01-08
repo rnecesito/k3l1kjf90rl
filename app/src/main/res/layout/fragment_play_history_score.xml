@@ -23,7 +23,6 @@
             android:textSize="15sp"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:background="@drawable/square_title"
             android:layout_height="60dp" />
 
         <ListView
