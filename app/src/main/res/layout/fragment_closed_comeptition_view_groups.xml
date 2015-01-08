@@ -34,13 +34,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:focusable="false"
                 android:textColor="@android:color/black"
-                android:focusableInTouchMode="false"
-                android:text="Competitor 1"
                 android:background="@drawable/container_background_3"
                 android:textSize="14sp"
-                android:padding="5dp" />
+                android:padding="5dp"
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout

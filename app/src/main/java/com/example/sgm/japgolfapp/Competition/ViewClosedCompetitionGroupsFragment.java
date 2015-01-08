@@ -26,6 +26,11 @@ import com.example.sgm.japgolfapp.util.NetworkUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,6 +40,7 @@ import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnTextChanged;
 
 public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     private final String groupListQueue = "GroupListQueue";
@@ -46,7 +52,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     private String retVal = null;
     private ProgressDialog pdialog;
     private boolean success = false;
-    private List<CompetitionGroupModel> groupList, myGroupList;
+    private List<CompetitionGroupModel> groupList, tempGroupList, myGroupList;
     private GroupListAdapter adapter, myAdapter;
 
     @Override
@@ -57,6 +63,8 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
 
         myGroupList = new ArrayList<CompetitionGroupModel>();
         myAdapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, myGroupList);
+
+        tempGroupList = adapter.getGroupList();
     }
 
 
@@ -70,6 +78,24 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         ButterKnife.inject(this, view);
         initLayout();
 
+        File cDir = getContext().getCacheDir();
+        File tempFile = new File(cDir.getPath() + "/" + "competition_number.txt");
+        String strLine = "";
+        StringBuilder competition_number = new StringBuilder();
+        try {
+            FileReader fReader = new FileReader(tempFile);
+            BufferedReader bReader = new BufferedReader(fReader);
+            while ((strLine = bReader.readLine()) != null) {
+                competition_number.append(strLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (competition_number.toString().equals(' ')) {
+            checkBox.setChecked(false);
+        }
+
+
 
         return view;
     }
@@ -78,6 +104,24 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LoadAllGroups();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        final String TEMP_FILE_NAME = "competition_number.txt";
+        File tempFile;
+        File cDir = getActivity().getCacheDir();
+        tempFile = new File(cDir.getPath() + "/" + TEMP_FILE_NAME) ;
+        FileWriter writer=null;
+        try {
+            writer = new FileWriter(tempFile);
+            writer.write(" ");
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initLayout() {
@@ -245,4 +289,21 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         showFragmentAndAddToBackStack(group);
     }
 
+    @OnTextChanged(R.id.competition_name)
+    public void searchGroup(CharSequence text) {
+        if (!text.equals("")) {
+            for(int i=0 ;i< groupList.size();i++){
+                if(groupList.get(i).toString().toUpperCase().contains(text.toString().toUpperCase())){
+                    tempGroupList.add(groupList.get(i));
+
+                }
+            }
+            adapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, tempGroupList );
+            listView.setAdapter(adapter);
+
+        }else{
+            adapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, groupList);
+            listView.setAdapter(adapter);
+        }
+    }
 }

@@ -3,7 +3,6 @@ package com.example.sgm.japgolfapp.Competition.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +32,14 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> {
         super(context, resource, objects);
         this.context = context;
         this.groupList = objects;
+    }
+
+    public List<CompetitionGroupModel> getGroupList() {
+        return this.groupList;
+    }
+
+    public void setGroupList(List<CompetitionGroupModel> list) {
+        this.groupList = list;
     }
 
     @Override

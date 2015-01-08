@@ -32,6 +32,7 @@ public abstract class BaseFragment extends Fragment {
 
 			FragmentManager fragmentManager = getFragmentManager();
 			fragmentManager.beginTransaction()
+                    .remove(this)
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                     .replace(R.id.container, fragment)
 					.commit();

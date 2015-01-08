@@ -383,7 +383,7 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
 
         b.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-               // showFragmentAndAddToBackStack(new ViewOpenCompetitionGroupsFragment());
+               showFragment(new ViewClosedCompetitionGroupsFragment());
             }
         });
 	}
