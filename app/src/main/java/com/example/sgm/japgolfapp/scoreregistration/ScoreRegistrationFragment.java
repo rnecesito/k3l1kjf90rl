@@ -26,7 +26,6 @@ import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.models.BetSetting;
-import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.models.CompetitorCompact;
 import com.example.sgm.japgolfapp.models.HoleRecord;
 import com.example.sgm.japgolfapp.models.HoleRecordCompact;
@@ -365,6 +364,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         saveTv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new PlaceBetScoresForward().execute();
                 container.setVisibility(View.GONE);
             }
         });

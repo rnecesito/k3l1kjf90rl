@@ -12,6 +12,15 @@
         android:layout_marginRight="80dp"
         android:layout_marginBottom="90dp"
         android:background="@drawable/container_background">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="スコア管理だけではなく、握りの集計、パーティー内のスコア集計、順位、最大40名までのコンペ集計に順位計算も自動で行えます。
+もちろん、記録は履歴として残ります"
+            android:padding="50dp"
+            android:id="@+id/intro_text"
+            />
 
         <Button
             android:layout_width="230dp"
@@ -23,7 +32,8 @@
             android:background="@drawable/container_background_2"
             android:textColor="#ffffffff"
             android:textSize="22sp"
-            android:layout_centerVertical="true"
+            android:layout_below="@id/intro_text"
+            android:layout_marginTop="-10dp"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
