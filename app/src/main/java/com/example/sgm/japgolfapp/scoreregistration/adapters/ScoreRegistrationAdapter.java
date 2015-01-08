@@ -9,17 +9,18 @@ import android.widget.ArrayAdapter;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.Competitor;
+import com.example.sgm.japgolfapp.models.CompetitorCompact;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.holders.ScoreRegistratonViewBinder;
 
 import java.util.ArrayList;
 
-public class ScoreRegistrationAdapter extends ArrayAdapter<Competitor> {
+public class ScoreRegistrationAdapter extends ArrayAdapter<CompetitorCompact> {
 
 
-	private ArrayList<Competitor> mItems;
+	private ArrayList<CompetitorCompact> mItems;
     private Integer mHoleNumber;
 
-	public ScoreRegistrationAdapter(Activity activity, int resource, ArrayList<Competitor> items, Integer holeNumber) {
+	public ScoreRegistrationAdapter(Activity activity, int resource, ArrayList<CompetitorCompact> items, Integer holeNumber) {
 		super(activity, resource, items);
 		this.mItems = items;
         mHoleNumber = holeNumber;
@@ -31,7 +32,7 @@ public class ScoreRegistrationAdapter extends ArrayAdapter<Competitor> {
 	}
 
 	@Override
-	public Competitor getItem(int position) {
+	public CompetitorCompact getItem(int position) {
 		if (getCount() > 0 && position > -1 && position < getCount()) {
 			return mItems.get(position);
 		}
@@ -42,7 +43,7 @@ public class ScoreRegistrationAdapter extends ArrayAdapter<Competitor> {
 	public View getView(int position, View view, ViewGroup parent) {
         ScoreRegistratonViewBinder.CompetitorScoreHolder holder = new ScoreRegistratonViewBinder.CompetitorScoreHolder();
 
-        Competitor competitor = (Competitor) getItem(position);
+        CompetitorCompact competitor = (CompetitorCompact) getItem(position);
 
 		if (view == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext()

@@ -25,7 +25,9 @@ import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.models.Competitor;
+import com.example.sgm.japgolfapp.models.CompetitorCompact;
 import com.example.sgm.japgolfapp.models.HoleRecord;
+import com.example.sgm.japgolfapp.models.HoleRecordCompact;
 import com.example.sgm.japgolfapp.models.Party;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.ScoreRegistrationAdapter;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
@@ -56,7 +58,8 @@ import butterknife.OnClick;
 public class ScoreRegistrationCompetitionFragment extends BaseFragment{
 
     private ListView lvCompetitors;
-    private ArrayList<HoleRecord> mItems;
+    private ArrayList<HoleRecordCompact> mItems;
+    private ArrayList<CompetitorCompact> mGroupMembers;
 
     private ScoreRegistrationAdapter mAdapter;
 
@@ -310,11 +313,9 @@ public class ScoreRegistrationCompetitionFragment extends BaseFragment{
         });
     }
 
-    private ArrayList<Competitor> mGroupMembers;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_score_registration_competition, container, false);
     }
 
@@ -326,7 +327,7 @@ public class ScoreRegistrationCompetitionFragment extends BaseFragment{
         lvCompetitors = (ListView) view_container.findViewById(R.id.lvCompetitors);
         container = (FrameLayout)view_container.findViewById(R.id.bet_registration_container);
 
-        mItems = new ArrayList<HoleRecord>();
+        mItems = new ArrayList<HoleRecordCompact>();
 
         mHoleNumber = 0;
         mTvHoleNumber = (TextView) view.findViewById(R.id.tvHoleNumber);
@@ -336,10 +337,11 @@ public class ScoreRegistrationCompetitionFragment extends BaseFragment{
         mBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mHoleNumber <= 0) {
+                if(mHoleNumber >= 0) {
                     mHoleNumber--;
                     mTvHoleNumber.setText("" + (mHoleNumber + 1));
-                    mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
+                    mAdapter = new ScoreRegistrationAdapter(getActivity(), 0,
+                            mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
                     lvCompetitors.setAdapter(mAdapter);
                     lvCompetitors.setFocusable(true);
                     if(mHoleNumber == 0){
@@ -357,11 +359,9 @@ public class ScoreRegistrationCompetitionFragment extends BaseFragment{
                 //CAN'T GO OVER HOW MANY HOLES
                 if(mHoleNumber < Integer.valueOf(partyInformation.getHoles()) - 1) {
                     mHoleNumber++;
-                    if(mHoleNumber >= mItems.size())
-                        //TODO
-                        mItems.add(new HoleRecord("" + mHoleNumber, mGroupMembers, null));
                     mTvHoleNumber.setText("" + (mHoleNumber + 1));
-                    mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
+                    mAdapter = new ScoreRegistrationAdapter(getActivity(), 0,
+                            mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
                     lvCompetitors.setAdapter(mAdapter);
                     lvCompetitors.setFocusable(true);
 
@@ -469,19 +469,25 @@ public class ScoreRegistrationCompetitionFragment extends BaseFragment{
             }
             if(success) {
                 try {
-                    JSONArray info = new JSONArray(retVal);
-                    //TEST DATAS
-                    mGroupMembers = new ArrayList<Competitor>();
+                    final JSONObject info = new JSONObject(retVal);
 
-                    for(int i = 0 ; i < info.getJSONObject(mGroupPosition).getJSONArray("competitors").length(); i++) {
-                        JSONObject obj = info.getJSONObject(mGroupPosition).getJSONArray("competitors").getJSONObject(i);
-                        mGroupMembers.add(new Competitor(obj.getJSONObject("member").getString("firstname") + " " + obj.getJSONObject("member").getString("lastname")
-                                , "0"
-                                , "0"
-                                , new ArrayList<Integer>()));
+                    for(int a = 0 ; a < Integer.valueOf(info.getJSONObject("course").getString("holes")); a++){
+
+
+                        mGroupMembers = new ArrayList<CompetitorCompact>();
+
+                        for(int i = 0 ; i < info.getJSONArray("members").length(); i++) {
+                            JSONObject obj = info.getJSONArray("members").getJSONObject(i);
+                            if(a < obj.getJSONArray("scores").length()){
+                                mGroupMembers.add(new CompetitorCompact(obj.getString("id"), obj.getJSONObject("member").getString("firstname") + " " + obj.getJSONObject("member").getString("lastname")
+                                        , obj.getJSONArray("scores").getJSONObject(a).getString("score")));
+                            }else{
+                                mGroupMembers.add(new CompetitorCompact(obj.getString("id"), obj.getJSONObject("member").getString("firstname") + " " + obj.getJSONObject("member").getString("lastname")
+                                        , "0"));
+                            }
+                        }
+                        mItems.add(new HoleRecordCompact(info.getString("id"), info.getString("name"), mGroupMembers));
                     }
-
-                    mItems.add(new HoleRecord(info.getJSONObject(mGroupPosition).getString("id"), mGroupMembers, null));
                     // -----------
                     mAdapter = new ScoreRegistrationAdapter(getActivity(), 0, mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
                     lvCompetitors.setAdapter(mAdapter);
