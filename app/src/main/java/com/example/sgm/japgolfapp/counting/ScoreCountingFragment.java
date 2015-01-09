@@ -3,7 +3,6 @@ package com.example.sgm.japgolfapp.counting;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,7 +25,6 @@ import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
-import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 
 import org.apache.http.HttpResponse;
@@ -524,6 +522,11 @@ public class ScoreCountingFragment extends BaseFragment {
 
     @OnClick(R.id.return_btn)
     public void goBack() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(
+                "com.golf.app", Context.MODE_PRIVATE);
+
+        String hasLoggedIn = "com.golf.app.fromcounting";
+        prefs.edit().putBoolean(hasLoggedIn, true).apply();
         popBackStack();
     }
 

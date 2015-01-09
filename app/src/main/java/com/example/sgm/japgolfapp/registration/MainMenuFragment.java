@@ -120,7 +120,7 @@ public class MainMenuFragment extends BaseFragment {
                 final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
                 item.setTag("counting_sub_menu");
                 View tagged = view_container.findViewWithTag("counting_sub_menu");
-                if (tagged == null) {
+                if ((tagged == null)) {
                     rl.addView(item);
                 }
                 Button scoreCountingButton = (Button) item.findViewById(R.id.scoreCounting);
@@ -207,6 +207,14 @@ public class MainMenuFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         shown = false;
         view_container = view;
+        Button b1 = (Button) view.findViewById(R.id.menu_button);
+        final SharedPreferences prefs = getActivity().getSharedPreferences(
+                "com.golf.app", Context.MODE_PRIVATE);
+        final String hasLoggedIn = "com.golf.app.fromcounting";
+        final Boolean b = prefs.getBoolean(hasLoggedIn, false);
+        if (b) {
+            b1.performClick();
+        }
     }
 
     public void SlideToRight(View view) {

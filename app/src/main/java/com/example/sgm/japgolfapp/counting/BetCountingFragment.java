@@ -505,6 +505,11 @@ public class BetCountingFragment extends BaseFragment {
 
     @OnClick(R.id.return_btn)
     public void goBack() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(
+                "com.golf.app", Context.MODE_PRIVATE);
+
+        String hasLoggedIn = "com.golf.app.fromcounting";
+        prefs.edit().putBoolean(hasLoggedIn, true).apply();
         popBackStack();
     }
 
