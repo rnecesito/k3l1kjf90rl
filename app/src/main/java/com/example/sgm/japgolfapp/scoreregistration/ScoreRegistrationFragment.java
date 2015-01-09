@@ -25,10 +25,8 @@ import com.example.sgm.japgolfapp.counting.BetCountingFragment;
 import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
-import com.example.sgm.japgolfapp.models.BetRecordCompact;
 import com.example.sgm.japgolfapp.models.BetSetting;
 import com.example.sgm.japgolfapp.models.CompetitorCompact;
-import com.example.sgm.japgolfapp.models.HoleRecord;
 import com.example.sgm.japgolfapp.models.HoleRecordCompact;
 import com.example.sgm.japgolfapp.models.Party;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.BetRegistrationAdapter;
@@ -423,7 +421,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Members");
+            pdialog.setMessage(getResources().getString(R.string.jap_getting_members));
             pdialog.show();
         }
 
@@ -562,7 +560,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Saving Scores");
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
         }
 
@@ -638,7 +636,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Saving Scores");
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
         }
 
@@ -724,7 +722,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Saving Scores");
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
         }
 
@@ -811,7 +809,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Bets");
+            pdialog.setMessage(getResources().getString(R.string.jap_getting_bets));
             pdialog.show();
         }
 
@@ -913,7 +911,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Bet Scores");
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_scores));
             pdialog.show();
         }
 
@@ -1038,7 +1036,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Saving Bets");
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_bets));
             pdialog.show();
         }
 
@@ -1128,7 +1126,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Saving Bets");
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_bets));
             pdialog.show();
         }
 
