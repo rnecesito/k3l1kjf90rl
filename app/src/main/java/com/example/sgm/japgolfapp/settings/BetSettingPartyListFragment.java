@@ -120,7 +120,7 @@ public class BetSettingPartyListFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Groups");
+            pdialog.setMessage(getResources().getString(R.string.jap_getting_groups));
             pdialog.show();
         }
 
@@ -137,15 +137,11 @@ public class BetSettingPartyListFragment extends BaseFragment{
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
                     retVal = str;
                 }
             } catch (UnsupportedEncodingException e) {
@@ -335,20 +331,20 @@ public class BetSettingPartyListFragment extends BaseFragment{
         view_container = view;
         lvPartyPlayGroups = (ListView) view.findViewById(R.id.lvPartyPlayGroups);
         TextView registerTv = (TextView) view.findViewById(R.id.registerTv);
-        registerTv.setText("Party List");
+        registerTv.setText(getResources().getString(R.string.jap_party_list));
         TableRow tableRow = (TableRow) view
                 .findViewById(R.id.tr_generic_row);
         tableRow.setBackgroundColor(Color.LTGRAY);
 
         TextView tvName = (TextView) view
                 .findViewById(R.id.tv_generic_column_1);
-        tvName.setText("Name");
+        tvName.setText(getResources().getString(R.string.name));
         TextView tvDate = (TextView) view
                 .findViewById(R.id.tv_generic_column_2);
-        tvDate.setText("Date");
+        tvDate.setText(getResources().getString(R.string.date));
         TextView tvCourse = (TextView) view
                 .findViewById(R.id.tv_generic_column_3);
-        tvCourse.setText("Course");
+        tvCourse.setText(getResources().getString(R.string.jap_course));
 
         getPartyPlayGroupList init = new getPartyPlayGroupList();
         init.execute();

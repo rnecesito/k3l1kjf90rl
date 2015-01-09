@@ -113,13 +113,11 @@ public class CreateClosedCompetitionFragment extends Fragment {
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, "UTF-8");
-                    System.out.println("Success!");
                     courses_json = result_string;
                     success = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, "UTF-8");
-                    System.out.println("Failed!");
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -222,16 +220,11 @@ public class CreateClosedCompetitionFragment extends Fragment {
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
-                    System.out.println(new UrlEncodedFormEntity(json).toString());
                     retVal = str;
                 }
             } catch (UnsupportedEncodingException e) {

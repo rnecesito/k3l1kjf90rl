@@ -243,7 +243,7 @@ public class ClosedCompetitionEditFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                Toast.makeText(getActivity(), "Loading Complete.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }

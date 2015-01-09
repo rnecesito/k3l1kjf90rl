@@ -127,7 +127,7 @@ public class ClosedCompetitionGroupsFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Groups");
+            pdialog.setMessage(getResources().getString(R.string.jap_getting_groups));
             pdialog.show();
         }
 

@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import butterknife.OnClick;
+
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.counting.BetCountingFragment;
@@ -20,8 +20,9 @@ import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
-import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
+
+import butterknife.OnClick;
 
 
 public class MainMenuFragment extends BaseFragment {
@@ -206,72 +207,6 @@ public class MainMenuFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         shown = false;
         view_container = view;
-
-//        Button settingButton = (Button)view.findViewById(R.id.settingButton);
-//        settingButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showFragmentAndAddToBackStack(new MenuSettingsFragment());
-//            }
-//        });
-//        ImageButton iSettingButton = (ImageButton)view.findViewById(R.id.imageSettingButton);
-//        iSettingButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showFragmentAndAddToBackStack(new MenuSettingsFragment());
-//            }
-//        });
-//
-//        Button historyButton = (Button)view.findViewById(R.id.historyButton);
-//        historyButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showFragmentAndAddToBackStack(new PlayHistoryFragment());
-//            }
-//        });
-//
-//        ImageView iHButton = (ImageView)view.findViewById(R.id.imageHistoryButton);
-//        iHButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showFragmentAndAddToBackStack(new PlayHistoryFragment());
-//            }
-//        });
-//
-//        Button scoreRegistrationButton = (Button)view.findViewById(R.id.scoreRegistrationButton);
-//        scoreRegistrationButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
-//            }
-//        });
-//        ImageButton iSButton = (ImageButton)view.findViewById(R.id.imageScoreRegistrationButton);
-//        iSButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showFragmentAndAddToBackStack(new ScoreRegistrationFragment());
-//            }
-//        });
-//
-//        Button countingButton= (Button)view.findViewById(R.id.countingButton);
-//        countingButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                countingButton(view_container);
-////                showFragmentAndAddToBackStack(new MenuSettingsFragment());
-//            }
-//        });
-//
-//
-//        ImageButton iCButton = (ImageButton)view.findViewById(R.id.imageButton3);
-//        iCButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                countingButton(view_container);
-//            }
-//        });
-
-
     }
 
     public void SlideToRight(View view) {

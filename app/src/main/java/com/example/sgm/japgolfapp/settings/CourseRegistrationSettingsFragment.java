@@ -259,25 +259,25 @@ public class CourseRegistrationSettingsFragment extends BaseFragment {
         });
     }
 
-	@OnClick(id.createCoursesB)
-	public void createCourse() {
-		showFragmentAndAddToBackStack(new CreateCourseFragment());
-	}
-
-    @OnClick(id.imageSettingButton)
-    public void createCourse2() {
-        showFragmentAndAddToBackStack(new CreateCourseFragment());
-    }
-
-	@OnClick(id.viewCoursesB)
-	public void viewCourse() {
-        showFragmentAndAddToBackStack(new ViewCourseFragment());
-	}
-
-    @OnClick(id.imageButton2)
-    public void viewCourse2() {
-        showFragmentAndAddToBackStack(new ViewCourseFragment());
-    }
+//	@OnClick(id.createCoursesB)
+//	public void createCourse() {
+//		showFragmentAndAddToBackStack(new CreateCourseFragment());
+//	}
+//
+//    @OnClick(id.imageSettingButton)
+//    public void createCourse2() {
+//        showFragmentAndAddToBackStack(new CreateCourseFragment());
+//    }
+//
+//	@OnClick(id.viewCoursesB)
+//	public void viewCourse() {
+//        showFragmentAndAddToBackStack(new ViewCourseFragment());
+//	}
+//
+//    @OnClick(id.imageButton2)
+//    public void viewCourse2() {
+//        showFragmentAndAddToBackStack(new ViewCourseFragment());
+//    }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -294,5 +294,44 @@ public class CourseRegistrationSettingsFragment extends BaseFragment {
         RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.new_registration_main);
         final View item = inflater.inflate(R.layout.fragment_menu_course, rl, false);
         rl.addView(item);
+
+        Button b1 = (Button) view.findViewById(id.createCoursesB);
+        Button b2 = (Button) view.findViewById(id.viewCoursesB);
+        ImageButton ib1 = (ImageButton) view.findViewById(id.imageSettingButton);
+        ImageButton ib2 = (ImageButton) view.findViewById(id.imageButton2);
+
+        b1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new CreateCourseFragment());
+            }
+        });
+
+        b2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new ViewCourseFragment());
+            }
+        });
+
+        ib1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new CreateCourseFragment());
+            }
+        });
+
+        ib2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                showFragmentAndAddToBackStack(new ViewCourseFragment());
+            }
+        });
+
+
     }
 }

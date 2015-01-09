@@ -76,7 +76,7 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Loading competition info...");
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
             pdialog.show();
         }
 
@@ -170,13 +170,11 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_2 = EntityUtils.toByteArray(response.getEntity());
                     result2_2 = new String(result_2, "UTF-8");
-                    System.out.println("Success!");
                     comp_info_json = result2_2;
                     success = true;
                 }else {
                     result_2 = EntityUtils.toByteArray(response.getEntity());
                     result2_2 = new String(result_2, "UTF-8");
-                    System.out.println("Failed!");
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -326,16 +324,12 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
                     System.out.println("Failed!");
-                    System.out.println(str);
-                    System.out.println(new UrlEncodedFormEntity(json).toString());
                     retVal = str;
                 }
             } catch (UnsupportedEncodingException e) {

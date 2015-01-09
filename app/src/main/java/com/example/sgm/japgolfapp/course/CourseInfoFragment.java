@@ -121,15 +121,11 @@ public class CourseInfoFragment extends BaseFragment {
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     result2 = new String(result, "UTF-8");
-                    System.out.println(result2);
-                    System.out.println("Success!");
                     response2 = result2;
                     success = true;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     result2 = new String(result, "UTF-8");
-                    System.out.println(result2);
-                    System.out.println("Failed!");
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -207,7 +203,7 @@ public class CourseInfoFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Updating course...");
+            pdialog.setMessage(getResources().getString(R.string.jap_registering));
             pdialog.show();
 
             File cDir = getActivity().getCacheDir();
@@ -308,7 +304,7 @@ public class CourseInfoFragment extends BaseFragment {
                 pdialog.dismiss();
             }
             if(success) {
-                Toast.makeText(getContext(), "Course updated.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_success), Toast.LENGTH_SHORT).show();
                 showFragment(new ViewCourseFragment());
             } else {
                 Toast.makeText(getContext(), getResources().getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();

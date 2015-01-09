@@ -103,7 +103,7 @@ public class EditGroup extends BaseFragment {
         String urlString = Api.WEB_URL + "closed-competition";
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading Group Data...");
+        pDialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
         pDialog.show();
         Log.d(GolfApp.TAG, urlString);
 
@@ -199,7 +199,7 @@ public class EditGroup extends BaseFragment {
         String urlString = Api.WEB_URL + "closed-competition/" + cModel.getClosedCompetitionId() + "/group/" + cModel.getId();
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Updating group...");
+        pDialog.setMessage(getResources().getString(R.string.jap_updating_competition));
         pDialog.show();
 
         JSONObject requestObject = new JSONObject();
@@ -225,7 +225,7 @@ public class EditGroup extends BaseFragment {
 
 
                 pDialog.dismiss();
-                Toast.makeText(getActivity(), "Group Upated.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_competition_updated), Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
             }
         }, new Response.ErrorListener() {

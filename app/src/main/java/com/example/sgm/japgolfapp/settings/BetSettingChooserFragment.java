@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -28,7 +26,6 @@ import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.models.BetSetting;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
-import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 import com.example.sgm.japgolfapp.settings.adapter.BetChooserAdapter;
 
 import org.apache.http.HttpResponse;
@@ -53,7 +50,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -364,7 +360,7 @@ public class BetSettingChooserFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Saving Bets");
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_bets));
             pdialog.show();
         }
 
@@ -439,7 +435,7 @@ public class BetSettingChooserFragment extends BaseFragment{
         protected void onPreExecute() {
             super.onPreExecute();
 //            pdialog.setMessage(getResources().getString(R.string.);
-            pdialog.setMessage("Loading bets");
+            pdialog.setMessage(getResources().getString(R.string.jap_getting_bets));
             pdialog.show();
         }
 

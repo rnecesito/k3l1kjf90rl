@@ -101,15 +101,11 @@ public class ViewCourseFragment extends BaseFragment {
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     result2 = new String(result, "UTF-8");
-                    System.out.println(result2);
-                    System.out.println("Success!");
                     response2 = result2;
                     success = true;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     result2 = new String(result, "UTF-8");
-                    System.out.println(result2);
-                    System.out.println("Failed!");
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

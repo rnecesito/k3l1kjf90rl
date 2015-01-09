@@ -354,7 +354,7 @@ public class NewBetSettingFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Holes");
+            pdialog.setMessage(getResources().getString(R.string.jap_getting_holes));
             pdialog.show();
         }
 
@@ -371,15 +371,11 @@ public class NewBetSettingFragment extends BaseFragment{
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
                     retVal = str;
                 }
             } catch (UnsupportedEncodingException e) {

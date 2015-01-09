@@ -1,7 +1,6 @@
 package com.example.sgm.japgolfapp.Competition;
 
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -58,6 +56,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     private List<CompetitionGroupModel> groupList, tempGroupList, myGroupList;
     private GroupListAdapter adapter, myAdapter;//, newAdapter;
     View view_container;
+    boolean my_groups = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,43 +98,13 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
 
         return view;
     }
-
-//    private class RefreshList extends AsyncTask<Object, Object, Object> {
-//
-//        @Override
-//        protected Object doInBackground(Object... params) {
-//            return null;
-//        }
-//
-//        protected void onPostExecute(String result) {
-//            EditText etSearch = (EditText) view_container.findViewById(R.id.competition_name);
-//            clearAdapter();
-//            if (!etSearch.getText().toString().equals("")) {
-//                for(int i=0 ;i < listView.getCount() ;i++){
-//                    if(groupList.get(i).getName().toUpperCase().contains(etSearch.getText().toString().toUpperCase())){
-//                        tempGroupList.add(groupList.get(i));
-//                        Log.d("Group Name", groupList.get(i).getName());
-//                    }
-//                }
-//
-////                newAdapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, tempGroupList );
-//                adapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, tempGroupList);
-//                listView.setAdapter(adapter);
-//
-//            }else{
-//                adapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, groupList);
-//                listView.setAdapter(adapter);
-//            }
-//        }
-//    }
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LoadAllGroups();
         view_container = view;
         tempGroupList = adapter.getGroupList();
-        EditText etSearch = (EditText) view.findViewById(R.id.competition_name);
+        final EditText etSearch = (EditText) view.findViewById(R.id.competition_name);
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -144,45 +113,22 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals("")) {
-//                    List<CompetitionGroupModel> tempList = groupList;
-                    List<CompetitionGroupModel> tempList = new ArrayList<CompetitionGroupModel>();
-
-//                    for(int i=0 ;i < listView.getCount() ;i++){
-//                        if(tempList.get(i).getName().toUpperCase().contains(s.toString().toUpperCase())){
-//                            groupList.add(tempList.get(i));
-//                            Log.d("Group Name", tempList.get(i).getName());
-//                        }
-//                    }
-//                    adapter.setGroupList(groupList);
-//                    adapter.notifyDataSetChanged();
-//                    listView.setAdapter(adapter);
-//
-//                    for (int i=0; i < listView.getCount(); i++) {
-//                        Log.d("Group name 2 is ", groupList.get(i).getName());
-//                    }
-
-                    for (int i = 0; i < listView.getCount(); i++) {
-                        if (groupList.get(i).getName().toUpperCase().contains(s.toString().toUpperCase())) {
-                            tempList.add(groupList.get(i));
-                        }
+                if (my_groups) {
+                    if (!s.toString().equals("")) {
+                        adapter.getFilter().filter(s.toString());
+                    } else {
+                        adapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, groupList);
+                        listView.setAdapter(adapter);
                     }
-
-                    adapter.setGroupList(tempList);
-                    adapter.notifyDataSetChanged();
-                    listView.setAdapter(adapter);
-                    listView.invalidateViews();
-
-//                    listView.setAdapter(adapter);
-//                    for (int i = 0; i < listView.getCount(); i++) {
-//                        Log.d("Group name 2 is ", groupList.get(i).getName());
-//                    }
-//                    Toast.makeText(getActivity(), "CHANGE!", Toast.LENGTH_SHORT).show();
-
                 } else {
-                    adapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, groupList);
-                    listView.setAdapter(adapter);
+                    if (!s.toString().equals("")) {
+                        myAdapter.getFilter().filter(s.toString());
+                    } else {
+                        myAdapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, myGroupList);
+                        listView.setAdapter(myAdapter);
+                    }
                 }
+
             }
 
             @Override
@@ -199,6 +145,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    my_groups = true;
                     if (myGroupList.size() < 1) {
                         LoadAllMyGroups();
                         listViewChange(true);
@@ -206,6 +153,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
                         listViewChange(true);
                     }
                 } else {
+                    my_groups = false;
                     if (groupList.size() < 1) {
                         LoadAllGroups();
                         listView.invalidate();
@@ -222,7 +170,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         String urlString = Api.WEB_URL + "closed-competition/group/mine";
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading Your Groups...");
+        pDialog.setMessage(getResources().getString(R.string.jap_loading_competition_groups));
         pDialog.show();
         Log.d(GolfApp.TAG, urlString);
 
@@ -288,7 +236,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         String urlString = Api.WEB_URL + "closed-competition/group";
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading Groups...");
+        pDialog.setMessage(getResources().getString(R.string.jap_loading_competition_groups));
         pDialog.show();
         Log.d(GolfApp.TAG, urlString);
         clearAdapter();

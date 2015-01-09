@@ -25,7 +25,6 @@ import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
-import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -77,7 +76,7 @@ public class MemberChangeFragment extends BaseFragment{
         protected void onPreExecute() {
             super.onPreExecute();
 //            pdialog.setMessage(getResources().getString(R.string.jap_loading_user_profile));
-            pdialog.setMessage("Loading profile...");
+            pdialog.setMessage(getResources().getString(R.string.information_loaded));
             pdialog.show();
         }
 

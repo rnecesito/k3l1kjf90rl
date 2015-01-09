@@ -24,14 +24,11 @@ import com.example.sgm.japgolfapp.counting.BetCountingFragment;
 import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
-import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.models.CompetitorCompact;
-import com.example.sgm.japgolfapp.models.HoleRecord;
 import com.example.sgm.japgolfapp.models.HoleRecordCompact;
 import com.example.sgm.japgolfapp.models.Party;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.ScoreRegistrationAdapter;
 import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
-import com.example.sgm.japgolfapp.settings.NewBetSettingFragment;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -41,7 +38,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -421,7 +417,7 @@ public class ScoreRegistrationCompetitionFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Members");
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
             pdialog.show();
         }
 

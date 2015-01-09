@@ -7,12 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.CompetitionGroupModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -22,11 +25,12 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by CarlAnthony on 12/26/2014.
  */
-public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> {
+public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> implements Filterable {
 
     private Context context;
     private List<CompetitionGroupModel> groupList;
     private View view;
+    private Filter planetFilter;
 
     public GroupListAdapter(Context context, int resource, List<CompetitionGroupModel> objects) {
         super(context, resource, objects);
@@ -111,4 +115,55 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> {
             ButterKnife.inject(this, view);
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        if (planetFilter == null) {
+            planetFilter = new PlanetFilter();
+        }
+
+        return planetFilter;
+    }
+
+
+    private class PlanetFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            // We implement here the filter logic
+            if (constraint == null || constraint.length() == 0) {
+                // No filter implemented we return all the list
+                results.values = groupList;
+                results.count = groupList.size();
+            }
+            else {
+                // We perform filtering operation
+                List<CompetitionGroupModel> nPlanetList = new ArrayList<CompetitionGroupModel>();
+
+                for (CompetitionGroupModel p : groupList) {
+                    if (p.getName().toUpperCase().startsWith(constraint.toString().toUpperCase()))
+                        nPlanetList.add(p);
+                }
+
+                results.values = nPlanetList;
+                results.count = nPlanetList.size();
+
+            }
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint,FilterResults results) {
+            // Now we have to inform the adapter about the new list filtered
+            if (results.count == 0)
+                notifyDataSetInvalidated();
+            else {
+                groupList = (List<CompetitionGroupModel>) results.values;
+                notifyDataSetChanged();
+            }
+        }
+
+    }
+
 }

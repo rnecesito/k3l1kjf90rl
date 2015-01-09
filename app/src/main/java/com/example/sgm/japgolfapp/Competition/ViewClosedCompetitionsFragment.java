@@ -50,7 +50,7 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Loading open competitions...");
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
             pdialog.show();
         }
 
@@ -84,15 +84,11 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string  = new String(result_byte, "UTF-8");
-                    System.out.println(result_string );
-                    System.out.println("Success!");
                     competitions_json = result_string ;
                     success = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string  = new String(result_byte, "UTF-8");
-                    System.out.println(result_string );
-                    System.out.println("Failed!");
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -145,9 +141,9 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
                     }
                 }
 
-                Toast.makeText(getContext(), "Courses loaded.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.courses_loaded), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getContext(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.information_loaded), Toast.LENGTH_SHORT).show();
             }
         }
     }

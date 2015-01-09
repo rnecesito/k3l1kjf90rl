@@ -30,7 +30,7 @@
             android:layout_width="110dp"
             android:id="@+id/tvSaveReturn"
             android:layout_alignParentTop="true"
-            android:text="@string/dummy_text_name"
+            android:text="@string/save"
             android:layout_alignParentRight="true"
             android:layout_marginTop="17dp"
             android:textSize="15sp"

@@ -183,7 +183,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Handicap"
+                    android:text="@string/handicap"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_marginLeft="30dp"
                     android:layout_below="@+id/textViewV1"
@@ -249,7 +249,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Handicap"
+                    android:text="@string/handicap"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_marginLeft="30dp"
                     android:layout_below="@+id/textViewV2"
@@ -315,7 +315,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Handicap"
+                    android:text="@string/handicap"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_marginLeft="30dp"
                     android:layout_below="@+id/textViewV3"
@@ -382,7 +382,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Handicap"
+                    android:text="@string/handicap"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_marginLeft="30dp"
                     android:layout_below="@+id/textViewV4"

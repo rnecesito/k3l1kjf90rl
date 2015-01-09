@@ -32,7 +32,6 @@ import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
 import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationChooseFragment;
-import com.example.sgm.japgolfapp.scoreregistration.ScoreRegistrationFragment;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -61,6 +60,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.OnClick;
 
@@ -72,7 +72,7 @@ import butterknife.OnClick;
  * Use the {@link PartyRegistrationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PartyRegistrationFragment extends BaseFragment{
+public class PartyRegistrationFragment extends BaseFragment {
 
     boolean shown = false;
     View view_container;
@@ -145,9 +145,9 @@ public class PartyRegistrationFragment extends BaseFragment{
             File cDir = getActivity().getCacheDir();
 
             /** Getting a reference to temporary file, if created earlier */
-            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
+            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt");
 
-            String strLine="";
+            String strLine = "";
             StringBuilder text = new StringBuilder();
 
             /** Reading contents of the temporary file, if already exists */
@@ -156,17 +156,17 @@ public class PartyRegistrationFragment extends BaseFragment{
                 BufferedReader bReader = new BufferedReader(fReader);
 
                 /** Reading the contents of the file , line by line */
-                while( (strLine=bReader.readLine()) != null  ){
+                while ((strLine = bReader.readLine()) != null) {
                     text.append(strLine);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/course?access_token="+text.toString());
+            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/course?access_token=" + text.toString());
 
             try {
                 HttpResponse response = httpclient.execute(httppost);
@@ -177,7 +177,7 @@ public class PartyRegistrationFragment extends BaseFragment{
                     System.out.println("Success!");
                     response2 = result2;
                     success = true;
-                }else {
+                } else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     result2 = new String(result, "UTF-8");
                     System.out.println("Failed!");
@@ -191,7 +191,7 @@ public class PartyRegistrationFragment extends BaseFragment{
             }
 
             HttpClient httpclient_2 = new DefaultHttpClient();
-            HttpGet httppost_2 = new HttpGet("http://zoogtech.com/golfapp/public/user/all?access_token="+text.toString());
+            HttpGet httppost_2 = new HttpGet("http://zoogtech.com/golfapp/public/user/all?access_token=" + text.toString());
 
             try {
                 HttpResponse response = httpclient_2.execute(httppost_2);
@@ -203,7 +203,7 @@ public class PartyRegistrationFragment extends BaseFragment{
                     System.out.println("Success!");
                     response2_2 = result2_2;
                     success = true;
-                }else {
+                } else {
                     result_2 = EntityUtils.toByteArray(response.getEntity());
                     result2_2 = new String(result_2, "UTF-8");
                     System.out.println(result2_2);
@@ -220,7 +220,7 @@ public class PartyRegistrationFragment extends BaseFragment{
 
 
             HttpClient httpclient_3 = new DefaultHttpClient();
-            HttpGet httppost_3 = new HttpGet("http://zoogtech.com/golfapp/public/user/profile?access_token="+text.toString());
+            HttpGet httppost_3 = new HttpGet("http://zoogtech.com/golfapp/public/user/profile?access_token=" + text.toString());
 
             try {
                 HttpResponse response = httpclient_3.execute(httppost_3);
@@ -232,7 +232,7 @@ public class PartyRegistrationFragment extends BaseFragment{
                     System.out.println("Success!");
                     user_info_json_string = user_info_result_string;
                     success = true;
-                }else {
+                } else {
                     user_info_result = EntityUtils.toByteArray(response.getEntity());
                     user_info_result_string = new String(user_info_result, "UTF-8");
                     System.out.println(user_info_result_string);
@@ -253,10 +253,10 @@ public class PartyRegistrationFragment extends BaseFragment{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if(pdialog != null && pdialog.isShowing()) {
+            if (pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
-            if(success) {
+            if (success) {
                 JSONArray array = null;
                 try {
                     array = new JSONArray(response2);
@@ -286,7 +286,7 @@ public class PartyRegistrationFragment extends BaseFragment{
                     JSONObject row = null;
                     try {
                         row = array2.getJSONObject(i);
-                        player_list_container.add(new Players(Integer.parseInt(row.getString("id")), row.getString("firstname")+" "+row.getString("lastname")));
+                        player_list_container.add(new Players(Integer.parseInt(row.getString("id")), row.getString("firstname") + " " + row.getString("lastname")));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -358,14 +358,14 @@ public class PartyRegistrationFragment extends BaseFragment{
             rl.addView(item);
             SlideToRight(item);
 
-            Button settingButton = (Button)item.findViewById(R.id.settingButton);
+            Button settingButton = (Button) item.findViewById(R.id.settingButton);
             settingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showFragmentAndAddToBackStack(new MenuSettingsFragment());
                 }
             });
-            ImageButton iSettingButton = (ImageButton)item.findViewById(R.id.imageSettingButton);
+            ImageButton iSettingButton = (ImageButton) item.findViewById(R.id.imageSettingButton);
             iSettingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -373,7 +373,7 @@ public class PartyRegistrationFragment extends BaseFragment{
                 }
             });
 
-            Button historyButton = (Button)item.findViewById(R.id.historyButton);
+            Button historyButton = (Button) item.findViewById(R.id.historyButton);
             historyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -381,7 +381,7 @@ public class PartyRegistrationFragment extends BaseFragment{
                 }
             });
 
-            ImageView iHButton = (ImageView)item.findViewById(R.id.imageHistoryButton);
+            ImageView iHButton = (ImageView) item.findViewById(R.id.imageHistoryButton);
             iHButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -389,14 +389,14 @@ public class PartyRegistrationFragment extends BaseFragment{
                 }
             });
 
-            Button scoreRegistrationButton = (Button)item.findViewById(R.id.scoreRegistrationButton);
+            Button scoreRegistrationButton = (Button) item.findViewById(R.id.scoreRegistrationButton);
             scoreRegistrationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
                 }
             });
-            ImageButton iSButton = (ImageButton)item.findViewById(R.id.imageScoreRegistrationButton);
+            ImageButton iSButton = (ImageButton) item.findViewById(R.id.imageScoreRegistrationButton);
             iSButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -404,7 +404,7 @@ public class PartyRegistrationFragment extends BaseFragment{
                 }
             });
 
-            Button countingButton= (Button)item.findViewById(R.id.countingButton);
+            Button countingButton = (Button) item.findViewById(R.id.countingButton);
             countingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -414,7 +414,7 @@ public class PartyRegistrationFragment extends BaseFragment{
             });
 
 
-            ImageButton iCButton = (ImageButton)item.findViewById(R.id.imageButton3);
+            ImageButton iCButton = (ImageButton) item.findViewById(R.id.imageButton3);
             iCButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -430,7 +430,7 @@ public class PartyRegistrationFragment extends BaseFragment{
             shown = false;
         }
 
-        Button countingButton= (Button)item.findViewById(R.id.countingButton);
+        Button countingButton = (Button) item.findViewById(R.id.countingButton);
         countingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -439,10 +439,10 @@ public class PartyRegistrationFragment extends BaseFragment{
                 final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
                 item.setTag("counting_sub_menu");
                 View tagged = view_container.findViewWithTag("counting_sub_menu");
-                if(tagged == null) {
+                if (tagged == null) {
                     rl.addView(item);
                 }
-                Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
+                Button scoreCountingButton = (Button) item.findViewById(R.id.scoreCounting);
                 scoreCountingButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -450,7 +450,7 @@ public class PartyRegistrationFragment extends BaseFragment{
                     }
                 });
 
-                Button betCountingButton = (Button)item.findViewById(R.id.betCounting);
+                Button betCountingButton = (Button) item.findViewById(R.id.betCounting);
                 betCountingButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -458,7 +458,7 @@ public class PartyRegistrationFragment extends BaseFragment{
                     }
                 });
 
-                Button competitionCountingButton = (Button)item.findViewById(R.id.competitionCounting);
+                Button competitionCountingButton = (Button) item.findViewById(R.id.competitionCounting);
                 competitionCountingButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -476,10 +476,10 @@ public class PartyRegistrationFragment extends BaseFragment{
         final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
         item.setTag("counting_sub_menu");
         View tagged = view_container.findViewWithTag("counting_sub_menu");
-        if(tagged == null) {
+        if (tagged == null) {
             rl.addView(item);
         }
-        Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
+        Button scoreCountingButton = (Button) item.findViewById(R.id.scoreCounting);
         scoreCountingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -487,7 +487,7 @@ public class PartyRegistrationFragment extends BaseFragment{
             }
         });
 
-        Button betCountingButton = (Button)item.findViewById(R.id.betCounting);
+        Button betCountingButton = (Button) item.findViewById(R.id.betCounting);
         betCountingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -495,7 +495,7 @@ public class PartyRegistrationFragment extends BaseFragment{
             }
         });
 
-        Button competitionCountingButton = (Button)item.findViewById(R.id.competitionCounting);
+        Button competitionCountingButton = (Button) item.findViewById(R.id.competitionCounting);
         competitionCountingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -506,6 +506,7 @@ public class PartyRegistrationFragment extends BaseFragment{
 
     private class PartyCreate extends AsyncTask<String, String, String> {
         StringBuilder text = new StringBuilder();
+
         public PartyCreate() {
             pdialog = new ProgressDialog(getActivity());
         }
@@ -519,9 +520,9 @@ public class PartyRegistrationFragment extends BaseFragment{
             File cDir = getActivity().getCacheDir();
 
             /** Getting a reference to temporary file, if created earlier */
-            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
+            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt");
 
-            String strLine="";
+            String strLine = "";
 
             /** Reading contents of the temporary file, if already exists */
             try {
@@ -529,12 +530,12 @@ public class PartyRegistrationFragment extends BaseFragment{
                 BufferedReader bReader = new BufferedReader(fReader);
 
                 /** Reading the contents of the file , line by line */
-                while( (strLine=bReader.readLine()) != null  ){
+                while ((strLine = bReader.readLine()) != null) {
                     text.append(strLine);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -543,7 +544,7 @@ public class PartyRegistrationFragment extends BaseFragment{
         protected String doInBackground(String... strings) {
             String pname = strings[0];
             String date = strings[1];
-            String course= strings[2];
+            String course = strings[2];
             byte[] result = null;
             String str = "";
             HttpClient httpclient = new DefaultHttpClient();
@@ -570,10 +571,10 @@ public class PartyRegistrationFragment extends BaseFragment{
                 int p3_id = p3.id;
                 int p4_id = p4.id;
 
-                json.add(new BasicNameValuePair("members[0]", p1_id+""));
-                json.add(new BasicNameValuePair("members[1]", p2_id+""));
-                json.add(new BasicNameValuePair("members[2]", p3_id+""));
-                json.add(new BasicNameValuePair("members[3]", p4_id+""));
+                json.add(new BasicNameValuePair("members[0]", p1_id + ""));
+                json.add(new BasicNameValuePair("members[1]", p2_id + ""));
+                json.add(new BasicNameValuePair("members[2]", p3_id + ""));
+                json.add(new BasicNameValuePair("members[3]", p4_id + ""));
 
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
                 httppost.setHeader("Authorization", text.toString());
@@ -588,7 +589,7 @@ public class PartyRegistrationFragment extends BaseFragment{
                     System.out.println("Success!");
                     success = true;
                     retVal = str;
-                }else {
+                } else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
                     System.out.println("Failed!");
@@ -609,10 +610,10 @@ public class PartyRegistrationFragment extends BaseFragment{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if(pdialog != null && pdialog.isShowing()) {
+            if (pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
-            if(success) {
+            if (success) {
                 Toast.makeText(getContext(), getResources().getString(R.string.jap_party_created), Toast.LENGTH_SHORT).show();
                 popBackStack();
             } else {
@@ -688,7 +689,7 @@ public class PartyRegistrationFragment extends BaseFragment{
 
     @OnClick(R.id.party_date_value)
     public void setdate() {
-        Calendar c = Calendar.getInstance();
+        Calendar c = Calendar.getInstance(Locale.JAPAN);
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
@@ -718,7 +719,7 @@ public class PartyRegistrationFragment extends BaseFragment{
     }
 
     @OnClick(R.id.saveB)
-    public void saveB(){
+    public void saveB() {
 //        pdialog2 = new ProgressDialog(getActivity());
 //        pdialog2.setMessage("Saving...");
 //        pdialog2.show();
@@ -737,13 +738,13 @@ public class PartyRegistrationFragment extends BaseFragment{
         Courses c = (Courses) course_name.getSelectedItem();
         int course_id = c.id;
         String p_date = date_view.getText().toString();
-        if(pn_val.matches("")) {
+        if (pn_val.matches("")) {
             Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_party_name), Toast.LENGTH_SHORT).show();
             return;
         } else if (p_date.matches("") || p_date.matches("0000-00-00") || p_date.matches("MM/dd/yy")) {
             Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_valid_date), Toast.LENGTH_SHORT).show();
         } else {
-            new PartyCreate().execute(pn_val, p_date, course_id+"");
+            new PartyCreate().execute(pn_val, p_date, course_id + "");
         }
     }
 

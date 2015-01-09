@@ -109,7 +109,7 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Loading competitions...");
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
             pdialog.show();
         }
 
@@ -143,13 +143,11 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, "UTF-8");
-                    System.out.println("Success!");
                     courses_json = result_string;
                     success = true;
                 } else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, "UTF-8");
-                    System.out.println("Failed!");
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -207,7 +205,7 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Creating group...");
+            pdialog.setMessage(getResources().getString(R.string.jap_registering));
             pdialog.show();
 
             File cDir = getActivity().getCacheDir();
@@ -251,16 +249,11 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 } else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
-                    System.out.println(new UrlEncodedFormEntity(json).toString());
                     retVal = str;
                 }
             } catch (UnsupportedEncodingException e) {
@@ -280,7 +273,7 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
                 pdialog.dismiss();
             }
             if (success) {
-                Toast.makeText(getActivity(), "Group created.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_reg_success), Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
@@ -319,7 +312,7 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
                 Courses c = (Courses) course_name.getSelectedItem();
                 int course_id = c.id;
                 if (pn_val.matches("")) {
-                    Toast.makeText(getActivity(), "Enter a group name.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_party_name), Toast.LENGTH_SHORT).show();
                     return;
                 } else {
 //                    new CompetitionCreate().execute(pn_val, course_id + "");
@@ -336,7 +329,7 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
         String urlString = Api.WEB_URL + "closed-competition/" + competition + "/create-group";
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Creating group...");
+        pDialog.setMessage(getResources().getString(R.string.jap_registering));
         pDialog.show();
 
         JSONObject requestObject = new JSONObject();
@@ -358,7 +351,7 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
             @Override
             public void onResponse(JSONObject response) {
                 pDialog.dismiss();
-                Toast.makeText(getActivity(), "Group created.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_reg_success), Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
 

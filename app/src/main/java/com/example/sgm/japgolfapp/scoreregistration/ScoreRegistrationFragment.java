@@ -421,7 +421,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Members");
+            pdialog.setMessage(getResources().getString(R.string.jap_getting_members));
             pdialog.show();
         }
 
@@ -560,7 +560,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Bets");
+            pdialog.setMessage(getResources().getString(R.string.jap_getting_bets));
             pdialog.show();
         }
 
@@ -577,15 +577,11 @@ public class ScoreRegistrationFragment extends BaseFragment{
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
                     retVal = str;
                 }
             } catch (UnsupportedEncodingException e) {
@@ -693,7 +689,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
                         container.setVisibility(View.VISIBLE);
                         //------------------------------------------------------------------------------
                     }else{
-                        Toast.makeText(getActivity(), "There are no bets set for this hole", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getResources().getString(R.string.not_entered), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -712,7 +708,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Saving Scores");
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
         }
 
@@ -745,15 +741,11 @@ public class ScoreRegistrationFragment extends BaseFragment{
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
                     retVal = str;
                 }
 
@@ -788,7 +780,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Saving Scores");
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
         }
 
@@ -821,15 +813,11 @@ public class ScoreRegistrationFragment extends BaseFragment{
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
                     retVal = str;
                 }
 
@@ -874,7 +862,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Saving Scores");
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
         }
 
@@ -907,15 +895,11 @@ public class ScoreRegistrationFragment extends BaseFragment{
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
                     retVal = str;
                 }
 
@@ -960,7 +944,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Saving Bets");
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_bets));
             pdialog.show();
         }
 
@@ -994,15 +978,11 @@ public class ScoreRegistrationFragment extends BaseFragment{
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
                     retVal = str;
                 }
 

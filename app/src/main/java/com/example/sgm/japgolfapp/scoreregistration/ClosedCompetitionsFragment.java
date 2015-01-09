@@ -120,7 +120,7 @@ public class ClosedCompetitionsFragment extends BaseFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Getting Competitions");
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
             pdialog.show();
         }
 
@@ -137,15 +137,11 @@ public class ClosedCompetitionsFragment extends BaseFragment{
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
                     retVal = str;
                 }
             } catch (UnsupportedEncodingException e) {

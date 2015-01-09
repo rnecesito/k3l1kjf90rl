@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:maxLines="1"
-                    android:text="Action" />
+                    android:text="@string/jap_option" />
             </TableRow>
 
 

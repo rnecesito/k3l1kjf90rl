@@ -75,7 +75,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Loading competitions...");
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
             pdialog.show();
         }
 
@@ -210,9 +210,9 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                 group_list = player_list_container;
                 spinnerArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, group_list);
 
-                Toast.makeText(getContext(), "Competitions loaded.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.information_loaded), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getContext(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -226,7 +226,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog.setMessage("Loading competition groups...");
+            pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_groups));
             pdialog.show();
         }
 
@@ -308,7 +308,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                 spinnerArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, group_list);
 
             } else {
-                Toast.makeText(getContext(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -322,7 +322,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
         protected void onPreExecute() {
             super.onPreExecute();
             success = false;
-            pdialog.setMessage("Joining competition...");
+            pdialog.setMessage(getResources().getString(R.string.jap_registering));
             pdialog.show();
         }
 
@@ -393,12 +393,10 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_2 = EntityUtils.toByteArray(response.getEntity());
                     result2_2 = new String(result_2, "UTF-8");
-                    System.out.println("Success!");
                     success = true;
                 }else {
                     result_2 = EntityUtils.toByteArray(response.getEntity());
                     result2_2 = new String(result_2, "UTF-8");
-                    System.out.println("Failed!");
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -433,9 +431,9 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                     }
                 };
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Join Successful").setMessage("Joined competition.").setPositiveButton("Okay", dialogClickListener).show();
+                builder.setTitle(getResources().getString(R.string.jap_reg_success)).setMessage(getResources().getString(R.string.jap_reg_success)).setPositiveButton(getResources().getString(R.string.jap_okay), dialogClickListener).show();
             } else {
-                Toast.makeText(getActivity(), "Unable to join. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -493,9 +491,9 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
             };
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Select Group")
+            builder.setTitle(getResources().getString(R.string.jap_select_group))
                     .setView(group_spinner)
-                    .setPositiveButton("Okay", dialogClickListener)
+                    .setPositiveButton(getResources().getString(R.string.jap_okay), dialogClickListener)
                     .show();
         }
     };

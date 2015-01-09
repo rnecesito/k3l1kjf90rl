@@ -87,16 +87,11 @@ public class LoginFragment extends BaseFragment{
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, "UTF-8");
-                    System.out.println(result_string);
-                    System.out.println("Success!");
                     success = true;
                     retVal = result_string;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(result_string);
-                    System.out.println(json1.toString());
                     retVal = result_string;
                 }
             } catch (UnsupportedEncodingException e) {
@@ -191,12 +186,10 @@ public class LoginFragment extends BaseFragment{
 
         if(email_val.matches("")) {
             Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
-//            Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
             return;
         } else if (pass_val.matches("")) {
 
             Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_pass), Toast.LENGTH_SHORT).show();
-//            Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
             return;
         } else {
             new LoginCall().execute(email_val, pass_val);
