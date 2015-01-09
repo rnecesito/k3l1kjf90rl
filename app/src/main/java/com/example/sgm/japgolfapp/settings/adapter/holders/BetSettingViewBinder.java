@@ -5,7 +5,6 @@ import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.HoleRecord;
-import com.example.sgm.japgolfapp.models.PlayHistory;
 
 
 public class BetSettingViewBinder {
@@ -36,7 +35,7 @@ public class BetSettingViewBinder {
 			if (record != null) {
 
 				if (holder.tvName != null) {
-					holder.tvName.setText(record.getName() + "xx Hole");
+					holder.tvName.setText(record.getName() + " ホール");
 				}
 
                 holder.tvFirstBet.setVisibility(View.INVISIBLE);
