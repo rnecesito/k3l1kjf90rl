@@ -43,6 +43,11 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> {
     }
 
     @Override
+    public int getCount() {
+        return ((groupList == null || groupList.size() == 0) ? 0 : groupList.size());
+    }
+
+    @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder = null;
@@ -55,31 +60,36 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.txtGName.setText(groupList.get(position).getName());
-        holder.txtGName.setTextColor(Color.BLACK);
-        holder.txtGMemberCount.setText(groupList.get(position).getCompetitors().size() + "");
-        holder.txtGMemberCount.setTextColor(Color.BLACK);
+        try {
+            holder.txtGName.setText(groupList.get(position).getName());
+            holder.txtGName.setTextColor(Color.BLACK);
+            holder.txtGMemberCount.setText(groupList.get(position).getCompetitors().size() + "");
+            holder.txtGMemberCount.setTextColor(Color.BLACK);
 
 
-        //IF STATEMENT MUST BE HERE
-        Drawable drawable = context.getResources().getDrawable(android.R.drawable.ic_delete);
-        holder.txtAction.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-        holder.txtAction.setText(" ");
-        holder.txtAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(groupList.get(position));
+            //IF STATEMENT MUST BE HERE
+            Drawable drawable = context.getResources().getDrawable(android.R.drawable.ic_delete);
+            holder.txtAction.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+            holder.txtAction.setText(" ");
+            holder.txtAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EventBus.getDefault().post(groupList.get(position));
+                }
+            });
+
+            //IF STATEMENT ENDS HERE
+
+            if (position % 2 == 0) {
+                holder.tableRow.setBackgroundColor(Color.WHITE);
+            } else {
+                holder.tableRow.setBackgroundColor(Color.LTGRAY);
+
             }
-        });
-
-        //IF STATEMENT ENDS HERE
-
-        if (position % 2 == 0) {
-            holder.tableRow.setBackgroundColor(Color.WHITE);
-        } else {
-            holder.tableRow.setBackgroundColor(Color.LTGRAY);
+        }catch(Exception e){
 
         }
+
 
         return view;
     }
