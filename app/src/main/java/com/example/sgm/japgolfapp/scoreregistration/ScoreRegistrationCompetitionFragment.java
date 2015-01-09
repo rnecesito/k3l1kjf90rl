@@ -500,9 +500,4 @@ public class ScoreRegistrationCompetitionFragment extends BaseFragment{
         }
     }
 
-
-
-
-
-
 }

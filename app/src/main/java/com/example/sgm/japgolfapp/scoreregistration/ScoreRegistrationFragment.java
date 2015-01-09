@@ -25,6 +25,7 @@ import com.example.sgm.japgolfapp.counting.BetCountingFragment;
 import com.example.sgm.japgolfapp.counting.CompetitionCountingFragment;
 import com.example.sgm.japgolfapp.counting.ScoreCountingFragment;
 import com.example.sgm.japgolfapp.history.PlayHistoryFragment;
+import com.example.sgm.japgolfapp.models.BetRecordCompact;
 import com.example.sgm.japgolfapp.models.BetSetting;
 import com.example.sgm.japgolfapp.models.CompetitorCompact;
 import com.example.sgm.japgolfapp.models.HoleRecord;
@@ -76,13 +77,14 @@ public class ScoreRegistrationFragment extends BaseFragment{
 
     //FOR BET REGISTRATION
     private ListView lvCompetitors2;
-    private ArrayList<HoleRecord> mItems2;
+//    private ArrayList<BetRecordCompact> mItems2;
     private BetRegistrationAdapter mAdapter2;
     private Integer mBetNumber;
     private TextView tvPrev;
     private TextView tvNext;
     private TextView saveTv2;
     private ArrayList<BetSetting> mBetSettings;
+    private ArrayList<CompetitorCompact> mGroupMembersScores;
 
     private TextView mTvHoleNumber;
     private TextView tvBetRegistration;
@@ -550,158 +552,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
         }
     }
 
-    private class GetBetsList extends AsyncTask<String, String, String> {
-
-        public GetBetsList() {
-            pdialog = new ProgressDialog(getActivity());
-            pdialog.setCancelable(false);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pdialog.setMessage("Getting Bets");
-            pdialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            byte[] result = null;
-            String str = "";
-            String token = readtoken();
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/bet-registration/bets/"+partyInformation.getId()+"?access_token="+token.toString());
-            try {
-                HttpResponse response = httpclient.execute(httppost);
-                StatusLine statusLine = response.getStatusLine();
-                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                    result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
-                    System.out.println(str);
-                    System.out.println("Success!");
-                    success = true;
-                    retVal = str;
-                }else {
-                    result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
-                    System.out.println("Failed!");
-                    System.out.println(str);
-                    retVal = str;
-                }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return str;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            mItems2 = new ArrayList<HoleRecord>();
-            mBetNumber = 0;
-
-            if(pdialog != null && pdialog.isShowing()) {
-                pdialog.dismiss();
-            }
-            if(success) {
-                try {
-                    final JSONObject info = new JSONObject(retVal);
-
-                    mBetSettings = new ArrayList<BetSetting>();
-
-                    JSONArray bets = info.getJSONObject("course").getJSONArray("hole_items").getJSONObject(mHoleNumber).getJSONArray("bets");
-                    for(int i = 0 ; i < bets.length(); i++) {
-                        JSONObject obj = bets.getJSONObject(i);
-
-                        //TODO INSERT BET SETTING HERE
-                        mBetSettings.add(new BetSetting(obj.getString("id"),
-                                obj.getString("amount"),
-                                obj.getJSONObject("bet_type").getString("name"),
-                                obj.getJSONObject("bet_type").getString("description"), false));
-                    }
-
-
-
-                    mItems2.add(new HoleRecord(info.getString("id"), mGroupMembers, mBetSettings));
-                    mAdapter2 = new BetRegistrationAdapter(getActivity(), 0,
-                            mItems2.get(mBetNumber).getCompetitors(), mBetNumber);
-                    lvCompetitors2.setAdapter(mAdapter2);
-                    lvCompetitors2.setFocusable(true);
-
-                    if(mBetSettings.size() != 0) {
-                        tvBetType.setText(mBetSettings.get(0).getName());
-
-                        //ACTIVATE BUTTONS FOR NEXT AND PREV -------------------------------------------
-
-                        tvPrev = (TextView) view_container.findViewById(R.id.ivBack2);
-                        tvPrev.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (mBetNumber != 0) {
-                                    --mBetNumber;
-                                    tvBetType.setText(mBetSettings.get(mBetNumber).getName());
-                                    mAdapter2 = new BetRegistrationAdapter(getActivity(), 0,
-                                            mItems2.get(mBetNumber).getCompetitors(), mBetNumber);
-                                    lvCompetitors2.setAdapter(mAdapter2);
-                                    lvCompetitors2.setFocusable(true);
-                                    if (mBetNumber == 0) {
-                                        tvPrev.setVisibility(View.INVISIBLE);
-                                    }
-                                    tvNext.setVisibility(View.VISIBLE);
-                                }
-                            }
-                        });
-
-                        tvPrev.setVisibility(TextView.INVISIBLE);
-
-                        tvNext = (TextView) view_container.findViewById(R.id.ivForward2);
-                        tvNext.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (mBetNumber < mBetSettings.size() - 1) {
-                                    ++mBetNumber;
-                                    tvBetType.setText(mBetSettings.get(mBetNumber).getName());
-                                    //TODO
-                                    if (mBetNumber >= mItems2.size())
-                                        mItems2.add(new HoleRecord("" + mHoleNumber, mGroupMembers, mBetSettings));
-
-                                    mAdapter2 = new BetRegistrationAdapter(getActivity(), 0,
-                                            mItems2.get(mBetNumber).getCompetitors(), mBetNumber);
-                                    lvCompetitors2.setAdapter(mAdapter2);
-                                    lvCompetitors2.setFocusable(true);
-
-                                    if (mBetNumber == mBetSettings.size() - 1) {
-                                        tvNext.setVisibility(View.INVISIBLE);
-                                    }
-                                    tvPrev.setVisibility(View.VISIBLE);
-                                }
-                            }
-                        });
-
-                        if(mBetSettings.size() > 1){
-                            tvNext.setVisibility(TextView.VISIBLE);
-                        }else{
-                            tvNext.setVisibility(TextView.INVISIBLE);
-                        }
-
-                        container.setVisibility(View.VISIBLE);
-                        //------------------------------------------------------------------------------
-                    }else{
-                        Toast.makeText(getActivity(), "There are no bets set for this hole", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     private class PlaceScores extends AsyncTask<String, String, String> {
 
         public PlaceScores() {
@@ -950,6 +800,234 @@ public class ScoreRegistrationFragment extends BaseFragment{
         }
     }
 
+    // TODO BETS
+    private class GetBetsList extends AsyncTask<String, String, String> {
+
+        public GetBetsList() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage("Getting Bets");
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/bet-registration/bets/"+partyInformation.getId()+"?access_token="+token.toString());
+            try {
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            mBetNumber = 0;
+
+            if(pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+            if(success) {
+                try {
+                    final JSONObject info = new JSONObject(retVal);
+
+                    mBetSettings = new ArrayList<BetSetting>();
+
+                    JSONArray bets = info.getJSONObject("course").getJSONArray("hole_items").getJSONObject(mHoleNumber).getJSONArray("bets");
+                    for(int i = 0 ; i < bets.length(); i++) {
+                        JSONObject obj = bets.getJSONObject(i);
+
+                        //TODO INSERT BET SETTING HERE
+                        mBetSettings.add(new BetSetting(obj.getString("id"),
+                                obj.getString("amount"),
+                                obj.getJSONObject("bet_type").getString("name"),
+                                obj.getJSONObject("bet_type").getString("description"), false));
+                    }
+
+                    if(mBetSettings.size() != 0) {
+                        tvPrev = (TextView) view_container.findViewById(R.id.ivBack2);
+                        tvNext = (TextView) view_container.findViewById(R.id.ivForward2);
+                        if(mBetSettings.size() > 1){
+                            tvNext.setVisibility(TextView.VISIBLE);
+                        }else{
+                            tvNext.setVisibility(TextView.INVISIBLE);
+                        }
+
+                        GetBetScores getFirstScores = new GetBetScores();
+                        getFirstScores.execute();
+
+
+                        tvPrev.setVisibility(TextView.INVISIBLE);
+
+                        container.setVisibility(View.VISIBLE);
+
+                    }else{
+                        Toast.makeText(getActivity(), "There are no bets set for this hole", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private class GetBetScores extends AsyncTask<String, String, String> {
+
+        public GetBetScores() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage("Getting Bet Scores");
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/score-registration/bets/"+partyInformation.getId()+"?access_token="+token.toString());
+            try {
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            mGroupMembersScores = mGroupMembers;
+            //Clear Scores
+            for(int a = 0; a < mGroupMembersScores.size();a++){
+                mGroupMembersScores.get(a).setScore("0");
+            }
+
+            if(pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+
+            if(success) {
+                try {
+                    final JSONObject info = new JSONObject(retVal);
+
+                    JSONArray betScores = info.getJSONArray("bet_scores");
+                    for(int i = 0 ; i < betScores.length(); i++) {
+                        JSONObject obj = betScores.getJSONObject(i);
+                        if(obj.getString("party_play_bet_id").equals(mBetSettings.get(mBetNumber).getId())){
+//                            String name = "";
+//                            for(int a = 0 ; a < memberList.length() ; a++){
+//                                if(memberList.getJSONObject(a).getString("id").equals(obj.getString("party_member_id"))){
+//                                    name = memberList.getJSONObject(a).getJSONObject("member").getString("firstname") +
+//                                            memberList.getJSONObject(a).getJSONObject("member").getString("lastname");
+//                                }
+//                            }
+
+                            for(int b = 0 ; b < mGroupMembersScores.size(); b++){
+                                if(obj.getString("party_member_id").equals(mGroupMembersScores.get(b).getId()))
+                                    mGroupMembersScores.get(b).setScore(obj.getString("score"));
+                            }
+
+//                            mGroupMembersScores.add(new CompetitorCompact(obj.getString("party_member_id"), name, obj.getString("score")));
+                        }
+                    }
+
+                    mAdapter2 = new BetRegistrationAdapter(getActivity(), 0,
+                            mGroupMembersScores, mBetNumber);
+                    lvCompetitors2.setAdapter(mAdapter2);
+                    lvCompetitors2.setFocusable(true);
+
+
+                        tvBetType.setText(mBetSettings.get(0).getName());
+
+                        //ACTIVATE BUTTONS FOR NEXT AND PREV -------------------------------------------
+
+
+                        tvPrev.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (mBetNumber != 0) {
+                                    PlaceBetScoresBackward placeBets = new PlaceBetScoresBackward();
+                                    placeBets.execute();
+                                }
+                            }
+                        });
+
+                        tvNext.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                    PlaceBetScoresForward placeBets = new PlaceBetScoresForward();
+                                    placeBets.execute();
+                            }
+                        });
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     private class PlaceBetScoresForward extends AsyncTask<String, String, String> {
 
         public PlaceBetScoresForward() {
@@ -970,22 +1048,18 @@ public class ScoreRegistrationFragment extends BaseFragment{
             String str = "";
             String token = readtoken();
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/score-registration/bet");
+            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/score-registration/bet/" + mBetSettings.get(mBetNumber).getId());
             try {
-
                 List<NameValuePair> json = new ArrayList<NameValuePair>();
+                for(int i = 0; i < mGroupMembersScores.size(); i++) {
+                    json.add(new BasicNameValuePair("scores["+ i +"][party_member_id]", mGroupMembersScores.get(i).getId()));
+                    json.add(new BasicNameValuePair("scores["+ i +"][score]", mGroupMembersScores.get(i).getScore()));
+                }
 
-//                json.add(new BasicNameValuePair("hole_id", mHoleId));
-//                json.add(new BasicNameValuePair("bet_type_id: ", mHoleId));
-//                json.add(new BasicNameValuePair("party_play_id: ", partyInformation.getId()));
-//                for(int i = 0; i < mChoosen.size(); i++) {
-//                    json.add(new BasicNameValuePair("bets["+ i +"][bet_type_id]", mChoosen.get(i).getId()));
-//                    json.add(new BasicNameValuePair("bets["+ i +"][amount]", mChoosen.get(i).getId()));
-//                }
-                json.add(new BasicNameValuePair("access_token", token));
+//                json.add(new BasicNameValuePair("access_token", ));
 
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
-//                httppost.setHeader("Authorization", text.toString());
+                httppost.setHeader("Authorization", token);
                 httppost.setEntity(new UrlEncodedFormEntity(json));
 
                 HttpResponse response = httpclient.execute(httppost);
@@ -1006,6 +1080,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
                     retVal = str;
                 }
 
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (ClientProtocolException e) {
@@ -1023,7 +1098,113 @@ public class ScoreRegistrationFragment extends BaseFragment{
             if (pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
-            getActivity().onBackPressed();
+
+            if (mBetNumber < mBetSettings.size() - 1) {
+                ++mBetNumber;
+
+                if (mBetNumber == mBetSettings.size() - 1) {
+                    tvNext.setVisibility(View.INVISIBLE);
+                }
+                tvPrev.setVisibility(View.VISIBLE);
+
+                //TODO
+                GetBetScores showBetScores = new GetBetScores();
+                showBetScores.execute();
+
+                tvBetType.setText(mBetSettings.get(mBetNumber).getName());
+
+            }
         }
     }
+
+
+    private class PlaceBetScoresBackward extends AsyncTask<String, String, String> {
+
+        public PlaceBetScoresBackward() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage("Saving Bets");
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/score-registration/bet/" + mBetSettings.get(mBetNumber).getId());
+            try {
+                List<NameValuePair> json = new ArrayList<NameValuePair>();
+                for(int i = 0; i < mGroupMembersScores.size(); i++) {
+                    json.add(new BasicNameValuePair("scores["+ i +"][party_member_id]", mGroupMembersScores.get(i).getId()));
+                    json.add(new BasicNameValuePair("scores["+ i +"][score]", mGroupMembersScores.get(i).getScore()));
+                }
+
+//                json.add(new BasicNameValuePair("access_token", ));
+
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+                httppost.setHeader("Authorization", token);
+                httppost.setEntity(new UrlEncodedFormEntity(json));
+
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+
+            if (mBetNumber < mBetSettings.size() - 1) {
+                --mBetNumber;
+
+                if (mBetNumber == 0) {
+                    tvPrev.setVisibility(View.INVISIBLE);
+                }
+                tvNext.setVisibility(View.VISIBLE);
+
+                //TODO
+                GetBetScores showBetScores = new GetBetScores();
+                showBetScores.execute();
+
+                tvBetType.setText(mBetSettings.get(mBetNumber).getName());
+
+            }
+        }
+    }
+
 }
