@@ -153,7 +153,7 @@
     <string name="jap_party_list">Party List</string>
     <string name="jap_getting_holes">Getting Holes</string>
 
-
+    <string name="members">Members</string>
 
     <string name="dummy_text_history_date" translatable="false">MM/DD/2017</string>
     <string name="dummy_text_history_course_name" translatable="false">Golf course name</string>

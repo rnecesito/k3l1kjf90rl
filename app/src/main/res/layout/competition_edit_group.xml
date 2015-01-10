@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:maxLines="1"
-                    android:layout_gravity="left"
+                    android:gravity="center_horizontal"
                     android:text="@string/title_email_address" />
 
                 <LinearLayout
@@ -137,8 +137,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
+                    android:layout_gravity="center_horizontal"
                     android:maxLines="1"
-                    android:text="@string/jap_option" />
+                    android:text="@string/delete" />
             </TableRow>
 
 

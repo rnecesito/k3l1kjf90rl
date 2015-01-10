@@ -72,7 +72,7 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> implem
 
 
             //IF STATEMENT MUST BE HERE
-            Drawable drawable = context.getResources().getDrawable(android.R.drawable.ic_delete);
+            Drawable drawable = context.getResources().getDrawable(android.R.drawable.ic_menu_edit);
             holder.txtAction.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
             holder.txtAction.setText(" ");
             holder.txtAction.setOnClickListener(new View.OnClickListener() {
@@ -90,12 +90,21 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> implem
                 holder.tableRow.setBackgroundColor(Color.LTGRAY);
 
             }
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
 
 
         return view;
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (planetFilter == null) {
+            planetFilter = new PlanetFilter();
+        }
+
+        return planetFilter;
     }
 
     class ViewHolder {
@@ -116,16 +125,6 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> implem
         }
     }
 
-    @Override
-    public Filter getFilter() {
-        if (planetFilter == null) {
-            planetFilter = new PlanetFilter();
-        }
-
-        return planetFilter;
-    }
-
-
     private class PlanetFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -135,8 +134,7 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> implem
                 // No filter implemented we return all the list
                 results.values = groupList;
                 results.count = groupList.size();
-            }
-            else {
+            } else {
                 // We perform filtering operation
                 List<CompetitionGroupModel> nPlanetList = new ArrayList<CompetitionGroupModel>();
 
@@ -154,7 +152,7 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> implem
         }
 
         @Override
-        protected void publishResults(CharSequence constraint,FilterResults results) {
+        protected void publishResults(CharSequence constraint, FilterResults results) {
             // Now we have to inform the adapter about the new list filtered
             if (results.count == 0)
                 notifyDataSetInvalidated();
