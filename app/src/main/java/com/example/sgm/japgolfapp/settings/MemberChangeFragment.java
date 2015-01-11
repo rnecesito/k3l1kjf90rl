@@ -540,12 +540,12 @@ public class MemberChangeFragment extends BaseFragment{
             invalidName.setVisibility(View.INVISIBLE);
             return;
         }
-        if(!password.getText().toString().isEmpty()){
-            invalidPassword.setVisibility(View.INVISIBLE);
-            return;
-        }
-
+//        if(!password.getText().toString().isEmpty()){
+//            invalidPassword.setVisibility(View.INVISIBLE);
+//            return;
+//        }
         new UpdateCall().execute(name.getText().toString(), "-", "Male", "1", email.getText().toString(), password.getText().toString() );
+
     }
 
     private String readtoken() {

@@ -152,6 +152,7 @@
     <string name="jap_saving_scores">Saving scores</string>
     <string name="jap_party_list">Party List</string>
     <string name="jap_getting_holes">Getting Holes</string>
+    <string name="jap_invalid_email">Invalid Email Address</string>
 
     <string name="members">Members</string>
 
@@ -359,5 +360,6 @@
         <item>Blue</item>
         <item>Green</item>
     </string-array>
+    <string name="jap_not_entered">Not Entered</string>
 
 </resources>
