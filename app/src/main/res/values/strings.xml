@@ -362,4 +362,6 @@
     </string-array>
     <string name="jap_not_entered">Not Entered</string>
 
+    <string name="cannot_choose_more_than_three">Cannot Choose more that 3 settings</string>
+
 </resources>

@@ -155,4 +155,6 @@
     <string name="jap_invalid_email">有効なメールアドレスではありません</string>
     <string name="jap_not_entered">未入力です</string>
 
+    <string name="cannot_choose_more_than_three">4つ以上は設定できません</string>
+
 </resources>

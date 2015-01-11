@@ -419,7 +419,8 @@ public class NewBetSettingFragment extends BaseFragment{
                                     ,obj.getJSONObject("bet_type").getString("description")
                                     ,true ));
                         }
-                        HoleRecord newHoleRecord = new HoleRecord(hole.getJSONObject(i).getString("id"), hole.getJSONObject(i).getString("hole_number"), null, holeBetSettings);
+//                        HoleRecord newHoleRecord = new HoleRecord(hole.getJSONObject(i).getString("id"), hole.getJSONObject(i).getString("hole_number"), null, holeBetSettings);
+                        HoleRecord newHoleRecord = new HoleRecord(hole.getJSONObject(i).getString("id"), "" + (i + 1), null, holeBetSettings);
                         mItems.add(newHoleRecord);
                     }
 

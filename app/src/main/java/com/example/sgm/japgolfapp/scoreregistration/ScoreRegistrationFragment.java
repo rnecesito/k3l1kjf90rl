@@ -347,8 +347,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
         tvBetRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             GetBetsList getbets = new GetBetsList();
-             getbets.execute();
+                PlaceScoresBeforeBetScoring saveFirst = new PlaceScoresBeforeBetScoring();
+                saveFirst.execute();
 
             }
         });
@@ -500,13 +500,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
                     toBetSettings.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            NewBetSettingFragment targetFragment = new NewBetSettingFragment();
-                            try {
-                                targetFragment.setPartyId(info.getString("id"));
-                            }catch (Exception e){
-
-                            }
-                            showFragmentAndAddToBackStack(targetFragment);
+                            PlaceScoresBeforeBetRegistration saveFirst = new PlaceScoresBeforeBetRegistration();
+                            saveFirst.execute();
                         }
                     });
 
@@ -517,8 +512,19 @@ public class ScoreRegistrationFragment extends BaseFragment{
                         @Override
                         public void onClick(View view) {
                             if(mHoleNumber >= 0) {
-                                PlaceScoresBack saveScores = new PlaceScoresBack();
-                                saveScores.execute();
+//                                PlaceScoresBack saveScores = new PlaceScoresBack();
+//                                saveScores.execute();
+
+                                --mHoleNumber;
+                                mTvHoleNumber.setText("" + (mHoleNumber + 1));
+                                mAdapter = new ScoreRegistrationAdapter(getActivity(), 0,
+                                        mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
+                                lvCompetitors.setAdapter(mAdapter);
+                                lvCompetitors.setFocusable(true);
+                                if(mHoleNumber == 0){
+                                    mBtnBack.setVisibility(View.INVISIBLE);
+                                }
+                                mBtnForward.setVisibility(View.VISIBLE);
                             }
                         }
                     });
@@ -529,8 +535,20 @@ public class ScoreRegistrationFragment extends BaseFragment{
                         public void onClick(View view) {
                             //CAN'T GO OVER HOW MANY HOLES
                             if(mHoleNumber < Integer.valueOf(partyInformation.getHoles()) - 1) {
-                                PlaceScoresForward saveScores = new PlaceScoresForward();
-                                saveScores.execute();
+//                                PlaceScoresForward saveScores = new PlaceScoresForward();
+//                                saveScores.execute();
+
+                                ++mHoleNumber;
+                                mTvHoleNumber.setText("" + (mHoleNumber + 1));
+                                mAdapter = new ScoreRegistrationAdapter(getActivity(), 0,
+                                        mItems.get(mHoleNumber).getCompetitors(), mHoleNumber);
+                                lvCompetitors.setAdapter(mAdapter);
+                                lvCompetitors.setFocusable(true);
+
+                                if(mHoleNumber == Integer.valueOf(partyInformation.getHoles()) - 1){
+                                    mBtnForward.setVisibility(View.INVISIBLE);
+                                }
+                                mBtnBack.setVisibility(View.VISIBLE);
                             }
                         }
                     });
@@ -622,7 +640,167 @@ public class ScoreRegistrationFragment extends BaseFragment{
             if (pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
-            getActivity().onBackPressed();
+        }
+    }
+
+    private class PlaceScoresBeforeBetRegistration extends AsyncTask<String, String, String> {
+
+        public PlaceScoresBeforeBetRegistration() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/score-registration/score/" + partyInformation.getId());
+            try {
+
+                ArrayList<CompetitorCompact> toSaveData = mItems.get(mHoleNumber).getCompetitors();
+                List<NameValuePair> json = new ArrayList<NameValuePair>();
+                //TODO
+                json.add(new BasicNameValuePair("hole_id", mItems.get(mHoleNumber).getId()));
+                for(int i = 0; i < toSaveData.size(); i++) {
+                    json.add(new BasicNameValuePair("scores["+ i +"][party_member_id]", toSaveData.get(i).getId()));
+                    json.add(new BasicNameValuePair("scores["+ i +"][score]", toSaveData.get(i).getScore()));
+                }
+                json.add(new BasicNameValuePair("access_token", token));
+
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+//                httppost.setHeader("Authorization", text.toString());
+                httppost.setEntity(new UrlEncodedFormEntity(json));
+
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+
+            NewBetSettingFragment targetFragment = new NewBetSettingFragment();
+            try {
+                targetFragment.setPartyId(partyInformation.getId());
+            }catch (Exception e){
+
+            }
+            showFragmentAndAddToBackStack(targetFragment);
+        }
+    }
+
+    private class PlaceScoresBeforeBetScoring extends AsyncTask<String, String, String> {
+
+        public PlaceScoresBeforeBetScoring() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
+            pdialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/score-registration/score/" + partyInformation.getId());
+            try {
+
+                ArrayList<CompetitorCompact> toSaveData = mItems.get(mHoleNumber).getCompetitors();
+                List<NameValuePair> json = new ArrayList<NameValuePair>();
+                //TODO
+                json.add(new BasicNameValuePair("hole_id", mItems.get(mHoleNumber).getId()));
+                for(int i = 0; i < toSaveData.size(); i++) {
+                    json.add(new BasicNameValuePair("scores["+ i +"][party_member_id]", toSaveData.get(i).getId()));
+                    json.add(new BasicNameValuePair("scores["+ i +"][score]", toSaveData.get(i).getScore()));
+                }
+                json.add(new BasicNameValuePair("access_token", token));
+
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+//                httppost.setHeader("Authorization", text.toString());
+                httppost.setEntity(new UrlEncodedFormEntity(json));
+
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+
+            GetBetsList getbets = new GetBetsList();
+            getbets.execute();
         }
     }
 
@@ -798,7 +976,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
         }
     }
 
-    // TODO BETS
     private class GetBetsList extends AsyncTask<String, String, String> {
 
         public GetBetsList() {
@@ -1114,7 +1291,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
             }
         }
     }
-
 
     private class PlaceBetScoresBackward extends AsyncTask<String, String, String> {
 
