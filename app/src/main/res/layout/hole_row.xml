@@ -35,6 +35,6 @@
         android:background="@drawable/container_background_3"
         android:paddingLeft="5dp"
         android:paddingRight="40dp"
-        android:inputType="numberDecimal"
+        android:inputType="number"
         android:textColor="@android:color/black" />
 </TableRow>

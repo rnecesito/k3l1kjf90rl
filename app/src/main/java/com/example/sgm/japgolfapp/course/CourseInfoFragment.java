@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,7 @@ public class CourseInfoFragment extends BaseFragment {
     View c_info_view;
     String response2;
     TableLayout holes_table;
+    boolean firstload = true;
 
 
     private class SingleCourseView extends AsyncTask<String, String, String> {
@@ -73,6 +75,7 @@ public class CourseInfoFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.loading_course_info));
             pdialog.show();
+            firstload = true;
         }
 
         @Override
@@ -156,11 +159,10 @@ public class CourseInfoFragment extends BaseFragment {
                     ArrayAdapter<CharSequence> adapter= ArrayAdapter.createFromResource(getActivity(), holes_list, android.R.layout.simple_spinner_dropdown_item);
                     if(!jsonObject.getString("holes").equals(null)){
                         int holePosition = adapter.getPosition(jsonObject.getString("holes"));
-                        holes_info.setSelection(holePosition);
-
+//                        holes_info.setSelection(holePosition);
                     }
 
-                    tl.removeAllViews();
+//                    tl.removeAllViews();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -367,6 +369,7 @@ public class CourseInfoFragment extends BaseFragment {
                     System.out.println("Success!");
                     success = true;
                     retVal = str;
+                    Log.d("Response", retVal);
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
@@ -411,6 +414,7 @@ public class CourseInfoFragment extends BaseFragment {
         holes_table = (TableLayout) view.findViewById(R.id.holes_table_info);
         c_info_view = view;
         new SingleCourseView().execute();
+
         Button login = (Button) view.findViewById(R.id.create_course_info);
         Button del = (Button) view.findViewById(R.id.delete_course);
         final EditText coursename = (EditText) view.findViewById(R.id.course_name_info);
@@ -419,19 +423,24 @@ public class CourseInfoFragment extends BaseFragment {
         holes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String amount_str = holes.getSelectedItem().toString();
-                if (amount_str.matches("") || amount_str.matches(" ")) {
-                    amount_str = "0";
-                }
-                int amount = Integer.parseInt(amount_str);
+                if (!firstload) {
+                    String amount_str = holes.getSelectedItem().toString();
+                    if (amount_str.matches("") || amount_str.matches(" ")) {
+                        amount_str = "0";
+                    }
+                    int amount = Integer.parseInt(amount_str);
 
-                holes_table.removeAllViews();
-                for(int x = 0; x < amount; x++) {
-                    LayoutInflater inflater = LayoutInflater.from(getContext());
-                    final View item = inflater.inflate(R.layout.hole_row, holes_table, false);
-                    TextView hnt = (TextView) item.findViewById(R.id.hole_number_text);
-                    hnt.setText((x + 1) + "");
-                    holes_table.addView(item);
+                    holes_table.removeAllViews();
+                    for (int x = 0; x < amount; x++) {
+                        LayoutInflater inflater = LayoutInflater.from(getContext());
+                        final View item = inflater.inflate(R.layout.hole_row, holes_table, false);
+                        TextView hnt = (TextView) item.findViewById(R.id.hole_number_text);
+                        hnt.setText((x + 1) + "");
+                        holes_table.addView(item);
+                    }
+                } else {
+                    firstload = false;
+                    return;
                 }
             }
 
