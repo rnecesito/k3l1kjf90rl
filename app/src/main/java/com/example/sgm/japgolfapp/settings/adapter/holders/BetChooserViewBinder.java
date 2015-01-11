@@ -62,7 +62,7 @@ public class BetChooserViewBinder {
                                     BetSettingChooserFragment.STATICsettingsCount++;
                                 }else{
                                     holder.cbBetCheck.setChecked(false);
-                                    Toast.makeText(mContext, "Cannot Choose more that 3 settings", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(mContext, mContext.getResources().getString(R.string.cannot_choose_more_than_three), Toast.LENGTH_LONG).show();
                                 }
                             } else {
                                 record.setIsChosen(false);
