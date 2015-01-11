@@ -59,4 +59,13 @@
         android:singleLine="true"
         android:textSize="27sp" />
 
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="100dp"
+        android:text="スマート　ゴルフ　マネージャー"
+        android:textSize="23dp"/>
+
 </RelativeLayout>
