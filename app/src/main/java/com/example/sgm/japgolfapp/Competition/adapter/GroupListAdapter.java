@@ -98,15 +98,6 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> implem
         return view;
     }
 
-    @Override
-    public Filter getFilter() {
-        if (planetFilter == null) {
-            planetFilter = new PlanetFilter();
-        }
-
-        return planetFilter;
-    }
-
     class ViewHolder {
         @InjectView(R.id.tv_generic_column_1)
         TextView txtGName;
@@ -123,6 +114,15 @@ public class GroupListAdapter extends ArrayAdapter<CompetitionGroupModel> implem
         public ViewHolder(View view) {
             ButterKnife.inject(this, view);
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (planetFilter == null) {
+            planetFilter = new PlanetFilter();
+        }
+
+        return planetFilter;
     }
 
     private class PlanetFilter extends Filter {

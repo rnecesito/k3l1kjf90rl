@@ -353,12 +353,27 @@ public class CourseInfoFragment extends BaseFragment {
         protected String doInBackground(String... strings) {
             byte[] result = null;
             String str = "";
+            File cDir = getActivity().getCacheDir();
+            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
+            String strLine="";
+            StringBuilder text = new StringBuilder();
+            try {
+                FileReader fReader = new FileReader(tempFile);
+                BufferedReader bReader = new BufferedReader(fReader);
+                while( (strLine=bReader.readLine()) != null  ){
+                    text.append(strLine);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
             HttpClient httpclient = new DefaultHttpClient();
             HttpDelete httppost = new HttpDelete("http://zoogtech.com/golfapp/public/course/"+course_number.toString());
 
             try {
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
-                httppost.setHeader("Authorization", course_number.toString());
+                httppost.setHeader("Authorization", text.toString());
 
                 HttpResponse response = httpclient.execute(httppost);
                 StatusLine statusLine = response.getStatusLine();
@@ -395,7 +410,7 @@ public class CourseInfoFragment extends BaseFragment {
             }
             if(success) {
                 Toast.makeText(getContext(), getResources().getString(R.string.course_deleted), Toast.LENGTH_SHORT).show();
-                showFragment(new ViewCourseFragment());
+                popBackStack();
             } else {
                 Toast.makeText(getContext(), getResources().getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
             }

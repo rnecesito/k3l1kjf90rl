@@ -90,9 +90,6 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (competition_number.toString().equals(' ')) {
-//            checkBox.setChecked(false);
-        }
 
 
 
@@ -104,7 +101,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         LoadAllGroups();
         view_container = view;
         tempGroupList = adapter.getGroupList();
-        final EditText etSearch = (EditText) view.findViewById(R.id.competition_name);
+        final EditText etSearch = (EditText) view.findViewById(R.id.competition_name2);
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -113,7 +110,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (my_groups) {
+                if (!my_groups) {
                     if (!s.toString().equals("")) {
                         adapter.getFilter().filter(s.toString());
                     } else {

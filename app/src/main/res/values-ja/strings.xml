@@ -5,7 +5,7 @@
     <string name="action_settings">設定</string>
     <string name="title_menu">メニュー</string>
     <string name="title_login">ログイン</string>
-    <string name="title_new_registration">新規登録へ</string>
+    <string name="title_new_registration">新規登録</string>
     <string name="title_to_login">ログインへ</string>
     <string name="title_to_new_registration">新規登録へ</string>
     <string name="title_email_address">メールアドレス</string>
