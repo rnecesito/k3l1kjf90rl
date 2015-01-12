@@ -36,6 +36,9 @@ public class MainActivity extends Activity {
             SharedPreferences prefs = this.getSharedPreferences(
                     "com.golf.app", Context.MODE_PRIVATE);
 
+            String fromCounting = "com.golf.app.fromcounting";
+            prefs.edit().remove(fromCounting).apply();
+
             String hasLoggedIn = "com.golf.app.hasloggedin";
             String firstTime = "com.golf.app.firstTimeCheck";
 

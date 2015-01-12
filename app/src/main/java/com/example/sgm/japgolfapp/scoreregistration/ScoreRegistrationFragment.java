@@ -482,10 +482,10 @@ public class ScoreRegistrationFragment extends BaseFragment{
                             JSONObject obj = info.getJSONArray("members").getJSONObject(i);
                             if(a < obj.getJSONArray("scores").length()){
                             mGroupMembers.add(new CompetitorCompact(obj.getString("id"), obj.getJSONObject("member").getString("firstname") + " " + obj.getJSONObject("member").getString("lastname")
-                                    , obj.getJSONArray("scores").getJSONObject(a).getString("score")));
+                                    , obj.getJSONArray("scores").getJSONObject(a).getString("score"), obj.getJSONObject("member").getString("handicap")));
                             }else{
                             mGroupMembers.add(new CompetitorCompact(obj.getString("id"), obj.getJSONObject("member").getString("firstname") + " " + obj.getJSONObject("member").getString("lastname")
-                                    , "0"));
+                                    , "0", obj.getJSONObject("member").getString("handicap")));
                             }
                         }
                         mItems.add(new HoleRecordCompact(info.getJSONObject("course").getJSONArray("hole_items").getJSONObject(a).getString("id"), info.getString("name"), mGroupMembers));

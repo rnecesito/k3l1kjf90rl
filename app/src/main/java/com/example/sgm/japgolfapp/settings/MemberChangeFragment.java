@@ -38,6 +38,7 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -227,6 +228,7 @@ public class MemberChangeFragment extends BaseFragment{
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, "UTF-8");
                     System.out.println("Failed!");
+                    success = false;
                     System.out.println(str);
                     System.out.println(json1.toString());
                     retVal = str;
@@ -252,7 +254,19 @@ public class MemberChangeFragment extends BaseFragment{
                 Toast.makeText(getContext(), getResources().getString(R.string.jap_profile_updated), Toast.LENGTH_LONG).show();
                 popBackStack();
             } else {
-                Toast.makeText(getContext(), getResources().getString(R.string.jap_profile_update_failed), Toast.LENGTH_LONG).show();
+                JSONObject err;
+                JSONArray msg = null;
+                try {
+                    err = new JSONObject(retVal);
+                    msg = new JSONArray(err.getString("email"));
+                    if (!msg.getString(0).equals("The email has already been taken.")) {
+                        Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_failed), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), getResources().getString(R.string.jap_email_registered), Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -519,14 +533,15 @@ public class MemberChangeFragment extends BaseFragment{
     }
 
     public void validate(){
-        boolean pass = false;
+        boolean pass1 = false;
+        boolean pass2 = false;
         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
             invalidEmail.setVisibility(View.VISIBLE);
-            pass = false;
+            pass1 = false;
         }
         else if(name.getText().toString().isEmpty() ){
             invalidName.setVisibility(View.VISIBLE);
-            pass = false;
+            pass2 = false;
         }
 //        else if(password.getText().toString().isEmpty()){
 //            invalidPassword.setVisibility(View.VISIBLE);
@@ -535,17 +550,17 @@ public class MemberChangeFragment extends BaseFragment{
 
         if(android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
             invalidEmail.setVisibility(View.INVISIBLE);
-            pass = true;
+            pass1 = true;
         }
         if(!name.getText().toString().isEmpty()){
             invalidName.setVisibility(View.INVISIBLE);
-            pass = true;
+            pass2 = true;
         }
 //        if(!password.getText().toString().isEmpty()){
 //            invalidPassword.setVisibility(View.INVISIBLE);
 //            return;
 //        }
-        if (pass) {
+        if (pass1 && pass2) {
             new UpdateCall().execute(name.getText().toString(), "-", "Male", "1", email.getText().toString(), password.getText().toString() );
         }
 

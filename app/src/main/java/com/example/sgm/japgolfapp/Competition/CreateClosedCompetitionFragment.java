@@ -80,7 +80,7 @@ public class CreateClosedCompetitionFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_loading_courses_players));
-            pdialog.show();
+//            pdialog.show();
         }
 
         @Override
@@ -158,9 +158,9 @@ public class CreateClosedCompetitionFragment extends Fragment {
                 ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, course_list);
                 spinner.setAdapter(spinnerArrayAdapter);
 
-                Toast.makeText(getActivity(),getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(),getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
         }
     }

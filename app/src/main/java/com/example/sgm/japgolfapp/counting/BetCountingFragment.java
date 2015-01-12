@@ -477,6 +477,7 @@ public class BetCountingFragment extends BaseFragment {
         View tagged = view_container.findViewWithTag("counting_sub_menu");
         if(tagged == null) {
             rl.addView(item);
+            SlideToRight(item);
         }
         Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
         scoreCountingButton.setOnClickListener(new View.OnClickListener() {

@@ -40,7 +40,7 @@
         android:background="@drawable/arrow"
         android:contentDescription=""
         android:text="表示"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" />
