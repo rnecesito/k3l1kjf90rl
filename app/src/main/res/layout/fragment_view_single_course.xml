@@ -103,7 +103,7 @@
                 android:background="#999" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="@string/holes" />
@@ -117,7 +117,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="@string/par" />

@@ -16,9 +16,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="スコア管理だけではなく、握りの集計、パーティー内のスコア集計、順位、最大40名までのコンペ集計に順位計算も自動で行えます。
-もちろん、記録は履歴として残ります"
-            android:padding="50dp"
+            android:text="スコア管理だけではなく、握りの集計、パーティー内のスコア集計、順位、最大40名までのコンペ集計に順位計算も自動で行えます。もちろん、記録は履歴として残ります。"
+            android:textSize="22dp"
+            android:lineSpacingMultiplier="1.25"
+            android:paddingTop="10dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="7dp"
+            android:paddingBottom="30dp"
             android:id="@+id/intro_text"
             />
 
@@ -54,5 +58,14 @@
         android:textStyle="normal"
         android:singleLine="true"
         android:textSize="27sp" />
+
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="100dp"
+        android:text="スマート　ゴルフ　マネージャー"
+        android:textSize="23dp"/>
 
 </RelativeLayout>

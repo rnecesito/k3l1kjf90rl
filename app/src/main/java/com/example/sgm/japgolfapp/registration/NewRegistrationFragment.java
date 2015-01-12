@@ -21,6 +21,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -89,7 +90,6 @@ public class NewRegistrationFragment extends BaseFragment{
                     str = new String(result, "UTF-8");
                     System.out.println("Failed!");
                     System.out.println(str);
-                    System.out.println(json.toString());
                     retVal = str;
                 }
             } catch (JSONException e) {
@@ -115,7 +115,20 @@ public class NewRegistrationFragment extends BaseFragment{
                 Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_success), Toast.LENGTH_LONG).show();
                 showFragment(new MainMenuFragment());
             } else {
-                Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_failed), Toast.LENGTH_LONG).show();
+                JSONObject err;
+                JSONArray msg = null;
+                try {
+                    err = new JSONObject(retVal);
+                    msg = new JSONArray(err.getString("email"));
+                    if (!msg.getString(0).equals("The email has already been taken.")) {
+                        Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_failed), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), getResources().getString(R.string.jap_email_registered), Toast.LENGTH_LONG).show();
+                        popBackStack();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
