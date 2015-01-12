@@ -169,6 +169,8 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage(getResources().getString(R.string.jap_loading_competition_groups));
         pDialog.show();
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
         Log.d(GolfApp.TAG, urlString);
 
         StringRequest strReq = new StringRequest(Request.Method.GET, urlString,
@@ -235,6 +237,8 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage(getResources().getString(R.string.jap_loading_competition_groups));
         pDialog.show();
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
         Log.d(GolfApp.TAG, urlString);
         clearAdapter();
 

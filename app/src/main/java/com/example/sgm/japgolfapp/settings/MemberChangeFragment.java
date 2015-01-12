@@ -79,6 +79,8 @@ public class MemberChangeFragment extends BaseFragment{
 //            pdialog.setMessage(getResources().getString(R.string.jap_loading_user_profile));
             pdialog.setMessage(getResources().getString(R.string.information_loaded));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -187,6 +189,8 @@ public class MemberChangeFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_updating_profile));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -259,7 +263,7 @@ public class MemberChangeFragment extends BaseFragment{
                 try {
                     err = new JSONObject(retVal);
                     msg = new JSONArray(err.getString("email"));
-                    if (!msg.getString(0).equals("The email has already been taken.")) {
+                    if (!msg.getString(0).equals("未入力です")) {
                         Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_failed), Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getContext(), getResources().getString(R.string.jap_email_registered), Toast.LENGTH_LONG).show();

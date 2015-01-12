@@ -62,6 +62,8 @@ public class LoginFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_logging_in));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override

@@ -299,6 +299,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         View tagged = view_container.findViewWithTag("counting_sub_menu");
         if(tagged == null) {
             rl.addView(item);
+            SlideToRight(item);
         }
         Button scoreCountingButton = (Button)item.findViewById(R.id.scoreCounting);
         scoreCountingButton.setOnClickListener(new View.OnClickListener() {
@@ -423,6 +424,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_getting_members));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -580,6 +583,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -655,6 +660,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -738,6 +745,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -816,6 +825,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -902,6 +913,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_saving_scores));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -988,6 +1001,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_getting_bets));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -1092,6 +1107,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_loading_scores));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -1217,6 +1234,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_saving_bets));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -1306,6 +1325,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_saving_bets));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override

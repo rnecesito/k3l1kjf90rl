@@ -116,7 +116,7 @@
                     android:maxLines="1"
                     android:padding="5dp"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/delete" />
+                    android:text="@string/jap_edit" />
             </TableRow>
 
         </TableLayout>

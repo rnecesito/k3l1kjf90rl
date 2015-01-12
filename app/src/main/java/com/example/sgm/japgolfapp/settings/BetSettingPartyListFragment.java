@@ -122,6 +122,8 @@ public class BetSettingPartyListFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_getting_groups));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -338,7 +340,7 @@ public class BetSettingPartyListFragment extends BaseFragment{
 
         TextView tvName = (TextView) view
                 .findViewById(R.id.tv_generic_column_1);
-        tvName.setText(getResources().getString(R.string.name));
+        tvName.setText(getResources().getString(R.string.jap_party_name));
         TextView tvDate = (TextView) view
                 .findViewById(R.id.tv_generic_column_2);
         tvDate.setText(getResources().getString(R.string.date));

@@ -145,7 +145,7 @@
     <string name="jap_getting_groups">グループをロード中です</string>
     <string name="jap_getting_members">メンバーをロード中です</string>
     <string name="jap_getting_bets">握りをロード中です</string>
-    <string name="jap_saving_bets">握りをが保存されている</string>
+    <string name="jap_saving_bets">握りを保存中です</string>
     <string name="jap_saving_scores">スコアを保存し</string>
     <string name="jap_party_list">パーティーリスト</string>
     <string name="jap_getting_holes">ホールをロード中です</string>
@@ -254,5 +254,6 @@
         カラーで止まった場合に、同伴者にポイントを渡します。オリンピックと併用する場合が多いようです。
     </string>
     <string name="jap_group_name">グループ名</string>
+    <string name="jap_edit">編集</string>
 
 </resources>

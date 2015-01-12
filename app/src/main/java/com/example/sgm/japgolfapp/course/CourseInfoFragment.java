@@ -75,6 +75,8 @@ public class CourseInfoFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.loading_course_info));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
             firstload = true;
         }
 
@@ -207,6 +209,8 @@ public class CourseInfoFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_registering));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
 
             File cDir = getActivity().getCacheDir();
             File tempFile = new File(cDir.getPath() + "/" + "course_number.txt") ;
@@ -325,6 +329,8 @@ public class CourseInfoFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.deleting_course));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
             /** Getting Cache Directory */
             File cDir = getActivity().getCacheDir();
 

@@ -176,6 +176,8 @@ public class CreateClosedCompetitionFragment extends Fragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_creating_competition));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
 
             File cDir = getActivity().getCacheDir();
             File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;

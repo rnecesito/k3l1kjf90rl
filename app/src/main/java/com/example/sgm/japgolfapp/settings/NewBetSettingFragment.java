@@ -356,6 +356,8 @@ public class NewBetSettingFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_getting_holes));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override

@@ -111,6 +111,8 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -207,6 +209,8 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_registering));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
 
             File cDir = getActivity().getCacheDir();
             File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt");

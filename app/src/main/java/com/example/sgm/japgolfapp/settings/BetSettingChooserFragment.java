@@ -362,6 +362,8 @@ public class BetSettingChooserFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_saving_bets));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -437,6 +439,8 @@ public class BetSettingChooserFragment extends BaseFragment{
 //            pdialog.setMessage(getResources().getString(R.string.);
             pdialog.setMessage(getResources().getString(R.string.jap_getting_bets));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override

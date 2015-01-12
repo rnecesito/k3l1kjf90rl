@@ -93,6 +93,8 @@ public class ScoreCountingFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_loading_parties));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -187,6 +189,8 @@ public class ScoreCountingFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_loading_scores));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override

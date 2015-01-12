@@ -105,6 +105,8 @@ public class EditGroup extends BaseFragment {
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
         pDialog.show();
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
         Log.d(GolfApp.TAG, urlString);
 
         StringRequest strReq = new StringRequest(Request.Method.GET, urlString,
@@ -201,6 +203,8 @@ public class EditGroup extends BaseFragment {
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage(getResources().getString(R.string.jap_updating_competition));
         pDialog.show();
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
 
         JSONObject requestObject = new JSONObject();
         JSONArray arr = new JSONArray(generateMemberArray());

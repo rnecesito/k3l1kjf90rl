@@ -93,6 +93,8 @@ public class CompetitionCountingFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -187,6 +189,8 @@ public class CompetitionCountingFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_groups));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -282,6 +286,8 @@ public class CompetitionCountingFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_loading_scores));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override

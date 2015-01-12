@@ -122,6 +122,8 @@ public class PartyPlayScoringFragment extends BaseFragment{
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_getting_groups));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -343,13 +345,13 @@ public class PartyPlayScoringFragment extends BaseFragment{
 
         TextView tvName = (TextView) view
                 .findViewById(R.id.tv_generic_column_1);
-        tvName.setText("Name");
+        tvName.setText(getResources().getString(R.string.jap_party_name));
         TextView tvDate = (TextView) view
                 .findViewById(R.id.tv_generic_column_2);
-        tvDate.setText("Date");
+        tvDate.setText(getResources().getString(R.string.date));
         TextView tvCourse = (TextView) view
                 .findViewById(R.id.tv_generic_column_3);
-        tvCourse.setText("Course");
+        tvCourse.setText(getResources().getString(R.string.jap_course));
 
         getPartyPlayGroupList init = new getPartyPlayGroupList();
         init.execute();

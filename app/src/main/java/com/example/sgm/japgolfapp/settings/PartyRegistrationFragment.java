@@ -128,6 +128,8 @@ public class PartyRegistrationFragment extends BaseFragment {
             pdialog.setMessage(getResources().getString(R.string.jap_loading_courses_players));
 //            pdialog.setMessage("Loading courses and players...");
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -516,6 +518,8 @@ public class PartyRegistrationFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_creating_party));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
             /** Getting Cache Directory */
             File cDir = getActivity().getCacheDir();
 
@@ -577,9 +581,9 @@ public class PartyRegistrationFragment extends BaseFragment {
                 int p4_id = p4.id;
 
                 int h1 = Integer.parseInt(tv1.getText().toString());
-                int h2 = Integer.parseInt(tv1.getText().toString());
-                int h3 = Integer.parseInt(tv1.getText().toString());
-                int h4 = Integer.parseInt(tv1.getText().toString());
+                int h2 = Integer.parseInt(tv2.getText().toString());
+                int h3 = Integer.parseInt(tv3.getText().toString());
+                int h4 = Integer.parseInt(tv4.getText().toString());
 
                 json.add(new BasicNameValuePair("members[0][member_id]", p1_id + ""));
                 json.add(new BasicNameValuePair("members[0][handicap]", h1 + ""));

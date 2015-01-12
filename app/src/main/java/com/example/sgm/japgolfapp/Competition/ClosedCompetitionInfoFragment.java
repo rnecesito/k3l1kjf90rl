@@ -78,6 +78,8 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_loading_competition_info));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -252,6 +254,8 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_updating_competition));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
             /** Getting Cache Directory */
             File cDir = getActivity().getCacheDir();
 

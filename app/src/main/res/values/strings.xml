@@ -366,6 +366,7 @@
     <string name="cannot_choose_more_than_three">Cannot Choose more that 3 settings</string>
     <string name="jap_no_bets">No bets</string>
     <string name="jap_group_name">Group Name</string>
+    <string name="jap_edit">Edit</string>
 
 
     <!--<string name="app_name">打球晩成</string>-->

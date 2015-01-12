@@ -85,6 +85,8 @@ public class ClosedCompetitionEditFragment extends Fragment {
             super.onPreExecute();
             pdialog.setMessage("Loading courses and players...");
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
         }
 
         @Override
@@ -261,6 +263,8 @@ public class ClosedCompetitionEditFragment extends Fragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.jap_updating_competition));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
             /** Getting Cache Directory */
             File cDir = getActivity().getCacheDir();
 

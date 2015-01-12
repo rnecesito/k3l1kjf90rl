@@ -59,6 +59,8 @@ public class CreateCourseFragment extends BaseFragment {
             super.onPreExecute();
             pdialog.setMessage(getResources().getString(R.string.create_courses));
             pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
             /** Getting Cache Directory */
             File cDir = getActivity().getCacheDir();
 
