@@ -566,15 +566,29 @@ public class PartyRegistrationFragment extends BaseFragment {
                 Players p3 = (Players) sp3.getSelectedItem();
                 Players p4 = (Players) sp4.getSelectedItem();
 
+                TextView tv1 = (TextView) view_container.findViewById(R.id.textViewC1Count);
+                TextView tv2 = (TextView) view_container.findViewById(R.id.textViewC2Count);
+                TextView tv3 = (TextView) view_container.findViewById(R.id.textViewC3Count);
+                TextView tv4 = (TextView) view_container.findViewById(R.id.textViewC4Count);
+
                 int p1_id = p1.id;
                 int p2_id = p2.id;
                 int p3_id = p3.id;
                 int p4_id = p4.id;
 
-                json.add(new BasicNameValuePair("members[0]", p1_id + ""));
-                json.add(new BasicNameValuePair("members[1]", p2_id + ""));
-                json.add(new BasicNameValuePair("members[2]", p3_id + ""));
-                json.add(new BasicNameValuePair("members[3]", p4_id + ""));
+                int h1 = Integer.parseInt(tv1.getText().toString());
+                int h2 = Integer.parseInt(tv1.getText().toString());
+                int h3 = Integer.parseInt(tv1.getText().toString());
+                int h4 = Integer.parseInt(tv1.getText().toString());
+
+                json.add(new BasicNameValuePair("members[0][member_id]", p1_id + ""));
+                json.add(new BasicNameValuePair("members[0][handicap]", h1 + ""));
+                json.add(new BasicNameValuePair("members[1][member_id]", p2_id + ""));
+                json.add(new BasicNameValuePair("members[1][handicap]", h2 + ""));
+                json.add(new BasicNameValuePair("members[2][member_id]", p3_id + ""));
+                json.add(new BasicNameValuePair("members[2][handicap]", h3 + ""));
+                json.add(new BasicNameValuePair("members[3][member_id]", p4_id + ""));
+                json.add(new BasicNameValuePair("members[3][handicap]", h4 + ""));
 
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
                 httppost.setHeader("Authorization", text.toString());
