@@ -1069,7 +1069,9 @@ public class ScoreRegistrationFragment extends BaseFragment{
                         container.setVisibility(View.VISIBLE);
 
                     }else{
-                        Toast.makeText(getActivity(), "There are no bets set for this hole", Toast.LENGTH_SHORT).show();
+
+
+                        Toast.makeText(getActivity(), getResources().getString(R.string.jap_no_bets), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

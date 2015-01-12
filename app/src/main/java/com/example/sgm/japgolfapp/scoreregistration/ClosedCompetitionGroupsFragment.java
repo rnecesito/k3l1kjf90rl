@@ -76,11 +76,8 @@ public class ClosedCompetitionGroupsFragment extends BaseFragment{
         clearBackStack();
     }
 
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_party_play_scoring_list, container, false);
     }
 
@@ -204,8 +201,9 @@ public class ClosedCompetitionGroupsFragment extends BaseFragment{
                     lvPartyPlayGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            ScoreRegistrationCompetitionFragment targetFragment = new ScoreRegistrationCompetitionFragment();
-                            targetFragment.setScoreRegistrationFragmentParty(mCompetitionId, mPartyPlayGroups.get(position), position);
+                            NewScoreRegistrationCompetitionFragment targetFragment = new NewScoreRegistrationCompetitionFragment();
+//                            targetFragment.setScoreRegistrationFragmentParty(mCompetitionId, mPartyPlayGroups.get(position), position);
+                            targetFragment.setScoreRegistrationFragmentParty(mCompetitionId, mPartyPlayGroups.get(position));
                             showFragmentAndAddToBackStack(targetFragment);
                         }
                     });
@@ -215,6 +213,7 @@ public class ClosedCompetitionGroupsFragment extends BaseFragment{
             }
         }
     }
+
     @OnClick(R.id.menu_button)
     public void showMenu() {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
