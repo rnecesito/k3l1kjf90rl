@@ -263,7 +263,7 @@ public class ScoreCountingFragment extends BaseFragment {
                             LayoutInflater inflater = LayoutInflater.from(getActivity());
                             final View item = inflater.inflate(R.layout.score_counting_party_play_row, main_table, false);
                             TextView player_name_col = (TextView) item.findViewById(R.id.party_play_row_name);
-                            player_name_col.setText(row.getString("name"));
+                            player_name_col.setText(row.getString("name") + " (" + row.getString("rank") + "位)");
                             TextView gross_col = (TextView) item.findViewById(R.id.party_play_gross);
                             gross_col .setText(row.getString("gross"));
                             TextView net_col = (TextView) item.findViewById(R.id.party_play_net);
