@@ -74,7 +74,7 @@ public class BetSettingPartyListFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_party_play_scoring_list, container, false);
+        return inflater.inflate(R.layout.fragment_new_party_play_scoring_list, container, false);
     }
 
     View view_container;
@@ -204,6 +204,7 @@ public class BetSettingPartyListFragment extends BaseFragment{
             }
         }
     }
+
     @OnClick(R.id.menu_button)
     public void showMenu() {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -332,8 +333,6 @@ public class BetSettingPartyListFragment extends BaseFragment{
 
         view_container = view;
         lvPartyPlayGroups = (ListView) view.findViewById(R.id.lvPartyPlayGroups);
-        TextView registerTv = (TextView) view.findViewById(R.id.registerTv);
-        registerTv.setText(getResources().getString(R.string.jap_party_list));
         TableRow tableRow = (TableRow) view
                 .findViewById(R.id.tr_generic_row);
         tableRow.setBackgroundColor(Color.LTGRAY);

@@ -1085,7 +1085,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
 
                     }else{
 
-
                         Toast.makeText(getActivity(), getResources().getString(R.string.jap_no_bets), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
