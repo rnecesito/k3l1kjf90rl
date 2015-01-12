@@ -348,15 +348,9 @@ public class ClosedCompetitionGroupsFragment extends BaseFragment{
                 .findViewById(R.id.tr_generic_row);
         tableRow.setBackgroundColor(Color.LTGRAY);
 
-        TextView tvName = (TextView) view
-                .findViewById(R.id.tv_generic_column_1);
-        tvName.setText("Name");
-        TextView tvDate = (TextView) view
-                .findViewById(R.id.tv_generic_column_2);
-        tvDate.setText("Date");
         TextView tvCourse = (TextView) view
                 .findViewById(R.id.tv_generic_column_3);
-        tvCourse.setText("Course");
+        tvCourse.setText("ゴルフ場");
 
         getPartyPlayGroupList init = new getPartyPlayGroupList();
         init.execute();
