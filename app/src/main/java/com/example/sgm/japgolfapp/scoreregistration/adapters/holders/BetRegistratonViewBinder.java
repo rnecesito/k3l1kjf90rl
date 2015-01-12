@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.models.CompetitorCompact;
 
 
@@ -47,6 +46,9 @@ public class BetRegistratonViewBinder {
 				}
                 if (holder.tvScore != null) {
                     holder.tvScore.setText("" + competitor.getScore());
+                }
+                if (holder.tvHandicap != null) {
+                    holder.tvHandicap.setText("ハンディー " + competitor.getHandicap());
                 }
 
                 if (holder.ivIncrease != null){

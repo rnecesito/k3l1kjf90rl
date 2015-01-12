@@ -1,19 +1,19 @@
 package com.example.sgm.japgolfapp.models;
 
-import java.util.ArrayList;
-
 public class CompetitorCompact {
 
     private String mId;
     private String mName;
     private String mScore;
+    private String mHandicap;
 
     public CompetitorCompact(){}
 
-    public CompetitorCompact(String id, String name, String score){
+    public CompetitorCompact(String id, String name, String score, String handicap){
         mId = id;
         mName = name;
         mScore = score;
+        mHandicap = handicap;
     }
 	
 	public String getName() {
@@ -38,4 +38,11 @@ public class CompetitorCompact {
 
     public void setScore(String score) { this.mScore = score; }
 
+    public String getHandicap() {
+        return mHandicap;
+    }
+
+    public void setHandicap(String handicap) {
+        this.mHandicap = handicap;
+    }
 }

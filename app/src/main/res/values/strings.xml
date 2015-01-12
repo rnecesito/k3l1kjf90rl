@@ -433,9 +433,7 @@
     <string name="view_courses">コース確認</string>
     <string name="Edit">編集</string>
     <string name="view_closed_competition">コンペ確認</string>
-    <!--<string name="name">氏名</string>-->
-    <string name="name">パーティー名</string>
-    <!--<string name="date">日付</string>-->
+    <string name="name">氏名</string>
     <string name="date">日付</string>
     <string name="view">確認</string>
     <string name="jap_closed_competition">コンペ</string>

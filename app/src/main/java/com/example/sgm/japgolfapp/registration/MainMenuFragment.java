@@ -156,7 +156,7 @@ public class MainMenuFragment extends BaseFragment {
         SharedPreferences prefs = getActivity().getSharedPreferences(
                 "com.example.app", Context.MODE_PRIVATE);
 
-        String hasLoggedIn = "com.example.app.hasloggedin";
+        String hasLoggedIn = "com.golf.app.hasloggedin";
         prefs.edit().putBoolean(hasLoggedIn, false).apply();
 
         clearBackStack();
@@ -170,6 +170,7 @@ public class MainMenuFragment extends BaseFragment {
         View tagged = view_container.findViewWithTag("counting_sub_menu");
         if (tagged == null) {
             rl.addView(item);
+            SlideToRight(item);
         }
         Button scoreCountingButton = (Button) item.findViewById(R.id.scoreCounting);
         scoreCountingButton.setOnClickListener(new View.OnClickListener() {
@@ -213,7 +214,88 @@ public class MainMenuFragment extends BaseFragment {
         final String hasLoggedIn = "com.golf.app.fromcounting";
         final Boolean b = prefs.getBoolean(hasLoggedIn, false);
         if (b) {
-            b1.performClick();
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
+            View item = inflater.inflate(R.layout.side_menu, rl, false);
+            if (!shown) {
+                item.setTag("side_menu_tag");
+                rl.addView(item);
+                SlideToRight(item);
+
+                Button settingButton = (Button) item.findViewById(R.id.settingButton);
+                settingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new MenuSettingsFragment());
+                    }
+                });
+                ImageButton iSettingButton = (ImageButton) item.findViewById(R.id.imageSettingButton);
+                iSettingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new MenuSettingsFragment());
+                    }
+                });
+
+                Button historyButton = (Button) item.findViewById(R.id.historyButton);
+                historyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new PlayHistoryFragment());
+                    }
+                });
+
+                ImageView iHButton = (ImageView) item.findViewById(R.id.imageHistoryButton);
+                iHButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new PlayHistoryFragment());
+                    }
+                });
+
+                Button scoreRegistrationButton = (Button) item.findViewById(R.id.scoreRegistrationButton);
+                scoreRegistrationButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
+                    }
+                });
+                ImageButton iSButton = (ImageButton) item.findViewById(R.id.imageScoreRegistrationButton);
+                iSButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragmentAndAddToBackStack(new ScoreRegistrationChooseFragment());
+                    }
+                });
+
+                Button countingButton = (Button) item.findViewById(R.id.countingButton);
+                countingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        countingButton(view_container);
+//                showFragmentAndAddToBackStack(new MenuSettingsFragment());
+                    }
+                });
+
+
+                ImageButton iCButton = (ImageButton) item.findViewById(R.id.imageButton3);
+                iCButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        countingButton(view_container);
+                    }
+                });
+//                showFragmentAndAddToBackStack(new MenuSettingsFragment());
+                shown = true;
+            } else {
+                item = view_container.findViewWithTag("side_menu_tag");
+                SlideToLeft(item);
+                rl.removeView(item);
+                shown = false;
+            }
+
+            Button countingButton = (Button) item.findViewById(R.id.countingButton);
+            countingButton.performClick();
         }
     }
 

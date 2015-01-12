@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/name" />
+                    android:text="@string/jap_competition_name" />
 
                 <LinearLayout
                     android:layout_width="1dp"
