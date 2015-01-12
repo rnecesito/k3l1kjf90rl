@@ -9,7 +9,7 @@
     <string name="title_to_login">ログインへ</string>
     <string name="title_to_new_registration">新規登録へ</string>
     <string name="title_email_address">メールアドレス</string>
-    <string name="title_first_name">名</string>
+    <string name="title_first_name">氏名</string>
     <string name="title_last_name">姓</string>
     <string name="title_password">パスワード</string>
     <string name="title_setting">設定</string>
@@ -37,7 +37,7 @@
     <string name="jap_reg_failed">登録できませんでした。再試行してください。</string>
     <string name="jap_registering">登録中です</string>
     <string name="jap_enter_email">メールアドレスを入力してください</string>
-    <string name="jap_enter_firstname">氏名（名）を入力してください</string>
+    <string name="jap_enter_firstname">未入力です</string>
     <string name="jap_enter_pass">パスワードを入力してください</string>
     <string name="jap_updating_competition">コンペを更新中です</string>
     <string name="jap_competition_updated">コンペの更新が完了しました</string>

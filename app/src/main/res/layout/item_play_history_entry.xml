@@ -33,12 +33,15 @@
         android:textColor="@android:color/white"
         android:layout_alignParentStart="true" />
 
-    <ImageView
+    <TextView
         android:layout_width="70dp"
         android:layout_height="55dp"
         android:id="@+id/imgDisplayHistory"
         android:background="@drawable/arrow"
         android:contentDescription=""
+        android:text="表示"
+        android:textColor="@android:color/black"
+        android:gravity="center"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" />
 

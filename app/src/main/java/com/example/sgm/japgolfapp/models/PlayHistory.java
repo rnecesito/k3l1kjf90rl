@@ -4,15 +4,20 @@ import java.util.ArrayList;
 
 public class PlayHistory{
 
+    private String mId;
     private String mDate;
     private String mGolfCourseName;
     private ArrayList<Competitor> mCompetitors;
 
 	public PlayHistory(){}
-    public PlayHistory(String date, String golfCourse, ArrayList<Competitor> competitor){
+    public PlayHistory(String id, String date, String golfCourse, ArrayList<Competitor> competitor){
+        this.mId = id;
         this.mDate = date;
         this.mGolfCourseName = golfCourse;
         this.mCompetitors = competitor;
+    }
+    public String getId() {
+        return mId;
     }
 	public String getDate() {
         return mDate;

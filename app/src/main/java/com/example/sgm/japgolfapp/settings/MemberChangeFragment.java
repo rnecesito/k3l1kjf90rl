@@ -519,32 +519,35 @@ public class MemberChangeFragment extends BaseFragment{
     }
 
     public void validate(){
+        boolean pass = false;
         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
             invalidEmail.setVisibility(View.VISIBLE);
-            return;
+            pass = false;
         }
         else if(name.getText().toString().isEmpty() ){
             invalidName.setVisibility(View.VISIBLE);
-            return;
+            pass = false;
         }
-        else if(password.getText().toString().isEmpty()){
-            invalidPassword.setVisibility(View.VISIBLE);
-            return;
-        }
+//        else if(password.getText().toString().isEmpty()){
+//            invalidPassword.setVisibility(View.VISIBLE);
+//            return;
+//        }
 
         if(android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
             invalidEmail.setVisibility(View.INVISIBLE);
-            return;
+            pass = true;
         }
         if(!name.getText().toString().isEmpty()){
             invalidName.setVisibility(View.INVISIBLE);
-            return;
+            pass = true;
         }
 //        if(!password.getText().toString().isEmpty()){
 //            invalidPassword.setVisibility(View.INVISIBLE);
 //            return;
 //        }
-        new UpdateCall().execute(name.getText().toString(), "-", "Male", "1", email.getText().toString(), password.getText().toString() );
+        if (pass) {
+            new UpdateCall().execute(name.getText().toString(), "-", "Male", "1", email.getText().toString(), password.getText().toString() );
+        }
 
     }
 
