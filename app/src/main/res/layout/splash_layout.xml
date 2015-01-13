@@ -3,9 +3,8 @@
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <ImageView android:id="@+id/splashscreen" android:layout_width="wrap_content"
+    <WebView android:id="@+id/splashscreen" android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:src="@drawable/splash"
         android:layout_gravity="center"/>
 
 </LinearLayout>

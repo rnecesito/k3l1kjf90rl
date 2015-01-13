@@ -12,13 +12,10 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.BetSetting;
 import com.example.sgm.japgolfapp.settings.adapter.holders.BetChooserViewBinder;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -50,7 +47,7 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
 	public View getView(int position, View view, ViewGroup parent) {
         BetChooserViewBinder.BetChooserHolder holder = new BetChooserViewBinder.BetChooserHolder();
 
-        BetSetting record = getItem(position);
+        final BetSetting record = getItem(position);
 
 		if (view == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext()
@@ -66,7 +63,7 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
                 @Override
                 public void onClick(View v) {
                     //new CustomDialogClass(a).show();
-                    CustomDialogClass dialog = new CustomDialogClass(a);
+                    CustomDialogClass dialog = new CustomDialogClass(a, record.getHelp());
                     dialog.getWindow().getAttributes().windowAnimations = R.anim.right_left_animation;
                     dialog.show();
                 }
@@ -92,10 +89,12 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
         public Context c;
         public Dialog d;
         public Button returnB;
+        public String desc;
 
-        public CustomDialogClass(Context a) {
+        public CustomDialogClass(Context a, String s) {
             super(a);
             this.c = a;
+            this.desc = s;
         }
 
         @Override
@@ -110,6 +109,7 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
             returnB.setOnClickListener(this);
 
             TextView content = (TextView)findViewById(R.id.content);
+            content.setText(desc);
             content.setMovementMethod(new ScrollingMovementMethod());
 
         }

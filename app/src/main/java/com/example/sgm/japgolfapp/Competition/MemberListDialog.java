@@ -206,13 +206,13 @@ public class MemberListDialog extends Dialog {
         boolean flag = false;
         if (tempUser.size() > 0) {
             if (tempUser.size() == 3) {
-                Toast.makeText(context, "Can't add member anymore!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "これ以上追加できません", Toast.LENGTH_SHORT).show();
 
             } else {
                 for (int i = 0; i < tempUser.size(); i++) {
                     if (userModel.getId().contentEquals(tempUser.get(i).getId())) {
                         flag = false;
-                        Toast.makeText(context, "User is already added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, " 既に登録済みです。", Toast.LENGTH_SHORT).show();
                         break;
                     } else {
                         flag = true;

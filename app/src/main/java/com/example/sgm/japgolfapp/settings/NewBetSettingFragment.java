@@ -406,7 +406,7 @@ public class NewBetSettingFragment extends BaseFragment{
                     lvHoldeRecords = (ListView) view_container.findViewById(R.id.lvBets);
 
                     tvSet = (TextView) view_container.findViewById(R.id.tvSaveReturn);
-                    tvSet.setText("Save");
+                    tvSet.setText(getResources().getString(R.string.save));
 
                     mItems = new ArrayList<HoleRecord>();
 

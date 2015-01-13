@@ -342,6 +342,12 @@ public class ClosedCompetitionsFragment extends BaseFragment{
         TextView tvCourse = (TextView) view
                 .findViewById(R.id.tv_generic_column_3);
         tvCourse.setText("ゴルフ場");
+        TextView tvName = (TextView) view
+                .findViewById(R.id.tv_generic_column_1);
+        tvName.setText("コンペ名");
+        TextView tvDate = (TextView) view
+                .findViewById(R.id.tv_generic_column_2);
+        tvDate.setText("日付");
 
         getPartyPlayGroupList init = new getPartyPlayGroupList();
         init.execute();

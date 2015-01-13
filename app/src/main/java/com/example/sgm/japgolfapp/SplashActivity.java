@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 /**
  * Created by Rey on 1/13/2015.
@@ -16,6 +18,11 @@ public class SplashActivity extends Activity{
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.splash_layout);
+        WebView wv = (WebView) findViewById(R.id.splashscreen);
+        WebSettings settings = wv.getSettings();
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+        wv.loadUrl("file:///android_asset/splash_movie.gif");
 
         final SplashActivity sPlashScreen = this;
 
@@ -24,7 +31,7 @@ public class SplashActivity extends Activity{
             public void run() {
                 try {
                     synchronized (this) {
-                        wait(2000);
+                        wait(4100);
                     }
                 } catch (InterruptedException ex) {
                 }
