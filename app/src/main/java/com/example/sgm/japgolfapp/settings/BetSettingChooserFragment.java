@@ -475,6 +475,7 @@ public class BetSettingChooserFragment extends BaseFragment{
                     bets_byte = EntityUtils.toByteArray(response.getEntity());
                     bets_string = new String(bets_byte, "UTF-8");
                     bettype_json_string = bets_string;
+                    System.out.print(bets_string);
                     success = true;
                 } else {
                     bets_byte = EntityUtils.toByteArray(response.getEntity());
@@ -525,6 +526,7 @@ public class BetSettingChooserFragment extends BaseFragment{
                     lvBetSettings = (ListView) view_container.findViewById(R.id.lvBets);
                     adapter = new BetChooserAdapter(getActivity(), 0, mItems);
                     lvBetSettings.setAdapter(adapter);
+                    lvBetSettings.setFocusable(true);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -572,7 +574,7 @@ public class BetSettingChooserFragment extends BaseFragment{
         lvBetSettings = (ListView) view.findViewById(R.id.lvBets);
         adapter = new BetChooserAdapter(getActivity(), 0, mItems);
         lvBetSettings.setAdapter(adapter);
-
+        lvBetSettings.setFocusable(true);
     }
 
 }

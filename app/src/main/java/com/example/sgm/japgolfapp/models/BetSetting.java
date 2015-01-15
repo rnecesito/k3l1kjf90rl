@@ -1,7 +1,5 @@
 package com.example.sgm.japgolfapp.models;
 
-import java.util.ArrayList;
-
 public class BetSetting {
 
     private String mId;
@@ -13,17 +11,17 @@ public class BetSetting {
     public BetSetting(){}
 
     public BetSetting(String id, String ammount, String name, String help, Boolean choosen){
-        mId = id;
-        mAmmount = ammount;
-        mName = name;
-        mHelp = help;
-        mChosen = choosen;
+        this.mId = id;
+        this.mAmmount = ammount;
+        this.mName = name;
+        this.mHelp = help;
+        this.mChosen = choosen;
     }
 
     public BetSetting(String name, String help, Boolean choosen){
-        mName = name;
-        mHelp = help;
-        mChosen = choosen;
+        this.mName = name;
+        this.mHelp = help;
+        this.mChosen = choosen;
     }
 
     public void setId(String id){
