@@ -1,17 +1,11 @@
 package com.example.sgm.japgolfapp.settings.adapter;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.BetSetting;
@@ -58,7 +52,7 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
 						false);
 
 
-            BetChooserViewBinder.bindBetChooserdHolder(a.getApplicationContext(), holder, view);
+            BetChooserViewBinder.bindBetChooserdHolder(a, holder, view);
 //            holder.
 			view.setTag(holder);
 

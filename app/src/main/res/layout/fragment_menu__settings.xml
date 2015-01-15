@@ -8,7 +8,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:descendantFocusability="beforeDescendants"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TableLayout
             android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
 
                 <Button
                     android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_height="60dp"
                     android:text="@string/text_member_change"
                     android:id="@+id/createCompetitionB"
                     android:textAllCaps="false"
@@ -56,7 +56,7 @@
                     android:id="@+id/iCreateCompetitionB"
                     android:background="@drawable/arrow"
                     android:contentDescription=""
-                    android:layout_marginTop="22dp" />
+                    android:layout_marginTop="6dp" />
             </TableRow>
 
             <TableRow
@@ -66,7 +66,7 @@
 
                 <Button
                     android:layout_width="100dp"
-                    android:layout_height="90dp"
+                    android:layout_height="60dp"
                     android:text="@string/text_party_registration"
                     android:id="@+id/ViewCompetitionB"
                     android:textAllCaps="false"
@@ -79,7 +79,7 @@
                     android:id="@+id/iViewCompetitionB"
                     android:background="@drawable/arrow"
                     android:contentDescription=""
-                    android:layout_marginTop="22dp" />
+                    android:layout_marginTop="6dp" />
 
             </TableRow>
 
@@ -90,7 +90,7 @@
 
                 <Button
                     android:layout_width="100dp"
-                    android:layout_height="90dp"
+                    android:layout_height="60dp"
                     android:text="@string/text_competition_registration"
                     android:id="@+id/competitionRButton"
                     android:textAllCaps="false"
@@ -103,7 +103,7 @@
                     android:id="@+id/iCompetitionRButton"
                     android:background="@drawable/arrow"
                     android:contentDescription=""
-                    android:layout_marginTop="22dp" />
+                    android:layout_marginTop="6dp" />
             </TableRow>
 
             <TableRow
@@ -113,7 +113,7 @@
 
                 <Button
                     android:layout_width="100dp"
-                    android:layout_height="90dp"
+                    android:layout_height="60dp"
                     android:text="@string/text_bet_registration"
                     android:id="@+id/betRButton"
                     android:textAllCaps="false"
@@ -126,18 +126,17 @@
                     android:id="@+id/ibetRButton"
                     android:background="@drawable/arrow"
                     android:contentDescription=""
-                    android:layout_marginTop="22dp" />
+                    android:layout_marginTop="6dp" />
             </TableRow>
 
             <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginRight="10dp">
 
                 <Button
                     android:layout_width="100dp"
-                    android:layout_height="90dp"
+                    android:layout_height="60dp"
                     android:text="@string/title_course_registration"
                     android:id="@+id/courseAdministrationB"
                     android:textAllCaps="false"
@@ -150,7 +149,31 @@
                     android:id="@+id/iCourseAdministrationB"
                     android:background="@drawable/arrow"
                     android:contentDescription=""
-                    android:layout_marginTop="22dp" />
+                    android:layout_marginTop="6dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="@string/jap_party_list"
+                    android:id="@+id/partyView"
+                    android:textAllCaps="false"
+                    android:background="@drawable/button_new_golf_app"
+                    android:layout_marginLeft="0dp" />
+
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/iPartyView"
+                    android:background="@drawable/arrow"
+                    android:contentDescription=""
+                    android:layout_marginTop="6dp" />
             </TableRow>
 
         </TableLayout>

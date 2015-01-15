@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.BetSetting;
 import com.example.sgm.japgolfapp.settings.BetSettingChooserFragment;
-import com.example.sgm.japgolfapp.settings.adapter.BetChooserAdapter;
 
 
 public class BetChooserViewBinder {

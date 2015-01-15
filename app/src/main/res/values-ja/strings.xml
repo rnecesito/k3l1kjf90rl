@@ -255,5 +255,7 @@
     </string>
     <string name="jap_group_name">グループ名</string>
     <string name="jap_edit">編集</string>
+    <string name="jap_deleting_party">パーティー削除中</string>
+    <string name="jap_party_deleted">削除完了しました。</string>
 
 </resources>
