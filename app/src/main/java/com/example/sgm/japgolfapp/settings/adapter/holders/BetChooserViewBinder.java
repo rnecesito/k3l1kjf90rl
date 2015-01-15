@@ -1,16 +1,20 @@
 package com.example.sgm.japgolfapp.settings.adapter.holders;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.R;
 import com.example.sgm.japgolfapp.models.BetSetting;
-import com.example.sgm.japgolfapp.models.HoleRecord;
 import com.example.sgm.japgolfapp.settings.BetSettingChooserFragment;
+import com.example.sgm.japgolfapp.settings.adapter.BetChooserAdapter;
 
 
 public class BetChooserViewBinder {
@@ -52,6 +56,17 @@ public class BetChooserViewBinder {
 //                    }
 //                });
 
+                holder.tvHelp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //new CustomDialogClass(a).show();
+                        CustomDialogClass dialog = new CustomDialogClass(mContext, record.getHelp());
+                        dialog.getWindow().getAttributes().windowAnimations = R.anim.right_left_animation;
+                        dialog.show();
+                    }
+                });
+
+
                 holder.cbBetCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -73,5 +88,51 @@ public class BetChooserViewBinder {
                 });
 			}
 		}
-	}
+
+    public static class CustomDialogClass extends Dialog implements
+            android.view.View.OnClickListener {
+
+        public Context c;
+        public Dialog d;
+        public Button returnB;
+        public String desc;
+
+        public CustomDialogClass(Context a, String s) {
+            super(a);
+            this.c = a;
+            this.desc = s;
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+            setContentView(R.layout.dialog_help);
+
+            returnB = (Button)findViewById(R.id.returnB);
+            returnB.getBackground().setAlpha(51);
+            returnB.setOnClickListener(this);
+
+            TextView content = (TextView)findViewById(R.id.content);
+            content.setText(desc);
+            content.setMovementMethod(new ScrollingMovementMethod());
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.returnB:
+                    dismiss();
+                    break;
+                default:
+                    break;
+            }
+            dismiss();
+        }
+    }
+
+
+}
 

@@ -59,16 +59,7 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
 
 
             BetChooserViewBinder.bindBetChooserdHolder(a.getApplicationContext(), holder, view);
-            holder.tvHelp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //new CustomDialogClass(a).show();
-                    CustomDialogClass dialog = new CustomDialogClass(a, record.getHelp());
-                    dialog.getWindow().getAttributes().windowAnimations = R.anim.right_left_animation;
-                    dialog.show();
-                }
-            });
-
+//            holder.
 			view.setTag(holder);
 
 		} else {
@@ -81,51 +72,4 @@ public class BetChooserAdapter extends ArrayAdapter<BetSetting> {
 
 		return view;
 	}
-
-
-    public class CustomDialogClass extends Dialog implements
-            android.view.View.OnClickListener {
-
-        public Context c;
-        public Dialog d;
-        public Button returnB;
-        public String desc;
-
-        public CustomDialogClass(Context a, String s) {
-            super(a);
-            this.c = a;
-            this.desc = s;
-        }
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-            setContentView(R.layout.dialog_help);
-
-            returnB = (Button)findViewById(R.id.returnB);
-            returnB.getBackground().setAlpha(51);
-            returnB.setOnClickListener(this);
-
-            TextView content = (TextView)findViewById(R.id.content);
-            content.setText(desc);
-            content.setMovementMethod(new ScrollingMovementMethod());
-
-        }
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.returnB:
-                    dismiss();
-                    break;
-                default:
-                    break;
-            }
-            dismiss();
-        }
-    }
-
-
 }
