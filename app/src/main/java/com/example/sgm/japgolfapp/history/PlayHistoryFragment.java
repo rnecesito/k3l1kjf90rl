@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -342,10 +343,13 @@ public class PlayHistoryFragment extends BaseFragment{
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, "UTF-8");
                     party_string = result_string;
+                    Log.d("Data", result_string);
                     success = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, "UTF-8");
+                    party_string = result_string;
+                    success = false;
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -393,7 +397,8 @@ public class PlayHistoryFragment extends BaseFragment{
 //                        } catch (ExecutionException e) {
 //                            e.printStackTrace();
 //                        }
-                        mItems.add(new PlayHistory(row.getString("id"), row.getString("date"), row.getString("name"), dummy_one));
+                        JSONObject course_info = new JSONObject(row.getString("course"));
+                        mItems.add(new PlayHistory(row.getString("id"), row.getString("date"), course_info.getString("name"), dummy_one));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

@@ -29,7 +29,7 @@ public class PlayHistoryScoreViewBinder {
 
 			if (historyScore != null) {
 				if (holder.tvName != null) {
-					holder.tvName.setText(historyScore.getName());
+					holder.tvName.setText(historyScore.getRank() + "位 " + historyScore.getName());
 				}
                 if (holder.tvGross != null) {
                     holder.tvGross.setText(historyScore.getGross());
@@ -37,6 +37,7 @@ public class PlayHistoryScoreViewBinder {
                 if (holder.tvNet != null) {
                     holder.tvNet.setText(historyScore.getNet());
                 }
+
 			}
 		}
 	}
