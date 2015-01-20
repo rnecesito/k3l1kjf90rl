@@ -536,6 +536,24 @@ public class MemberChangeFragment extends BaseFragment{
         validate();
     }
 
+
+    @InjectView(R.id.imgMinusB)
+    ImageView minus;
+    @InjectView(R.id.imgAddB)
+    ImageView add;
+
+    @OnClick(R.id.imgMinusB)
+    public void minusHandicap() {
+        TextView handicap = (TextView) view_container.findViewById(R.id.textViewC1Count);
+        handicap.setText((Integer.parseInt(handicap.getText().toString()) - 1)+"");
+    }
+
+    @OnClick(R.id.imgAddB)
+    public void plusHandicap() {
+        TextView handicap = (TextView) view_container.findViewById(R.id.textViewC1Count);
+        handicap.setText((Integer.parseInt(handicap.getText().toString()) + 1)+"");
+    }
+
     public void validate(){
         boolean pass1 = false;
         boolean pass2 = false;
@@ -565,7 +583,8 @@ public class MemberChangeFragment extends BaseFragment{
 //            return;
 //        }
         if (pass1 && pass2) {
-            new UpdateCall().execute(name.getText().toString(), "-", "Male", "1", email.getText().toString(), password.getText().toString() );
+            TextView handicap = (TextView) view_container.findViewById(R.id.textViewC1Count);
+            new UpdateCall().execute(name.getText().toString(), "-", "Male", handicap.getText().toString(), email.getText().toString(), password.getText().toString() );
         }
 
     }
