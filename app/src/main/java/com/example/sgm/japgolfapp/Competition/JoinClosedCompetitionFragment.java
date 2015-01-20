@@ -437,7 +437,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                     }
                 };
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(getResources().getString(R.string.jap_reg_success)).setMessage(getResources().getString(R.string.jap_reg_success)).setPositiveButton(getResources().getString(R.string.jap_okay), dialogClickListener).show();
+                builder.setTitle(getResources().getString(R.string.jap_reg_success)).setMessage(getResources().getString(R.string.jap_reg_success)).setPositiveButton("OK", dialogClickListener).show();
             } else {
                 Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }

@@ -34,6 +34,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ViewClosedCompetitionsFragment extends BaseFragment {
     private ProgressDialog pdialog;
@@ -119,26 +122,32 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
                     JSONObject competition_row = null;
                     try {
                         competition_row = competitions_ja.getJSONObject(i);
-                        LayoutInflater inflater = LayoutInflater.from(getContext());
-                        final View item = inflater.inflate(R.layout.competition_row_view, main_table, false);
-                        TextView competition_name = (TextView) item.findViewById(R.id.comp_name);
-                        competition_name.setText(competition_row.getString("name"));
-                        TextView date_col = (TextView) item.findViewById(R.id.comp_date);
-                        date_col.setText(competition_row.getString("date"));
-                        if(i % 2 == 0) {
-                            item.setBackgroundColor(Color.WHITE);
-                        } else {
-                            item.setBackgroundColor(Color.LTGRAY);
-                        }
-                        ImageView edit_btn = (ImageView) item.findViewById(R.id.edit_competition);
-                        edit_btn.setOnClickListener(edit_comp);
-                        edit_btn.setTag(competition_row.getString("id"));
-                        ImageView view_btn = (ImageView) item.findViewById(R.id.view_competition);
-                        view_btn.setOnClickListener(view_comp);
-                        view_btn.setTag(competition_row.getString("id"));
-                        main_table.addView(item);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                        Date comp_date = sdf.parse(competition_row.getString("date"));
+//                        if (new Date().before(comp_date)) {
+                            LayoutInflater inflater = LayoutInflater.from(getContext());
+                            final View item = inflater.inflate(R.layout.competition_row_view, main_table, false);
+                            TextView competition_name = (TextView) item.findViewById(R.id.comp_name);
+                            competition_name.setText(competition_row.getString("name"));
+                            TextView date_col = (TextView) item.findViewById(R.id.comp_date);
+                            date_col.setText(competition_row.getString("date"));
+                            if(i % 2 == 0) {
+                                item.setBackgroundColor(Color.WHITE);
+                            } else {
+                                item.setBackgroundColor(Color.LTGRAY);
+                            }
+                            ImageView edit_btn = (ImageView) item.findViewById(R.id.edit_competition);
+                            edit_btn.setOnClickListener(edit_comp);
+                            edit_btn.setTag(competition_row.getString("id"));
+                            ImageView view_btn = (ImageView) item.findViewById(R.id.view_competition);
+                            view_btn.setOnClickListener(view_comp);
+                            view_btn.setTag(competition_row.getString("id"));
+                            main_table.addView(item);
+//                        }
 
                     } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }

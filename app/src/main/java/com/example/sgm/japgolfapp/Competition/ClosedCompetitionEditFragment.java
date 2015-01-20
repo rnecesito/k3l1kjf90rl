@@ -47,8 +47,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ClosedCompetitionEditFragment extends Fragment {
@@ -410,13 +413,27 @@ public class ClosedCompetitionEditFragment extends Fragment {
             int mYear = year;
             int mMonth = monthOfYear;
             int mDay = dayOfMonth;
-            date_view.setText(new StringBuilder()
-                    // Month is 0 based so add 1
-                    .append(new DecimalFormat("00").format(mYear)).append("-")
-                    .append(new DecimalFormat("00").format(mMonth + 1)).append("-")
-                    .append(new DecimalFormat("00").format(mDay)));
-            System.out.println(date_view.getText().toString());
 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date today = new Date();
+                Date comp_date = sdf.parse(String.valueOf(new StringBuilder()
+                        .append(new DecimalFormat("00").format(mYear)).append("-")
+                        .append(new DecimalFormat("00").format(mMonth + 1)).append("-")
+                        .append(new DecimalFormat("00").format(mDay))));
+                if (comp_date.compareTo(today) > 0){
+                    Toast.makeText(getActivity(),getResources().getString(R.string.jap_enter_valid_date), Toast.LENGTH_SHORT).show();
+                    date_view.setText("");
+                } else {
+                    date_view.setText(new StringBuilder()
+                            // Month is 0 based so add 1
+                            .append(new DecimalFormat("00").format(mYear)).append("-")
+                            .append(new DecimalFormat("00").format(mMonth + 1)).append("-")
+                            .append(new DecimalFormat("00").format(mDay)));
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 

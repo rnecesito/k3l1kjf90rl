@@ -205,7 +205,7 @@ public class MemberListDialog extends Dialog {
     public boolean checker(UserModel userModel) {
         boolean flag = false;
         if (tempUser.size() > 0) {
-            if (tempUser.size() == 3) {
+            if (tempUser.size() == 4) {
                 Toast.makeText(context, "これ以上追加できません", Toast.LENGTH_SHORT).show();
 
             } else {

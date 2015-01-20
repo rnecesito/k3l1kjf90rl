@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.example.sgm.japgolfapp.R;
 
@@ -45,8 +45,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CreateClosedCompetitionFragment extends Fragment {
@@ -256,8 +259,7 @@ public class CreateClosedCompetitionFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater
-				.inflate(R.layout.fragment_create_closed_competition, container, false);
+		return inflater.inflate(R.layout.fragment_create_closed_competition, container, false);
 	}
 
 	@Override
@@ -273,12 +275,12 @@ public class CreateClosedCompetitionFragment extends Fragment {
         iv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("DatePicker", "True");
                 Calendar c = Calendar.getInstance();
-                int mYear = c.get(Calendar.YEAR);
-                int mMonth = c.get(Calendar.MONTH);
-                int mDay = c.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(getActivity(),
-                        new mDateSetListener(), mYear, mMonth, mDay);
+                final int mYear = c.get(Calendar.YEAR);
+                final int mMonth = c.get(Calendar.MONTH);
+                final int mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(), new mDateSetListener(), mYear, mMonth, mDay);
                 dialog.show();
             }
         });
@@ -294,10 +296,13 @@ public class CreateClosedCompetitionFragment extends Fragment {
                 if(pn_val.matches("")) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_competition_name), Toast.LENGTH_SHORT).show();
                     return;
-                } else if (p_date.matches("") || p_date.matches("0000-00-00") || p_date.matches("MM/dd/yy")) {
-                    Toast.makeText(getActivity(),getResources().getString(R.string.jap_enter_valid_date), Toast.LENGTH_SHORT).show();
                 } else {
-                    new CompetitionCreate().execute(pn_val, p_date, course_id+"");
+                    if (p_date.matches("") || p_date.matches("0000-00-00") || p_date.matches("MM/dd/yy")) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.jap_enter_valid_date), Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        new CompetitionCreate().execute(pn_val, p_date, course_id + "");
+                    }
                 }
             }
         });
@@ -312,13 +317,26 @@ public class CreateClosedCompetitionFragment extends Fragment {
             int mYear = year;
             int mMonth = monthOfYear;
             int mDay = dayOfMonth;
-            date_view.setText(new StringBuilder()
-                    // Month is 0 based so add 1
-                    .append(new DecimalFormat("00").format(mYear)).append("-")
-                    .append(new DecimalFormat("00").format(mMonth + 1)).append("-")
-                    .append(new DecimalFormat("00").format(mDay)));
-            System.out.println(date_view.getText().toString());
-
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date today = new Date();
+                Date comp_date = sdf.parse(String.valueOf(new StringBuilder()
+                        .append(new DecimalFormat("00").format(mYear)).append("-")
+                        .append(new DecimalFormat("00").format(mMonth + 1)).append("-")
+                        .append(new DecimalFormat("00").format(mDay))));
+                if (comp_date.compareTo(today) > 0){
+                    Toast.makeText(getActivity(),getResources().getString(R.string.jap_enter_valid_date), Toast.LENGTH_SHORT).show();
+                    date_view.setText("");
+                } else {
+                    date_view.setText(new StringBuilder()
+                            // Month is 0 based so add 1
+                            .append(new DecimalFormat("00").format(mYear)).append("-")
+                            .append(new DecimalFormat("00").format(mMonth + 1)).append("-")
+                            .append(new DecimalFormat("00").format(mDay)));
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
