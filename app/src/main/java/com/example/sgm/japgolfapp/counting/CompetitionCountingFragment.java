@@ -364,7 +364,7 @@ public class CompetitionCountingFragment extends BaseFragment {
                             LayoutInflater inflater = LayoutInflater.from(getActivity());
                             final View item = inflater.inflate(R.layout.bet_counting_row, main_table, false);
                             TextView player_name_col = (TextView) item.findViewById(R.id.bet_row_name);
-                            player_name_col.setText(row.getString("name"));
+                            player_name_col.setText(row.getString("rank") + "位 " + row.getString("name"));
                             TextView gross_col = (TextView) item.findViewById(R.id.bet_row_operand);
                             gross_col .setText(row.getString("operand"));
                             TextView net_col = (TextView) item.findViewById(R.id.bet_row_score);
