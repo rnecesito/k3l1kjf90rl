@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.sgm.japgolfapp.registration.IntroScreenFragment;
+import com.example.sgm.japgolfapp.registration.PrimaryScreenFragment;
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
@@ -53,7 +53,7 @@ public abstract class BaseFragment extends Fragment {
         getFragmentManager().beginTransaction()
                 .remove(this)
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                .replace(R.id.container, new IntroScreenFragment())
+                .replace(R.id.container, new PrimaryScreenFragment())
                 .commit();
     }
 

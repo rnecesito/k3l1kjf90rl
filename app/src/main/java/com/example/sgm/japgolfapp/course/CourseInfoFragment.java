@@ -478,6 +478,8 @@ public class CourseInfoFragment extends BaseFragment {
                 } else if(!( holes_int <= 18)) {
                     Toast.makeText(getContext(), getResources().getString(R.string.up_to_18_holes), Toast.LENGTH_SHORT).show();
                     return;
+                } else if (!checkPar()) {
+                    Toast.makeText(getContext(), "パー数を入力してください", Toast.LENGTH_SHORT).show();
                 } else {
                     new CourseCreate().execute(cname_val, holes_val, "No");
                     System.out.println(retVal);
@@ -508,5 +510,18 @@ public class CourseInfoFragment extends BaseFragment {
             }
         });
 	}
+
+    public boolean checkPar() {
+        boolean flag = true;
+        for(int index = 0; index < holes_table.getChildCount(); index++){
+            TableRow row = (TableRow) holes_table.getChildAt(index);
+            EditText et = (EditText) row.getChildAt(2);
+            String hole_par = et.getText().toString();
+            if(hole_par.matches("")) {
+                flag = false;
+            }
+        }
+        return flag;
+    }
 }
 
