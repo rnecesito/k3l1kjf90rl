@@ -552,7 +552,7 @@ public class BetSettingChooserFragment extends BaseFragment{
         new InitLists().execute();
         STATICsettingsCount = mInitialItems.size();
         tvReturn = (TextView) view_container.findViewById(R.id.tvSaveReturn);
-        tvReturn.setText("戻る");
+        tvReturn.setText("保存");
         tvReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

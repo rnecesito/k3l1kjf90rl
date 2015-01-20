@@ -170,74 +170,53 @@ public class PartyRegistrationFragment extends BaseFragment {
             HttpClient httpclient = new DefaultHttpClient();
             HttpGet httppost = new HttpGet("http://zoogtech.com/golfapp/public/course?access_token=" + text.toString());
 
+            HttpClient httpclient_2 = new DefaultHttpClient();
+            HttpGet httppost_2 = new HttpGet("http://zoogtech.com/golfapp/public/user/all?access_token=" + text.toString());
+
+            HttpClient httpclient_3 = new DefaultHttpClient();
+            HttpGet httppost_3 = new HttpGet("http://zoogtech.com/golfapp/public/user/profile?access_token=" + text.toString());
+
             try {
                 HttpResponse response = httpclient.execute(httppost);
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
                     result2 = new String(result, "UTF-8");
-                    System.out.println("Success!");
                     response2 = result2;
                     success = true;
                 } else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     result2 = new String(result, "UTF-8");
-                    System.out.println("Failed!");
                 }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
-            HttpClient httpclient_2 = new DefaultHttpClient();
-            HttpGet httppost_2 = new HttpGet("http://zoogtech.com/golfapp/public/user/all?access_token=" + text.toString());
-
-            try {
-                HttpResponse response = httpclient_2.execute(httppost_2);
-                StatusLine statusLine = response.getStatusLine();
-                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                    result_2 = EntityUtils.toByteArray(response.getEntity());
+                HttpResponse response2 = httpclient_2.execute(httppost_2);
+                StatusLine statusLine2 = response2.getStatusLine();
+                if (statusLine2.getStatusCode() == HttpStatus.SC_OK) {
+                    result_2 = EntityUtils.toByteArray(response2.getEntity());
                     result2_2 = new String(result_2, "UTF-8");
-                    System.out.println(result2_2);
-                    System.out.println("Success!");
                     response2_2 = result2_2;
                     success = true;
                 } else {
-                    result_2 = EntityUtils.toByteArray(response.getEntity());
+                    result_2 = EntityUtils.toByteArray(response2.getEntity());
                     result2_2 = new String(result_2, "UTF-8");
-                    System.out.println(result2_2);
-                    System.out.println("Failed!");
+                    response2_2 = result2_2;
                     success = false;
                 }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
-
-            HttpClient httpclient_3 = new DefaultHttpClient();
-            HttpGet httppost_3 = new HttpGet("http://zoogtech.com/golfapp/public/user/profile?access_token=" + text.toString());
-
-            try {
-                HttpResponse response = httpclient_3.execute(httppost_3);
-                StatusLine statusLine = response.getStatusLine();
-                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                    user_info_result = EntityUtils.toByteArray(response.getEntity());
+                HttpResponse response3 = httpclient_3.execute(httppost_3);
+                StatusLine statusLine3 = response3.getStatusLine();
+                if (statusLine3.getStatusCode() == HttpStatus.SC_OK) {
+                    user_info_result = EntityUtils.toByteArray(response3.getEntity());
                     user_info_result_string = new String(user_info_result, "UTF-8");
-                    System.out.println(user_info_result_string);
-                    System.out.println("Success!");
                     user_info_json_string = user_info_result_string;
+                    System.out.println(user_info_json_string);
+                    System.out.println("Success!");
                     success = true;
                 } else {
-                    user_info_result = EntityUtils.toByteArray(response.getEntity());
+                    user_info_result = EntityUtils.toByteArray(response3.getEntity());
                     user_info_result_string = new String(user_info_result, "UTF-8");
-                    System.out.println(user_info_result_string);
+                    user_info_json_string = user_info_result_string;
+                    System.out.println(user_info_json_string);
                     System.out.println("Failed!");
                     success = false;
                 }
@@ -299,8 +278,8 @@ public class PartyRegistrationFragment extends BaseFragment {
                 spinner.setAdapter(spinnerArrayAdapter);
 
                 Spinner spinner2 = (Spinner) view_container.findViewById(R.id.cName1);
-//                ArrayAdapter spinnerArrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list_container);
-//                spinner2.setAdapter(spinnerArrayAdapter2);
+                ArrayAdapter spinnerArrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list_container);
+                spinner2.setAdapter(spinnerArrayAdapter2);
                 Spinner spinner3 = (Spinner) view_container.findViewById(R.id.cName2);
                 ArrayAdapter spinnerArrayAdapter3 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list_container);
                 spinner3.setAdapter(spinnerArrayAdapter3);
@@ -312,23 +291,24 @@ public class PartyRegistrationFragment extends BaseFragment {
                 spinner5.setAdapter(spinnerArrayAdapter5);
 
 
-                int index = 0;
-                JSONObject user_info_jo;
-                try {
-                    ArrayAdapter spinnerArrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list);
-                    user_info_jo = new JSONObject(user_info_json_string);
-                    spinner2.setAdapter(spinnerArrayAdapter2);
-                    for (Players p : player_list) {
-                        if (p.id == Integer.parseInt(user_info_jo.getString("id"))) {
-                            int pos = spinnerArrayAdapter2.getPosition(p);
-                            spinner2.setSelection(pos);
-                            spinner2.setClickable(false);
-                        }
-                        index = index + 1;
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+//                int index = 0;
+//                JSONObject user_info_jo;
+//                try {
+//                    ArrayAdapter spinnerArrayAdapter2 = new ArrayAdapter(getActivity(), R.layout.spinner_background, player_list);
+//                    user_info_jo = new JSONObject(user_info_json_string);
+//                    spinner2.setAdapter(spinnerArrayAdapter2);
+//                    for (Players p : player_list) {
+//                        String userID = "com.golf.app.userID";
+//                        if (p.id == Integer.parseInt(user_info_jo.getString("id"))) {
+//                            int pos = spinnerArrayAdapter2.getPosition(p);
+//                            spinner2.setSelection(pos);
+//                            spinner2.setClickable(false);
+//                        }
+//                        index = index + 1;
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
 
                 Toast.makeText(getContext(), getResources().getString(R.string.jap_loading_complete), Toast.LENGTH_SHORT).show();
 //                Toast.makeText(getContext(), "Loading complete.", Toast.LENGTH_SHORT).show();

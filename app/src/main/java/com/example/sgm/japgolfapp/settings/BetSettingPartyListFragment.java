@@ -340,6 +340,7 @@ public class BetSettingPartyListFragment extends BaseFragment{
         TextView tvName = (TextView) view
                 .findViewById(R.id.tv_generic_column_1);
         tvName.setText(getResources().getString(R.string.jap_party_name));
+        tvName.setTextSize(12);
         TextView tvDate = (TextView) view
                 .findViewById(R.id.tv_generic_column_2);
         tvDate.setText(getResources().getString(R.string.date));
