@@ -61,7 +61,7 @@ public class CourseInfoFragment extends BaseFragment {
     View c_info_view;
     String response2;
     TableLayout holes_table;
-    boolean firstload = true;
+    private boolean firstload = true;
 
 
     private class SingleCourseView extends AsyncTask<String, String, String> {
@@ -77,7 +77,6 @@ public class CourseInfoFragment extends BaseFragment {
             pdialog.show();
             pdialog.setCancelable(false);
             pdialog.setCanceledOnTouchOutside(false);
-            firstload = true;
         }
 
         @Override
@@ -158,40 +157,35 @@ public class CourseInfoFragment extends BaseFragment {
 
                     Spinner holes_info = (Spinner) c_info_view.findViewById(R.id.hole_count_info);
                     //holes_info.setText(jsonObject.getString("holes"));
-                    ArrayAdapter<CharSequence> adapter= ArrayAdapter.createFromResource(getActivity(), holes_list, android.R.layout.simple_spinner_dropdown_item);
-                    if(!jsonObject.getString("holes").equals(null)){
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), holes_list, android.R.layout.simple_spinner_dropdown_item);
+                    if (!jsonObject.getString("holes").equals(null)) {
                         int holePosition = adapter.getPosition(jsonObject.getString("holes"));
-//                        holes_info.setSelection(holePosition);
+                        holes_info.setSelection(holePosition);
                     }
-
-//                    tl.removeAllViews();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                JSONArray array = null;
-                try {
+                    JSONArray array = null;
                     array = new JSONArray(jsonObject.getString("hole_items"));
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject row = null;
+                        try {
+                            row = array.getJSONObject(i);
+                            LayoutInflater inflater = LayoutInflater.from(getContext());
+                            final View item = inflater.inflate(R.layout.hole_row, holes_table, false);
+                            TextView hnt = (TextView) item.findViewById(R.id.hole_number_text);
+                            hnt.setText((i + 1) + "");
+                            EditText hv = (EditText) item.findViewById(R.id.hole_value_info);
+                            hv.setText(row.getString("par"));
+                            hv.setTextColor(Color.BLACK);
+                            holes_table.addView(item);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject row = null;
-                    try {
-                        row = array.getJSONObject(i);
-                        LayoutInflater inflater = LayoutInflater.from(getContext());
-                        final View item = inflater.inflate(R.layout.hole_row, holes_table, false);
-                        TextView hnt = (TextView) item.findViewById(R.id.hole_number_text);
-                        hnt.setText((i + 1) + "");
-                        EditText hv = (EditText) item.findViewById(R.id.hole_value_info);
-                        hv.setText(row.getString("par"));
-                        hv.setTextColor(Color.BLACK);
-                        holes_table.addView(item);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
                 }
                 Toast.makeText(getContext(), getResources().getString(R.string.information_loaded), Toast.LENGTH_SHORT).show();
+                firstload = false;
             } else {
                 Toast.makeText(getContext(), getResources().getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
             }
@@ -440,11 +434,11 @@ public class CourseInfoFragment extends BaseFragment {
         Button del = (Button) view.findViewById(R.id.delete_course);
         final EditText coursename = (EditText) view.findViewById(R.id.course_name_info);
         final Spinner holes = (Spinner) view.findViewById(R.id.hole_count_info);
-        final Spinner handicap = (Spinner) view.findViewById(R.id.handicap_info);
+//        final Spinner handicap = (Spinner) view.findViewById(R.id.handicap_info);
         holes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (!firstload) {
+                if (firstload) {
                     String amount_str = holes.getSelectedItem().toString();
                     if (amount_str.matches("") || amount_str.matches(" ")) {
                         amount_str = "0";
@@ -460,8 +454,7 @@ public class CourseInfoFragment extends BaseFragment {
                         holes_table.addView(item);
                     }
                 } else {
-                    firstload = false;
-                    return;
+                    firstload = true;
                 }
             }
 
@@ -478,7 +471,7 @@ public class CourseInfoFragment extends BaseFragment {
                 if (!holes_val.matches("")) {
                     holes_int = Integer.parseInt(holes_val);
                 }
-                String hc_val = handicap.getSelectedItem().toString();
+//                String hc_val = handicap.getSelectedItem().toString();
                 if(cname_val.matches("")) {
                     Toast.makeText(getContext(), getResources().getString(R.string.enter_course_name), Toast.LENGTH_SHORT).show();
                     return;
@@ -486,7 +479,7 @@ public class CourseInfoFragment extends BaseFragment {
                     Toast.makeText(getContext(), getResources().getString(R.string.up_to_18_holes), Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    new CourseCreate().execute(cname_val, holes_val, hc_val);
+                    new CourseCreate().execute(cname_val, holes_val, "No");
                     System.out.println(retVal);
                 }
             }

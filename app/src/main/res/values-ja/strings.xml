@@ -145,7 +145,7 @@
     <string name="jap_getting_groups">グループをロード中です</string>
     <string name="jap_getting_members">メンバーをロード中です</string>
     <string name="jap_getting_bets">握りをロード中です</string>
-    <string name="jap_saving_bets">握りポイントを保存中です</string>
+    <string name="jap_saving_bets">握り保存中です</string>
     <string name="jap_saving_scores">スコアを保存中です</string>
     <string name="jap_party_list">パーティーリスト</string>
     <string name="jap_getting_holes">ホールをロード中です</string>

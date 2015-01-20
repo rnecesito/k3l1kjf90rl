@@ -172,7 +172,7 @@ public class CreateCourseFragment extends BaseFragment {
         Button login = (Button) view.findViewById(R.id.create_course);
         final EditText coursename = (EditText) view.findViewById(R.id.course_name);
         final Spinner holes = (Spinner) view.findViewById(R.id.hole_count);
-        final Spinner handicap = (Spinner) view.findViewById(R.id.handicap);
+//        final Spinner handicap = (Spinner) view.findViewById(R.id.handicap);
         holes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -206,7 +206,7 @@ public class CreateCourseFragment extends BaseFragment {
                 if (!holes_val.matches("")) {
                     holes_int = Integer.parseInt(holes_val);
                 }
-                String hc_val = handicap.getSelectedItem().toString();
+//                String hc_val = handicap.getSelectedItem().toString();
                 byte[] result = null;
                 String str = "";
                 if (cname_val.matches("")) {
@@ -218,7 +218,7 @@ public class CreateCourseFragment extends BaseFragment {
                     Toast.makeText(getContext(), getResources().getString(R.string.up_to_18_holes), Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    new CourseCreate().execute(cname_val, holes_val, hc_val);
+                    new CourseCreate().execute(cname_val, holes_val, "No");
                     showFragmentAndAddToBackStack(new ViewCourseFragment());
                 }
             }
