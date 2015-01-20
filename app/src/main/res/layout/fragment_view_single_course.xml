@@ -65,28 +65,28 @@
                 android:id="@+id/hole_count_info" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:orientation="horizontal" >-->
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="@string/handicap"
-                android:textSize="14sp" />
+            <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="right"-->
+                <!--android:text="@string/handicap"-->
+                <!--android:textSize="14sp" />-->
 
-            <Spinner
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:entries="@array/active"
-                android:id="@+id/handicap_info" />
-        </LinearLayout>
+            <!--<Spinner-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:entries="@array/active"-->
+                <!--android:id="@+id/handicap_info" />-->
+        <!--</LinearLayout>-->
 
         <TableLayout
             android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                 android:background="#999" >
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="@string/holes" />
@@ -117,7 +117,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="30dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="@string/par" />
