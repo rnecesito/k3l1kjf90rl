@@ -122,7 +122,7 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
                     JSONObject competition_row = null;
                     try {
                         competition_row = competitions_ja.getJSONObject(i);
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         Date comp_date = sdf.parse(competition_row.getString("date"));
 //                        if (new Date().before(comp_date)) {
                             LayoutInflater inflater = LayoutInflater.from(getContext());

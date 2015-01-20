@@ -32,6 +32,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -218,7 +219,7 @@ public class CreateClosedCompetitionFragment extends Fragment {
 
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
                 httppost.setHeader("Authorization", text.toString());
-                httppost.setEntity(new UrlEncodedFormEntity(json));
+                httppost.setEntity(new UrlEncodedFormEntity(json, HTTP.UTF_8));
 
                 HttpResponse response = httpclient.execute(httppost);
                 StatusLine statusLine = response.getStatusLine();
@@ -324,7 +325,7 @@ public class CreateClosedCompetitionFragment extends Fragment {
                         .append(new DecimalFormat("00").format(mYear)).append("-")
                         .append(new DecimalFormat("00").format(mMonth + 1)).append("-")
                         .append(new DecimalFormat("00").format(mDay))));
-                if (comp_date.compareTo(today) > 0){
+                if (comp_date.compareTo(today) < 0){
                     Toast.makeText(getActivity(),getResources().getString(R.string.jap_enter_valid_date), Toast.LENGTH_SHORT).show();
                     date_view.setText("");
                 } else {

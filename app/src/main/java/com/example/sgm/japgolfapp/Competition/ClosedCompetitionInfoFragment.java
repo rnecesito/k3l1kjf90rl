@@ -29,6 +29,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -321,7 +322,7 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
 
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
                 httppost.setHeader("Authorization", text.toString());
-                httppost.setEntity(new UrlEncodedFormEntity(json));
+                httppost.setEntity(new UrlEncodedFormEntity(json, HTTP.UTF_8));
 
                 HttpResponse response = httpclient.execute(httppost);
                 StatusLine statusLine = response.getStatusLine();
@@ -381,7 +382,7 @@ public class ClosedCompetitionInfoFragment extends BaseFragment {
 
         b.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-               showFragment(new ViewClosedCompetitionGroupsFragment());
+               showFragmentAndAddToBackStack(new ViewClosedCompetitionGroupsFragment());
             }
         });
 	}

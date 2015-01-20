@@ -26,6 +26,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -83,7 +84,7 @@ public class LoginFragment extends BaseFragment{
                 json1.add(new BasicNameValuePair("password", password));
 
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
-                httppost.setEntity(new UrlEncodedFormEntity(json1));
+                httppost.setEntity(new UrlEncodedFormEntity(json1, HTTP.UTF_8));
                 HttpResponse response = httpclient.execute(httppost);
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {

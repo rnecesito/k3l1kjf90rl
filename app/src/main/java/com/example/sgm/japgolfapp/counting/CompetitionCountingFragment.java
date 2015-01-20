@@ -122,7 +122,8 @@ public class CompetitionCountingFragment extends BaseFragment {
             }
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpGet httpget = new HttpGet("http://zoogtech.com/golfapp/public/closed-competition?access_token="+golfapp_token.toString());
+//            HttpGet httpget = new HttpGet("http://zoogtech.com/golfapp/public/closed-competition?access_token="+golfapp_token.toString());
+            HttpGet httpget = new HttpGet("http://zoogtech.com/golfapp/public/course?access_token="+golfapp_token.toString());
 
             try {
                 HttpResponse response = httpclient.execute(httpget);
@@ -389,18 +390,19 @@ public class CompetitionCountingFragment extends BaseFragment {
         Parties p = (Parties) adapterView.getSelectedItem();
         if (adapterView.getSelectedItem() != null) {
             System.out.println(p.id+"");
-            new GetGroups().execute(p.id+"");
-        }
-    }
-
-    @OnItemSelected(R.id.score_count_party_spinner3)
-    public void changeParty(AdapterView<?> adapterView, View view2, int i, long l) {
-        Parties p = (Parties) adapterView.getSelectedItem();
-        if (adapterView.getSelectedItem() != null) {
-            System.out.println(p.id+"");
+//            new GetGroups().execute(p.id+"");
             new GetScores().execute(p.id+"");
         }
     }
+
+//    @OnItemSelected(R.id.score_count_party_spinner3)
+//    public void changeParty(AdapterView<?> adapterView, View view2, int i, long l) {
+//        Parties p = (Parties) adapterView.getSelectedItem();
+//        if (adapterView.getSelectedItem() != null) {
+//            System.out.println(p.id+"");
+//            new GetScores().execute(p.id+"");
+//        }
+//    }
 
     @OnClick(R.id.menu_button)
     public void showMenu() {

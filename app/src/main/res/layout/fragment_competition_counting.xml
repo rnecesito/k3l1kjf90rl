@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/jap_competition_name"
+            android:text="@string/course_name"
             android:id="@+id/textView12345"
             android:layout_marginLeft="29dp"
             android:layout_marginStart="29dp"
@@ -76,39 +76,39 @@
             android:paddingLeft="5dp"
             android:spinnerMode="dropdown" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/group"
-            android:id="@+id/textView1234"
-            android:layout_marginLeft="29dp"
-            android:layout_marginStart="29dp"
-            android:textSize="25sp"
-            android:autoText="false"
-            android:textColor="#ffffffff"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="9dp"
-            android:layout_below="@+id/competition_spinner" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="@string/group"-->
+            <!--android:id="@+id/textView1234"-->
+            <!--android:layout_marginLeft="29dp"-->
+            <!--android:layout_marginStart="29dp"-->
+            <!--android:textSize="25sp"-->
+            <!--android:autoText="false"-->
+            <!--android:textColor="#ffffffff"-->
+            <!--android:layout_alignParentLeft="false"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_marginTop="9dp"-->
+            <!--android:layout_below="@+id/competition_spinner" />-->
 
-        <Spinner
-            android:layout_width="240dp"
-            android:layout_height="35dp"
-            android:id="@+id/score_count_party_spinner3"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/textView1234"
-            android:layout_alignLeft="@+id/textView1234"
-            android:layout_alignRight="@+id/textView1234"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentStart="false"
-            android:paddingLeft="5dp"
-            android:spinnerMode="dropdown" />
+        <!--<Spinner-->
+            <!--android:layout_width="240dp"-->
+            <!--android:layout_height="35dp"-->
+            <!--android:id="@+id/score_count_party_spinner3"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_below="@+id/textView1234"-->
+            <!--android:layout_alignLeft="@+id/textView1234"-->
+            <!--android:layout_alignRight="@+id/textView1234"-->
+            <!--android:layout_alignParentEnd="false"-->
+            <!--android:layout_alignParentStart="false"-->
+            <!--android:paddingLeft="5dp"-->
+            <!--android:spinnerMode="dropdown" />-->
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/score_count_party_spinner3"
+            android:layout_below="@+id/competition_spinner"
             android:layout_marginTop="5dp" >
 
             <TableLayout

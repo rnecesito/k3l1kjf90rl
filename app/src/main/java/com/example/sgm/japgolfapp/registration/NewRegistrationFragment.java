@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,6 +19,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,7 +73,7 @@ public class NewRegistrationFragment extends BaseFragment{
                 json.put("password", pass);
                 json.put("gender", gender);
                 json.put("handicap", Integer.parseInt(handicap));
-                StringEntity se = new StringEntity(json.toString(), "UTF-8");
+                StringEntity se = new StringEntity(json.toString(), HTTP.UTF_8);
 
                 httppost.setEntity(se);
                 httppost.setHeader("Content-type", "application/json");
