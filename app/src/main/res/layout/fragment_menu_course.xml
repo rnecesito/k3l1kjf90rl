@@ -24,7 +24,8 @@
             <TextView
                 android:layout_width="130dp"
                 android:layout_height="60dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
+                android:background="@drawable/square_title"
                 android:textColor="@android:color/white"
                 android:gravity="center"
                 android:text="@string/title_course_registration"

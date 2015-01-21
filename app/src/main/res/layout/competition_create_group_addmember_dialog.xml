@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:text="@string/jap_add_member"
             android:textAllCaps="false"
+            android:background="@drawable/button_new_golf_app"
             android:id="@+id/b_competition_create_group_add_member" />
 
         <View

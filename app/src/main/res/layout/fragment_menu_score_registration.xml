@@ -26,8 +26,9 @@
             <TextView
                 android:layout_width="130dp"
                 android:layout_height="60dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"
+                android:background="@drawable/square_title"
                 android:gravity="center"
                 android:text="@string/tx_score_registration"
                 android:textAllCaps="false"

@@ -14,7 +14,6 @@
         android:layout_width="wrap_content"
         android:id="@+id/itemHoleName"
         android:textSize="24sp"
-        android:text="@string/dummy_text_history_date"
         android:layout_toLeftOf="@+id/tvSet"
         android:layout_alignParentLeft="true"
         android:textColor="@android:color/white"
@@ -34,7 +33,6 @@
             android:singleLine="true"
             android:ellipsize="end"
             android:id="@+id/itemBetStyleOne"
-            android:text="@string/dummy_text_ooo"
             android:textSize="14sp"
             android:textColor="@android:color/white"/>
 
@@ -45,7 +43,6 @@
             android:singleLine="true"
             android:ellipsize="end"
             android:id="@+id/itemBetStyleTwo"
-            android:text="@string/dummy_text_ooo"
             android:textSize="14sp"
             android:textColor="@android:color/white"/>
 
@@ -56,7 +53,6 @@
             android:singleLine="true"
             android:ellipsize="end"
             android:id="@+id/itemBetStyleThree"
-            android:text="@string/dummy_text_ooo"
             android:textSize="14sp"
             android:textColor="@android:color/white" />
 

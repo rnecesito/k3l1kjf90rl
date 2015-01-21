@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:id="@+id/tvBetName"
         android:textSize="24sp"
-        android:text="@string/dummy_text_history_date"
         android:layout_alignParentLeft="true"
         android:textColor="@android:color/white"
         android:layout_alignParentStart="true"

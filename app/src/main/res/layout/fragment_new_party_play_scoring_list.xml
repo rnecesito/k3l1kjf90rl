@@ -24,7 +24,7 @@
             android:layout_marginTop="17dp"
             android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="20dp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/registerTv2"
@@ -36,7 +36,7 @@
             android:layout_marginTop="-30dp"
             android:layout_below="@+id/registerTv"
             android:textColor="@android:color/white"
-            android:textSize="20dp" />
+            android:textSize="18sp" />
 
         <include
             android:layout_marginTop="10dp"

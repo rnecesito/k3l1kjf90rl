@@ -21,24 +21,25 @@
             android:id="@+id/saveB"
             android:enabled="true"
             android:textAllCaps="false"
-            android:background="@drawable/square_title"
+            android:background="@drawable/button_new_golf_app"
             android:textColor="#ffffffff"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:layout_marginTop="17dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:clickable="true" />
 
         <TextView
-            android:layout_width="110dp"
+            android:layout_width="150dp"
             android:id="@+id/registerTv"
             android:layout_alignParentTop="true"
             android:text="@string/text_party_registration"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="17dp"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textColor="@android:color/white"
-            android:gravity="center_vertical|right"
+            android:background="@drawable/square_title"
+            android:gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_height="60dp" />
 

@@ -110,6 +110,7 @@
             android:layout_marginTop="20dp"
             android:layout_centerInParent="true"
             android:layout_below="@id/date_container"
+            android:background="@drawable/button_new_golf_app"
             android:textAllCaps="false"
             android:text="@string/update" />
 
