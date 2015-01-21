@@ -13,12 +13,13 @@ import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
@@ -26,8 +27,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.OnClick;
 
@@ -66,40 +68,33 @@ public class NewRegistrationFragment extends BaseFragment{
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://zoogtech.com/golfapp/public/register");
             try {
-                JSONObject json = new JSONObject();
-                json.put("firstname", fname);
-                json.put("lastname", lname);
-                json.put("email", email);
-                json.put("password", pass);
-                json.put("gender", gender);
-                json.put("handicap", Integer.parseInt(handicap));
-                StringEntity se = new StringEntity(json.toString(), HTTP.UTF_8);
+                List<NameValuePair> json = new ArrayList<NameValuePair>();
+                json.add(new BasicNameValuePair("firstname", fname));
+                json.add(new BasicNameValuePair("lastname", lname));
+                json.add(new BasicNameValuePair("email", email));
+                json.add(new BasicNameValuePair("password", pass));
+                json.add(new BasicNameValuePair("gender", gender));
+                json.add(new BasicNameValuePair("handicap", handicap));
 
-                httppost.setEntity(se);
-                httppost.setHeader("Content-type", "application/json");
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+                httppost.setEntity(new UrlEncodedFormEntity(json, HTTP.UTF_8));
 
                 HttpResponse response = httpclient.execute(httppost);
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println(str);
                     System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println("Failed!");
                     System.out.println(str);
                     retVal = str;
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
