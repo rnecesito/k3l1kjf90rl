@@ -149,7 +149,6 @@ public class CourseInfoFragment extends BaseFragment {
                 pdialog.dismiss();
             }
             if(success) {
-                TableLayout tl = holes_table;
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(response2);
@@ -165,6 +164,7 @@ public class CourseInfoFragment extends BaseFragment {
                     }
                     JSONArray array = null;
                     array = new JSONArray(jsonObject.getString("hole_items"));
+                    holes_table.removeAllViews();
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject row = null;
                         try {
