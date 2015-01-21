@@ -34,6 +34,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -130,12 +131,12 @@ public class CompetitionCountingFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                     party_string = result_string;
                     success = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -227,12 +228,12 @@ public class CompetitionCountingFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                     party_string = result_string;
                     success = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -322,13 +323,13 @@ public class CompetitionCountingFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     score_byte = EntityUtils.toByteArray(response.getEntity());
-                    score_string = new String(score_byte, "UTF-8");
+                    score_string = new String(score_byte, HTTP.UTF_8);
                     System.out.println(score_string);
                     score_json_string = score_string;
                     success = true;
                 }else {
                     score_byte = EntityUtils.toByteArray(response.getEntity());
-                    score_string = new String(score_byte, "UTF-8");
+                    score_string = new String(score_byte, HTTP.UTF_8);
                     System.out.println(score_string);
                     score_json_string = score_string;
                 }
@@ -363,13 +364,13 @@ public class CompetitionCountingFragment extends BaseFragment {
                         try {
                             row = array.getJSONObject(i);
                             LayoutInflater inflater = LayoutInflater.from(getActivity());
-                            final View item = inflater.inflate(R.layout.bet_counting_row, main_table, false);
-                            TextView player_name_col = (TextView) item.findViewById(R.id.bet_row_name);
+                            final View item = inflater.inflate(R.layout.score_counting_party_play_row, main_table, false);
+                            TextView player_name_col = (TextView) item.findViewById(R.id.party_play_row_name);
                             player_name_col.setText(row.getString("rank") + "位 " + row.getString("name"));
-                            TextView gross_col = (TextView) item.findViewById(R.id.bet_row_operand);
-                            gross_col .setText(row.getString("operand"));
-                            TextView net_col = (TextView) item.findViewById(R.id.bet_row_score);
-                            net_col.setText(row.getString("score"));
+                            TextView gross_col = (TextView) item.findViewById(R.id.party_play_gross);
+                            gross_col .setText(row.getString("gross"));
+                            TextView net_col = (TextView) item.findViewById(R.id.party_play_net);
+                            net_col.setText(row.getString("net"));
                             main_table.addView(item);
 
                         } catch (JSONException e) {

@@ -34,6 +34,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -129,12 +130,12 @@ public class ScoreCountingFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                     party_string = result_string;
                     success = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -224,13 +225,13 @@ public class ScoreCountingFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     score_byte = EntityUtils.toByteArray(response.getEntity());
-                    score_string = new String(score_byte, "UTF-8");
+                    score_string = new String(score_byte, HTTP.UTF_8);
                     System.out.println(score_string);
                     score_json_string = score_string;
                     success = true;
                 }else {
                     score_byte = EntityUtils.toByteArray(response.getEntity());
-                    score_string = new String(score_byte, "UTF-8");
+                    score_string = new String(score_byte, HTTP.UTF_8);
                     System.out.println(score_string);
                     score_json_string = score_string;
                 }
