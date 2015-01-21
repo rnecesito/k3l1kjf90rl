@@ -182,24 +182,24 @@ public class PartyRegistrationFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    result2 = new String(result, "UTF-8");
+                    result2 = new String(result, HTTP.UTF_8);
                     response2 = result2;
                     success = true;
                 } else {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    result2 = new String(result, "UTF-8");
+                    result2 = new String(result, HTTP.UTF_8);
                 }
 
                 HttpResponse response2 = httpclient_2.execute(httppost_2);
                 StatusLine statusLine2 = response2.getStatusLine();
                 if (statusLine2.getStatusCode() == HttpStatus.SC_OK) {
                     result_2 = EntityUtils.toByteArray(response2.getEntity());
-                    result2_2 = new String(result_2, "UTF-8");
+                    result2_2 = new String(result_2, HTTP.UTF_8);
                     response2_2 = result2_2;
                     success = true;
                 } else {
                     result_2 = EntityUtils.toByteArray(response2.getEntity());
-                    result2_2 = new String(result_2, "UTF-8");
+                    result2_2 = new String(result_2, HTTP.UTF_8);
                     response2_2 = result2_2;
                     success = false;
                 }
@@ -208,14 +208,14 @@ public class PartyRegistrationFragment extends BaseFragment {
                 StatusLine statusLine3 = response3.getStatusLine();
                 if (statusLine3.getStatusCode() == HttpStatus.SC_OK) {
                     user_info_result = EntityUtils.toByteArray(response3.getEntity());
-                    user_info_result_string = new String(user_info_result, "UTF-8");
+                    user_info_result_string = new String(user_info_result, HTTP.UTF_8);
                     user_info_json_string = user_info_result_string;
                     System.out.println(user_info_json_string);
                     System.out.println("Success!");
                     success = true;
                 } else {
                     user_info_result = EntityUtils.toByteArray(response3.getEntity());
-                    user_info_result_string = new String(user_info_result, "UTF-8");
+                    user_info_result_string = new String(user_info_result, HTTP.UTF_8);
                     user_info_json_string = user_info_result_string;
                     System.out.println(user_info_json_string);
                     System.out.println("Failed!");
@@ -583,14 +583,14 @@ public class PartyRegistrationFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println(str);
                     System.out.println("Success!");
                     success = true;
                     retVal = str;
                 } else {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println("Failed!");
                     System.out.println(str);
                     System.out.println(new UrlEncodedFormEntity(json).toString());

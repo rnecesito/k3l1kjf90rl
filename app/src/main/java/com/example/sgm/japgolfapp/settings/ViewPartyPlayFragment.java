@@ -26,6 +26,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -89,13 +90,13 @@ public class ViewPartyPlayFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                     System.out.println(result_string);
                     party_string = result_string;
                     success = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -184,14 +185,14 @@ public class ViewPartyPlayFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println(str);
                     System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println("Failed!");
                     System.out.println(str);
                     retVal = str;

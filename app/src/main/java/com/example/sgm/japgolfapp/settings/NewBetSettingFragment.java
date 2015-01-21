@@ -36,6 +36,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -372,12 +373,12 @@ public class NewBetSettingFragment extends BaseFragment{
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     retVal = str;
                 }
             } catch (UnsupportedEncodingException e) {

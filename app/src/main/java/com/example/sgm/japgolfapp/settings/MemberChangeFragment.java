@@ -37,6 +37,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -95,14 +96,14 @@ public class MemberChangeFragment extends BaseFragment{
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println(str);
                     System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println("Failed!");
                     System.out.println(str);
                     retVal = str;
@@ -218,19 +219,19 @@ public class MemberChangeFragment extends BaseFragment{
 
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
                 httppost.setHeader("Authorization", readtoken());
-                httppost.setEntity(new UrlEncodedFormEntity(json1));
+                httppost.setEntity(new UrlEncodedFormEntity(json1, HTTP.UTF_8));
                 HttpResponse response = httpclient.execute(httppost);
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println(str);
                     System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println("Failed!");
                     success = false;
                     System.out.println(str);
@@ -263,7 +264,7 @@ public class MemberChangeFragment extends BaseFragment{
                 try {
                     err = new JSONObject(retVal);
                     msg = new JSONArray(err.getString("email"));
-                    if (!msg.getString(0).equals("未入力です")) {
+                    if (!msg.getString(0).equals("The email has already been taken.")) {
                         Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_failed), Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getContext(), getResources().getString(R.string.jap_email_registered), Toast.LENGTH_LONG).show();
