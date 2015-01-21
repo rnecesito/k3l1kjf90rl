@@ -145,12 +145,12 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                     courses_json = result_string;
                     success = true;
                 } else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -253,12 +253,12 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     success = true;
                     retVal = str;
                 } else {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     retVal = str;
                 }
             } catch (UnsupportedEncodingException e) {

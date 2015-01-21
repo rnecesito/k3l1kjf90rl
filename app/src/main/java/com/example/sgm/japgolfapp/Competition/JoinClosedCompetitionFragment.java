@@ -27,6 +27,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +37,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -114,12 +114,12 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                     competitions_json_string = result_string;
                     success = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -137,13 +137,13 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte_groups = EntityUtils.toByteArray(response.getEntity());
-                    result_string_groups = new String(result_byte_groups, "UTF-8");
+                    result_string_groups = new String(result_byte_groups, HTTP.UTF_8);
                     System.out.println(result_string_groups);
                     groups_json_string = result_string_groups;
                     success = true;
                 }else {
                     result_byte_groups = EntityUtils.toByteArray(response.getEntity());
-                    result_string_groups = new String(result_byte_groups, "UTF-8");
+                    result_string_groups = new String(result_byte_groups, HTTP.UTF_8);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -236,6 +236,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
 
         @Override
         protected String doInBackground(String... strings) {
+            String competition_id = strings[0];
             byte[] result_byte = null;
             String result_string = "";
             byte[] result_byte_groups = null;
@@ -260,20 +261,20 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
             }
 
             HttpClient httpclient_groups = new DefaultHttpClient();
-            HttpGet httppost_groups  = new HttpGet("http://zoogtech.com/golfapp/public/closed-competition/group?access_token="+golfapp_token.toString());
+            HttpGet httppost_groups  = new HttpGet("http://zoogtech.com/golfapp/public/closed-competition/"+competition_id+"/group?access_token="+golfapp_token.toString());
 
             try {
                 HttpResponse response = httpclient_groups.execute(httppost_groups);
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                     System.out.println(result_string);
                     groups_json_string = result_string;
                     success = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string = new String(result_byte, "UTF-8");
+                    result_string = new String(result_byte, HTTP.UTF_8);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -389,7 +390,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
             }
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://zoogtech.com/golfapp/public/open-competition/"+comp_number.toString()+"/join");
+            HttpPost httppost = new HttpPost("http://zoogtech.com/golfapp/public/open-competition/"+ number +"/join");
 
             try {
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
@@ -398,11 +399,12 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_2 = EntityUtils.toByteArray(response.getEntity());
-                    result2_2 = new String(result_2, "UTF-8");
+                    result2_2 = new String(result_2, HTTP.UTF_8);
+                    System.out.println(result2_2);
                     success = true;
                 }else {
                     result_2 = EntityUtils.toByteArray(response.getEntity());
-                    result2_2 = new String(result_2, "UTF-8");
+                    result2_2 = new String(result_2, HTTP.UTF_8);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -462,20 +464,21 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
         @Override
         public void onClick(View view) {
 
-            final String TEMP_FILE_NAME = "competition_number.txt";
-            File tempFile;
-            File cDir = getActivity().getCacheDir();
-            tempFile = new File(cDir.getPath() + "/" + TEMP_FILE_NAME) ;
-            FileWriter writer=null;
-            try {
-                writer = new FileWriter(tempFile);
-                writer.write(view.getTag()+"");
-                writer.close();
+//            final String TEMP_FILE_NAME = "competition_number.txt";
+//            File tempFile;
+//            File cDir = getActivity().getCacheDir();
+//            tempFile = new File(cDir.getPath() + "/" + TEMP_FILE_NAME) ;
+//            FileWriter writer=null;
+//            try {
+//                writer = new FileWriter(tempFile);
+//                writer.write(view.getTag()+"");
+//                writer.close();
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            new GetGroups().execute(view.getTag()+"");
             final Spinner group_spinner = new Spinner(getActivity());
             group_spinner.setAdapter(spinnerArrayAdapter);
 

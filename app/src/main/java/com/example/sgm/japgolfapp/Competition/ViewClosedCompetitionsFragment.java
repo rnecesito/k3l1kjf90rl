@@ -18,10 +18,10 @@ import com.example.sgm.japgolfapp.R;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,11 +29,9 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -74,9 +72,7 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
                 while( (strLine=bReader.readLine()) != null  ){
                     golfapp_token.append(strLine);
                 }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }catch(IOException e){
+            } catch(IOException e){
                 e.printStackTrace();
             }
 
@@ -88,17 +84,13 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string  = new String(result_byte, "UTF-8");
+                    result_string  = new String(result_byte, HTTP.UTF_8);
                     competitions_json = result_string ;
                     success = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string  = new String(result_byte, "UTF-8");
+                    result_string  = new String(result_byte, HTTP.UTF_8);
                 }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -145,9 +137,7 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
                             main_table.addView(item);
 //                        }
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (ParseException e) {
+                    } catch (JSONException | ParseException e) {
                         e.printStackTrace();
                     }
                 }

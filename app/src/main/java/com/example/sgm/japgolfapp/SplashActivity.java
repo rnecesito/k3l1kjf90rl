@@ -34,7 +34,7 @@ public class SplashActivity extends Activity{
             public void run() {
                 try {
                     synchronized (this) {
-                        wait(4000);
+                        wait(3000);
                     }
                 } catch (InterruptedException ex) {
                 }

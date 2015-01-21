@@ -160,13 +160,13 @@ public class ClosedCompetitionEditFragment extends Fragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    result2 = new String(result, "UTF-8");
+                    result2 = new String(result, HTTP.UTF_8);
                     System.out.println("Success!");
                     courses_json = result2;
                     success = true;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    result2 = new String(result, "UTF-8");
+                    result2 = new String(result, HTTP.UTF_8);
                     System.out.println("Failed!");
                 }
             } catch (UnsupportedEncodingException e) {
@@ -182,13 +182,13 @@ public class ClosedCompetitionEditFragment extends Fragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_2 = EntityUtils.toByteArray(response.getEntity());
-                    result2_2 = new String(result_2, "UTF-8");
+                    result2_2 = new String(result_2, HTTP.UTF_8);
                     System.out.println("Success!");
                     comp_info_json = result2_2;
                     success = true;
                 }else {
                     result_2 = EntityUtils.toByteArray(response.getEntity());
-                    result2_2 = new String(result_2, "UTF-8");
+                    result2_2 = new String(result_2, HTTP.UTF_8);
                     System.out.println("Failed!");
                 }
             } catch (UnsupportedEncodingException e) {
@@ -317,14 +317,14 @@ public class ClosedCompetitionEditFragment extends Fragment {
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println(str);
                     System.out.println("Success!");
                     success = true;
                     retVal = str;
                 }else {
                     result = EntityUtils.toByteArray(response.getEntity());
-                    str = new String(result, "UTF-8");
+                    str = new String(result, HTTP.UTF_8);
                     System.out.println("Failed!");
                     System.out.println(str);
                     System.out.println(new UrlEncodedFormEntity(json).toString());
