@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,9 @@ public class NewScoreRegistrationCompetitionFragment extends BaseFragment{
 
     private TextView mTvHoleNumber;
     private Party partyInformation;
+
+    private String closed_competition_id;
+    private String closed_competition_group_id;
 
     View view_container;
     boolean shown = false;
@@ -438,7 +442,8 @@ public class NewScoreRegistrationCompetitionFragment extends BaseFragment{
             if(success) {
                 try {
                     final JSONObject info = new JSONObject(retVal);
-
+                    closed_competition_group_id = info.getString("id");
+                    closed_competition_id = info.getString("closed_competition_id");
                     for(int a = 0 ; a < Integer.valueOf(info.getJSONObject("closed_competition").getJSONObject("course").getString("holes")); a++){
 
                         mGroupMembers = new ArrayList<CompetitorCompact>();
@@ -544,7 +549,7 @@ public class NewScoreRegistrationCompetitionFragment extends BaseFragment{
             String str = "";
             String token = readtoken();
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/score-registration/closed-competition/" + partyInformation.getId());
+            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/score-registration/closed-competition/" + closed_competition_id);
             try {
 
                 ArrayList<CompetitorCompact> toSaveData = mItems.get(mHoleNumber).getCompetitors();
@@ -555,7 +560,12 @@ public class NewScoreRegistrationCompetitionFragment extends BaseFragment{
                     json.add(new BasicNameValuePair("scores["+ i +"][closed_competition_competitor_id]", toSaveData.get(i).getId()));
                     json.add(new BasicNameValuePair("scores["+ i +"][score]", toSaveData.get(i).getScore()));
                 }
+//                json.add(new BasicNameValuePair("closed_competition_id", closed_competition_id));
+                json.add(new BasicNameValuePair("closed_competition_group_id", closed_competition_group_id));
                 json.add(new BasicNameValuePair("access_token", token));
+
+                Log.d("CC_ID", closed_competition_id);
+                Log.d("CCG_ID", closed_competition_group_id);
 
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
 //                httppost.setHeader("Authorization", text.toString());

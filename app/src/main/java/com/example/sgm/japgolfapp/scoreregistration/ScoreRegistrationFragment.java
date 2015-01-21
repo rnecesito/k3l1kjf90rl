@@ -90,6 +90,8 @@ public class ScoreRegistrationFragment extends BaseFragment{
     private Party partyInformation;
     private TextView tvBetType;
 
+    private boolean firstload = true;
+
     public ScoreRegistrationFragment(){}
 
     public void setScoreRegistrationFragmentParty(Party party){
@@ -335,6 +337,9 @@ public class ScoreRegistrationFragment extends BaseFragment{
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        GetPartyPlayScoresList init = new GetPartyPlayScoresList();
+        init.execute();
+
         view_container = view;
 
         tvBetType = (TextView) view_container.findViewById(R.id.tvBetType);
@@ -365,7 +370,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
         saveTv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new PlaceBetScoresForward().execute();
+                new PlaceBetScores().execute();
                 container.setVisibility(View.GONE);
             }
         });
@@ -374,8 +379,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
         mTvHoleNumber = (TextView) view.findViewById(R.id.tvHoleNumber);
         mTvHoleNumber.setText("" + (mHoleNumber + 1));
 
-        GetPartyPlayScoresList init = new GetPartyPlayScoresList();
-        init.execute();
 
     }
 
@@ -1075,13 +1078,12 @@ public class ScoreRegistrationFragment extends BaseFragment{
                             tvNext.setVisibility(TextView.INVISIBLE);
                         }
 
-                        GetBetScores getFirstScores = new GetBetScores();
-                        getFirstScores.execute();
-
-
                         tvPrev.setVisibility(TextView.INVISIBLE);
 
                         container.setVisibility(View.VISIBLE);
+
+                        GetBetScores getFirstScores = new GetBetScores();
+                        getFirstScores.execute();
 
                     }else{
 
@@ -1176,21 +1178,23 @@ public class ScoreRegistrationFragment extends BaseFragment{
 //                            }
 
                             for(int b = 0 ; b < mGroupMembersScores.size(); b++){
-                                if(obj.getString("party_member_id").equals(mGroupMembersScores.get(b).getId()))
+                                if(obj.getString("party_member_id").equals(mGroupMembersScores.get(b).getId())) {
                                     mGroupMembersScores.get(b).setScore(obj.getString("score"));
+                                }
                             }
 
 //                            mGroupMembersScores.add(new CompetitorCompact(obj.getString("party_member_id"), name, obj.getString("score")));
                         }
                     }
 
-                    mAdapter2 = new BetRegistrationAdapter(getActivity(), 0,
-                            mGroupMembersScores, mBetNumber);
+                    mAdapter2 = new BetRegistrationAdapter(getActivity(), 0, mGroupMembersScores, mBetNumber);
                     lvCompetitors2.setAdapter(mAdapter2);
                     lvCompetitors2.setFocusable(true);
 
-
+                    if (firstload) {
                         tvBetType.setText(mBetSettings.get(0).getName());
+                        firstload = false;
+                    }
 
                         //ACTIVATE BUTTONS FOR NEXT AND PREV -------------------------------------------
 
@@ -1218,6 +1222,97 @@ public class ScoreRegistrationFragment extends BaseFragment{
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    private class PlaceBetScores extends AsyncTask<String, String, String> {
+
+        public PlaceBetScores() {
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setCancelable(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog.setMessage(getResources().getString(R.string.jap_saving_bets));
+            pdialog.show();
+            pdialog.setCancelable(false);
+            pdialog.setCanceledOnTouchOutside(false);
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            byte[] result = null;
+            String str = "";
+            String token = readtoken();
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPut httppost = new HttpPut("http://zoogtech.com/golfapp/public/score-registration/bet/" + mBetSettings.get(mBetNumber).getId());
+            try {
+                List<NameValuePair> json = new ArrayList<NameValuePair>();
+                for(int i = 0; i < mGroupMembersScores.size(); i++) {
+                    json.add(new BasicNameValuePair("scores["+ i +"][party_member_id]", mGroupMembersScores.get(i).getId()));
+                    json.add(new BasicNameValuePair("scores["+ i +"][score]", mGroupMembersScores.get(i).getScore()));
+                }
+
+//                json.add(new BasicNameValuePair("access_token", ));
+
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+                httppost.setHeader("Authorization", token);
+                httppost.setEntity(new UrlEncodedFormEntity(json));
+
+                HttpResponse response = httpclient.execute(httppost);
+                StatusLine statusLine = response.getStatusLine();
+
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println(str);
+                    System.out.println("Success!");
+                    success = true;
+                    retVal = str;
+                }else {
+                    result = EntityUtils.toByteArray(response.getEntity());
+                    str = new String(result, "UTF-8");
+                    System.out.println("Failed!");
+                    System.out.println(str);
+                    retVal = str;
+                }
+
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pdialog != null && pdialog.isShowing()) {
+                pdialog.dismiss();
+            }
+
+//            if (mBetNumber < mBetSettings.size() - 1) {
+//                ++mBetNumber;
+//
+//                if (mBetNumber == mBetSettings.size() - 1) {
+//                    tvNext.setVisibility(View.INVISIBLE);
+//                }
+//                tvPrev.setVisibility(View.VISIBLE);
+//
+//                //TODO
+//                GetBetScores showBetScores = new GetBetScores();
+//                showBetScores.execute();
+//
+//                tvBetType.setText(mBetSettings.get(mBetNumber).getName());
+//
+//            }
         }
     }
 
@@ -1384,8 +1479,9 @@ public class ScoreRegistrationFragment extends BaseFragment{
             if (pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
-
-            if (mBetNumber < mBetSettings.size() - 1) {
+//
+//            if (mBetNumber < mBetSettings.size() - 1) {
+            if (mBetNumber > 0) {
                 --mBetNumber;
 
                 if (mBetNumber == 0) {
