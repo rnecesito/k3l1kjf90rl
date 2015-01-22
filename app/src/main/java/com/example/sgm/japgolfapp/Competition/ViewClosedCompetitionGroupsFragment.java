@@ -72,8 +72,6 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_closed_comeptition_view_groups, container, false);
-//        main_table = (TableLayout) view.findViewById(R.id.closed_groups_table);
-//        new CompetitionView().execute();
         ButterKnife.inject(this, view);
         initLayout();
 
@@ -95,6 +93,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
 
         return view;
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -136,8 +135,6 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     }
 
     private void initLayout() {
-//        listView.setAdapter(adapter);
-
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -163,7 +160,6 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     }
 
     private void LoadAllMyGroups() {
-        //http://zoogtech.com/golfapp/public/closed-competition/group/mine
         String urlString = Api.WEB_URL + "closed-competition/group/mine";
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
@@ -231,7 +227,6 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     }
 
     private void LoadAllGroups() {
-        //http://zoogtech.com/golfapp/public/closed-competition/group
         String urlString = Api.WEB_URL + "closed-competition/group";
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());

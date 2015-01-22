@@ -45,7 +45,7 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClosedCompetitionInfoFragment extends BaseFragment {
+public class  ClosedCompetitionInfoFragment extends BaseFragment {
     View view_container;
     private boolean success = false;
     private ProgressDialog pdialog;

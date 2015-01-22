@@ -286,11 +286,8 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        view = inflater
-                .inflate(R.layout.fragment_closed_comeptition_create_group, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_closed_comeptition_create_group, container, false);
 
         ButterKnife.inject(this, view);
         listAdapter = new GroupMemberAdapter(getActivity(), R.layout.generic_3_column_item_layout, listUser);

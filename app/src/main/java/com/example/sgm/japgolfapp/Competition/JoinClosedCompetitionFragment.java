@@ -463,7 +463,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
     private View.OnClickListener join_comp = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            new GetGroups().execute(view.getTag()+"");
 //            final String TEMP_FILE_NAME = "competition_number.txt";
 //            File tempFile;
 //            File cDir = getActivity().getCacheDir();
@@ -478,7 +478,6 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
 //                e.printStackTrace();
 //            }
 
-            new GetGroups().execute(view.getTag()+"");
             final Spinner group_spinner = new Spinner(getActivity());
             group_spinner.setAdapter(spinnerArrayAdapter);
 
