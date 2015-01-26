@@ -319,6 +319,11 @@ public class ScoreCountingFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         view_container = view;
         new InitLists().execute();
+        SharedPreferences prefs = getActivity().getSharedPreferences(
+                "com.golf.app", Context.MODE_PRIVATE);
+
+        String hasLoggedIn = "com.golf.app.fromcounting";
+        prefs.edit().putBoolean(hasLoggedIn, true).apply();
     }
 
 }

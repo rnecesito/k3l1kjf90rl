@@ -146,7 +146,7 @@
         <ListView
             android:id="@+id/lv_competition_create_group_addmember"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="200dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:isScrollContainer="false" />

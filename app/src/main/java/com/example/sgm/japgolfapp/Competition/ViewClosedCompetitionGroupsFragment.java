@@ -31,6 +31,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -53,8 +54,8 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     private String retVal = null;
     private ProgressDialog pdialog;
     private boolean success = false;
-    private List<CompetitionGroupModel> groupList, tempGroupList, myGroupList;
-    private GroupListAdapter adapter, myAdapter;//, newAdapter;
+    private List<CompetitionGroupModel> groupList, myGroupList, compGroupList;
+    private GroupListAdapter adapter, myAdapter, compAdapter;
     View view_container;
     boolean my_groups = false;
 
@@ -66,8 +67,10 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
 
         myGroupList = new ArrayList<CompetitionGroupModel>();
         myAdapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, myGroupList);
-    }
 
+        compGroupList = new ArrayList<CompetitionGroupModel>();
+        compAdapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, compGroupList);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -99,7 +102,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         LoadAllGroups();
         view_container = view;
-        tempGroupList = adapter.getGroupList();
+//        tempGroupList = adapter.getGroupList();
         final EditText etSearch = (EditText) view.findViewById(R.id.competition_name2);
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -228,6 +231,26 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
 
     private void LoadAllGroups() {
         String urlString = Api.WEB_URL + "closed-competition/group";
+
+        File cDir2 = getActivity().getCacheDir();
+        File tempFile2 = new File(cDir2.getPath() + "/" + "competition_number.txt") ;
+        String strLine2="";
+        StringBuilder comp_number = new StringBuilder();
+        try {
+            FileReader fReader = new FileReader(tempFile2);
+            BufferedReader bReader = new BufferedReader(fReader);
+            while( (strLine2=bReader.readLine()) != null  ){
+                comp_number.append(strLine2);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        if(!comp_number.toString().isEmpty()) {
+            urlString = Api.WEB_URL + "closed-competition/"+comp_number.toString()+"/group";
+        }
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage(getResources().getString(R.string.jap_loading_competition_groups));

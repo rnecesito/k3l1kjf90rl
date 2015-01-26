@@ -14,14 +14,15 @@
         android:background="@drawable/container_background">
 
         <TextView
-            android:layout_width="110dp"
+            android:layout_width="130dp"
             android:id="@+id/tvPlayHistory"
             android:layout_alignParentTop="true"
             android:text="@string/text_play_history"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="17dp"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textColor="@android:color/white"
+            android:background="@drawable/square_title"
             android:gravity="center"
             android:layout_height="60dp" />
 

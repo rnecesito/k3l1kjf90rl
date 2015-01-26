@@ -87,8 +87,9 @@ public abstract class BaseFragment extends Fragment {
     public void logout() {
         SharedPreferences prefs = getActivity().getSharedPreferences(
                 "com.golf.app", Context.MODE_PRIVATE);
-        String hasLoggedIn = "com.example.app.hasloggedin";
-        prefs.edit().remove(hasLoggedIn).apply();
+        String firstTime = "com.golf.app.firstTimeCheck";
+        prefs.edit().clear().apply();
+        prefs.edit().putBoolean(firstTime, true).apply();
         clearBackStack();
     }
 

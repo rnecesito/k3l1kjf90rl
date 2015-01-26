@@ -16,26 +16,15 @@
 
         <TextView
             android:id="@+id/registerTv"
-            android:layout_width="120dp"
+            android:layout_width="170dp"
             android:layout_height="60dp"
-            android:text="パーティー"
+            android:text="パーティー リスト"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="18sp"
             android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/registerTv2"
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:text="リスト"
-            android:layout_alignParentLeft="true"
-            android:gravity="center"
-            android:layout_marginTop="-30dp"
-            android:layout_below="@+id/registerTv"
-            android:textColor="@android:color/white"
+            android:background="@drawable/square_title"
             android:textSize="18sp" />
 
         <include
@@ -44,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/generic_3_column_item_layout"
-            android:layout_below="@+id/registerTv2"/>
+            android:layout_below="@+id/registerTv"/>
 
         <ListView
             android:id="@+id/lvPartyPlayGroups"

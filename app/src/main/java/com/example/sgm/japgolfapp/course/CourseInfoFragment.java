@@ -306,7 +306,7 @@ public class CourseInfoFragment extends BaseFragment {
             }
             if(success) {
                 Toast.makeText(getContext(), getResources().getString(R.string.jap_reg_success), Toast.LENGTH_SHORT).show();
-                showFragment(new ViewCourseFragment());
+                popBackStack();
             } else {
                 Toast.makeText(getContext(), getResources().getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
             }

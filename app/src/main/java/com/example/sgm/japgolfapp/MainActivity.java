@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.sgm.japgolfapp.registration.IntroScreenFragment;
 import com.example.sgm.japgolfapp.registration.MainMenuFragment;
+import com.example.sgm.japgolfapp.registration.PrimaryScreenFragment;
 
 import java.util.Locale;
 
@@ -54,7 +55,7 @@ public class MainActivity extends Activity {
                 }else{
                     getFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                            .add(R.id.container, new IntroScreenFragment())
+                            .add(R.id.container, new PrimaryScreenFragment())
                             .commit();
                 }
             } else {

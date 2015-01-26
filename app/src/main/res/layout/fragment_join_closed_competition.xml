@@ -54,7 +54,8 @@
 
                 <LinearLayout
                     android:layout_width="1dp"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
 
                     <View style="@style/Divider" />
                 </LinearLayout>
@@ -64,7 +65,8 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/Edit" />
+                    android:text="@string/Edit"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:layout_width="1dp"

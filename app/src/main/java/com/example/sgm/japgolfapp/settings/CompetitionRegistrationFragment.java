@@ -17,6 +17,10 @@ import com.example.sgm.japgolfapp.Competition.ViewClosedCompetitionGroupsFragmen
 import com.example.sgm.japgolfapp.Competition.ViewClosedCompetitionsFragment;
 import com.example.sgm.japgolfapp.R;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import butterknife.OnClick;
 
 /**
@@ -122,6 +126,19 @@ public class CompetitionRegistrationFragment extends BaseFragment {
         viewGroupsB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final String TEMP_FILE_NAME = "competition_number.txt";
+                File tempFile;
+                File cDir = getActivity().getCacheDir();
+                tempFile = new File(cDir.getPath() + "/" + TEMP_FILE_NAME) ;
+                FileWriter writer=null;
+                try {
+                    writer = new FileWriter(tempFile);
+                    writer.write("");
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 showFragmentAndAddToBackStack(new ViewClosedCompetitionGroupsFragment());
             }
         });
@@ -130,6 +147,19 @@ public class CompetitionRegistrationFragment extends BaseFragment {
         viewGroupsB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final String TEMP_FILE_NAME = "competition_number.txt";
+                File tempFile;
+                File cDir = getActivity().getCacheDir();
+                tempFile = new File(cDir.getPath() + "/" + TEMP_FILE_NAME) ;
+                FileWriter writer=null;
+                try {
+                    writer = new FileWriter(tempFile);
+                    writer.write("");
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 showFragmentAndAddToBackStack(new ViewClosedCompetitionGroupsFragment());
             }
         });

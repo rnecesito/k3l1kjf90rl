@@ -3,6 +3,7 @@ package com.example.sgm.japgolfapp.registration;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -187,11 +188,10 @@ public class MainMenuFragment extends BaseFragment {
     @OnClick(R.id.logout_button)
     public void logout() {
         SharedPreferences prefs = getActivity().getSharedPreferences(
-                "com.example.app", Context.MODE_PRIVATE);
-
-        String hasLoggedIn = "com.golf.app.hasloggedin";
-        prefs.edit().putBoolean(hasLoggedIn, false).apply();
-
+                "com.golf.app", Context.MODE_PRIVATE);
+        String firstTime = "com.golf.app.firstTimeCheck";
+        prefs.edit().clear().apply();
+        prefs.edit().putBoolean(firstTime, true).apply();
         clearBackStack();
     }
 
@@ -241,7 +241,6 @@ public class MainMenuFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         shown = false;
         view_container = view;
-        Button b1 = (Button) view.findViewById(R.id.menu_button);
         final SharedPreferences prefs = getActivity().getSharedPreferences(
                 "com.golf.app", Context.MODE_PRIVATE);
         final String hasLoggedIn = "com.golf.app.fromcounting";
@@ -250,16 +249,8 @@ public class MainMenuFragment extends BaseFragment {
             LayoutInflater inflater = LayoutInflater.from(getActivity());
             RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
             View item = inflater.inflate(R.layout.side_menu, rl, false);
-            if (!shown) {
-                showMenu();
-            } else {
-                item = view_container.findViewWithTag("side_menu_tag");
-                SlideToLeft(item);
-                rl.removeView(item);
-                shown = false;
-            }
-
-            Button countingButton = (Button) item.findViewById(R.id.countingButton);
+            sidemenu(view_container, false);
+            Button countingButton = (Button) getActivity().findViewById(R.id.countingButton);
             countingButton.performClick();
         }
         final SharedPreferences prefs2 = getActivity().getSharedPreferences(
@@ -279,6 +270,24 @@ public class MainMenuFragment extends BaseFragment {
                 shown = false;
             }
         }
+        getView().setFocusableInTouchMode(true);
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    View item = view_container.findViewWithTag("counting_sub_menu");
+                    if (item != null) {
+                        SlideToLeft(item);
+                        RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
+                        rl.removeView(item);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     public void SlideToRight(View view) {

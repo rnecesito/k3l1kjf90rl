@@ -310,8 +310,34 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                     }
                 }
                 group_list = player_list_container;
-                spinnerArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, group_list);
+                if (group_list.size() > 0) {
+                    spinnerArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, group_list);
+                    final Spinner group_spinner = new Spinner(getActivity());
+                    group_spinner.setAdapter(spinnerArrayAdapter);
 
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    Groups sel_group = (Groups) group_spinner.getSelectedItem();
+                                    int selected_group = sel_group.id;
+                                    new JoinCompetition().execute(selected_group+"");
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle(getResources().getString(R.string.jap_select_group))
+                            .setView(group_spinner)
+                            .setPositiveButton(getResources().getString(R.string.jap_okay), dialogClickListener)
+                            .show();
+                }
             } else {
                 Toast.makeText(getContext(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }
@@ -390,7 +416,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
             }
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://zoogtech.com/golfapp/public/open-competition/"+ number +"/join");
+            HttpPost httppost = new HttpPost("http://zoogtech.com/golfapp/public/open-competition/group/"+ number +"/join");
 
             try {
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
@@ -478,31 +504,6 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
 //                e.printStackTrace();
 //            }
 
-            final Spinner group_spinner = new Spinner(getActivity());
-            group_spinner.setAdapter(spinnerArrayAdapter);
-
-            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which){
-                        case DialogInterface.BUTTON_POSITIVE:
-                            Groups sel_group = (Groups) group_spinner.getSelectedItem();
-                            int selected_group = sel_group.id;
-                            new JoinCompetition().execute(selected_group+"");
-                            break;
-
-                        case DialogInterface.BUTTON_NEGATIVE:
-                            //No button clicked
-                            break;
-                    }
-                }
-            };
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(getResources().getString(R.string.jap_select_group))
-                    .setView(group_spinner)
-                    .setPositiveButton(getResources().getString(R.string.jap_okay), dialogClickListener)
-                    .show();
         }
     };
 }

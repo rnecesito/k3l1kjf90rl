@@ -97,7 +97,7 @@
         android:background="#fff"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="View Party Play"
+        android:text="@string/jap_party_list"
         android:textColor="@android:color/black"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

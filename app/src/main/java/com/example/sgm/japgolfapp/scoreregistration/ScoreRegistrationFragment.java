@@ -958,10 +958,10 @@ public class ScoreRegistrationFragment extends BaseFragment{
                     lvCompetitors2.setAdapter(mAdapter2);
                     lvCompetitors2.setFocusable(true);
 
-                    if (firstload) {
-                        tvBetType.setText(mBetSettings.get(0).getName());
-                        firstload = false;
-                    }
+//                    if (firstload) {
+                        tvBetType.setText(mBetSettings.get(mBetNumber).getName());
+//                        firstload = false;
+//                    }
 
                         //ACTIVATE BUTTONS FOR NEXT AND PREV -------------------------------------------
 

@@ -32,14 +32,16 @@ android:background="#CCC" >
 
     <LinearLayout
         android:layout_width="1dp"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <View style="@style/Divider" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="60dp"
-        android:layout_gravity="center_horizontal|center_vertical">
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:visibility="gone">
         <ImageView
             android:id="@+id/edit_closed_competition"
             android:layout_width="fill_parent"
