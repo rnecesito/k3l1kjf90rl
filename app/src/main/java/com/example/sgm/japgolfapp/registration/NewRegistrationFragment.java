@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sgm.japgolfapp.BaseFragment;
@@ -31,6 +32,7 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.InjectView;
 import butterknife.OnClick;
 
 
@@ -139,19 +141,19 @@ public class NewRegistrationFragment extends BaseFragment{
             String email_val = email.getText().toString();
             String pass_val = pass.getText().toString();
 
-            if(email_val.matches("")) {
-                    Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
-                return;
-            } else if(fname_val.matches("")) {
-                Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_firstname), Toast.LENGTH_SHORT).show();
-            return;
-            } else if(pass_val.matches("")) {
-                Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_pass), Toast.LENGTH_SHORT).show();
-                return;
-            } else {
-                new RegisterCall().execute(fname_val, "-", "Male", "1", email_val, pass_val);
+//            if(email_val.matches("")) {
+//                    Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_email), Toast.LENGTH_SHORT).show();
+//                return;
+//            } else if(fname_val.matches("")) {
+//                Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_firstname), Toast.LENGTH_SHORT).show();
+//            return;
+//            } else if(pass_val.matches("")) {
+//                Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_pass), Toast.LENGTH_SHORT).show();
+//                return;
+//            } else {
+                validate();
                 System.out.println(retVal);
-            }
+//            }
     }
 
     @Override
@@ -163,5 +165,54 @@ public class NewRegistrationFragment extends BaseFragment{
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view_container = view;
+    }
+
+    @InjectView(R.id.courseSpinner)
+    EditText email;
+    @InjectView(R.id.cName1)
+    EditText name;
+    @InjectView(R.id.editTextPassword)
+    EditText password;
+
+    @InjectView(R.id.emailValidateText)
+    TextView invalidEmail;
+    @InjectView(R.id.nameValidateText)
+    TextView invalidName;
+    @InjectView(R.id.passwordValidateText)
+    TextView invalidPassword;
+
+    public void validate(){
+        boolean pass1 = false;
+        boolean pass2 = false;
+        boolean pass3 = false;
+        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
+            invalidEmail.setVisibility(View.VISIBLE);
+            pass1 = false;
+        }
+        else if(name.getText().toString().isEmpty() ){
+            invalidName.setVisibility(View.VISIBLE);
+            pass2 = false;
+        }
+        else if(password.getText().toString().isEmpty()){
+            invalidPassword.setVisibility(View.VISIBLE);
+            pass3 = false;
+        }
+
+        if(android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
+            invalidEmail.setVisibility(View.INVISIBLE);
+            pass1 = true;
+        }
+        if(!name.getText().toString().isEmpty()){
+            invalidName.setVisibility(View.INVISIBLE);
+            pass2 = true;
+        }
+        if(!password.getText().toString().isEmpty()){
+            invalidPassword.setVisibility(View.INVISIBLE);
+            pass3 = true;
+        }
+        if (pass1 && pass2 && pass3) {
+            new RegisterCall().execute(name.getText().toString(), "-", "Male", "1", email.getText().toString(), password.getText().toString());
+        }
+
     }
 }

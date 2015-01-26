@@ -64,6 +64,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/emailValidateText"
+            android:text="@string/jap_invalid_email"
+            android:visibility="invisible"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_below="@id/courseSpinner"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/title_first_name"
             android:id="@+id/textView2"
@@ -112,6 +124,34 @@
             android:inputType="textPassword"
             android:textColor="#ff000000"
             android:paddingLeft="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/passwordValidateText"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="@string/jap_not_entered"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editTextPassword"
+            android:visibility="invisible"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignLeft="@+id/editTextPassword"
+            android:layout_alignStart="@+id/editTextPassword" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:visibility="invisible"
+            android:text="@string/jap_not_entered"
+            android:textColor="@android:color/holo_red_dark"
+            android:id="@+id/nameValidateText"
+            android:layout_below="@+id/cName1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignLeft="@+id/nameValidateText"
+            android:layout_alignStart="@+id/nameValidateText" />
 
     </RelativeLayout>
 

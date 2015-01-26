@@ -48,7 +48,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_below="@id/membeChangeText"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:isScrollContainer="false">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -96,7 +97,7 @@
                     android:layout_marginTop="5dp"
                     android:textColor="#ffffffff"
                     android:layout_centerVertical="true"
-                    android:layout_below="@id/user_email"
+                    android:layout_below="@id/emailValidateText"
                     android:layout_alignLeft="@+id/user_name"
                     android:layout_alignStart="@+id/user_name" />
 
@@ -124,7 +125,7 @@
                     android:autoText="false"
                     android:textColor="#ffffffff"
                     android:layout_marginTop="5dp"
-                    android:layout_below="@+id/user_name"
+                    android:layout_below="@+id/nameValidateText"
                     android:layout_alignLeft="@+id/user_name"
                     android:layout_alignStart="@+id/user_name" />
 
@@ -207,6 +208,7 @@
                     android:visibility="invisible"
                     android:textColor="@android:color/holo_red_dark"
                     android:id="@+id/nameValidateText"
+                    android:text="@string/jap_not_entered"
                     android:layout_below="@+id/user_name"
                     android:layout_alignParentLeft="true"
                     android:layout_alignLeft="@+id/textView3"
@@ -219,6 +221,7 @@
                     android:textColor="@android:color/holo_red_dark"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/user_password"
+                    android:text="@string/jap_not_entered"
                     android:visibility="invisible"
                     android:layout_marginStart="10dp"
                     android:layout_alignParentStart="true"
