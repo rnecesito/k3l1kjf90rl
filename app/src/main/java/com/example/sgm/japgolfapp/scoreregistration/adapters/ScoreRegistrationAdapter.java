@@ -22,7 +22,7 @@ public class ScoreRegistrationAdapter extends ArrayAdapter<CompetitorCompact> {
 	public ScoreRegistrationAdapter(Activity activity, int resource, ArrayList<CompetitorCompact> items, Integer holeNumber) {
 		super(activity, resource, items);
 		this.mItems = items;
-        mHoleNumber = holeNumber;
+        this.mHoleNumber = holeNumber;
 	}
 
 	@Override

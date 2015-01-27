@@ -228,6 +228,24 @@ public class MainMenuFragment extends BaseFragment {
                 showFragmentAndAddToBackStack(new CompetitionCountingFragment());
             }
         });
+        getView().setFocusableInTouchMode(true);
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    View item = getView().findViewWithTag("counting_sub_menu");
+                    if (item != null) {
+                        SlideToLeft(item);
+                        RelativeLayout rl = (RelativeLayout) getView().findViewById(R.id.new_registration_main);
+                        rl.removeView(item);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -241,18 +259,11 @@ public class MainMenuFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         shown = false;
         view_container = view;
+
         final SharedPreferences prefs = getActivity().getSharedPreferences(
                 "com.golf.app", Context.MODE_PRIVATE);
         final String hasLoggedIn = "com.golf.app.fromcounting";
         final Boolean b = prefs.getBoolean(hasLoggedIn, false);
-        if (b) {
-            LayoutInflater inflater = LayoutInflater.from(getActivity());
-            RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
-            View item = inflater.inflate(R.layout.side_menu, rl, false);
-            sidemenu(view_container, false);
-            Button countingButton = (Button) getActivity().findViewById(R.id.countingButton);
-            countingButton.performClick();
-        }
         final SharedPreferences prefs2 = getActivity().getSharedPreferences(
                 "com.golf.app", Context.MODE_PRIVATE);
         final String back = "com.golf.app.back";
@@ -263,6 +274,9 @@ public class MainMenuFragment extends BaseFragment {
             View item = inflater.inflate(R.layout.side_menu, rl, false);
             if (!shown) {
                 showMenu();
+                if (b) {
+                    countingButton(rl);
+                }
             } else {
                 item = view_container.findViewWithTag("side_menu_tag");
                 SlideToLeft(item);
@@ -270,24 +284,6 @@ public class MainMenuFragment extends BaseFragment {
                 shown = false;
             }
         }
-        getView().setFocusableInTouchMode(true);
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    View item = view_container.findViewWithTag("counting_sub_menu");
-                    if (item != null) {
-                        SlideToLeft(item);
-                        RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
-                        rl.removeView(item);
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-                return false;
-            }
-        });
     }
 
     public void SlideToRight(View view) {

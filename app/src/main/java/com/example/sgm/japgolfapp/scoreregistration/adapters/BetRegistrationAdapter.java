@@ -22,7 +22,7 @@ public class BetRegistrationAdapter extends ArrayAdapter<CompetitorCompact> {
 	public BetRegistrationAdapter(Activity activity, int resource, ArrayList<CompetitorCompact> items, Integer holeNumber) {
 		super(activity, resource, items);
 		this.mItems = items;
-        mHoleNumber = holeNumber;
+        this.mHoleNumber = holeNumber;
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class BetRegistrationAdapter extends ArrayAdapter<CompetitorCompact> {
 	public View getView(int position, View view, ViewGroup parent) {
         BetRegistratonViewBinder.CompetitorScoreHolder holder = new BetRegistratonViewBinder.CompetitorScoreHolder();
 
-        CompetitorCompact competitor = (CompetitorCompact) getItem(position);
+        CompetitorCompact competitor = getItem(position);
 
 		if (view == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext()

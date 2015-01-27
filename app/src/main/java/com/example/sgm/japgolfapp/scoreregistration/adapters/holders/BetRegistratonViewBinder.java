@@ -55,7 +55,7 @@ public class BetRegistratonViewBinder {
                     holder.ivIncrease.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Integer i = new Integer(competitor.getScore()).intValue() + 1;
+                            Integer i = Integer.parseInt(competitor.getScore()) + 1;
                             competitor.setScore(i.toString());
                             holder.tvScore.setText("" + competitor.getScore());
                         }
@@ -66,7 +66,7 @@ public class BetRegistratonViewBinder {
                     holder.ivDecrease.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Integer i = new Integer(competitor.getScore()).intValue() - 1;
+                            Integer i = Integer.parseInt(competitor.getScore()) - 1;
                             competitor.setScore(i.toString());
                             holder.tvScore.setText("" + competitor.getScore());
                         }

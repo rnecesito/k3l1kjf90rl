@@ -180,7 +180,7 @@
         android:visibility="gone"
         android:layout_alignParentTop="true">
 
-    <include layout="@layout/fragment_bet_registration2"/>
+        <include layout="@layout/fragment_bet_registration2"/>
         
     </FrameLayout>
 

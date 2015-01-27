@@ -247,8 +247,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
                     final JSONObject info = new JSONObject(retVal);
 
                     for(int a = 0 ; a < Integer.valueOf(info.getJSONObject("course").getString("holes")); a++){
-
-
                         mGroupMembers = new ArrayList<CompetitorCompact>();
 
                         for(int i = 0 ; i < info.getJSONArray("members").length(); i++) {
@@ -918,12 +916,6 @@ public class ScoreRegistrationFragment extends BaseFragment{
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            mGroupMembersScores = mGroupMembers;
-            //Clear Scores
-            for(int a = 0; a < mGroupMembersScores.size();a++){
-                mGroupMembersScores.get(a).setScore("0");
-            }
-
             if(pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
@@ -931,6 +923,12 @@ public class ScoreRegistrationFragment extends BaseFragment{
             if(success) {
                 try {
                     final JSONObject info = new JSONObject(retVal);
+
+                    mGroupMembersScores = mGroupMembers;
+                    //Clear Scores
+                    for(int a = 0; a < mGroupMembersScores.size();a++){
+                        mGroupMembersScores.get(a).setScore("0");
+                    }
 
                     JSONArray betScores = info.getJSONArray("bet_scores");
                     for(int i = 0 ; i < betScores.length(); i++) {
@@ -1064,7 +1062,7 @@ public class ScoreRegistrationFragment extends BaseFragment{
             if (pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
-
+            new GetPartyPlayScoresList().execute();
 //            if (mBetNumber < mBetSettings.size() - 1) {
 //                ++mBetNumber;
 //
