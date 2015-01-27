@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.models.CompetitorCompact;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.holders.BetRegistratonViewBinder;
-import com.example.sgm.japgolfapp.scoreregistration.adapters.holders.ScoreRegistratonViewBinder;
 
 import java.util.ArrayList;
 

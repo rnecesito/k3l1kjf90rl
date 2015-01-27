@@ -191,10 +191,10 @@
                     android:id="@+id/textView25" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="43dp"
                     android:id="@+id/imgMinusB"
-                    android:src="@drawable/ic_triangle_minus"
+                    android:src="@drawable/arrow_down"
                     android:layout_below="@+id/textViewV1"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/textView25"
@@ -208,16 +208,16 @@
                     android:layout_toRightOf="@+id/imgMinusB"
                     android:layout_below="@+id/textViewV1"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="10dp"
                     android:padding="10dp"
                     android:background="@drawable/container_background_4"
                     android:id="@+id/textViewC1Count" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="43dp"
                     android:id="@+id/imgAddB"
-                    android:src="@drawable/ic_triangle_add"
+                    android:src="@drawable/arrow_up"
                     android:layout_below="@+id/textViewV1"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/textViewC1Count"
@@ -257,10 +257,10 @@
                     android:id="@+id/textView27" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="43dp"
                     android:id="@+id/imgMinusB2"
-                    android:src="@drawable/ic_triangle_minus"
+                    android:src="@drawable/arrow_down"
                     android:layout_below="@+id/textViewV2"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/textView27"
@@ -274,16 +274,16 @@
                     android:layout_toRightOf="@+id/imgMinusB2"
                     android:layout_below="@+id/textViewV2"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="10dp"
                     android:padding="10dp"
                     android:background="@drawable/container_background_4"
                     android:id="@+id/textViewC2Count" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="43dp"
                     android:id="@+id/imgAddB2"
-                    android:src="@drawable/ic_triangle_add"
+                    android:src="@drawable/arrow_up"
                     android:layout_below="@+id/textViewV2"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/textViewC2Count"
@@ -323,10 +323,10 @@
                     android:id="@+id/textView30" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="43dp"
                     android:id="@+id/imgMinusB3"
-                    android:src="@drawable/ic_triangle_minus"
+                    android:src="@drawable/arrow_down"
                     android:layout_below="@+id/textViewV3"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/textView30"
@@ -340,16 +340,16 @@
                     android:layout_toRightOf="@+id/imgMinusB3"
                     android:layout_below="@+id/textViewV3"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="10dp"
                     android:padding="10dp"
                     android:background="@drawable/container_background_4"
                     android:id="@+id/textViewC3Count" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="43dp"
                     android:id="@+id/imgAddB3"
-                    android:src="@drawable/ic_triangle_add"
+                    android:src="@drawable/arrow_up"
                     android:layout_below="@+id/textViewV3"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/textViewC3Count"
@@ -388,15 +388,16 @@
                     android:layout_marginLeft="30dp"
                     android:layout_below="@+id/textViewV4"
                     android:id="@+id/textView31" />
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="43dp"
                     android:id="@+id/imgMinusB4"
-                    android:src="@drawable/ic_triangle_minus"
+                    android:src="@drawable/arrow_down"
                     android:layout_below="@+id/textViewV4"
                     android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/textView31"
-                    />
+                    android:layout_toRightOf="@+id/textView31" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -405,16 +406,16 @@
                     android:layout_toRightOf="@+id/imgMinusB4"
                     android:layout_below="@+id/textViewV4"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="10dp"
                     android:padding="10dp"
                     android:background="@drawable/container_background_4"
                     android:id="@+id/textViewC4Count" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="43dp"
                     android:id="@+id/imgAddB4"
-                    android:src="@drawable/ic_triangle_add"
+                    android:src="@drawable/arrow_up"
                     android:layout_below="@+id/textViewV4"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/textViewC4Count"

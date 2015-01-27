@@ -60,7 +60,7 @@ public class BetChooserViewBinder {
                     public void onClick(View v) {
                         //new CustomDialogClass(a).show();
                         CustomDialogClass dialog = new CustomDialogClass(mContext, record.getHelp());
-                        dialog.getWindow().getAttributes().windowAnimations = R.anim.right_left_animation;
+//                        dialog.getWindow().getAttributes().windowAnimations = R.anim.right_left_animation;
                         dialog.show();
                     }
                 });
@@ -110,7 +110,7 @@ public class BetChooserViewBinder {
             setContentView(R.layout.dialog_help);
 
             returnB = (Button)findViewById(R.id.returnB);
-            returnB.getBackground().setAlpha(51);
+//            returnB.getBackground().setAlpha(51);
             returnB.setOnClickListener(this);
 
             TextView content = (TextView)findViewById(R.id.content);

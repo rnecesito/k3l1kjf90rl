@@ -268,7 +268,7 @@ public class PartyRegistrationFragment extends BaseFragment {
                     JSONObject row = null;
                     try {
                         row = array2.getJSONObject(i);
-                        player_list_container.add(new Players(Integer.parseInt(row.getString("id")), row.getString("firstname") + " " + row.getString("lastname")));
+                        player_list_container.add(new Players(Integer.parseInt(row.getString("id")), row.getString("firstname") + " " + row.getString("lastname") + " " + row.getString("email").substring(0, 1)));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

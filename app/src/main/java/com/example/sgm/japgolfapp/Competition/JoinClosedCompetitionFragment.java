@@ -416,7 +416,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
             }
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://zoogtech.com/golfapp/public/open-competition/group/"+ number +"/join");
+            HttpPost httppost = new HttpPost("http://zoogtech.com/golfapp/public/closed-competition/group/"+ number +"/join");
 
             try {
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
@@ -431,6 +431,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                 }else {
                     result_2 = EntityUtils.toByteArray(response.getEntity());
                     result2_2 = new String(result_2, HTTP.UTF_8);
+                    System.out.println(result2_2);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

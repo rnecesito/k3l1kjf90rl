@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.example.sgm.japgolfapp.R;
-import com.example.sgm.japgolfapp.models.Competitor;
 import com.example.sgm.japgolfapp.models.CompetitorCompact;
 import com.example.sgm.japgolfapp.scoreregistration.adapters.holders.ScoreRegistratonViewBinder;
 
@@ -43,7 +42,7 @@ public class ScoreRegistrationAdapter extends ArrayAdapter<CompetitorCompact> {
 	public View getView(int position, View view, ViewGroup parent) {
         ScoreRegistratonViewBinder.CompetitorScoreHolder holder = new ScoreRegistratonViewBinder.CompetitorScoreHolder();
 
-        CompetitorCompact competitor = (CompetitorCompact) getItem(position);
+        CompetitorCompact competitor = getItem(position);
 
 		if (view == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext()
