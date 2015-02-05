@@ -30,7 +30,6 @@
                 android:layout_height="55dp"
                 android:id="@+id/imageSettingButton"
                 android:background="@drawable/arrow"
-                android:contentDescription=""
                 android:layout_marginTop="22dp" />
         </TableRow>
 

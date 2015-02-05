@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="text_view_padding">10dp</dimen>
+
+    <dimen name="group_player_text_view_width">130dp</dimen>
 </resources>

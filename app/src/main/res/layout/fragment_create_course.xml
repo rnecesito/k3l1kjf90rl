@@ -170,4 +170,15 @@
         android:text="@string/create_courses"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/darker_gray"
+        android:text="AD PLACEMENT"
+        android:gravity="center"
+        android:textScaleX="2"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
+
 </RelativeLayout>

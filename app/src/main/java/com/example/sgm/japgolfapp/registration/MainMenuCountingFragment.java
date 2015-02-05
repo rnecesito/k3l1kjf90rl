@@ -3,7 +3,6 @@ package com.example.sgm.japgolfapp.registration;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import com.example.sgm.japgolfapp.settings.MenuSettingsFragment;
 import butterknife.OnClick;
 
 
-public class MainMenuFragment extends BaseFragment {
+public class MainMenuCountingFragment extends BaseFragment {
     boolean shown = false;
     View view_container;
 
@@ -111,8 +110,7 @@ public class MainMenuFragment extends BaseFragment {
                     SharedPreferences prefs = getActivity().getSharedPreferences("com.golf.app", Context.MODE_PRIVATE);
                     String hasLoggedIn = "com.golf.app.back";
                     prefs.edit().putBoolean(hasLoggedIn, true).apply();
-//                    countingButton(view_container);
-                    showFragmentAndAddToBackStack(new MainMenuCountingFragment());
+                    countingButton(view_container);
 //                showFragmentAndAddToBackStack(new MenuSettingsFragment());
                 }
             });
@@ -125,64 +123,64 @@ public class MainMenuFragment extends BaseFragment {
                     SharedPreferences prefs = getActivity().getSharedPreferences("com.golf.app", Context.MODE_PRIVATE);
                     String hasLoggedIn = "com.golf.app.back";
                     prefs.edit().putBoolean(hasLoggedIn, true).apply();
-//                    countingButton(view_container);
-                    showFragmentAndAddToBackStack(new MainMenuCountingFragment());
+                    countingButton(view_container);
                 }
             });
 //                showFragmentAndAddToBackStack(new MenuSettingsFragment());
             shown = true;
         } else {
-            item = view_container.findViewWithTag("side_menu_tag");
-            SlideToLeft(item);
-            rl.removeView(item);
-            shown = false;
+//            item = view_container.findViewWithTag("side_menu_tag");
+//            SlideToLeft(item);
+//            rl.removeView(item);
+//            shown = false;
+            popBackStack();
         }
 
         Button countingButton = (Button) item.findViewById(R.id.countingButton);
         countingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                LayoutInflater inflater = LayoutInflater.from(getContext());
-//                RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
-//                final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
-//                item.setTag("counting_sub_menu");
-//                View tagged = view_container.findViewWithTag("counting_sub_menu");
-//                if ((tagged == null)) {
-//                    rl.addView(item);
-//                }
-//                Button scoreCountingButton = (Button) item.findViewById(R.id.scoreCounting);
-//                scoreCountingButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        SharedPreferences prefs = getActivity().getSharedPreferences("com.golf.app", Context.MODE_PRIVATE);
-//                        String hasLoggedIn = "com.golf.app.fromcounting";
-//                        prefs.edit().putBoolean(hasLoggedIn, true).apply();
-//                        showFragmentAndAddToBackStack(new ScoreCountingFragment());
-//                    }
-//                });
-//
-//                Button betCountingButton = (Button) item.findViewById(R.id.betCounting);
-//                betCountingButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        SharedPreferences prefs = getActivity().getSharedPreferences("com.golf.app", Context.MODE_PRIVATE);
-//                        String hasLoggedIn = "com.golf.app.fromcounting";
-//                        prefs.edit().putBoolean(hasLoggedIn, true).apply();
-//                        showFragmentAndAddToBackStack(new BetCountingFragment());
-//                    }
-//                });
-//
-//                Button competitionCountingButton = (Button) item.findViewById(R.id.competitionCounting);
-//                competitionCountingButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        SharedPreferences prefs = getActivity().getSharedPreferences("com.golf.app", Context.MODE_PRIVATE);
-//                        String hasLoggedIn = "com.golf.app.fromcounting";
-//                        prefs.edit().putBoolean(hasLoggedIn, true).apply();
-//                        showFragmentAndAddToBackStack(new CompetitionCountingFragment());
-//                    }
-//                });
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
+                final View item = inflater.inflate(R.layout.counting_sub_menu, rl, false);
+                item.setTag("counting_sub_menu");
+                View tagged = view_container.findViewWithTag("counting_sub_menu");
+                if ((tagged == null)) {
+                    rl.addView(item);
+                }
+                Button scoreCountingButton = (Button) item.findViewById(R.id.scoreCounting);
+                scoreCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SharedPreferences prefs = getActivity().getSharedPreferences("com.golf.app", Context.MODE_PRIVATE);
+                        String hasLoggedIn = "com.golf.app.fromcounting";
+                        prefs.edit().putBoolean(hasLoggedIn, true).apply();
+                        showFragmentAndAddToBackStack(new ScoreCountingFragment());
+                    }
+                });
 
+                Button betCountingButton = (Button) item.findViewById(R.id.betCounting);
+                betCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SharedPreferences prefs = getActivity().getSharedPreferences("com.golf.app", Context.MODE_PRIVATE);
+                        String hasLoggedIn = "com.golf.app.fromcounting";
+                        prefs.edit().putBoolean(hasLoggedIn, true).apply();
+                        showFragmentAndAddToBackStack(new BetCountingFragment());
+                    }
+                });
+
+                Button competitionCountingButton = (Button) item.findViewById(R.id.competitionCounting);
+                competitionCountingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SharedPreferences prefs = getActivity().getSharedPreferences("com.golf.app", Context.MODE_PRIVATE);
+                        String hasLoggedIn = "com.golf.app.fromcounting";
+                        prefs.edit().putBoolean(hasLoggedIn, true).apply();
+                        showFragmentAndAddToBackStack(new CompetitionCountingFragment());
+                    }
+                });
+//                showFragmentAndAddToBackStack(new MainMenuCountingFragment());
             }
         });
     }
@@ -247,7 +245,7 @@ public class MainMenuFragment extends BaseFragment {
         final SharedPreferences prefs = getActivity().getSharedPreferences(
                 "com.golf.app", Context.MODE_PRIVATE);
         final String hasLoggedIn = "com.golf.app.fromcounting";
-        final Boolean b = prefs.getBoolean(hasLoggedIn, false);
+        final Boolean b = true;
         final SharedPreferences prefs2 = getActivity().getSharedPreferences(
                 "com.golf.app", Context.MODE_PRIVATE);
         final String back = "com.golf.app.back";
@@ -264,24 +262,24 @@ public class MainMenuFragment extends BaseFragment {
             }
         }
 
-        getView().setFocusableInTouchMode(true);
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    View item = getView().findViewWithTag("counting_sub_menu");
-                    if (item != null) {
-                        SlideToLeft(item);
-                        RelativeLayout rl = (RelativeLayout) getView().findViewById(R.id.new_registration_main);
-                        rl.removeView(item);
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-                return false;
-            }
-        });
+//        getView().setFocusableInTouchMode(true);
+//        getView().setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//                    View item = getView().findViewWithTag("counting_sub_menu");
+//                    if (item != null) {
+//                        SlideToLeft(item);
+//                        RelativeLayout rl = (RelativeLayout) getView().findViewById(R.id.new_registration_main);
+//                        rl.removeView(item);
+//                        return true;
+//                    } else {
+//                        return false;
+//                    }
+//                }
+//                return false;
+//            }
+//        });
     }
 
     public void SlideToRight(View view) {

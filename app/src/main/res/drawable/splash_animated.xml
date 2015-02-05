@@ -3,22 +3,22 @@
     android:oneshot="true">
     <item
         android:drawable="@drawable/layer1"
-        android:duration="40"/>
+        android:duration="200"/>
     <item
         android:drawable="@drawable/layer2"
-        android:duration="40"/>
+        android:duration="200"/>
     <item
         android:drawable="@drawable/layer3"
-        android:duration="40"/>
+        android:duration="200"/>
     <item
         android:drawable="@drawable/layer4"
-        android:duration="40"/>
+        android:duration="200"/>
     <item
         android:drawable="@drawable/layer5"
-        android:duration="40"/>
+        android:duration="200"/>
     <item
         android:drawable="@drawable/layer6"
-        android:duration="40"/>
+        android:duration="200"/>
     <item
         android:drawable="@drawable/layer7"
         android:duration="45"/>
@@ -134,9 +134,9 @@
         android:drawable="@drawable/layer44"
         android:duration="45"/>
     <item
-        android:drawable="@drawable/layer47"
+        android:drawable="@drawable/layer45"
         android:duration="45" />
     <item
-        android:drawable="@drawable/layer48"
+        android:drawable="@drawable/layer46"
         android:duration="45" />
 </animation-list    >

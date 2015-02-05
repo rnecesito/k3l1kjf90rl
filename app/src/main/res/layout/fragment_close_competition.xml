@@ -5,6 +5,17 @@
     android:gravity="center_vertical"
     android:id="@+id/new_registration_main">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/darker_gray"
+        android:text="AD PLACEMENT"
+        android:gravity="center"
+        android:textScaleX="2"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
+
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

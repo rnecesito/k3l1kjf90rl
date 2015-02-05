@@ -11,11 +11,12 @@ import android.widget.RelativeLayout;
 import com.example.sgm.japgolfapp.BaseFragment;
 import com.example.sgm.japgolfapp.R;
 
+import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class MenuSettingsFragment extends BaseFragment {
     boolean shown = false;
-    View view_container;
+    @InjectView(R.id.new_registration_main) View view_container;
 
     @OnClick(R.id.logout_button)
     public void click_logout() {
@@ -34,7 +35,7 @@ public class MenuSettingsFragment extends BaseFragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view_container = view;
+//        view_container = view;
         LayoutInflater inflater = LayoutInflater.from(getContext());
         RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.new_registration_main);
         final View item = inflater.inflate(R.layout.fragment_menu__settings, rl, false);

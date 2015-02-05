@@ -31,7 +31,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -58,6 +57,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     private GroupListAdapter adapter, myAdapter, compAdapter;
     View view_container;
     boolean my_groups = false;
+    StringBuilder competition_number = new StringBuilder();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,22 +77,6 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_closed_comeptition_view_groups, container, false);
         ButterKnife.inject(this, view);
         initLayout();
-
-        File cDir = getContext().getCacheDir();
-        File tempFile = new File(cDir.getPath() + "/" + "competition_number.txt");
-        String strLine = "";
-        StringBuilder competition_number = new StringBuilder();
-        try {
-            FileReader fReader = new FileReader(tempFile);
-            BufferedReader bReader = new BufferedReader(fReader);
-            while ((strLine = bReader.readLine()) != null) {
-                competition_number.append(strLine);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
 
         return view;
     }
@@ -115,6 +99,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
                 if (!my_groups) {
                     if (!s.toString().equals("")) {
                         adapter.getFilter().filter(s.toString());
+                        Log.d("Filter", s.toString());
                     } else {
                         adapter = new GroupListAdapter(getActivity(), R.layout.generic_3_column_item_layout, groupList);
                         listView.setAdapter(adapter);
@@ -232,8 +217,9 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
     private void LoadAllGroups() {
         String urlString = Api.WEB_URL + "closed-competition/group";
 
+        String TEMP_FILE_NAME = "competition_number.txt";
         File cDir2 = getActivity().getCacheDir();
-        File tempFile2 = new File(cDir2.getPath() + "/" + "competition_number.txt") ;
+        File tempFile2 = new File(cDir2.getPath() + "/" + TEMP_FILE_NAME) ;
         String strLine2="";
         StringBuilder comp_number = new StringBuilder();
         try {
@@ -242,9 +228,7 @@ public class ViewClosedCompetitionGroupsFragment extends BaseFragment {
             while( (strLine2=bReader.readLine()) != null  ){
                 comp_number.append(strLine2);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }catch(IOException e){
+        } catch(IOException e){
             e.printStackTrace();
         }
 

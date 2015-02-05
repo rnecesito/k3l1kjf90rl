@@ -209,8 +209,6 @@ public class EditGroup extends BaseFragment {
         JSONObject requestObject = new JSONObject();
         JSONArray arr = new JSONArray(generateMemberArray());
         try {
-
-
             requestObject.put("name", txtGroupName.getText().toString());
             requestObject.put("members", arr);
             requestObject.put("closed_competition_id", cModel.getClosedCompetitionId());

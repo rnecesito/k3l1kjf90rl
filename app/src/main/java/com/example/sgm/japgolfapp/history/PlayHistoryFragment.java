@@ -142,27 +142,6 @@ public class PlayHistoryFragment extends BaseFragment{
                     ArrayList<Competitor> dummy_one = new ArrayList<Competitor>();
                     try {
                         row = array.getJSONObject(i);
-                        JSONArray array2 = null;
-//                        try {
-//                            array2 = new JSONArray(new GetScores().execute(row.getString("id")).get());
-//                            if (array2 != null) {
-//                                for (int i2 = 0; i2 < array2.length(); i2++) {
-//                                    JSONObject row2 = null;
-//                                    try {
-//                                        row2 = array2.getJSONObject(i2);
-//                                        dummy_one.add(new Competitor(row2.getString("name"), row2.getString("gross"), row2.getString("net"), null));
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        } catch (ExecutionException e) {
-//                            e.printStackTrace();
-//                        }
                         JSONObject course_info = new JSONObject(row.getString("course"));
                         mItems.add(new PlayHistory(row.getString("id"), row.getString("date"), course_info.getString("name"), dummy_one));
                     } catch (JSONException e) {

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,53 +64,54 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
             String result_string = "";
 
             File cDir = getActivity().getCacheDir();
-            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
-            String strLine="";
+            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt");
+            String strLine = "";
             StringBuilder golfapp_token = new StringBuilder();
             try {
                 FileReader fReader = new FileReader(tempFile);
                 BufferedReader bReader = new BufferedReader(fReader);
-                while( (strLine=bReader.readLine()) != null  ){
+                while ((strLine = bReader.readLine()) != null) {
                     golfapp_token.append(strLine);
                 }
-            } catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpGet httpget = new HttpGet("http://zoogtech.com/golfapp/public/closed-competition?access_token="+golfapp_token.toString());
+            HttpGet httpget = new HttpGet("http://zoogtech.com/golfapp/public/closed-competition?access_token=" + golfapp_token.toString());
 
             try {
                 HttpResponse response = httpclient.execute(httpget);
                 StatusLine statusLine = response.getStatusLine();
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string  = new String(result_byte, HTTP.UTF_8);
-                    competitions_json = result_string ;
+                    result_string = new String(result_byte, HTTP.UTF_8);
+                    competitions_json = result_string;
                     success = true;
-                }else {
+                } else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
-                    result_string  = new String(result_byte, HTTP.UTF_8);
+                    result_string = new String(result_byte, HTTP.UTF_8);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            return result_string ;
+            return result_string;
         }
 
         @Override
         protected void onPostExecute(String result2) {
-            if(pdialog != null && pdialog.isShowing()) {
+            if (pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
-            if(success) {
+            if (success) {
                 JSONArray competitions_ja = null;
                 try {
-                    competitions_ja= new JSONArray(competitions_json);
+                    competitions_ja = new JSONArray(competitions_json);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                Log.d("Competition json", competitions_ja.toString());
                 for (int i = 0; i < competitions_ja.length(); i++) {
                     JSONObject competition_row = null;
                     try {
@@ -117,25 +119,24 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         Date comp_date = sdf.parse(competition_row.getString("date"));
 //                        if (new Date().before(comp_date)) {
-                            LayoutInflater inflater = LayoutInflater.from(getContext());
-                            final View item = inflater.inflate(R.layout.competition_row_view, main_table, false);
-                            TextView competition_name = (TextView) item.findViewById(R.id.comp_name);
-                            competition_name.setText(competition_row.getString("name"));
-                            TextView date_col = (TextView) item.findViewById(R.id.comp_date);
-                            date_col.setText(competition_row.getString("date"));
-                            if(i % 2 == 0) {
-                                item.setBackgroundColor(Color.WHITE);
-                            } else {
-                                item.setBackgroundColor(Color.LTGRAY);
-                            }
-                            ImageView edit_btn = (ImageView) item.findViewById(R.id.edit_competition);
-                            edit_btn.setOnClickListener(edit_comp);
-                            edit_btn.setTag(competition_row.getString("id"));
-                            ImageView view_btn = (ImageView) item.findViewById(R.id.view_competition);
-                            view_btn.setOnClickListener(view_comp);
-                            view_btn.setTag(competition_row.getString("id"));
-                            main_table.addView(item);
-//                        }
+                        LayoutInflater inflater = LayoutInflater.from(getContext());
+                        final View item = inflater.inflate(R.layout.competition_row_view, main_table, false);
+                        TextView competition_name = (TextView) item.findViewById(R.id.comp_name);
+                        competition_name.setText(competition_row.getString("name"));
+                        TextView date_col = (TextView) item.findViewById(R.id.comp_date);
+                        date_col.setText(competition_row.getString("date"));
+                        if (i % 2 == 0) {
+                            item.setBackgroundColor(Color.WHITE);
+                        } else {
+                            item.setBackgroundColor(Color.LTGRAY);
+                        }
+                        ImageView edit_btn = (ImageView) item.findViewById(R.id.edit_competition);
+                        edit_btn.setOnClickListener(edit_comp);
+                        edit_btn.setTag(competition_row.getString("id"));
+                        ImageView view_btn = (ImageView) item.findViewById(R.id.view_competition);
+                        view_btn.setOnClickListener(view_comp);
+                        view_btn.setTag(competition_row.getString("id"));
+                        main_table.addView(item);
 
                     } catch (JSONException | ParseException e) {
                         e.printStackTrace();
@@ -148,10 +149,10 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
             }
         }
     }
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_view_closed_competitions, container, false);
         main_table = (TableLayout) view.findViewById(R.id.closed_competition_table);
@@ -159,7 +160,7 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
         new CompetitionView().execute();
 
         return view;
-	}
+    }
 
     private View.OnClickListener view_comp = new View.OnClickListener() {
         @Override
@@ -167,11 +168,11 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
             final String TEMP_FILE_NAME = "competition_number.txt";
             File tempFile;
             File cDir = getActivity().getCacheDir();
-            tempFile = new File(cDir.getPath() + "/" + TEMP_FILE_NAME) ;
-            FileWriter writer=null;
+            tempFile = new File(cDir.getPath() + "/" + TEMP_FILE_NAME);
+            FileWriter writer = null;
             try {
                 writer = new FileWriter(tempFile);
-                writer.write(view.getTag()+"");
+                writer.write(view.getTag() + "");
                 writer.close();
 
             } catch (IOException e) {
@@ -187,11 +188,11 @@ public class ViewClosedCompetitionsFragment extends BaseFragment {
             final String TEMP_FILE_NAME = "competition_number.txt";
             File tempFile;
             File cDir = getActivity().getCacheDir();
-            tempFile = new File(cDir.getPath() + "/" + TEMP_FILE_NAME) ;
-            FileWriter writer=null;
+            tempFile = new File(cDir.getPath() + "/" + TEMP_FILE_NAME);
+            FileWriter writer = null;
             try {
                 writer = new FileWriter(tempFile);
-                writer.write(view.getTag()+"");
+                writer.write(view.getTag() + "");
                 writer.close();
 
             } catch (IOException e) {

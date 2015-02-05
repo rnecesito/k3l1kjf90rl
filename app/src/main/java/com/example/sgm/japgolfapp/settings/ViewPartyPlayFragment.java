@@ -125,7 +125,7 @@ public class ViewPartyPlayFragment extends BaseFragment {
                     JSONObject row = null;
                     try {
                         row = array.getJSONObject(i);
-                        if(!row.getString("deleted_at").isEmpty()){
+                        if(!row.getString("deleted_at").equals("")){
                             LayoutInflater inflater = LayoutInflater.from(getContext());
                             final View item = inflater.inflate(R.layout.party_play_row, main_table, false);
                             TextView course_name_col = (TextView) item.findViewById(R.id.party_name2);
@@ -215,6 +215,7 @@ public class ViewPartyPlayFragment extends BaseFragment {
             }
             if(success) {
                 Toast.makeText(getActivity(), getResources().getString(R.string.jap_party_deleted), Toast.LENGTH_SHORT).show();
+                popBackStack();
             } else {
                 Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
             }

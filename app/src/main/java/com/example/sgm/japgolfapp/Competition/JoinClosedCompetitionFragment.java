@@ -45,6 +45,7 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
     private String retVal = null;
     private ProgressDialog pdialog;
     private boolean success = false;
+    private boolean joined = false;
     String competitions_json_string;
     String groups_json_string;
     TableLayout main_table;
@@ -272,9 +273,12 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                     System.out.println(result_string);
                     groups_json_string = result_string;
                     success = true;
+                } else if (statusLine.getStatusCode() == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
+                    joined = true;
                 }else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, HTTP.UTF_8);
+                    System.out.println(result_string);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -338,8 +342,10 @@ public class JoinClosedCompetitionFragment extends BaseFragment {
                             .setPositiveButton(getResources().getString(R.string.jap_okay), dialogClickListener)
                             .show();
                 }
-            } else {
+            } else if (!joined && !success) {
                 Toast.makeText(getContext(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
+            } else if (joined && !success) {
+                Toast.makeText(getContext(), "すでにこの大会に参加しました.", Toast.LENGTH_SHORT).show();
             }
         }
     }

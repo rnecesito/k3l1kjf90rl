@@ -95,10 +95,11 @@ public abstract class BaseFragment extends Fragment {
 
     public boolean sidemenu(final View view_container, boolean shown2) {
         boolean shown = shown2;
+        View item_check = view_container.findViewWithTag("side_menu_tag");
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         RelativeLayout rl = (RelativeLayout) view_container.findViewById(R.id.new_registration_main);
         View item = inflater.inflate(R.layout.side_menu, rl, false);
-        if (!shown) {
+        if (item_check == null) {
             item.setTag("side_menu_tag");
             rl.addView(item);
             SlideToRight(item);
@@ -249,7 +250,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void SlideToLeft(View view) {
-        Animation slide = null;
+        Animation slide;
         slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
                 Animation.RELATIVE_TO_SELF, -5.0f, Animation.RELATIVE_TO_SELF,
                 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
@@ -333,6 +334,7 @@ public abstract class BaseFragment extends Fragment {
 
 
     public void onEvent(Object object) {
+
     }
 
 

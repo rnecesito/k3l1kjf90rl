@@ -359,9 +359,13 @@ public class CreateClosedCompetitionGroupFragment extends EventFragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(GolfApp.TAG, error.getMessage());
+                VolleyLog.d(GolfApp.TAG, error.getLocalizedMessage());
                 pDialog.dismiss();
-                Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
+                if (String.valueOf(error.networkResponse.statusCode).equals("500")) {
+                    Toast.makeText(getActivity(), "プレイヤーが重複しています。ご確認ください。", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.jap_something_wrong), Toast.LENGTH_SHORT).show();
+                }
             }
         }) {
 

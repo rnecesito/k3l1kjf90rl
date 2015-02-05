@@ -145,7 +145,7 @@ public class PlayHistoryScoreFragment extends BaseFragment{
                         JSONObject row = null;
                         try {
                             row = array.getJSONObject(i);
-                            mItems.add(new Competitor(row.getString("name"), row.getString("gross"), row.getString("net"), row.getString("rank"), null));
+                            mItems.add(new Competitor(row.getJSONObject("member").getString("firstname") + " " + row.getJSONObject("member").getString("lastname") + " " + row.getJSONObject("member").getString("email").substring(0, 1), row.getString("gross"), row.getString("net"), row.getString("rank"), null));
 //                            LayoutInflater inflater = LayoutInflater.from(getActivity());
 //                            final View item = inflater.inflate(R.layout.score_counting_party_play_row, main_table, false);
 //                            TextView player_name_col = (TextView) item.findViewById(R.id.party_play_row_name);

@@ -42,7 +42,7 @@
             android:layout_height="20dp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="@string/jap_add_member"
             android:textAllCaps="false"

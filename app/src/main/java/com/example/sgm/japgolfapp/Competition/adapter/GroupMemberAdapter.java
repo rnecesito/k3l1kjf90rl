@@ -50,13 +50,17 @@ public class GroupMemberAdapter extends ArrayAdapter<UserModel> {
             holder = (ViewHolder) view.getTag();
         }
 
-        String name = listUser.get(position).getFirstName() + " " + listUser.get(position).getLastName();
+        String name = listUser.get(position).getFirstName() + " " + listUser.get(position).getLastName() + " " + listUser.get(position).getEmail().substring(0, 1);
 
 
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        int pixels = (int) (130 * scale + 0.5f);
         holder.txtName.setText(name);
         holder.txtName.setTextColor(Color.BLACK);
+        holder.txtName.setLayoutParams(new TableRow.LayoutParams(pixels, TableRow.LayoutParams.MATCH_PARENT));
         holder.txtEmail.setText(listUser.get(position).getEmail());
         holder.txtEmail.setTextColor(Color.BLACK);
+        holder.txtEmail.setVisibility(View.GONE);
 
         Drawable drawable = context.getResources().getDrawable(android.R.drawable.ic_delete);
         holder.txtAction.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);

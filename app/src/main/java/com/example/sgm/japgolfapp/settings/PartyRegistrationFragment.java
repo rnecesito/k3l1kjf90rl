@@ -551,15 +551,15 @@ public class PartyRegistrationFragment extends BaseFragment {
                 Players p3 = (Players) sp3.getSelectedItem();
                 Players p4 = (Players) sp4.getSelectedItem();
 
-                TextView tv1 = (TextView) view_container.findViewById(R.id.textViewC1Count);
-                TextView tv2 = (TextView) view_container.findViewById(R.id.textViewC2Count);
-                TextView tv3 = (TextView) view_container.findViewById(R.id.textViewC3Count);
-                TextView tv4 = (TextView) view_container.findViewById(R.id.textViewC4Count);
-
                 int p1_id = p1.id;
                 int p2_id = p2.id;
                 int p3_id = p3.id;
                 int p4_id = p4.id;
+
+                TextView tv1 = (TextView) view_container.findViewById(R.id.textViewC1Count);
+                TextView tv2 = (TextView) view_container.findViewById(R.id.textViewC2Count);
+                TextView tv3 = (TextView) view_container.findViewById(R.id.textViewC3Count);
+                TextView tv4 = (TextView) view_container.findViewById(R.id.textViewC4Count);
 
                 int h1 = Integer.parseInt(tv1.getText().toString());
                 int h2 = Integer.parseInt(tv2.getText().toString());
@@ -719,17 +719,7 @@ public class PartyRegistrationFragment extends BaseFragment {
 
     @OnClick(R.id.saveB)
     public void saveB() {
-//        pdialog2 = new ProgressDialog(getActivity());
-//        pdialog2.setMessage("Saving...");
-//        pdialog2.show();
-//
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            public void run() {
-//              pdialog2.dismiss();
-//              popBackStack();
-//            }
-//        }, 2000);
+        boolean same = false;
         EditText party_name = (EditText) view_container.findViewById(R.id.party_name_value);
         Spinner course_name = (Spinner) view_container.findViewById(R.id.courseSpinner);
         date_view = (TextView) view_container.findViewById(R.id.party_date_value);
@@ -737,11 +727,34 @@ public class PartyRegistrationFragment extends BaseFragment {
         Courses c = (Courses) course_name.getSelectedItem();
         int course_id = c.id;
         String p_date = date_view.getText().toString();
+
+        Spinner sp1 = (Spinner) view_container.findViewById(R.id.cName1);
+        Spinner sp2 = (Spinner) view_container.findViewById(R.id.cName2);
+        Spinner sp3 = (Spinner) view_container.findViewById(R.id.cName3);
+        Spinner sp4 = (Spinner) view_container.findViewById(R.id.cName4);
+
+        Players p1 = (Players) sp1.getSelectedItem();
+        Players p2 = (Players) sp2.getSelectedItem();
+        Players p3 = (Players) sp3.getSelectedItem();
+        Players p4 = (Players) sp4.getSelectedItem();
+
+        int[] ids = {p1.id, p2.id, p3.id, p4.id};
+        for (int i = 0; i < ids.length; i++) {
+            for (int ii = 0; ii < ids.length; ii++) {
+                if (i != ii) {
+                    if (ids[i] == ids[ii]) {
+                        same = true;
+                    }
+                }
+            }
+        }
+
         if (pn_val.matches("")) {
             Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_party_name), Toast.LENGTH_SHORT).show();
-            return;
         } else if (p_date.matches("") || p_date.matches("0000-00-00") || p_date.matches("MM/dd/yy")) {
             Toast.makeText(getContext(), getResources().getString(R.string.jap_enter_valid_date), Toast.LENGTH_SHORT).show();
+        } else if (same) {
+            Toast.makeText(getContext(), "プレイヤーが重複しています。ご確認ください。", Toast.LENGTH_SHORT).show();
         } else {
             new PartyCreate().execute(pn_val, p_date, course_id + "");
         }

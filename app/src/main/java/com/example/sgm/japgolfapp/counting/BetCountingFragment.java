@@ -251,7 +251,7 @@ public class BetCountingFragment extends BaseFragment {
                             LayoutInflater inflater = LayoutInflater.from(getActivity());
                             final View item = inflater.inflate(R.layout.bet_counting_row, main_table, false);
                             TextView player_name_col = (TextView) item.findViewById(R.id.bet_row_name);
-                            player_name_col.setText(row.getString("rank") + "位 " + row.getString("name"));
+                            player_name_col.setText(row.getString("rank") + "位 " + row.getJSONObject("member").getString("firstname") + " " + row.getJSONObject("member").getString("lastname") + " " + row.getJSONObject("member").getString("email").substring(0, 1));
                             TextView gross_col = (TextView) item.findViewById(R.id.bet_row_operand);
                             gross_col .setText(row.getString("operand"));
                             TextView net_col = (TextView) item.findViewById(R.id.bet_row_score);
@@ -286,7 +286,7 @@ public class BetCountingFragment extends BaseFragment {
                 "com.golf.app", Context.MODE_PRIVATE);
 
         String hasLoggedIn = "com.golf.app.fromcounting";
-        prefs.edit().putBoolean(hasLoggedIn, true).apply();
+//        prefs.edit().putBoolean(hasLoggedIn, true).apply();
         popBackStack();
     }
 
@@ -314,7 +314,7 @@ public class BetCountingFragment extends BaseFragment {
                 "com.golf.app", Context.MODE_PRIVATE);
 
         String hasLoggedIn = "com.golf.app.fromcounting";
-        prefs.edit().putBoolean(hasLoggedIn, true).apply();
+//        prefs.edit().putBoolean(hasLoggedIn, true).apply();
     }
 
 }

@@ -217,10 +217,10 @@ public class NewScoreRegistrationCompetitionFragment extends BaseFragment{
                         for(int i = 0 ; i < info.getJSONArray("competitors").length(); i++) {
                             JSONObject obj = info.getJSONArray("competitors").getJSONObject(i);
                             if(a < obj.getJSONArray("scores").length()){
-                            mGroupMembers.add(new CompetitorCompact(obj.getString("id"), obj.getJSONObject("member").getString("firstname") + " " + obj.getJSONObject("member").getString("lastname")
+                            mGroupMembers.add(new CompetitorCompact(obj.getString("id"), obj.getJSONObject("member").getString("firstname") + " " + obj.getJSONObject("member").getString("lastname") + " " + obj.getJSONObject("member").getString("email").substring(0, 1)
                                     , obj.getJSONArray("scores").getJSONObject(a).getString("score"), obj.getJSONObject("member").getString("handicap")));
                             }else{
-                            mGroupMembers.add(new CompetitorCompact(obj.getString("id"), obj.getJSONObject("member").getString("firstname") + " " + obj.getJSONObject("member").getString("lastname")
+                            mGroupMembers.add(new CompetitorCompact(obj.getString("id"), obj.getJSONObject("member").getString("firstname") + " " + obj.getJSONObject("member").getString("lastname") + " " + obj.getJSONObject("member").getString("email").substring(0, 1)
                                     , "0", obj.getJSONObject("member").getString("handicap")));
                             }
                         }

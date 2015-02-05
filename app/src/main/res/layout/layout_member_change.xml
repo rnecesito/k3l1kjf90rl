@@ -168,11 +168,11 @@
                 android:id="@+id/textView25" />
 
                 <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="43dp"
                 android:id="@+id/imgMinusB"
                 android:layout_marginTop="22dp"
-                android:src="@drawable/ic_triangle_minus"
+                android:src="@drawable/arrow_down"
                 android:layout_below="@+id/user_password"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/textView25"
@@ -191,11 +191,11 @@
                 android:id="@+id/textViewC1Count" />
 
                 <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="43dp"
                 android:id="@+id/imgAddB"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/ic_triangle_add"
+                android:src="@drawable/arrow_up"
                 android:layout_below="@+id/user_password"
                 android:layout_toRightOf="@+id/textViewC1Count"
                 />
@@ -266,5 +266,16 @@
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/dd"
         android:layout_alignStart="@+id/dd" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/darker_gray"
+        android:text="AD PLACEMENT"
+        android:gravity="center"
+        android:textScaleX="2"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
 
 </RelativeLayout>

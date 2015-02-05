@@ -20,18 +20,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Locale myLocale = new Locale("ja");
-//        Locale myLocale = new Locale("en");
+//        Locale myLocale = new Locale("ja");
+        Locale myLocale = new Locale("en");
         Locale.setDefault(myLocale);
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = myLocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        String langPref = "Language";
-        SharedPreferences prefs2 = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs2.edit();
-        editor.putString(langPref, "ja");
-//        editor.putString(langPref, "en");
-        editor.commit();
 
         if (savedInstanceState == null) {
             SharedPreferences prefs = this.getSharedPreferences(
