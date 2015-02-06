@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -66,24 +67,24 @@ public class ViewPartyPlayFragment extends BaseFragment {
             String result_string = "";
 
             File cDir = getActivity().getCacheDir();
-            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
-            String strLine="";
+            File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt");
+            String strLine = "";
             StringBuilder golfapp_token = new StringBuilder();
 
             try {
                 FileReader fReader = new FileReader(tempFile);
                 BufferedReader bReader = new BufferedReader(fReader);
-                while( (strLine=bReader.readLine()) != null  ){
+                while ((strLine = bReader.readLine()) != null) {
                     golfapp_token.append(strLine);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpGet httpget = new HttpGet("http://zoogtech.com/golfapp/public/party-play?access_token="+golfapp_token.toString());
+            HttpGet httpget = new HttpGet("http://zoogtech.com/golfapp/public/party-play?access_token=" + golfapp_token.toString());
 
             try {
                 HttpResponse response = httpclient.execute(httpget);
@@ -91,10 +92,10 @@ public class ViewPartyPlayFragment extends BaseFragment {
                 if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, HTTP.UTF_8);
-                    System.out.println(result_string);
+//                    System.out.println(result_string);
                     party_string = result_string;
                     success = true;
-                }else {
+                } else {
                     result_byte = EntityUtils.toByteArray(response.getEntity());
                     result_string = new String(result_byte, HTTP.UTF_8);
                 }
@@ -111,10 +112,10 @@ public class ViewPartyPlayFragment extends BaseFragment {
 
         @Override
         protected void onPostExecute(String result2) {
-            if(pdialog != null && pdialog.isShowing()) {
+            if (pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
-            if(success) {
+            if (success) {
                 JSONArray array = null;
                 try {
                     array = new JSONArray(party_string);
@@ -125,14 +126,17 @@ public class ViewPartyPlayFragment extends BaseFragment {
                     JSONObject row = null;
                     try {
                         row = array.getJSONObject(i);
-                        if(!row.getString("deleted_at").equals("")){
+                        Log.d(row.getString("name") +" was deleted at", row.getString("deleted_at"));
+
+                        String deleted = row.getString("deleted_at");
+                        if (deleted.equals("null")) {
                             LayoutInflater inflater = LayoutInflater.from(getContext());
                             final View item = inflater.inflate(R.layout.party_play_row, main_table, false);
                             TextView course_name_col = (TextView) item.findViewById(R.id.party_name2);
                             course_name_col.setText(row.getString("name"));
                             TextView holes_col = (TextView) item.findViewById(R.id.party_date2);
                             holes_col.setText(row.getString("date"));
-                            if(i % 2 == 0) {
+                            if (i % 2 == 0) {
                                 item.setBackgroundColor(Color.WHITE);
                             } else {
                                 item.setBackgroundColor(Color.LTGRAY);
@@ -174,7 +178,7 @@ public class ViewPartyPlayFragment extends BaseFragment {
             String party = strings[0];
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpDelete httppost = new HttpDelete("http://zoogtech.com/golfapp/public/party-play/"+party);
+            HttpDelete httppost = new HttpDelete("http://zoogtech.com/golfapp/public/party-play/" + party);
 
             try {
 
@@ -190,7 +194,7 @@ public class ViewPartyPlayFragment extends BaseFragment {
                     System.out.println("Success!");
                     success = true;
                     retVal = str;
-                }else {
+                } else {
                     result = EntityUtils.toByteArray(response.getEntity());
                     str = new String(result, HTTP.UTF_8);
                     System.out.println("Failed!");
@@ -210,10 +214,10 @@ public class ViewPartyPlayFragment extends BaseFragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if(pdialog != null && pdialog.isShowing()) {
+            if (pdialog != null && pdialog.isShowing()) {
                 pdialog.dismiss();
             }
-            if(success) {
+            if (success) {
                 Toast.makeText(getActivity(), getResources().getString(R.string.jap_party_deleted), Toast.LENGTH_SHORT).show();
                 popBackStack();
             } else {
@@ -222,22 +226,22 @@ public class ViewPartyPlayFragment extends BaseFragment {
         }
     }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		return inflater
-				.inflate(R.layout.fragment_view_party_play, container, false);
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater
+                .inflate(R.layout.fragment_view_party_play, container, false);
+    }
 
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         main_table = (TableLayout) view.findViewById(R.id.party_table);
         new PartyView().execute();
-	}
+    }
 
-	private OnClickListener listener = new OnClickListener() {
-		public void onClick(final View v) {
+    private OnClickListener listener = new OnClickListener() {
+        public void onClick(final View v) {
 //            final String TEMP_FILE_NAME = "party_play_number.txt";
 //            File tempFile;
 //            File cDir = getActivity().getCacheDir();
@@ -256,9 +260,9 @@ public class ViewPartyPlayFragment extends BaseFragment {
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    switch (which){
+                    switch (which) {
                         case DialogInterface.BUTTON_POSITIVE:
-                            new DeleteParty().execute(v.getTag()+"");
+                            new DeleteParty().execute(v.getTag() + "");
                             break;
 
                         case DialogInterface.BUTTON_NEGATIVE:
@@ -271,8 +275,8 @@ public class ViewPartyPlayFragment extends BaseFragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage(getResources().getString(R.string.sure)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener)
                     .setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
-		}
-	};
+        }
+    };
 
     private String getToken() {
         StringBuilder text = new StringBuilder();
@@ -280,9 +284,9 @@ public class ViewPartyPlayFragment extends BaseFragment {
         File cDir = getActivity().getCacheDir();
 
         /** Getting a reference to temporary file, if created earlier */
-        File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt") ;
+        File tempFile = new File(cDir.getPath() + "/" + "golfapp_token.txt");
 
-        String strLine="";
+        String strLine = "";
 
         /** Reading contents of the temporary file, if already exists */
         try {
@@ -290,12 +294,12 @@ public class ViewPartyPlayFragment extends BaseFragment {
             BufferedReader bReader = new BufferedReader(fReader);
 
             /** Reading the contents of the file , line by line */
-            while( (strLine=bReader.readLine()) != null  ){
+            while ((strLine = bReader.readLine()) != null) {
                 text.append(strLine);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return text.toString();
